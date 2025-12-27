@@ -7,7 +7,7 @@
   margin-left: 280px;
   margin-top: 70px;
   flex: 1;
-  padding: 2rem 0;
+  padding: 0;
   background: #f8f9fa;
   min-height: calc(100vh - 70px);
   transition: margin-left 0.3s ease-in-out;
