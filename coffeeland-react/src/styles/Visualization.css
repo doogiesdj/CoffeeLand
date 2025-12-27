@@ -5,7 +5,7 @@
 
 .viz-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   padding: 2rem;
   background: white;
   border-radius: 12px;
@@ -22,6 +22,21 @@
 .viz-header p {
   color: #666;
   font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.graph-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
 }
 
 .legend {
@@ -29,7 +44,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   background: white;
   border-radius: 12px;
@@ -53,20 +68,57 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.viz-controls {
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 8px;
+  color: #92400e;
+  font-size: 0.9rem;
+}
+
+.viz-controls p {
+  margin: 0;
+}
+
 .visualization-container {
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  height: calc(100vh - 350px);
+  height: 700px;
   min-height: 600px;
+  position: relative;
 }
 
 .visualization-container svg {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
+/* Node styles */
+.node {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.node:hover circle {
+  filter: brightness(1.1);
+}
+
+.node text {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Link styles */
+.links line {
+  transition: stroke-opacity 0.2s;
+}
+
+/* Tooltip styles */
 .graph-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.9);
@@ -77,20 +129,71 @@
   pointer-events: none;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 250px;
 }
 
-.loading, .error {
-  text-align: center;
-  padding: 3rem;
-  font-size: 1.2rem;
+.graph-tooltip strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
 }
 
+/* Loading state */
 .loading {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
   color: #666;
 }
 
+.loading .spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1rem;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #6b4423;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Error state */
 .error {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.error h2 {
   color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.error p {
+  color: #666;
+}
+
+/* Empty state */
+.empty-graph {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #9ca3af;
+}
+
+.empty-graph svg {
+  margin-bottom: 1rem;
+  opacity: 0.5;
 }
 
 /* Mobile responsiveness */
@@ -99,14 +202,40 @@
     font-size: 1.5rem;
   }
 
+  .viz-header p {
+    font-size: 1rem;
+  }
+
+  .graph-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
   .legend {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
   }
 
+  .viz-controls {
+    font-size: 0.8rem;
+  }
+
   .visualization-container {
-    height: calc(100vh - 400px);
+    height: calc(100vh - 450px);
     min-height: 400px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .viz-controls {
+    display: none;
+  }
+  
+  .visualization-container {
+    height: auto;
+    page-break-inside: avoid;
   }
 }

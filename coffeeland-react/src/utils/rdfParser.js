@@ -2,10 +2,20 @@ import * as $rdf from 'rdflib';
 
 export const parseRDFData = async (rdfUrl) => {
   try {
-    const store = $rdf.graph();
-    const fetcher = new $rdf.Fetcher(store);
+    // Fetch RDF file directly
+    const response = await fetch(rdfUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch RDF file: ${response.statusText}`);
+    }
     
-    await fetcher.load(rdfUrl);
+    const rdfText = await response.text();
+    
+    // Parse RDF using rdflib
+    const store = $rdf.graph();
+    const contentType = 'application/rdf+xml';
+    const baseURI = rdfUrl;
+    
+    $rdf.parse(rdfText, store, baseURI, contentType);
     
     const ontologyNS = 'http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#';
     const ns = $rdf.Namespace(ontologyNS);

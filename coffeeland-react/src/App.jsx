@@ -8,6 +8,7 @@ import Countries from './pages/Countries';
 import Brands from './pages/Brands';
 import Chains from './pages/Chains';
 import Brokers from './pages/Brokers';
+import OntologyDiagram from './pages/OntologyDiagram';
 import Visualization from './pages/Visualization';
 import About from './pages/About';
 import './App.css';
@@ -31,6 +32,7 @@ function App() {
             <Route path="/brands" element={<Brands />} />
             <Route path="/chains" element={<Chains />} />
             <Route path="/brokers" element={<Brokers />} />
+            <Route path="/ontology" element={<OntologyDiagram />} />
             <Route path="/visualization" element={<Visualization />} />
             <Route path="/about" element={<About />} />
           </Routes>

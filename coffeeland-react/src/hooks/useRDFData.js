@@ -10,7 +10,9 @@ export const useRDFData = () => {
     const loadRDFData = async () => {
       try {
         setLoading(true);
-        const rdfData = await parseRDFData('/coffeeland.rdf');
+        // Use absolute URL for RDFLib
+        const rdfUrl = `${window.location.origin}/coffeeland.rdf`;
+        const rdfData = await parseRDFData(rdfUrl);
         setData(rdfData);
         setError(null);
       } catch (err) {

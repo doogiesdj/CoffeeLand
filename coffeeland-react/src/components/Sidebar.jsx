@@ -1,4 +1,4 @@
-import { Home, Database, MapPin, Coffee, Users, BarChart3, Info } from 'lucide-react';
+import { Home, Database, MapPin, Coffee, Users, BarChart3, Info, Network } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/Sidebar.css';
 
@@ -11,7 +11,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     { path: '/brands', icon: Coffee, label: 'Coffee Brands', description: 'Premium coffee selections' },
     { path: '/chains', icon: Users, label: 'Coffee Chains', description: 'Major retailers' },
     { path: '/brokers', icon: Database, label: 'Brokers', description: 'Supply chain intermediaries' },
-    { path: '/visualization', icon: BarChart3, label: 'Visualization', description: 'Network graph' },
+    { path: '/ontology', icon: Network, label: 'Ontology', description: 'Class diagram (VOWL)' },
+    { path: '/visualization', icon: BarChart3, label: 'Network Graph', description: 'Instance relationships' },
     { path: '/about', icon: Info, label: 'About', description: 'About CoffeeLand' }
   ];
 
