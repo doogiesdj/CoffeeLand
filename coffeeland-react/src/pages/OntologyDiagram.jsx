@@ -16,20 +16,25 @@ const OntologyDiagram = () => {
     const width = container.clientWidth || 1200;
     const height = container.clientHeight || 700;
 
-    // Define ontology structure (VOWL style)
+    // Calculate center and scale based on container size
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const scale = Math.min(width / 1200, height / 700);
+
+    // Define ontology structure (VOWL style) - centered layout
     const classes = [
-      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', x: 400, y: 100 },
-      { id: 'Country', label: 'Country', type: 'class', color: '#10b981', x: 300, y: 250 },
-      { id: 'City', label: 'City', type: 'class', color: '#14b8a6', x: 500, y: 250 },
-      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', x: 600, y: 350 },
+      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', x: centerX - 300, y: centerY - 250 },
+      { id: 'Country', label: 'Country', type: 'class', color: '#10b981', x: centerX - 400, y: centerY - 100 },
+      { id: 'City', label: 'City', type: 'class', color: '#14b8a6', x: centerX - 200, y: centerY - 100 },
+      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', x: centerX - 100, y: centerY + 20 },
       
-      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', x: 800, y: 100 },
-      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', x: 700, y: 250 },
-      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6', x: 900, y: 250 },
+      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', x: centerX + 200, y: centerY - 250 },
+      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', x: centerX + 100, y: centerY - 100 },
+      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6', x: centerX + 300, y: centerY - 100 },
       
-      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', x: 600, y: 450 },
-      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', x: 500, y: 550 },
-      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316', x: 700, y: 550 }
+      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', x: centerX, y: centerY + 100 },
+      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', x: centerX - 100, y: centerY + 230 },
+      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316', x: centerX + 100, y: centerY + 230 }
     ];
 
     const relationships = [
@@ -69,6 +74,10 @@ const OntologyDiagram = () => {
       });
     
     svg.call(zoom);
+    
+    // Set initial zoom to fit content nicely
+    const initialScale = Math.min(width / 1000, height / 700, 1);
+    svg.call(zoom.transform, d3.zoomIdentity.scale(initialScale));
 
     // Define arrow markers
     const defs = svg.append('defs');
