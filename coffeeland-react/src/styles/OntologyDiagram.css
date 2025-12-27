@@ -40,17 +40,17 @@
 }
 
 .diagram-main-content {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 1.5rem;
+  position: relative;
   width: 100%;
   margin: 0 0 2rem 0;
 }
 
 .diagram-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  max-width: 280px;
 }
 
 .diagram-legend {
@@ -109,8 +109,7 @@
 }
 
 .diagram-canvas {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 
 .ontology-container {
