@@ -747,6 +747,41 @@
     
 
 
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ediya_Coffee -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ediya_Coffee">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeChain"/>
+        <untitled-ontology-2:operatesIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Seoul"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#A_Twosome_Place -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#A_Twosome_Place">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeChain"/>
+        <untitled-ontology-2:operatesIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Seoul"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Mega_Coffee -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Mega_Coffee">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeChain"/>
+        <untitled-ontology-2:operatesIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Seoul"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Seoul -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Seoul">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#City"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Sumatra_Mandheling -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Sumatra_Mandheling">

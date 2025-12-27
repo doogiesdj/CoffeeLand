@@ -166,6 +166,33 @@ const Chains = () => {
       description: 'American specialty coffee roaster, pioneer in direct trade relationships.',
       specialty: 'Single-origin coffee, direct trade beans',
       mission: 'Pursue the extraordinary cup and create meaningful relationships.'
+    },
+    'Ediya Coffee': {
+      founded: '2001',
+      headquarters: 'Seoul, South Korea',
+      stores: '3,000+',
+      countries: '1+',
+      description: 'South Korea\'s largest coffee chain, known for affordable quality coffee and wide accessibility.',
+      specialty: 'Dutch coffee, seasonal beverages, affordable pricing',
+      mission: 'Provide high-quality coffee at reasonable prices for everyone.'
+    },
+    'A Twosome Place': {
+      founded: '2002',
+      headquarters: 'Seoul, South Korea',
+      stores: '1,600+',
+      countries: '2+',
+      description: 'Premium Korean dessert café chain specializing in coffee and fresh desserts.',
+      specialty: 'Cake & coffee pairing, premium desserts, cozy atmosphere',
+      mission: 'Create moments of happiness through quality coffee and desserts.'
+    },
+    'Mega Coffee': {
+      founded: '2017',
+      headquarters: 'Seoul, South Korea',
+      stores: '2,900+',
+      countries: '1+',
+      description: 'Fast-growing Korean coffee franchise known for large-size drinks at competitive prices.',
+      specialty: 'Mega-sized beverages, value pricing, diverse menu',
+      mission: 'Deliver great taste and generous portions at affordable prices.'
     }
   };
 
