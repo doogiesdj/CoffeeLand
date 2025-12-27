@@ -60,6 +60,7 @@ const Visualization = () => {
     };
 
     addInstances(data.countries, 'Country', 'Country', '#10b981');
+    addInstances(data.cities, 'City', 'City', '#14b8a6');
     addInstances(data.brands, 'Brand', 'CoffeeBrand', '#f59e0b');
     addInstances(data.chains, 'Chain', 'CoffeeChain', '#3b82f6');
     addInstances(data.brokers, 'Broker', 'Broker', '#8b5cf6');
@@ -111,15 +112,26 @@ const Visualization = () => {
       }
     });
 
-    // Add data relationships for instances
+    // Create a set of node IDs for validation
+    const nodeIds = new Set(nodes.map(n => n.id));
+
+    // Add data relationships for instances (only if both nodes exist)
     data.relationships?.forEach(rel => {
-      links.push({
-        source: `instance:${rel.source}`,
-        target: `instance:${rel.target}`,
-        type: rel.type,
-        label: rel.type,
-        style: 'data'
-      });
+      const sourceId = `instance:${rel.source}`;
+      const targetId = `instance:${rel.target}`;
+      
+      // Only add link if both nodes exist
+      if (nodeIds.has(sourceId) && nodeIds.has(targetId)) {
+        links.push({
+          source: sourceId,
+          target: targetId,
+          type: rel.type,
+          label: rel.type,
+          style: 'data'
+        });
+      } else {
+        console.log('Skipping link - missing node:', rel.source, '→', rel.target);
+      }
     });
 
     console.log('Total links:', links.length);
