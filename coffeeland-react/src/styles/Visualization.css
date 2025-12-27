@@ -12,9 +12,7 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .viz-header h1 {
@@ -54,9 +52,7 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .legend-item {
@@ -84,9 +80,7 @@
   border-radius: 8px;
   color: #92400e;
   font-size: 0.9rem;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .viz-controls p {
@@ -98,12 +92,10 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  height: 700px;
-  min-height: 600px;
+  height: 800px;
+  min-height: 700px;
   position: relative;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .visualization-container svg {

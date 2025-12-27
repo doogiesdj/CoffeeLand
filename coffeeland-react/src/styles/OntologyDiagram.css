@@ -13,9 +13,7 @@
   color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .diagram-header h1 {
@@ -37,9 +35,7 @@
   border-radius: 8px;
   color: #1e40af;
   font-size: 0.9rem;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .diagram-controls p {
@@ -48,10 +44,10 @@
 
 .diagram-main-content {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 1.5rem;
-  max-width: 1600px;
-  margin: 0 auto 2rem;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  width: 100%;
+  margin: 0 0 2rem 0;
 }
 
 .diagram-sidebar {
@@ -205,8 +201,8 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 1600px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 .ontology-info h3 {
