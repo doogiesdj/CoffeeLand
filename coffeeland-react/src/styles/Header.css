@@ -1,0 +1,71 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 280px;
+  right: 0;
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  transition: left 0.3s ease-in-out;
+}
+
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #6b4423;
+  transition: background 0.2s;
+  border-radius: 8px;
+}
+
+.menu-button:hover {
+  background: rgba(107, 68, 35, 0.1);
+}
+
+.header-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #3e2723;
+  font-weight: 600;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.domain-badge {
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #6b4423 0%, #3e2723 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .header {
+    left: 0;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .header-title {
+    font-size: 1.25rem;
+  }
+
+  .domain-badge {
+    display: none;
+  }
+}
