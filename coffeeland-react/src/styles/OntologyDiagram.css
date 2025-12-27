@@ -79,6 +79,19 @@
   flex-shrink: 0;
 }
 
+.control-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-info p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.6;
+}
+
 /* Right diagram panel - takes remaining space */
 .diagram-panel {
   width: 100%;

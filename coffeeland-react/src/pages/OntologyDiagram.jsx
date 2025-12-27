@@ -13,37 +13,26 @@ const OntologyDiagram = () => {
     d3.select(svgRef.current).selectAll('*').remove();
 
     const container = containerRef.current;
-    // Use actual dimensions from the container
     const width = container.clientWidth || 1200;
-    const height = 4000; // Match CSS height
+    const height = 4000;
 
     console.log('Ontology container dimensions:', width, height);
 
-    // Calculate center - use more horizontal space
-    const centerX = width / 2;
-    const centerY = height / 2;
-    
-    // Spread nodes more to utilize the large vertical space
-    const horizontalSpread = Math.min(width * 0.4, 500);
-    const verticalSpread = Math.min(height * 0.25, 900);
-
-    // Define ontology structure (VOWL style) - spread out layout
-    const classes = [
-      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', x: centerX - horizontalSpread * 0.8, y: centerY - verticalSpread * 1.2 },
-      { id: 'Country', label: 'Country', type: 'class', color: '#10b981', x: centerX - horizontalSpread * 1.1, y: centerY - verticalSpread * 0.4 },
-      { id: 'City', label: 'City', type: 'class', color: '#14b8a6', x: centerX - horizontalSpread * 0.5, y: centerY - verticalSpread * 0.4 },
-      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', x: centerX - horizontalSpread * 0.25, y: centerY + verticalSpread * 0.1 },
-      
-      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', x: centerX + horizontalSpread * 0.6, y: centerY - verticalSpread * 1.2 },
-      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', x: centerX + horizontalSpread * 0.3, y: centerY - verticalSpread * 0.4 },
-      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6', x: centerX + horizontalSpread * 0.9, y: centerY - verticalSpread * 0.4 },
-      
-      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', x: centerX, y: centerY + verticalSpread * 0.5 },
-      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', x: centerX - horizontalSpread * 0.3, y: centerY + verticalSpread * 1.1 },
-      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316', x: centerX + horizontalSpread * 0.3, y: centerY + verticalSpread * 1.1 }
+    // Define ontology classes as nodes
+    const nodes = [
+      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8' },
+      { id: 'Country', label: 'Country', type: 'class', color: '#10b981' },
+      { id: 'City', label: 'City', type: 'class', color: '#14b8a6' },
+      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4' },
+      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8' },
+      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6' },
+      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6' },
+      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8' },
+      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b' },
+      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316' }
     ];
 
-    const relationships = [
+    const links = [
       // Inheritance (subClassOf)
       { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
       { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
@@ -70,19 +59,16 @@ const OntologyDiagram = () => {
       .attr('height', height)
       .attr('viewBox', [0, 0, width, height]);
 
-    // Add zoom behavior
+    // Add zoom and pan behavior
     const g = svg.append('g');
     
     const zoom = d3.zoom()
-      .scaleExtent([0.3, 3])
+      .scaleExtent([0.1, 4])
       .on('zoom', (event) => {
         g.attr('transform', event.transform);
       });
     
     svg.call(zoom);
-    
-    // No initial zoom - show at full scale
-    svg.call(zoom.transform, d3.zoomIdentity);
 
     // Define arrow markers
     const defs = svg.append('defs');
@@ -91,7 +77,7 @@ const OntologyDiagram = () => {
     defs.append('marker')
       .attr('id', 'arrow-inheritance')
       .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 40)
+      .attr('refX', 35)
       .attr('refY', 0)
       .attr('markerWidth', 8)
       .attr('markerHeight', 8)
@@ -104,7 +90,7 @@ const OntologyDiagram = () => {
     defs.append('marker')
       .attr('id', 'arrow-property')
       .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 40)
+      .attr('refX', 35)
       .attr('refY', 0)
       .attr('markerWidth', 8)
       .attr('markerHeight', 8)
@@ -115,61 +101,53 @@ const OntologyDiagram = () => {
       .attr('stroke', '#3b82f6')
       .attr('stroke-width', 2);
 
-    // Draw relationships
-    const links = g.append('g')
-      .attr('class', 'links')
-      .selectAll('g')
-      .data(relationships)
-      .enter().append('g')
-      .attr('class', 'link-group');
+    // Create force simulation - like Protégé OntoGraf
+    const simulation = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(links).id(d => d.id).distance(200).strength(0.5))
+      .force('charge', d3.forceManyBody().strength(-1000))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collision', d3.forceCollide().radius(80))
+      .force('x', d3.forceX(width / 2).strength(0.05))
+      .force('y', d3.forceY(height / 2).strength(0.05));
 
-    links.append('path')
-      .attr('class', d => `link link-${d.type}`)
-      .attr('d', d => {
-        const sourceNode = classes.find(c => c.id === d.source);
-        const targetNode = classes.find(c => c.id === d.target);
-        
-        if (!sourceNode || !targetNode) return '';
-        
-        return `M ${sourceNode.x} ${sourceNode.y} L ${targetNode.x} ${targetNode.y}`;
-      })
+    // Draw links
+    const linkElements = g.append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(links)
+      .enter().append('line')
       .attr('stroke', d => d.style === 'property' ? '#3b82f6' : '#64748b')
-      .attr('stroke-width', d => d.style === 'property' ? 2 : 2)
+      .attr('stroke-width', 2)
       .attr('stroke-dasharray', d => d.style === 'property' ? '0' : '5,5')
-      .attr('fill', 'none')
       .attr('marker-end', d => d.style === 'property' ? 'url(#arrow-property)' : 'url(#arrow-inheritance)');
 
-    // Add labels to relationships
-    links.append('text')
+    // Draw link labels
+    const linkLabels = g.append('g')
+      .attr('class', 'link-labels')
+      .selectAll('text')
+      .data(links)
+      .enter().append('text')
       .attr('class', 'link-label')
-      .attr('x', d => {
-        const sourceNode = classes.find(c => c.id === d.source);
-        const targetNode = classes.find(c => c.id === d.target);
-        return sourceNode && targetNode ? (sourceNode.x + targetNode.x) / 2 : 0;
-      })
-      .attr('y', d => {
-        const sourceNode = classes.find(c => c.id === d.source);
-        const targetNode = classes.find(c => c.id === d.target);
-        return sourceNode && targetNode ? (sourceNode.y + targetNode.y) / 2 - 5 : 0;
-      })
+      .attr('font-size', '10px')
+      .attr('fill', '#6b7280')
       .attr('text-anchor', 'middle')
-      .attr('font-size', '11px')
-      .attr('font-weight', '600')
-      .attr('fill', d => d.style === 'property' ? '#1e40af' : '#475569')
-      .style('pointer-events', 'none')
+      .attr('dy', -5)
       .text(d => d.label);
 
-    // Draw class nodes
-    const nodes = g.append('g')
+    // Draw nodes
+    const nodeElements = g.append('g')
       .attr('class', 'nodes')
       .selectAll('g')
-      .data(classes)
+      .data(nodes)
       .enter().append('g')
-      .attr('class', d => `node node-${d.type}`)
-      .attr('transform', d => `translate(${d.x},${d.y})`);
+      .attr('class', 'node')
+      .call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended));
 
-    // Class boxes
-    nodes.append('rect')
+    // Node rectangles
+    nodeElements.append('rect')
       .attr('x', -60)
       .attr('y', -30)
       .attr('width', 120)
@@ -178,10 +156,10 @@ const OntologyDiagram = () => {
       .attr('fill', d => d.color)
       .attr('stroke', '#fff')
       .attr('stroke-width', 3)
-      .style('filter', 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))');
+      .style('filter', 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))');
 
-    // Abstract class indicator (dashed border)
-    nodes.filter(d => d.type === 'abstract')
+    // Dashed border for abstract classes
+    nodeElements.filter(d => d.type === 'abstract')
       .append('rect')
       .attr('x', -60)
       .attr('y', -30)
@@ -193,18 +171,18 @@ const OntologyDiagram = () => {
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '5,5');
 
-    // Class labels
-    nodes.append('text')
+    // Node labels
+    nodeElements.append('text')
       .attr('text-anchor', 'middle')
-      .attr('y', 5)
+      .attr('dy', 5)
       .attr('font-size', '14px')
-      .attr('font-weight', '700')
+      .attr('font-weight', 'bold')
       .attr('fill', '#fff')
       .style('pointer-events', 'none')
       .text(d => d.label);
 
-    // Type indicator for abstract classes
-    nodes.filter(d => d.type === 'abstract')
+    // Abstract type indicator
+    nodeElements.filter(d => d.type === 'abstract')
       .append('text')
       .attr('text-anchor', 'middle')
       .attr('y', -12)
@@ -214,20 +192,19 @@ const OntologyDiagram = () => {
       .style('pointer-events', 'none')
       .text('«abstract»');
 
-    // Add tooltips
+    // Tooltip
     const tooltip = d3.select('body').append('div')
       .attr('class', 'ontology-tooltip')
       .style('opacity', 0);
 
-    nodes.on('mouseover', (event, d) => {
+    nodeElements.on('mouseover', (event, d) => {
       tooltip.transition().duration(200).style('opacity', 0.95);
       
       let tooltipHtml = `<strong>${d.label}</strong><br/>`;
       tooltipHtml += `Type: ${d.type === 'abstract' ? 'Abstract Class' : 'Class'}<br/>`;
       
-      // Find relationships
-      const outgoing = relationships.filter(r => r.source === d.id && r.style === 'property');
-      const incoming = relationships.filter(r => r.target === d.id && r.style === 'property');
+      const outgoing = links.filter(r => r.source.id === d.id && r.style === 'property');
+      const incoming = links.filter(r => r.target.id === d.id && r.style === 'property');
       
       if (outgoing.length > 0) {
         tooltipHtml += `<br/><em>Properties:</em><br/>`;
@@ -240,7 +217,6 @@ const OntologyDiagram = () => {
         .style('left', (event.pageX + 10) + 'px')
         .style('top', (event.pageY - 28) + 'px');
       
-      // Highlight
       d3.select(event.currentTarget).select('rect')
         .attr('stroke', '#fbbf24')
         .attr('stroke-width', 5);
@@ -253,7 +229,42 @@ const OntologyDiagram = () => {
         .attr('stroke-width', 3);
     });
 
+    // Update positions on simulation tick
+    simulation.on('tick', () => {
+      linkElements
+        .attr('x1', d => d.source.x)
+        .attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x)
+        .attr('y2', d => d.target.y);
+
+      linkLabels
+        .attr('x', d => (d.source.x + d.target.x) / 2)
+        .attr('y', d => (d.source.y + d.target.y) / 2);
+
+      nodeElements
+        .attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    // Drag functions
+    function dragstarted(event, d) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+
+    function dragended(event, d) {
+      if (!event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
     return () => {
+      simulation.stop();
       tooltip.remove();
     };
   }, []);
@@ -263,7 +274,7 @@ const OntologyDiagram = () => {
       {/* Full-width header */}
       <div className="page-header">
         <h1>Ontology Class Diagram</h1>
-        <p>VOWL-style visualization of the CoffeeLand ontology structure</p>
+        <p>Interactive VOWL-style visualization like Protégé OntoGraf</p>
       </div>
 
       {/* Two-column layout: sidebar + diagram */}
@@ -309,6 +320,16 @@ const OntologyDiagram = () => {
                 </svg>
                 <span>Property</span>
               </div>
+            </div>
+          </div>
+
+          <div className="legend-card">
+            <h3>Controls</h3>
+            <div className="control-info">
+              <p>🖱️ Drag nodes to move</p>
+              <p>🔍 Scroll to zoom</p>
+              <p>✋ Drag background to pan</p>
+              <p>💡 Hover for details</p>
             </div>
           </div>
         </div>
