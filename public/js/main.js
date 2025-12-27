@@ -8,32 +8,59 @@ const fileInput = document.getElementById('fileInput');
 const uploadBox = document.getElementById('uploadBox');
 const fileName = document.getElementById('fileName');
 const uploadStatus = document.getElementById('uploadStatus');
-const sidebarNav = document.getElementById('sidebarNav');
-const tabContent = document.getElementById('tabContent');
-const welcomeScreen = document.getElementById('welcomeScreen');
 const sidebar = document.getElementById('sidebar');
-const sidebarToggle = document.getElementById('sidebarToggle');
-const mainContent = document.getElementById('mainContent');
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-// Sidebar toggle
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
+// Sidebar Navigation
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const viewName = item.dataset.view;
+        switchView(viewName);
+        
+        // Update active state
+        navItems.forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+        
+        // Close mobile menu
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('active');
+        }
+    });
 });
 
-// Mobile sidebar toggle
-if (window.innerWidth <= 1024) {
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('mobile-open');
+function switchView(viewName) {
+    // Hide all views
+    document.querySelectorAll('.content-view').forEach(view => {
+        view.classList.remove('active');
+    });
+    
+    // Show selected view
+    const targetView = document.getElementById(`view-${viewName}`);
+    if (targetView) {
+        targetView.classList.add('active');
+        
+        // Resize graph if switching to graph view
+        if (viewName === 'graph' && cy) {
+            setTimeout(() => {
+                cy.resize();
+                cy.fit();
+            }, 100);
+        }
+    }
+}
+
+// Mobile menu toggle
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
     });
 }
 
 // File upload handling
 fileInput.addEventListener('change', handleFileSelect);
-uploadBox.addEventListener('click', (e) => {
-    if (e.target !== fileInput) {
-        fileInput.click();
-    }
-});
+uploadBox.addEventListener('click', () => fileInput.click());
 uploadBox.addEventListener('dragover', handleDragOver);
 uploadBox.addEventListener('dragleave', handleDragLeave);
 uploadBox.addEventListener('drop', handleDrop);
@@ -64,9 +91,14 @@ async function handleFileSelect() {
     
     if (!file) return;
     
+    // Update sidebar file info
     fileName.textContent = file.name;
+    fileName.classList.add('active');
+    
+    // Update status in sidebar
     uploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 업로드 중...';
-    uploadStatus.className = 'upload-status-mini';
+    uploadStatus.className = 'upload-status-widget';
+    uploadStatus.style.display = 'block';
     
     const formData = new FormData();
     formData.append('rdfFile', file);
@@ -81,22 +113,28 @@ async function handleFileSelect() {
         
         if (result.success) {
             uploadedFilename = result.filename;
-            uploadStatus.innerHTML = '<i class="fas fa-check-circle"></i> 성공!';
-            uploadStatus.className = 'upload-status-mini success';
+            uploadStatus.innerHTML = '<i class="fas fa-check-circle"></i> 업로드 성공!';
+            uploadStatus.className = 'upload-status-widget success';
             
-            // Hide welcome screen and show content
-            welcomeScreen.style.display = 'none';
-            sidebarNav.style.display = 'block';
-            tabContent.style.display = 'block';
+            // Enable navigation items
+            navItems.forEach(item => {
+                item.style.pointerEvents = 'auto';
+                item.style.opacity = '1';
+            });
             
+            // Load data
             await loadRDFData();
+            
+            // Switch to graph view
+            switchView('graph');
+            navItems.forEach(nav => nav.classList.remove('active'));
+            document.querySelector('[data-view="graph"]').classList.add('active');
         } else {
             throw new Error(result.error || '업로드 실패');
         }
     } catch (error) {
-        uploadStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> 오류`;
-        uploadStatus.className = 'upload-status-mini error';
-        console.error('Upload error:', error);
+        uploadStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> 오류: ${error.message}`;
+        uploadStatus.className = 'upload-status-widget error';
     }
 }
 
@@ -129,46 +167,11 @@ async function loadRDFData() {
     }
 }
 
-// Sidebar navigation
-document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-        const tabId = item.dataset.tab;
-        
-        // Update navigation
-        document.querySelectorAll('.nav-item').forEach(nav => {
-            nav.classList.remove('active');
-        });
-        item.classList.add('active');
-        
-        // Update content panes
-        document.querySelectorAll('.content-pane').forEach(pane => {
-            pane.classList.remove('active');
-        });
-        document.getElementById(tabId).classList.add('active');
-        
-        // Update page title
-        const titles = {
-            'graph': 'Graph Visualization',
-            'tree': 'Class Hierarchy',
-            'sparql': 'SPARQL Query Interface',
-            'raw': 'RDF Content',
-            'stats': 'Ontology Statistics'
-        };
-        document.getElementById('pageTitle').textContent = titles[tabId] || 'Ontology Viewer';
-        
-        // Resize graph if switching to graph tab
-        if (tabId === 'graph' && cy) {
-            setTimeout(() => {
-                cy.resize();
-                cy.fit();
-            }, 100);
-        }
-    });
-});
-
 // Graph visualization
 function initializeGraph() {
     const container = document.getElementById('cy');
+    
+    if (!container) return;
     
     // Build graph elements
     const elements = [];
@@ -215,37 +218,41 @@ function initializeGraph() {
             {
                 selector: 'node',
                 style: {
-                    'background-color': '#4a9eff',
+                    'background-color': '#2d72d2',
                     'label': 'data(label)',
-                    'color': '#ffffff',
-                    'text-outline-color': '#1a1f29',
+                    'color': '#f5f8fa',
+                    'text-outline-color': '#2d72d2',
                     'text-outline-width': 2,
                     'font-size': '12px',
                     'width': '60px',
                     'height': '60px',
-                    'font-weight': 'bold'
+                    'text-valign': 'center',
+                    'text-halign': 'center'
                 }
             },
             {
                 selector: 'edge',
                 style: {
                     'width': 2,
-                    'line-color': '#6b7785',
-                    'target-arrow-color': '#6b7785',
+                    'line-color': '#8b6f47',
+                    'target-arrow-color': '#8b6f47',
                     'target-arrow-shape': 'triangle',
                     'curve-style': 'bezier',
                     'label': 'data(label)',
                     'font-size': '10px',
                     'text-rotation': 'autorotate',
                     'text-margin-y': -10,
-                    'color': '#a8b2c1'
+                    'color': '#abb3bf',
+                    'text-outline-color': '#1a1f29',
+                    'text-outline-width': 1
                 }
             }
         ],
         layout: {
             name: 'cose',
             animate: true,
-            animationDuration: 1000
+            animationDuration: 1000,
+            padding: 50
         }
     });
     
@@ -256,32 +263,34 @@ function initializeGraph() {
     });
     
     // Graph controls
-    document.getElementById('fitBtn').addEventListener('click', () => {
-        cy.fit();
-    });
+    const fitBtn = document.getElementById('fitBtn');
+    const centerBtn = document.getElementById('centerBtn');
+    const resetZoomBtn = document.getElementById('resetZoomBtn');
+    const layoutSelect = document.getElementById('layoutSelect');
     
-    document.getElementById('centerBtn').addEventListener('click', () => {
-        cy.center();
-    });
-    
-    document.getElementById('resetZoomBtn').addEventListener('click', () => {
+    if (fitBtn) fitBtn.addEventListener('click', () => cy.fit());
+    if (centerBtn) centerBtn.addEventListener('click', () => cy.center());
+    if (resetZoomBtn) resetZoomBtn.addEventListener('click', () => {
         cy.zoom(1);
         cy.center();
     });
     
-    document.getElementById('layoutSelect').addEventListener('change', (e) => {
-        cy.layout({ name: e.target.value, animate: true }).run();
-    });
+    if (layoutSelect) {
+        layoutSelect.addEventListener('change', (e) => {
+            cy.layout({ name: e.target.value, animate: true }).run();
+        });
+    }
 }
 
 function showNodeInfo(data) {
     const infoPanel = document.getElementById('nodeInfo');
-    const connections = cy.getElementById(data.id).connectedEdges().length;
+    if (!infoPanel) return;
+    
     infoPanel.innerHTML = `
-        <h4><i class="fas fa-info-circle"></i> Node Information</h4>
-        <p><strong>Label:</strong> ${data.label}</p>
-        <p><strong>URI:</strong> <code>${data.fullUri}</code></p>
-        <p><strong>Connections:</strong> ${connections}</p>
+        <h4><i class="fas fa-info-circle"></i> 노드 정보</h4>
+        <p><strong>라벨:</strong> ${data.label}</p>
+        <p><strong>URI:</strong><br><code>${data.fullUri}</code></p>
+        <p><strong>연결:</strong> ${cy.getElementById(data.id).connectedEdges().length}개</p>
     `;
 }
 
@@ -311,15 +320,19 @@ async function loadStatistics() {
             
             // Namespaces
             const namespaceList = document.getElementById('namespaceList');
-            namespaceList.innerHTML = stats.namespaces
-                .map(ns => `<li>${ns}</li>`)
-                .join('');
+            if (namespaceList) {
+                namespaceList.innerHTML = stats.namespaces
+                    .map(ns => `<li>${ns}</li>`)
+                    .join('');
+            }
             
             // Classes
             const classList = document.getElementById('classList');
-            classList.innerHTML = stats.classes
-                .map(cls => `<li>${getShortName(cls)}</li>`)
-                .join('');
+            if (classList) {
+                classList.innerHTML = stats.classes
+                    .map(cls => `<li>${getShortName(cls)}</li>`)
+                    .join('');
+            }
         }
     } catch (error) {
         console.error('Error loading statistics:', error);
@@ -339,46 +352,29 @@ async function loadHierarchy() {
         
         if (result.success) {
             const treeView = document.getElementById('treeView');
-            treeView.innerHTML = renderTree(result.hierarchy);
-            
-            // Add click handlers for tree nodes
-            document.querySelectorAll('.tree-node-label').forEach(node => {
-                node.addEventListener('click', (e) => {
-                    const children = e.currentTarget.parentElement.querySelector('.tree-node-children');
-                    if (children) {
-                        children.style.display = children.style.display === 'none' ? 'block' : 'none';
-                        const icon = e.currentTarget.querySelector('i');
-                        if (icon.classList.contains('fa-chevron-down')) {
-                            icon.classList.remove('fa-chevron-down');
-                            icon.classList.add('fa-chevron-right');
-                        } else {
-                            icon.classList.remove('fa-chevron-right');
-                            icon.classList.add('fa-chevron-down');
-                        }
-                    }
-                });
-            });
+            if (treeView) {
+                treeView.innerHTML = renderTree(result.hierarchy);
+            }
             
             // Expand/collapse functionality
-            document.getElementById('expandAllBtn').addEventListener('click', () => {
-                document.querySelectorAll('.tree-node-children').forEach(el => {
-                    el.style.display = 'block';
-                });
-                document.querySelectorAll('.tree-node-label i.fa-chevron-right').forEach(icon => {
-                    icon.classList.remove('fa-chevron-right');
-                    icon.classList.add('fa-chevron-down');
-                });
-            });
+            const expandAllBtn = document.getElementById('expandAllBtn');
+            const collapseAllBtn = document.getElementById('collapseAllBtn');
             
-            document.getElementById('collapseAllBtn').addEventListener('click', () => {
-                document.querySelectorAll('.tree-node-children').forEach(el => {
-                    el.style.display = 'none';
+            if (expandAllBtn) {
+                expandAllBtn.addEventListener('click', () => {
+                    document.querySelectorAll('.tree-node-children').forEach(el => {
+                        el.style.display = 'block';
+                    });
                 });
-                document.querySelectorAll('.tree-node-label i.fa-chevron-down').forEach(icon => {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-right');
+            }
+            
+            if (collapseAllBtn) {
+                collapseAllBtn.addEventListener('click', () => {
+                    document.querySelectorAll('.tree-node-children').forEach(el => {
+                        el.style.display = 'none';
+                    });
                 });
-            });
+            }
         }
     } catch (error) {
         console.error('Error loading hierarchy:', error);
@@ -387,7 +383,7 @@ async function loadHierarchy() {
 
 function renderTree(nodes) {
     if (!nodes || nodes.length === 0) {
-        return '<p style="color: var(--text-secondary);">No hierarchy structure available.</p>';
+        return '<p style="color: var(--text-secondary);">계층 구조를 표시할 수 없습니다.</p>';
     }
     
     return nodes.map(node => {
@@ -405,7 +401,10 @@ function renderTree(nodes) {
 }
 
 // SPARQL Query
-document.getElementById('executeQueryBtn').addEventListener('click', executeSPARQLQuery);
+const executeQueryBtn = document.getElementById('executeQueryBtn');
+if (executeQueryBtn) {
+    executeQueryBtn.addEventListener('click', executeSPARQLQuery);
+}
 
 document.querySelectorAll('.example-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -429,6 +428,8 @@ async function executeSPARQLQuery() {
     const resultsContainer = document.getElementById('queryResults');
     const resultCount = document.getElementById('resultCount');
     
+    if (!resultsContainer) return;
+    
     resultsContainer.innerHTML = '<div class="spinner"></div>';
     
     try {
@@ -444,10 +445,12 @@ async function executeSPARQLQuery() {
         const result = await response.json();
         
         if (result.success) {
-            resultCount.textContent = `(${result.count} results)`;
+            if (resultCount) {
+                resultCount.textContent = `(${result.count}개)`;
+            }
             
             if (result.results.length === 0) {
-                resultsContainer.innerHTML = '<p style="padding:1rem;color:var(--text-secondary);">No results found.</p>';
+                resultsContainer.innerHTML = '<p style="padding:1rem;color:var(--text-secondary);">결과가 없습니다.</p>';
                 return;
             }
             
@@ -476,67 +479,77 @@ async function executeSPARQLQuery() {
             throw new Error(result.error);
         }
     } catch (error) {
-        resultsContainer.innerHTML = `<p style="padding:1rem;color:var(--error-color);">Error: ${error.message}</p>`;
+        resultsContainer.innerHTML = `<p style="padding:1rem;color:var(--error-color);">오류: ${error.message}</p>`;
     }
 }
 
 // RDF Content
-document.getElementById('convertBtn').addEventListener('click', async () => {
-    const format = document.getElementById('formatSelect').value;
-    const rdfContent = document.getElementById('rdfContent');
-    
-    rdfContent.textContent = 'Converting...';
-    
-    try {
-        const response = await fetch('/api/rdf/convert', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                filename: uploadedFilename,
-                format: format
-            })
-        });
+const convertBtn = document.getElementById('convertBtn');
+if (convertBtn) {
+    convertBtn.addEventListener('click', async () => {
+        const format = document.getElementById('formatSelect').value;
+        const rdfContent = document.getElementById('rdfContent');
         
-        const result = await response.json();
+        if (!rdfContent) return;
         
-        if (result.success) {
-            rdfContent.textContent = result.content;
-        } else {
-            throw new Error(result.error);
+        rdfContent.textContent = '변환 중...';
+        
+        try {
+            const response = await fetch('/api/rdf/convert', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    filename: uploadedFilename,
+                    format: format
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                rdfContent.textContent = result.content;
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            rdfContent.textContent = `오류: ${error.message}`;
         }
-    } catch (error) {
-        rdfContent.textContent = `Error: ${error.message}`;
-    }
-});
+    });
+}
 
-document.getElementById('copyRdfBtn').addEventListener('click', () => {
-    const content = document.getElementById('rdfContent').textContent;
-    navigator.clipboard.writeText(content).then(() => {
-        const btn = document.getElementById('copyRdfBtn');
-        const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+const copyRdfBtn = document.getElementById('copyRdfBtn');
+if (copyRdfBtn) {
+    copyRdfBtn.addEventListener('click', () => {
+        const content = document.getElementById('rdfContent').textContent;
+        navigator.clipboard.writeText(content);
+        
+        // Visual feedback
+        copyRdfBtn.innerHTML = '<i class="fas fa-check"></i> 복사됨!';
         setTimeout(() => {
-            btn.innerHTML = originalHTML;
+            copyRdfBtn.innerHTML = '<i class="fas fa-copy"></i> 복사';
         }, 2000);
     });
-});
+}
 
-document.getElementById('downloadRdfBtn').addEventListener('click', () => {
-    const content = document.getElementById('rdfContent').textContent;
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ontology.ttl';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-});
+const downloadRdfBtn = document.getElementById('downloadRdfBtn');
+if (downloadRdfBtn) {
+    downloadRdfBtn.addEventListener('click', () => {
+        const content = document.getElementById('rdfContent').textContent;
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ontology.ttl';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+}
 
-// Window resize handler
-window.addEventListener('resize', () => {
-    if (cy) {
-        cy.resize();
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            sidebar.classList.remove('active');
+        }
     }
 });
