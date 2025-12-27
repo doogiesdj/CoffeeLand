@@ -23,48 +23,115 @@ const Visualization = () => {
 
     console.log('Network Graph dimensions:', width, height);
 
-    // Create nodes from all entities with enhanced properties
-    const nodes = [];
-    const addNodes = (entities, type, color, shape = 'rect') => {
+    // Create ontology hierarchy nodes (like the first image)
+    const nodes = [
+      // Top level - owl:Thing
+      { id: 'owl:Thing', label: 'owl:Thing', type: 'owl:Class', color: '#22c55e', shape: 'rect', isOntology: true },
+      
+      // Second level - Main classes
+      { id: 'Location', label: 'Location', type: 'Class', color: '#94a3b8', shape: 'rect', isOntology: true },
+      { id: 'Organization', label: 'Organization', type: 'Class', color: '#94a3b8', shape: 'rect', isOntology: true },
+      { id: 'Product', label: 'Product', type: 'Class', color: '#94a3b8', shape: 'rect', isOntology: true },
+      
+      // Third level - Subclasses
+      { id: 'Country', label: 'Country', type: 'Class', color: '#10b981', shape: 'rect', isOntology: true },
+      { id: 'City', label: 'City', type: 'Class', color: '#14b8a6', shape: 'rect', isOntology: true },
+      { id: 'Capital', label: 'Capital', type: 'Class', color: '#06b6d4', shape: 'rect', isOntology: true },
+      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'Class', color: '#3b82f6', shape: 'rect', isOntology: true },
+      { id: 'Broker', label: 'Broker', type: 'Class', color: '#8b5cf6', shape: 'rect', isOntology: true },
+      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'Class', color: '#f59e0b', shape: 'rect', isOntology: true },
+      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'Class', color: '#f97316', shape: 'rect', isOntology: true }
+    ];
+
+    // Add instances from data
+    const addInstances = (entities, type, parentClass, color) => {
       entities?.forEach(entity => {
         nodes.push({ 
-          id: entity.name, 
+          id: `instance:${entity.name}`, 
           label: entity.name,
-          type, 
+          type: `${type} Instance`, 
           color,
-          shape,
+          shape: 'rect',
+          isOntology: false,
+          parentClass,
           ...entity 
         });
       });
     };
 
-    // Different shapes for different types (like Protégé)
-    addNodes(data.countries, 'Country', '#10b981', 'rect');
-    addNodes(data.brands, 'Brand', '#f59e0b', 'rect');
-    addNodes(data.chains, 'Chain', '#3b82f6', 'rect');
-    addNodes(data.brokers, 'Broker', '#8b5cf6', 'rect');
+    addInstances(data.countries, 'Country', 'Country', '#10b981');
+    addInstances(data.brands, 'Brand', 'CoffeeBrand', '#f59e0b');
+    addInstances(data.chains, 'Chain', 'CoffeeChain', '#3b82f6');
+    addInstances(data.brokers, 'Broker', 'Broker', '#8b5cf6');
 
     console.log('Total nodes:', nodes.length);
 
-    // Create links from relationships
-    const links = data.relationships?.map(rel => ({
-      source: rel.source,
-      target: rel.target,
-      type: rel.type,
-      label: rel.type
-    })) || [];
+    // Create ontology hierarchy links (subClassOf)
+    const ontologyLinks = [
+      // owl:Thing → Main classes
+      { source: 'Location', target: 'owl:Thing', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'Organization', target: 'owl:Thing', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'Product', target: 'owl:Thing', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      
+      // Main classes → Subclasses
+      { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'Capital', target: 'Country', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'CoffeeChain', target: 'Organization', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'Broker', target: 'Organization', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'CoffeeBrand', target: 'Product', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' },
+      { source: 'CoffeeBean', target: 'Product', type: 'subClassOf', label: 'subClassOf', style: 'inheritance' }
+    ];
 
-    // Filter links to only include nodes that exist
-    const nodeIds = new Set(nodes.map(n => n.id));
-    const validLinks = links.filter(link => 
-      nodeIds.has(link.source) && nodeIds.has(link.target)
-    );
+    // Create property links (object properties)
+    const propertyLinks = [
+      { source: 'Country', target: 'CoffeeBrand', type: 'produces', label: 'produces', style: 'property' },
+      { source: 'City', target: 'Country', type: 'isLocatedIn', label: 'isLocatedIn', style: 'property' },
+      { source: 'CoffeeChain', target: 'City', type: 'operatesIn', label: 'operatesIn', style: 'property' },
+      { source: 'Broker', target: 'CoffeeChain', type: 'suppliesTo', label: 'suppliesTo', style: 'property' },
+      { source: 'CoffeeChain', target: 'Broker', type: 'buysFrom', label: 'buysFrom', style: 'property' },
+      { source: 'Country', target: 'Capital', type: 'hasMainCapital', label: 'hasMainCapital', style: 'property' },
+      { source: 'CoffeeBrand', target: 'City', type: 'hasOriginIn', label: 'hasOriginIn', style: 'property' },
+      { source: 'CoffeeBrand', target: 'Country', type: 'isConsumedIn', label: 'isConsumedIn', style: 'property' }
+    ];
 
-    console.log('Valid links:', validLinks.length);
+    // Combine all links
+    const links = [...ontologyLinks, ...propertyLinks];
+
+    // Add instance-to-class links
+    nodes.forEach(node => {
+      if (!node.isOntology && node.parentClass) {
+        links.push({
+          source: node.id,
+          target: node.parentClass,
+          type: 'instanceOf',
+          label: 'instanceOf',
+          style: 'instance'
+        });
+      }
+    });
+
+    // Add data relationships for instances
+    data.relationships?.forEach(rel => {
+      links.push({
+        source: `instance:${rel.source}`,
+        target: `instance:${rel.target}`,
+        type: rel.type,
+        label: rel.type,
+        style: 'data'
+      });
+    });
+
+    console.log('Total links:', links.length);
+
+    const ontologyNodes = nodes.filter(n => n.isOntology);
+    const instanceNodes = nodes.filter(n => !n.isOntology);
 
     setGraphStats({
       nodes: nodes.length,
-      links: validLinks.length,
+      links: links.length,
+      classes: ontologyNodes.length,
+      instances: instanceNodes.length,
       countries: data.countries?.length || 0,
       brands: data.brands?.length || 0,
       chains: data.chains?.length || 0,
@@ -93,26 +160,52 @@ const Visualization = () => {
     
     svg.call(zoom);
 
-    // Define arrow markers for directed links
+    // Define arrow markers for different link types
     const defs = svg.append('defs');
 
-    // Create different colored arrows for each node type
-    const colors = [
+    // Inheritance arrow (filled blue triangle) - for subClassOf
+    defs.append('marker')
+      .attr('id', 'arrow-inheritance')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 40)
+      .attr('refY', 0)
+      .attr('markerWidth', 8)
+      .attr('markerHeight', 8)
+      .attr('orient', 'auto')
+      .append('path')
+      .attr('d', 'M0,-5L10,0L0,5Z')
+      .attr('fill', '#3b82f6');
+
+    // Instance arrow (dashed) - for instanceOf
+    defs.append('marker')
+      .attr('id', 'arrow-instance')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 40)
+      .attr('refY', 0)
+      .attr('markerWidth', 6)
+      .attr('markerHeight', 6)
+      .attr('orient', 'auto')
+      .append('path')
+      .attr('d', 'M0,-5L10,0L0,5Z')
+      .attr('fill', '#94a3b8');
+
+    // Property arrow (various colors) - for object properties
+    const propertyColors = [
       { id: 'green', color: '#10b981' },
       { id: 'orange', color: '#f59e0b' },
-      { id: 'blue', color: '#3b82f6' },
       { id: 'purple', color: '#8b5cf6' },
-      { id: 'gray', color: '#6b7280' }
+      { id: 'pink', color: '#ec4899' },
+      { id: 'cyan', color: '#06b6d4' }
     ];
 
-    colors.forEach(c => {
+    propertyColors.forEach(c => {
       defs.append('marker')
-        .attr('id', `arrow-${c.id}`)
+        .attr('id', `arrow-property-${c.id}`)
         .attr('viewBox', '0 -5 10 10')
         .attr('refX', 40)
         .attr('refY', 0)
-        .attr('markerWidth', 8)
-        .attr('markerHeight', 8)
+        .attr('markerWidth', 7)
+        .attr('markerHeight', 7)
         .attr('orient', 'auto')
         .append('path')
         .attr('d', 'M0,-5L10,0L0,5')
@@ -121,37 +214,111 @@ const Visualization = () => {
         .attr('stroke-width', 2);
     });
 
-    // Create force simulation - Protégé OntoGraf style
+    // Create force simulation - hierarchical layout like Protégé
     const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(250).strength(0.7))
-      .force('charge', d3.forceManyBody().strength(-1200))
+      .force('link', d3.forceLink(links).id(d => d.id)
+        .distance(d => {
+          // Different distances for different link types
+          if (d.style === 'inheritance') return 180;
+          if (d.style === 'instance') return 120;
+          if (d.style === 'property') return 200;
+          return 150;
+        })
+        .strength(d => {
+          if (d.style === 'inheritance') return 0.8;
+          if (d.style === 'instance') return 0.5;
+          return 0.6;
+        })
+      )
+      .force('charge', d3.forceManyBody().strength(d => {
+        // Stronger repulsion for ontology nodes
+        return d.isOntology ? -1500 : -800;
+      }))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(100))
-      .force('x', d3.forceX(width / 2).strength(0.05))
-      .force('y', d3.forceY(height / 2).strength(0.05));
+      .force('collision', d3.forceCollide().radius(d => d.isOntology ? 100 : 80))
+      .force('x', d3.forceX(width / 2).strength(0.03))
+      .force('y', d3.forceY(d => {
+        // Hierarchical positioning by level
+        if (d.id === 'owl:Thing') return height * 0.15;
+        if (['Location', 'Organization', 'Product'].includes(d.id)) return height * 0.3;
+        if (d.isOntology) return height * 0.45;
+        return height * 0.65;
+      }).strength(0.1));
 
-    // Draw links
+    // Draw links with different styles
     const linkElements = g.append('g')
       .attr('class', 'links')
       .selectAll('line')
-      .data(validLinks)
+      .data(links)
       .enter().append('line')
-      .attr('stroke', '#94a3b8')
-      .attr('stroke-width', 2)
-      .attr('stroke-opacity', 0.6)
-      .attr('marker-end', 'url(#arrow-gray)');
+      .attr('stroke', d => {
+        if (d.style === 'inheritance') return '#3b82f6'; // Blue for subClassOf
+        if (d.style === 'instance') return '#94a3b8'; // Gray for instanceOf
+        if (d.style === 'property') {
+          // Different colors for different properties
+          const colorMap = {
+            'produces': '#10b981',
+            'isLocatedIn': '#06b6d4',
+            'operatesIn': '#8b5cf6',
+            'suppliesTo': '#ec4899',
+            'buysFrom': '#f59e0b'
+          };
+          return colorMap[d.type] || '#6b7280';
+        }
+        return '#94a3b8';
+      })
+      .attr('stroke-width', d => {
+        if (d.style === 'inheritance') return 3;
+        if (d.style === 'instance') return 1.5;
+        return 2;
+      })
+      .attr('stroke-dasharray', d => {
+        if (d.style === 'instance') return '5,5'; // Dashed for instanceOf
+        return '0';
+      })
+      .attr('stroke-opacity', d => d.style === 'instance' ? 0.4 : 0.7)
+      .attr('marker-end', d => {
+        if (d.style === 'inheritance') return 'url(#arrow-inheritance)';
+        if (d.style === 'instance') return 'url(#arrow-instance)';
+        if (d.style === 'property') {
+          const colorMap = {
+            'produces': 'green',
+            'isLocatedIn': 'cyan',
+            'operatesIn': 'purple',
+            'suppliesTo': 'pink',
+            'buysFrom': 'orange'
+          };
+          const colorId = colorMap[d.type] || 'green';
+          return `url(#arrow-property-${colorId})`;
+        }
+        return '';
+      });
 
-    // Draw link labels
+    // Draw link labels (only for important relationships)
     const linkLabels = g.append('g')
       .attr('class', 'link-labels')
       .selectAll('text')
-      .data(validLinks)
+      .data(links.filter(d => d.style !== 'instance')) // Don't show labels for instanceOf
       .enter().append('text')
       .attr('class', 'link-label')
-      .attr('font-size', '11px')
-      .attr('fill', '#6b7280')
+      .attr('font-size', d => d.style === 'inheritance' ? '10px' : '9px')
+      .attr('fill', d => {
+        if (d.style === 'inheritance') return '#3b82f6';
+        if (d.style === 'property') {
+          const colorMap = {
+            'produces': '#10b981',
+            'isLocatedIn': '#06b6d4',
+            'operatesIn': '#8b5cf6',
+            'suppliesTo': '#ec4899',
+            'buysFrom': '#f59e0b'
+          };
+          return colorMap[d.type] || '#6b7280';
+        }
+        return '#6b7280';
+      })
+      .attr('font-weight', d => d.style === 'inheritance' ? 'bold' : 'normal')
       .attr('text-anchor', 'middle')
-      .attr('dy', -8)
+      .attr('dy', -10)
       .style('pointer-events', 'none')
       .text(d => d.label);
 
@@ -167,18 +334,28 @@ const Visualization = () => {
         .on('drag', dragged)
         .on('end', dragended));
 
-    // Node shapes - rectangles with rounded corners (like Protégé)
+    // Node shapes - different for ontology classes vs instances
     nodeElements.append('rect')
-      .attr('x', -70)
-      .attr('y', -35)
-      .attr('width', 140)
-      .attr('height', 70)
+      .attr('x', d => d.isOntology ? -70 : -60)
+      .attr('y', d => d.isOntology ? -35 : -30)
+      .attr('width', d => d.isOntology ? 140 : 120)
+      .attr('height', d => d.isOntology ? 70 : 60)
       .attr('rx', 10)
       .attr('ry', 10)
       .attr('fill', d => d.color)
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 4)
+      .attr('stroke', d => d.isOntology ? '#1e293b' : '#fff')
+      .attr('stroke-width', d => d.isOntology ? 3 : 4)
       .style('filter', 'drop-shadow(0px 3px 6px rgba(0,0,0,0.25))');
+
+    // Add icon for owl:Thing
+    nodeElements.filter(d => d.id === 'owl:Thing')
+      .append('circle')
+      .attr('cx', -50)
+      .attr('cy', -20)
+      .attr('r', 8)
+      .attr('fill', '#fbbf24')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2);
 
     // Node labels
     nodeElements.append('text')
@@ -382,17 +559,13 @@ const Visualization = () => {
         <p>Interactive graph like Protégé OntoGraf - drag, zoom, and explore relationships</p>
         {graphStats && (
           <div className="graph-stats">
-            <span>Nodes: {graphStats.nodes}</span>
+            <span>Total Nodes: {graphStats.nodes}</span>
             <span>•</span>
             <span>Links: {graphStats.links}</span>
             <span>•</span>
-            <span>Countries: {graphStats.countries}</span>
+            <span>Classes: {graphStats.classes}</span>
             <span>•</span>
-            <span>Brands: {graphStats.brands}</span>
-            <span>•</span>
-            <span>Chains: {graphStats.chains}</span>
-            <span>•</span>
-            <span>Brokers: {graphStats.brokers}</span>
+            <span>Instances: {graphStats.instances}</span>
           </div>
         )}
       </div>
@@ -402,23 +575,54 @@ const Visualization = () => {
         {/* Left sidebar - narrow */}
         <div className="sidebar-panel">
           <div className="legend-card">
-            <h3>Node Types</h3>
+            <h3>Ontology Classes</h3>
             <div className="legend-items">
               <div className="legend-item">
-                <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
-                <span>Countries</span>
+                <div className="legend-box" style={{ backgroundColor: '#22c55e' }}></div>
+                <span>owl:Thing</span>
               </div>
               <div className="legend-item">
-                <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
-                <span>Brands</span>
+                <div className="legend-box" style={{ backgroundColor: '#94a3b8' }}></div>
+                <span>Abstract Classes</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
+                <span>Location Classes</span>
               </div>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#3b82f6' }}></div>
-                <span>Chains</span>
+                <span>Organization</span>
               </div>
               <div className="legend-item">
-                <div className="legend-box" style={{ backgroundColor: '#8b5cf6' }}></div>
-                <span>Brokers</span>
+                <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
+                <span>Product Classes</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="legend-card">
+            <h3>Relationships</h3>
+            <div className="legend-items">
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#3b82f6" strokeWidth="3"/>
+                  <polygon points="40,10 35,7 35,13" fill="#3b82f6"/>
+                </svg>
+                <span>subClassOf</span>
+              </div>
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="5,5"/>
+                  <polygon points="40,10 35,7 35,13" fill="#94a3b8"/>
+                </svg>
+                <span>instanceOf</span>
+              </div>
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#10b981" strokeWidth="2"/>
+                  <polygon points="40,10 35,7 35,13" fill="none" stroke="#10b981" strokeWidth="2"/>
+                </svg>
+                <span>Properties</span>
               </div>
             </div>
           </div>
@@ -429,18 +633,8 @@ const Visualization = () => {
               <p>🖱️ Drag nodes to move</p>
               <p>🔍 Scroll to zoom</p>
               <p>✋ Drag background to pan</p>
-              <p>💡 Hover for connections</p>
-              <p>🎯 Click to focus</p>
-            </div>
-          </div>
-
-          <div className="legend-card">
-            <h3>Graph Info</h3>
-            <div className="control-info">
-              <p>📊 Force-directed layout</p>
-              <p>🔗 Relationship arrows</p>
-              <p>🏷️ Node type badges</p>
-              <p>💫 Dynamic positioning</p>
+              <p>💡 Hover for details</p>
+              <p>🔗 Colored links = different properties</p>
             </div>
           </div>
         </div>
