@@ -40,7 +40,8 @@
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  height: 800px;
+  height: 4000px;
+  min-height: 3500px;
 }
 
 .diagram-canvas {
@@ -98,7 +99,8 @@
 
 @media (max-width: 768px) {
   .diagram-container {
-    height: 600px;
+    height: 3000px;
+    min-height: 2500px;
   }
 
   .legend-panel {
