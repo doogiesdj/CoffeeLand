@@ -3,10 +3,11 @@ const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
 const N3 = require('n3');
+const $rdf = require('rdflib');
 const { DataFactory } = N3;
 const { namedNode, literal, defaultGraph, quad } = DataFactory;
 
-// Parse RDF file
+// Parse RDF file (supports RDF/XML, Turtle, N3, N-Triples)
 router.post('/parse', async (req, res) => {
     try {
         const { filename } = req.body;
@@ -18,25 +19,57 @@ router.post('/parse', async (req, res) => {
         const filePath = path.join(__dirname, '..', 'uploads', filename);
         const fileContent = await fs.readFile(filePath, 'utf8');
         
-        const parser = new N3.Parser();
+        // Detect format
+        const ext = path.extname(filename).toLowerCase();
+        const isRdfXml = fileContent.trim().startsWith('<?xml') || 
+                        fileContent.includes('<rdf:RDF') || 
+                        ext === '.rdf' || ext === '.owl';
+        
         const triples = [];
         
-        await new Promise((resolve, reject) => {
-            parser.parse(fileContent, (error, triple, prefixes) => {
-                if (error) {
-                    reject(error);
-                } else if (triple) {
+        if (isRdfXml) {
+            // Use rdflib for RDF/XML
+            const store = $rdf.graph();
+            const contentType = 'application/rdf+xml';
+            const baseURI = 'http://example.org/';
+            
+            try {
+                $rdf.parse(fileContent, store, baseURI, contentType);
+                
+                // Extract triples from store
+                store.statements.forEach(statement => {
                     triples.push({
-                        subject: triple.subject.value,
-                        predicate: triple.predicate.value,
-                        object: triple.object.value,
-                        objectType: triple.object.termType
+                        subject: statement.subject.value,
+                        predicate: statement.predicate.value,
+                        object: statement.object.value,
+                        objectType: statement.object.termType
                     });
-                } else {
-                    resolve({ triples, prefixes });
-                }
+                });
+            } catch (parseError) {
+                console.error('RDF/XML parse error:', parseError);
+                throw new Error('Failed to parse RDF/XML: ' + parseError.message);
+            }
+        } else {
+            // Use N3 parser for Turtle, N3, N-Triples
+            const parser = new N3.Parser();
+            
+            await new Promise((resolve, reject) => {
+                parser.parse(fileContent, (error, triple, prefixes) => {
+                    if (error) {
+                        reject(error);
+                    } else if (triple) {
+                        triples.push({
+                            subject: triple.subject.value,
+                            predicate: triple.predicate.value,
+                            object: triple.object.value,
+                            objectType: triple.object.termType
+                        });
+                    } else {
+                        resolve({ triples, prefixes });
+                    }
+                });
             });
-        });
+        }
 
         res.json({
             success: true,
