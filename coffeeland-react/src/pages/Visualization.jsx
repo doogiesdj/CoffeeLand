@@ -19,7 +19,7 @@ const Visualization = () => {
 
     const container = containerRef.current;
     const width = container.clientWidth || 1200;
-    const height = container.clientHeight || 600;
+    const height = container.clientHeight || 700;
 
     console.log('SVG dimensions:', width, height);
 
@@ -87,12 +87,14 @@ const Visualization = () => {
     
     svg.call(zoom);
 
-    // Create force simulation
+    // Create force simulation - spread nodes more to fill the space
     const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(150))
-      .force('charge', d3.forceManyBody().strength(-400))
+      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(200))
+      .force('charge', d3.forceManyBody().strength(-600))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(50));
+      .force('collision', d3.forceCollide().radius(60))
+      .force('x', d3.forceX(width / 2).strength(0.05))
+      .force('y', d3.forceY(height / 2).strength(0.05));
 
     // Create arrow marker for links
     svg.append('defs').selectAll('marker')
