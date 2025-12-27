@@ -256,88 +256,64 @@ const OntologyDiagram = () => {
   }, []);
 
   return (
-    <div className="ontology-diagram-page">
-      <div className="diagram-header">
+    <div className="ontology-page">
+      {/* Full-width header */}
+      <div className="page-header">
         <h1>Ontology Class Diagram</h1>
         <p>VOWL-style visualization of the CoffeeLand ontology structure</p>
       </div>
 
-      <div className="diagram-controls">
-        <p>💡 Scroll to zoom • Drag to pan • Hover over classes for details</p>
-      </div>
-
-      <div className="diagram-main-content">
-        <div className="diagram-sidebar">
-          <div className="diagram-legend">
-            <div className="legend-section">
-              <h3>Classes</h3>
-              <div className="legend-items">
-                <div className="legend-item">
-                  <div className="legend-box abstract"></div>
-                  <span>Abstract Class</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-box concrete" style={{ backgroundColor: '#10b981' }}></div>
-                  <span>Location Classes</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-box concrete" style={{ backgroundColor: '#3b82f6' }}></div>
-                  <span>Organization Classes</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-box concrete" style={{ backgroundColor: '#f59e0b' }}></div>
-                  <span>Product Classes</span>
-                </div>
+      {/* Two-column layout: sidebar + diagram */}
+      <div className="content-grid">
+        {/* Left sidebar - narrow */}
+        <div className="sidebar-panel">
+          <div className="legend-card">
+            <h3>Classes</h3>
+            <div className="legend-items">
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#94a3b8', border: '2px dashed #475569' }}></div>
+                <span>Abstract Class</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
+                <span>Location</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#3b82f6' }}></div>
+                <span>Organization</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
+                <span>Product</span>
               </div>
             </div>
-            <div className="legend-section">
-              <h3>Relationships</h3>
-              <div className="legend-items">
-                <div className="legend-item">
-                  <svg width="60" height="20">
-                    <line x1="0" y1="10" x2="50" y2="10" stroke="#64748b" strokeWidth="2" strokeDasharray="5,5"/>
-                    <polygon points="50,10 45,7 45,13" fill="#64748b"/>
-                  </svg>
-                  <span>subClassOf</span>
-                </div>
-                <div className="legend-item">
-                  <svg width="60" height="20">
-                    <line x1="0" y1="10" x2="50" y2="10" stroke="#3b82f6" strokeWidth="2"/>
-                    <polygon points="50,10 45,7 45,13" fill="none" stroke="#3b82f6" strokeWidth="2"/>
-                  </svg>
-                  <span>Object Property</span>
-                </div>
+          </div>
+
+          <div className="legend-card">
+            <h3>Relationships</h3>
+            <div className="legend-items">
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#64748b" strokeWidth="2" strokeDasharray="5,5"/>
+                  <polygon points="40,10 35,7 35,13" fill="#64748b"/>
+                </svg>
+                <span>subClassOf</span>
+              </div>
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#3b82f6" strokeWidth="2"/>
+                  <polygon points="40,10 35,7 35,13" fill="none" stroke="#3b82f6" strokeWidth="2"/>
+                </svg>
+                <span>Property</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="diagram-canvas">
-          <div className="ontology-container" ref={containerRef}>
+        {/* Right diagram - wide */}
+        <div className="diagram-panel">
+          <div className="diagram-container" ref={containerRef}>
             <svg ref={svgRef}></svg>
-          </div>
-        </div>
-      </div>
-
-      <div className="ontology-info">
-        <h3>Ontology Structure</h3>
-        <div className="info-grid">
-          <div className="info-card">
-            <h4>Main Classes</h4>
-            <ul>
-              <li><strong>Location</strong>: Geographic entities (Country, City, Capital)</li>
-              <li><strong>Organization</strong>: Business entities (CoffeeChain, Broker)</li>
-              <li><strong>Product</strong>: Coffee-related products (CoffeeBrand, CoffeeBean)</li>
-            </ul>
-          </div>
-          <div className="info-card">
-            <h4>Key Properties</h4>
-            <ul>
-              <li><strong>produces</strong>: Country → CoffeeBrand</li>
-              <li><strong>operatesIn</strong>: CoffeeChain → City</li>
-              <li><strong>suppliesTo</strong>: Broker → CoffeeChain</li>
-              <li><strong>isLocatedIn</strong>: City → Country</li>
-            </ul>
           </div>
         </div>
       </div>

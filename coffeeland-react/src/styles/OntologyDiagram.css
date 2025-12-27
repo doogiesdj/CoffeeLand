@@ -1,7 +1,9 @@
+/* Ontology Page - Full width layout */
 .ontology-page {
-  /* Full width - no max-width */
+  width: 100%;
 }
 
+/* Full-width header */
 .page-header {
   background: linear-gradient(135deg, #2d1b3d 0%, #1a0f24 100%);
   padding: 2rem;
@@ -23,56 +25,35 @@
   opacity: 0.9;
 }
 
-.controls-bar {
+/* Two-column grid: sidebar + diagram */
+.content-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Left sidebar - fixed narrow width */
+.sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.legend-card {
   background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #6b7280;
-  font-size: 0.9rem;
-}
-
-.diagram-container {
-  position: relative;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  height: 4000px;
-  min-height: 3500px;
-}
-
-.diagram-canvas {
-  width: 100%;
-  height: 100%;
-}
-
-.diagram-canvas svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.legend-panel {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  max-width: 240px;
-  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.legend-title {
+.legend-card h3 {
   font-size: 1rem;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .legend-items {
@@ -89,23 +70,73 @@
   color: #4b5563;
 }
 
-.legend-color {
+.legend-box {
   width: 32px;
   height: 24px;
   border-radius: 6px;
   border: 2px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
+/* Right diagram panel - takes remaining space */
+.diagram-panel {
+  width: 100%;
+  min-height: 4000px;
+}
+
+.diagram-container {
+  width: 100%;
+  height: 4000px;
+  min-height: 3500px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+.diagram-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Tooltip styles */
+.ontology-tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 12px;
+  font-size: 0.875rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1000;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+.ontology-tooltip strong {
+  font-size: 1rem;
+  color: #fbbf24;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .sidebar-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
   .diagram-container {
     height: 3000px;
     min-height: 2500px;
-  }
-
-  .legend-panel {
-    position: static;
-    margin-bottom: 1rem;
-    max-width: 100%;
   }
 }
