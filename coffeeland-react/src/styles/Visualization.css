@@ -1,6 +1,4 @@
 .visualization-page {
-  width: 100%;
-  margin: 0;
   padding: 2rem;
 }
 
@@ -46,7 +44,7 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 1rem;
-  padding: 1rem 2rem;
+  padding: 1rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -72,7 +70,7 @@
 .viz-controls {
   text-align: center;
   margin-bottom: 1rem;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem;
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
   border-radius: 12px;
   color: #92400e;
@@ -89,7 +87,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   height: 900px;
-  min-height: 800px;
   position: relative;
   width: 100%;
 }
@@ -100,7 +97,6 @@
   display: block;
 }
 
-/* Node styles */
 .node {
   cursor: pointer;
   transition: all 0.2s;
@@ -115,12 +111,10 @@
   user-select: none;
 }
 
-/* Link styles */
 .links line {
   transition: stroke-opacity 0.2s;
 }
 
-/* Tooltip styles */
 .graph-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.9);
@@ -140,7 +134,6 @@
   font-size: 1rem;
 }
 
-/* Loading state */
 .loading {
   text-align: center;
   padding: 4rem 2rem;
@@ -163,12 +156,6 @@
   100% { transform: rotate(360deg); }
 }
 
-.loading p {
-  margin: 0;
-  font-weight: 500;
-}
-
-/* Error state */
 .error {
   text-align: center;
   padding: 4rem 2rem;
@@ -186,26 +173,13 @@
   color: #666;
 }
 
-/* Empty state */
-.empty-graph {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: #9ca3af;
-}
-
-.empty-graph svg {
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-/* Mobile responsiveness */
 @media (max-width: 768px) {
-  .viz-header h1 {
-    font-size: 1.5rem;
+  .visualization-page {
+    padding: 1rem;
   }
 
-  .viz-header p {
-    font-size: 1rem;
+  .viz-header h1 {
+    font-size: 1.5rem;
   }
 
   .graph-stats {
@@ -220,24 +194,7 @@
     gap: 0.75rem;
   }
 
-  .viz-controls {
-    font-size: 0.8rem;
-  }
-
   .visualization-container {
-    height: calc(100vh - 450px);
-    min-height: 400px;
-  }
-}
-
-/* Print styles */
-@media print {
-  .viz-controls {
-    display: none;
-  }
-  
-  .visualization-container {
-    height: auto;
-    page-break-inside: avoid;
+    height: 600px;
   }
 }

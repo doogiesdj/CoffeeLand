@@ -1,6 +1,4 @@
 .entity-page {
-  width: 100%;
-  margin: 0;
   padding: 2rem;
 }
 
@@ -36,7 +34,7 @@
 
 .entity-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
 }
 
@@ -131,35 +129,10 @@
   font-weight: 500;
 }
 
-.origin-tag {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.location-tag {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.brand-tag {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.chain-tag {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
   color: #9ca3af;
-}
-
-.empty-state svg {
-  margin-bottom: 1rem;
-  opacity: 0.5;
 }
 
 .loading, .error {
@@ -176,16 +149,15 @@
   color: #dc2626;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
+  .entity-page {
+    padding: 1rem;
+  }
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     padding: 1.5rem;
-  }
-
-  .page-header h1 {
-    font-size: 1.5rem;
   }
 
   .entity-grid {

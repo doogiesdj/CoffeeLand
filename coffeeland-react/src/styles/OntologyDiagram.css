@@ -1,6 +1,4 @@
 .ontology-diagram-page {
-  width: 100%;
-  margin: 0;
   padding: 2rem;
 }
 
@@ -28,7 +26,7 @@
 .diagram-controls {
   text-align: center;
   margin-bottom: 1.5rem;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem;
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
   border-radius: 12px;
   color: #1e40af;
@@ -41,8 +39,7 @@
 
 .diagram-main-content {
   position: relative;
-  width: 100%;
-  margin: 0 0 2rem 0;
+  margin-bottom: 2rem;
 }
 
 .diagram-sidebar {
@@ -50,11 +47,11 @@
   top: 1rem;
   left: 1rem;
   z-index: 10;
-  max-width: 280px;
+  max-width: 260px;
 }
 
 .diagram-legend {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -118,7 +115,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   height: 900px;
-  min-height: 800px;
   position: relative;
 }
 
@@ -128,7 +124,6 @@
   display: block;
 }
 
-/* Node styles */
 .node {
   cursor: pointer;
   transition: all 0.2s;
@@ -147,7 +142,6 @@
   user-select: none;
 }
 
-/* Link styles */
 .link {
   transition: all 0.2s;
 }
@@ -157,14 +151,6 @@
   stroke-opacity: 1 !important;
 }
 
-.link-label {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: white;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-/* Tooltip styles */
 .ontology-tooltip {
   position: absolute;
   background: rgba(0, 0, 0, 0.92);
@@ -176,7 +162,6 @@
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   max-width: 300px;
-  line-height: 1.6;
 }
 
 .ontology-tooltip strong {
@@ -186,12 +171,6 @@
   color: #fbbf24;
 }
 
-.ontology-tooltip em {
-  color: #93c5fd;
-  font-weight: 600;
-}
-
-/* Ontology Info Section */
 .ontology-info {
   background: white;
   padding: 2rem;
@@ -245,56 +224,26 @@
   border-bottom: none;
 }
 
-.info-card strong {
-  color: #6b4423;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-}
-
-/* Mobile responsiveness */
 @media (max-width: 768px) {
+  .ontology-diagram-page {
+    padding: 1rem;
+  }
+
   .diagram-header h1 {
     font-size: 1.5rem;
   }
 
-  .diagram-header p {
-    font-size: 1rem;
-  }
-
-  .diagram-main-content {
-    grid-template-columns: 1fr;
-  }
-
   .diagram-sidebar {
-    order: 2;
-  }
-
-  .diagram-canvas {
-    order: 1;
-  }
-
-  .diagram-controls {
-    font-size: 0.8rem;
+    position: static;
+    max-width: 100%;
+    margin-bottom: 1rem;
   }
 
   .ontology-container {
-    height: calc(100vh - 500px);
-    min-height: 500px;
+    height: 600px;
   }
 
   .info-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-/* Print styles */
-@media print {
-  .diagram-controls {
-    display: none;
-  }
-  
-  .ontology-container {
-    height: auto;
-    page-break-inside: avoid;
   }
 }
