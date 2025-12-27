@@ -260,55 +260,61 @@ const OntologyDiagram = () => {
         <p>VOWL-style visualization of the CoffeeLand ontology structure</p>
       </div>
 
-      <div className="diagram-legend">
-        <div className="legend-section">
-          <h3>Classes</h3>
-          <div className="legend-items">
-            <div className="legend-item">
-              <div className="legend-box abstract"></div>
-              <span>Abstract Class</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-box concrete" style={{ backgroundColor: '#10b981' }}></div>
-              <span>Location Classes</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-box concrete" style={{ backgroundColor: '#3b82f6' }}></div>
-              <span>Organization Classes</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-box concrete" style={{ backgroundColor: '#f59e0b' }}></div>
-              <span>Product Classes</span>
-            </div>
-          </div>
-        </div>
-        <div className="legend-section">
-          <h3>Relationships</h3>
-          <div className="legend-items">
-            <div className="legend-item">
-              <svg width="60" height="20">
-                <line x1="0" y1="10" x2="50" y2="10" stroke="#64748b" strokeWidth="2" strokeDasharray="5,5"/>
-                <polygon points="50,10 45,7 45,13" fill="#64748b"/>
-              </svg>
-              <span>subClassOf</span>
-            </div>
-            <div className="legend-item">
-              <svg width="60" height="20">
-                <line x1="0" y1="10" x2="50" y2="10" stroke="#3b82f6" strokeWidth="2"/>
-                <polygon points="50,10 45,7 45,13" fill="none" stroke="#3b82f6" strokeWidth="2"/>
-              </svg>
-              <span>Object Property</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="diagram-controls">
         <p>💡 Scroll to zoom • Drag to pan • Hover over classes for details</p>
       </div>
 
-      <div className="ontology-container" ref={containerRef}>
-        <svg ref={svgRef}></svg>
+      <div className="diagram-main-content">
+        <div className="diagram-sidebar">
+          <div className="diagram-legend">
+            <div className="legend-section">
+              <h3>Classes</h3>
+              <div className="legend-items">
+                <div className="legend-item">
+                  <div className="legend-box abstract"></div>
+                  <span>Abstract Class</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-box concrete" style={{ backgroundColor: '#10b981' }}></div>
+                  <span>Location Classes</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-box concrete" style={{ backgroundColor: '#3b82f6' }}></div>
+                  <span>Organization Classes</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-box concrete" style={{ backgroundColor: '#f59e0b' }}></div>
+                  <span>Product Classes</span>
+                </div>
+              </div>
+            </div>
+            <div className="legend-section">
+              <h3>Relationships</h3>
+              <div className="legend-items">
+                <div className="legend-item">
+                  <svg width="60" height="20">
+                    <line x1="0" y1="10" x2="50" y2="10" stroke="#64748b" strokeWidth="2" strokeDasharray="5,5"/>
+                    <polygon points="50,10 45,7 45,13" fill="#64748b"/>
+                  </svg>
+                  <span>subClassOf</span>
+                </div>
+                <div className="legend-item">
+                  <svg width="60" height="20">
+                    <line x1="0" y1="10" x2="50" y2="10" stroke="#3b82f6" strokeWidth="2"/>
+                    <polygon points="50,10 45,7 45,13" fill="none" stroke="#3b82f6" strokeWidth="2"/>
+                  </svg>
+                  <span>Object Property</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="diagram-canvas">
+          <div className="ontology-container" ref={containerRef}>
+            <svg ref={svgRef}></svg>
+          </div>
+        </div>
       </div>
 
       <div className="ontology-info">

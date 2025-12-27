@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
 }
 
 .diagram-header {
@@ -13,6 +13,9 @@
   color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .diagram-header h1 {
@@ -26,22 +29,59 @@
   opacity: 0.9;
 }
 
-.diagram-legend {
+.diagram-controls {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 8px;
+  color: #1e40af;
+  font-size: 0.9rem;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.diagram-controls p {
+  margin: 0;
+}
+
+.diagram-main-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 320px 1fr;
   gap: 1.5rem;
-  margin-bottom: 1rem;
-  padding: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto 2rem;
+}
+
+.diagram-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.diagram-legend {
   background: white;
+  padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.legend-section {
+  margin-bottom: 1.5rem;
+}
+
+.legend-section:last-child {
+  margin-bottom: 0;
+}
+
 .legend-section h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #3e2723;
   margin-bottom: 1rem;
   font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f3f4f6;
 }
 
 .legend-items {
@@ -75,18 +115,9 @@
   border: 2px solid white;
 }
 
-.diagram-controls {
-  text-align: center;
-  margin-bottom: 1rem;
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  border-radius: 8px;
-  color: #1e40af;
-  font-size: 0.9rem;
-}
-
-.diagram-controls p {
-  margin: 0;
+.diagram-canvas {
+  flex: 1;
+  min-width: 0;
 }
 
 .ontology-container {
@@ -97,7 +128,6 @@
   height: 800px;
   min-height: 700px;
   position: relative;
-  margin-bottom: 2rem;
 }
 
 .ontology-container svg {
@@ -175,6 +205,8 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .ontology-info h3 {
@@ -238,8 +270,16 @@
     font-size: 1rem;
   }
 
-  .diagram-legend {
+  .diagram-main-content {
     grid-template-columns: 1fr;
+  }
+
+  .diagram-sidebar {
+    order: 2;
+  }
+
+  .diagram-canvas {
+    order: 1;
   }
 
   .diagram-controls {
