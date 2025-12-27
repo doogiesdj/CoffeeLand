@@ -13,16 +13,19 @@ const OntologyDiagram = () => {
     d3.select(svgRef.current).selectAll('*').remove();
 
     const container = containerRef.current;
+    // Use actual dimensions from the container
     const width = container.clientWidth || 1200;
-    const height = container.clientHeight || 700;
+    const height = 4000; // Match CSS height
+
+    console.log('Ontology container dimensions:', width, height);
 
     // Calculate center - use more horizontal space
     const centerX = width / 2;
     const centerY = height / 2;
     
-    // Spread nodes more horizontally to fill the space
-    const horizontalSpread = Math.min(width * 0.35, 450);
-    const verticalSpread = Math.min(height * 0.3, 280);
+    // Spread nodes more to utilize the large vertical space
+    const horizontalSpread = Math.min(width * 0.4, 500);
+    const verticalSpread = Math.min(height * 0.25, 900);
 
     // Define ontology structure (VOWL style) - spread out layout
     const classes = [

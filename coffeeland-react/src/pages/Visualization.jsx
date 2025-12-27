@@ -18,10 +18,11 @@ const Visualization = () => {
     d3.select(svgRef.current).selectAll('*').remove();
 
     const container = containerRef.current;
+    // Use actual dimensions - width from container, height from CSS
     const width = container.clientWidth || 1200;
-    const height = container.clientHeight || 700;
+    const height = 4000; // Match CSS height
 
-    console.log('SVG dimensions:', width, height);
+    console.log('Network Graph dimensions:', width, height);
 
     // Create nodes from all entities
     const nodes = [];
@@ -87,14 +88,14 @@ const Visualization = () => {
     
     svg.call(zoom);
 
-    // Create force simulation - spread nodes more to fill the space
+    // Create force simulation - use the full vertical space
     const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(200))
-      .force('charge', d3.forceManyBody().strength(-600))
+      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(250))
+      .force('charge', d3.forceManyBody().strength(-800))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(60))
-      .force('x', d3.forceX(width / 2).strength(0.05))
-      .force('y', d3.forceY(height / 2).strength(0.05));
+      .force('collision', d3.forceCollide().radius(70))
+      .force('x', d3.forceX(width / 2).strength(0.03))
+      .force('y', d3.forceY(height / 2).strength(0.03));
 
     // Create arrow marker for links
     svg.append('defs').selectAll('marker')
