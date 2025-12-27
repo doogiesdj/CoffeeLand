@@ -95,54 +95,115 @@ router.post('/stats', async (req, res) => {
         const filePath = path.join(__dirname, '..', 'uploads', filename);
         const fileContent = await fs.readFile(filePath, 'utf8');
         
-        const parser = new N3.Parser();
         const triples = [];
         const classes = new Set();
         const properties = new Set();
         const individuals = new Set();
         const namespaces = new Set();
         
-        await new Promise((resolve, reject) => {
-            parser.parse(fileContent, (error, triple, prefixes) => {
-                if (error) {
-                    reject(error);
-                } else if (triple) {
-                    triples.push(triple);
-                    
-                    // Extract namespace
-                    const extractNamespace = (uri) => {
-                        const match = uri.match(/^(.+[/#])([^/#]+)$/);
-                        return match ? match[1] : uri;
-                    };
-                    
-                    namespaces.add(extractNamespace(triple.subject.value));
-                    namespaces.add(extractNamespace(triple.predicate.value));
-                    
-                    // Identify classes
-                    if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
-                        triple.object.value === 'http://www.w3.org/2002/07/owl#Class') {
-                        classes.add(triple.subject.value);
-                    }
-                    
-                    // Identify properties
-                    if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
-                        (triple.object.value === 'http://www.w3.org/2002/07/owl#ObjectProperty' ||
-                         triple.object.value === 'http://www.w3.org/2002/07/owl#DatatypeProperty')) {
-                        properties.add(triple.subject.value);
-                    }
-                    
-                    // Identify individuals
-                    if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
-                        !triple.object.value.includes('owl#') &&
-                        !triple.object.value.includes('rdf#') &&
-                        !triple.object.value.includes('rdfs#')) {
-                        individuals.add(triple.subject.value);
-                    }
-                } else {
-                    resolve();
+        // Detect format
+        const isRdfXml = fileContent.trim().startsWith('<?xml') || fileContent.trim().startsWith('<rdf:RDF');
+        
+        if (isRdfXml) {
+            // Use rdflib for RDF/XML
+            const store = $rdf.graph();
+            let parseError = null;
+            
+            try {
+                $rdf.parse(fileContent, store, 'http://example.org/', 'application/rdf+xml');
+            } catch (e) {
+                parseError = e;
+            }
+            
+            if (parseError) {
+                throw new Error('Failed to parse RDF/XML stats: ' + parseError.message);
+            }
+            
+            // Extract triples and analyze
+            const statements = store.statements;
+            statements.forEach(stmt => {
+                triples.push(stmt);
+                
+                // Extract namespace
+                const extractNamespace = (uri) => {
+                    const match = uri.match(/^(.+[/#])([^/#]+)$/);
+                    return match ? match[1] : uri;
+                };
+                
+                const subjectUri = stmt.subject.value;
+                const predicateUri = stmt.predicate.value;
+                const objectUri = stmt.object.value;
+                
+                namespaces.add(extractNamespace(subjectUri));
+                namespaces.add(extractNamespace(predicateUri));
+                
+                // Identify classes
+                if (predicateUri === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                    objectUri === 'http://www.w3.org/2002/07/owl#Class') {
+                    classes.add(subjectUri);
+                }
+                
+                // Identify properties
+                if (predicateUri === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                    (objectUri === 'http://www.w3.org/2002/07/owl#ObjectProperty' ||
+                     objectUri === 'http://www.w3.org/2002/07/owl#DatatypeProperty')) {
+                    properties.add(subjectUri);
+                }
+                
+                // Identify individuals
+                if (predicateUri === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                    !objectUri.includes('owl#') &&
+                    !objectUri.includes('rdf#') &&
+                    !objectUri.includes('rdfs#')) {
+                    individuals.add(subjectUri);
                 }
             });
-        });
+        } else {
+            // Use N3 parser for Turtle, N3, N-Triples
+            const parser = new N3.Parser();
+            
+            await new Promise((resolve, reject) => {
+                parser.parse(fileContent, (error, triple, prefixes) => {
+                    if (error) {
+                        reject(error);
+                    } else if (triple) {
+                        triples.push(triple);
+                        
+                        // Extract namespace
+                        const extractNamespace = (uri) => {
+                            const match = uri.match(/^(.+[/#])([^/#]+)$/);
+                            return match ? match[1] : uri;
+                        };
+                        
+                        namespaces.add(extractNamespace(triple.subject.value));
+                        namespaces.add(extractNamespace(triple.predicate.value));
+                        
+                        // Identify classes
+                        if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                            triple.object.value === 'http://www.w3.org/2002/07/owl#Class') {
+                            classes.add(triple.subject.value);
+                        }
+                        
+                        // Identify properties
+                        if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                            (triple.object.value === 'http://www.w3.org/2002/07/owl#ObjectProperty' ||
+                             triple.object.value === 'http://www.w3.org/2002/07/owl#DatatypeProperty')) {
+                            properties.add(triple.subject.value);
+                        }
+                        
+                        // Identify individuals
+                        if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                            !triple.object.value.includes('owl#') &&
+                            !triple.object.value.includes('rdf#') &&
+                            !triple.object.value.includes('rdfs#')) {
+                            individuals.add(triple.subject.value);
+                        }
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        }
 
         res.json({
             success: true,
@@ -176,20 +237,53 @@ router.post('/convert', async (req, res) => {
         const filePath = path.join(__dirname, '..', 'uploads', filename);
         const fileContent = await fs.readFile(filePath, 'utf8');
         
-        const parser = new N3.Parser();
         const store = new N3.Store();
         
-        await new Promise((resolve, reject) => {
-            parser.parse(fileContent, (error, triple, prefixes) => {
-                if (error) {
-                    reject(error);
-                } else if (triple) {
-                    store.addQuad(triple);
-                } else {
-                    resolve();
-                }
+        // Detect format
+        const isRdfXml = fileContent.trim().startsWith('<?xml') || fileContent.trim().startsWith('<rdf:RDF');
+        
+        if (isRdfXml) {
+            // Use rdflib for RDF/XML
+            const rdflibStore = $rdf.graph();
+            let parseError = null;
+            
+            try {
+                $rdf.parse(fileContent, rdflibStore, 'http://example.org/', 'application/rdf+xml');
+            } catch (e) {
+                parseError = e;
+            }
+            
+            if (parseError) {
+                throw new Error('Failed to parse RDF/XML: ' + parseError.message);
+            }
+            
+            // Convert rdflib statements to N3 quads for output
+            const statements = rdflibStore.statements;
+            statements.forEach(stmt => {
+                store.addQuad(
+                    N3.DataFactory.namedNode(stmt.subject.value),
+                    N3.DataFactory.namedNode(stmt.predicate.value),
+                    stmt.object.termType === 'Literal' 
+                        ? N3.DataFactory.literal(stmt.object.value)
+                        : N3.DataFactory.namedNode(stmt.object.value)
+                );
             });
-        });
+        } else {
+            // Use N3 parser for Turtle, N3, N-Triples
+            const parser = new N3.Parser();
+            
+            await new Promise((resolve, reject) => {
+                parser.parse(fileContent, (error, triple, prefixes) => {
+                    if (error) {
+                        reject(error);
+                    } else if (triple) {
+                        store.addQuad(triple);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        }
 
         const writer = new N3.Writer({ format: format });
         let output = '';
@@ -229,37 +323,84 @@ router.post('/hierarchy', async (req, res) => {
         const filePath = path.join(__dirname, '..', 'uploads', filename);
         const fileContent = await fs.readFile(filePath, 'utf8');
         
-        const parser = new N3.Parser();
         const classes = new Map();
         const subClassRelations = [];
         
-        await new Promise((resolve, reject) => {
-            parser.parse(fileContent, (error, triple, prefixes) => {
-                if (error) {
-                    reject(error);
-                } else if (triple) {
-                    // Find classes
-                    if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
-                        triple.object.value === 'http://www.w3.org/2002/07/owl#Class') {
-                        classes.set(triple.subject.value, {
-                            uri: triple.subject.value,
-                            label: triple.subject.value.split(/[/#]/).pop(),
-                            children: []
-                        });
-                    }
-                    
-                    // Find subclass relations
-                    if (triple.predicate.value === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
-                        subClassRelations.push({
-                            child: triple.subject.value,
-                            parent: triple.object.value
-                        });
-                    }
-                } else {
-                    resolve();
+        // Detect format
+        const isRdfXml = fileContent.trim().startsWith('<?xml') || fileContent.trim().startsWith('<rdf:RDF');
+        
+        if (isRdfXml) {
+            // Use rdflib for RDF/XML
+            const store = $rdf.graph();
+            let parseError = null;
+            
+            try {
+                $rdf.parse(fileContent, store, 'http://example.org/', 'application/rdf+xml');
+            } catch (e) {
+                parseError = e;
+            }
+            
+            if (parseError) {
+                throw new Error('Failed to parse RDF/XML hierarchy: ' + parseError.message);
+            }
+            
+            // Extract hierarchy information
+            const statements = store.statements;
+            statements.forEach(stmt => {
+                const subjectUri = stmt.subject.value;
+                const predicateUri = stmt.predicate.value;
+                const objectUri = stmt.object.value;
+                
+                // Find classes
+                if (predicateUri === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                    objectUri === 'http://www.w3.org/2002/07/owl#Class') {
+                    classes.set(subjectUri, {
+                        uri: subjectUri,
+                        label: subjectUri.split(/[/#]/).pop(),
+                        children: []
+                    });
+                }
+                
+                // Find subclass relations
+                if (predicateUri === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
+                    subClassRelations.push({
+                        child: subjectUri,
+                        parent: objectUri
+                    });
                 }
             });
-        });
+        } else {
+            // Use N3 parser for Turtle, N3, N-Triples
+            const parser = new N3.Parser();
+            
+            await new Promise((resolve, reject) => {
+                parser.parse(fileContent, (error, triple, prefixes) => {
+                    if (error) {
+                        reject(error);
+                    } else if (triple) {
+                        // Find classes
+                        if (triple.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+                            triple.object.value === 'http://www.w3.org/2002/07/owl#Class') {
+                            classes.set(triple.subject.value, {
+                                uri: triple.subject.value,
+                                label: triple.subject.value.split(/[/#]/).pop(),
+                                children: []
+                            });
+                        }
+                        
+                        // Find subclass relations
+                        if (triple.predicate.value === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
+                            subClassRelations.push({
+                                child: triple.subject.value,
+                                parent: triple.object.value
+                            });
+                        }
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        }
 
         // Build hierarchy tree
         const roots = [];

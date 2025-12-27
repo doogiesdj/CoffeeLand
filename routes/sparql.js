@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
 const N3 = require('n3');
+const $rdf = require('rdflib');
 
 // Execute SPARQL query
 router.post('/query', async (req, res) => {
@@ -17,20 +18,53 @@ router.post('/query', async (req, res) => {
         const fileContent = await fs.readFile(filePath, 'utf8');
         
         // Parse RDF into store
-        const parser = new N3.Parser();
         const store = new N3.Store();
         
-        await new Promise((resolve, reject) => {
-            parser.parse(fileContent, (error, triple, prefixes) => {
-                if (error) {
-                    reject(error);
-                } else if (triple) {
-                    store.addQuad(triple);
-                } else {
-                    resolve();
-                }
+        // Detect format
+        const isRdfXml = fileContent.trim().startsWith('<?xml') || fileContent.trim().startsWith('<rdf:RDF');
+        
+        if (isRdfXml) {
+            // Use rdflib for RDF/XML
+            const rdflibStore = $rdf.graph();
+            let parseError = null;
+            
+            try {
+                $rdf.parse(fileContent, rdflibStore, 'http://example.org/', 'application/rdf+xml');
+            } catch (e) {
+                parseError = e;
+            }
+            
+            if (parseError) {
+                throw new Error('Failed to parse RDF/XML: ' + parseError.message);
+            }
+            
+            // Convert rdflib statements to N3 quads
+            const statements = rdflibStore.statements;
+            statements.forEach(stmt => {
+                store.addQuad(
+                    N3.DataFactory.namedNode(stmt.subject.value),
+                    N3.DataFactory.namedNode(stmt.predicate.value),
+                    stmt.object.termType === 'Literal' 
+                        ? N3.DataFactory.literal(stmt.object.value)
+                        : N3.DataFactory.namedNode(stmt.object.value)
+                );
             });
-        });
+        } else {
+            // Use N3 parser for Turtle, N3, N-Triples
+            const parser = new N3.Parser();
+            
+            await new Promise((resolve, reject) => {
+                parser.parse(fileContent, (error, triple, prefixes) => {
+                    if (error) {
+                        reject(error);
+                    } else if (triple) {
+                        store.addQuad(triple);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        }
 
         // Execute simple SPARQL-like queries
         // Note: This is a simplified implementation. For full SPARQL support, consider using a library like sparql-engine
