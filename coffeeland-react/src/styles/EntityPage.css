@@ -238,6 +238,10 @@
   gap: 1rem;
 }
 
+.modal-header-green {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
 .modal-icon {
   width: 48px;
   height: 48px;
