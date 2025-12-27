@@ -16,11 +16,13 @@
   padding: 2rem;
   background: #f5f6fa;
   min-height: 100vh;
+  width: calc(100vw - 260px);
 }
 
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
     padding: 1rem;
+    width: 100vw;
   }
 }
