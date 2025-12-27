@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeLand 온톨로지 뷰어</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- RDF 파싱 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/rdflib@2.2.34/dist/rdflib.min.js"></script>
+    
+    <!-- 그래프 시각화 라이브러리 (Cytoscape.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    
+    <!-- D3.js for tree visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- SPARQL.js -->
+    <script src="https://cdn.jsdelivr.net/npm/sparqljs@3.7.1/sparql.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-coffee"></i> CoffeeLand 온톨로지 뷰어</h1>
+            <p class="subtitle">Semantic Web Ontology Visualization System</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 파일 업로드 섹션 -->
+        <section class="upload-section">
+            <div class="upload-box">
+                <i class="fas fa-upload"></i>
+                <p>RDF/OWL 파일을 업로드하거나 드래그하세요</p>
+                <input type="file" id="fileInput" accept=".owl,.rdf,.ttl,.n3,.nt" />
+                <label for="fileInput" class="upload-btn">파일 선택</label>
+                <span id="fileName" class="file-name"></span>
+            </div>
+        </section>
+
+        <!-- 탭 네비게이션 -->
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="graph">
+                <i class="fas fa-project-diagram"></i> 그래프 시각화
+            </button>
+            <button class="tab-button" data-tab="tree">
+                <i class="fas fa-sitemap"></i> 계층 구조
+            </button>
+            <button class="tab-button" data-tab="sparql">
+                <i class="fas fa-search"></i> SPARQL 쿼리
+            </button>
+            <button class="tab-button" data-tab="raw">
+                <i class="fas fa-code"></i> RDF 내용
+            </button>
+            <button class="tab-button" data-tab="stats">
+                <i class="fas fa-chart-bar"></i> 통계
+            </button>
+        </nav>
+
+        <!-- 탭 컨텐츠 -->
+        <div class="tab-content">
+            <!-- 그래프 시각화 탭 -->
+            <div id="graph" class="tab-pane active">
+                <div class="controls">
+                    <button id="fitBtn" class="control-btn"><i class="fas fa-expand"></i> 전체보기</button>
+                    <button id="centerBtn" class="control-btn"><i class="fas fa-compress"></i> 중앙정렬</button>
+                    <button id="resetZoomBtn" class="control-btn"><i class="fas fa-sync"></i> 줌 리셋</button>
+                    <select id="layoutSelect" class="control-select">
+                        <option value="cose">Force-Directed</option>
+                        <option value="circle">Circle</option>
+                        <option value="grid">Grid</option>
+                        <option value="breadthfirst">Breadth First</option>
+                        <option value="concentric">Concentric</option>
+                    </select>
+                </div>
+                <div id="cy" class="visualization-container"></div>
+                <div id="nodeInfo" class="info-panel"></div>
+            </div>
+
+            <!-- 계층 구조 트리 탭 -->
+            <div id="tree" class="tab-pane">
+                <div class="controls">
+                    <button id="expandAllBtn" class="control-btn"><i class="fas fa-plus-circle"></i> 모두 펼치기</button>
+                    <button id="collapseAllBtn" class="control-btn"><i class="fas fa-minus-circle"></i> 모두 접기</button>
+                </div>
+                <div id="treeView" class="tree-container"></div>
+            </div>
+
+            <!-- SPARQL 쿼리 탭 -->
+            <div id="sparql" class="tab-pane">
+                <div class="sparql-container">
+                    <div class="query-section">
+                        <h3>SPARQL 쿼리 입력</h3>
+                        <textarea id="sparqlQuery" class="sparql-textarea" placeholder="SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object } LIMIT 100"></textarea>
+                        <div class="query-examples">
+                            <button class="example-btn" data-query="all">모든 트리플</button>
+                            <button class="example-btn" data-query="classes">모든 클래스</button>
+                            <button class="example-btn" data-query="properties">모든 속성</button>
+                            <button class="example-btn" data-query="individuals">모든 인스턴스</button>
+                        </div>
+                        <button id="executeQueryBtn" class="execute-btn"><i class="fas fa-play"></i> 쿼리 실행</button>
+                    </div>
+                    <div class="results-section">
+                        <h3>쿼리 결과</h3>
+                        <div id="queryResults" class="results-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RDF 원본 내용 탭 -->
+            <div id="raw" class="tab-pane">
+                <div class="controls">
+                    <button id="downloadRdfBtn" class="control-btn"><i class="fas fa-download"></i> 다운로드</button>
+                    <button id="copyRdfBtn" class="control-btn"><i class="fas fa-copy"></i> 복사</button>
+                    <select id="formatSelect" class="control-select">
+                        <option value="turtle">Turtle</option>
+                        <option value="n3">N3</option>
+                        <option value="ntriples">N-Triples</option>
+                    </select>
+                </div>
+                <pre id="rdfContent" class="rdf-content"></pre>
+            </div>
+
+            <!-- 통계 탭 -->
+            <div id="stats" class="tab-pane">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-cubes"></i>
+                        <h3>클래스</h3>
+                        <p id="classCount" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-link"></i>
+                        <h3>속성</h3>
+                        <p id="propertyCount" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-user"></i>
+                        <h3>인스턴스</h3>
+                        <p id="individualCount" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-stream"></i>
+                        <h3>총 트리플</h3>
+                        <p id="tripleCount" class="stat-number">0</p>
+                    </div>
+                </div>
+                <div class="stats-details">
+                    <h3>네임스페이스</h3>
+                    <ul id="namespaceList" class="namespace-list"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 CoffeeLand Ontology Project | Powered by RDFLib & Cytoscape.js</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/rdf-parser.js"></script>
+    <script src="js/graph-visualization.js"></script>
+    <script src="js/tree-visualization.js"></script>
+    <script src="js/sparql-query.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
