@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import Layout from './components/Layout';
 import Home from './pages/Home';
 import Countries from './pages/Countries';
 import Brands from './pages/Brands';
@@ -11,21 +8,14 @@ import Brokers from './pages/Brokers';
 import OntologyDiagram from './pages/OntologyDiagram';
 import Visualization from './pages/Visualization';
 import About from './pages/About';
-import './App.css';
+import './styles/Layout.css';
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   return (
     <Router>
       <div className="app">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <Header toggleSidebar={toggleSidebar} />
-        <Layout>
+        <Sidebar />
+        <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/countries" element={<Countries />} />
@@ -36,7 +26,7 @@ function App() {
             <Route path="/visualization" element={<Visualization />} />
             <Route path="/about" element={<About />} />
           </Routes>
-        </Layout>
+        </div>
       </div>
     </Router>
   );

@@ -1,61 +1,66 @@
-import { Home, Database, MapPin, Coffee, Users, BarChart3, Info, Network } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Coffee, MapPin, ShoppingBag, Store, Users, BarChart3, Network, Info } from 'lucide-react';
 import '../styles/Sidebar.css';
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const location = useLocation();
-
-  const menuItems = [
-    { path: '/', icon: Home, label: 'Home', description: 'Overview' },
-    { path: '/countries', icon: MapPin, label: 'Countries', description: 'Coffee producing nations' },
-    { path: '/brands', icon: Coffee, label: 'Coffee Brands', description: 'Premium coffee selections' },
-    { path: '/chains', icon: Users, label: 'Coffee Chains', description: 'Major retailers' },
-    { path: '/brokers', icon: Database, label: 'Brokers', description: 'Supply chain intermediaries' },
-    { path: '/ontology', icon: Network, label: 'Ontology', description: 'Class diagram (VOWL)' },
-    { path: '/visualization', icon: BarChart3, label: 'Network Graph', description: 'Instance relationships' },
-    { path: '/about', icon: Info, label: 'About', description: 'About CoffeeLand' }
-  ];
-
+const Sidebar = () => {
   return (
-    <>
-      <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <div className="logo-container">
-            <Coffee className="logo-icon" />
-            <h2>CoffeeLand</h2>
-          </div>
-        </div>
-
-        <nav className="sidebar-nav">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname === item.path;
-            
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`nav-item ${isActive ? 'active' : ''}`}
-                onClick={() => window.innerWidth < 768 && toggleSidebar()}
-              >
-                <Icon className="nav-icon" />
-                <div className="nav-content">
-                  <span className="nav-label">{item.label}</span>
-                  <span className="nav-description">{item.description}</span>
-                </div>
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="sidebar-footer">
-          <p>&copy; 2024 CoffeeLand</p>
-          <p className="small-text">Powered by RDF Ontology</p>
-        </div>
+    <div className="sidebar">
+      <div className="sidebar-logo">
+        <h2>
+          <Coffee className="logo-icon" />
+          CoffeeLand
+        </h2>
       </div>
-      
-      {isOpen && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
-    </>
+
+      <nav className="sidebar-nav">
+        <div className="nav-section">
+          <div className="nav-section-title">Dashboard</div>
+          <NavLink to="/" className="nav-item" end>
+            <BarChart3 className="nav-icon" />
+            <span>Overview</span>
+          </NavLink>
+        </div>
+
+        <div className="nav-section">
+          <div className="nav-section-title">Data</div>
+          <NavLink to="/countries" className="nav-item">
+            <MapPin className="nav-icon" />
+            <span>Countries</span>
+          </NavLink>
+          <NavLink to="/brands" className="nav-item">
+            <Coffee className="nav-icon" />
+            <span>Coffee Brands</span>
+          </NavLink>
+          <NavLink to="/chains" className="nav-item">
+            <Store className="nav-icon" />
+            <span>Coffee Chains</span>
+          </NavLink>
+          <NavLink to="/brokers" className="nav-item">
+            <Users className="nav-icon" />
+            <span>Brokers</span>
+          </NavLink>
+        </div>
+
+        <div className="nav-section">
+          <div className="nav-section-title">Visualization</div>
+          <NavLink to="/ontology" className="nav-item">
+            <ShoppingBag className="nav-icon" />
+            <span>Ontology</span>
+          </NavLink>
+          <NavLink to="/visualization" className="nav-item">
+            <Network className="nav-icon" />
+            <span>Network Graph</span>
+          </NavLink>
+        </div>
+
+        <div className="nav-section">
+          <NavLink to="/about" className="nav-item">
+            <Info className="nav-icon" />
+            <span>About</span>
+          </NavLink>
+        </div>
+      </nav>
+    </div>
   );
 };
 
