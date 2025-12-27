@@ -1,6 +1,6 @@
 .ontology-diagram-page {
   width: 100%;
-  max-width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -121,8 +121,8 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  height: 800px;
-  min-height: 700px;
+  height: 900px;
+  min-height: 800px;
   position: relative;
 }
 
