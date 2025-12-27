@@ -12,41 +12,47 @@ const Visualization = () => {
   useEffect(() => {
     if (!data || !svgRef.current || !containerRef.current) return;
 
-    console.log('Visualization data:', data);
+    console.log('Network Graph data:', data);
 
     // Clear previous visualization
     d3.select(svgRef.current).selectAll('*').remove();
 
     const container = containerRef.current;
-    // Use actual dimensions - width from container, height from CSS
     const width = container.clientWidth || 1200;
-    const height = 4000; // Match CSS height
+    const height = 4000;
 
     console.log('Network Graph dimensions:', width, height);
 
-    // Create nodes from all entities
+    // Create nodes from all entities with enhanced properties
     const nodes = [];
-    const addNodes = (entities, type, color) => {
+    const addNodes = (entities, type, color, shape = 'rect') => {
       entities?.forEach(entity => {
-        nodes.push({ id: entity.name, type, color, ...entity });
+        nodes.push({ 
+          id: entity.name, 
+          label: entity.name,
+          type, 
+          color,
+          shape,
+          ...entity 
+        });
       });
     };
 
-    addNodes(data.countries, 'Country', '#10b981');
-    addNodes(data.brands, 'Brand', '#f59e0b');
-    addNodes(data.chains, 'Chain', '#3b82f6');
-    addNodes(data.brokers, 'Broker', '#8b5cf6');
+    // Different shapes for different types (like Protégé)
+    addNodes(data.countries, 'Country', '#10b981', 'rect');
+    addNodes(data.brands, 'Brand', '#f59e0b', 'rect');
+    addNodes(data.chains, 'Chain', '#3b82f6', 'rect');
+    addNodes(data.brokers, 'Broker', '#8b5cf6', 'rect');
 
-    console.log('Nodes:', nodes.length, nodes);
+    console.log('Total nodes:', nodes.length);
 
     // Create links from relationships
     const links = data.relationships?.map(rel => ({
       source: rel.source,
       target: rel.target,
-      type: rel.type
+      type: rel.type,
+      label: rel.type
     })) || [];
-
-    console.log('Links:', links.length, links);
 
     // Filter links to only include nodes that exist
     const nodeIds = new Set(nodes.map(n => n.id));
@@ -65,7 +71,6 @@ const Visualization = () => {
       brokers: data.brokers?.length || 0
     });
 
-    // If no data, show message
     if (nodes.length === 0) {
       console.warn('No nodes to display');
       return;
@@ -77,7 +82,7 @@ const Visualization = () => {
       .attr('height', height)
       .attr('viewBox', [0, 0, width, height]);
 
-    // Add zoom behavior
+    // Add zoom and pan behavior
     const g = svg.append('g');
     
     const zoom = d3.zoom()
@@ -88,43 +93,70 @@ const Visualization = () => {
     
     svg.call(zoom);
 
-    // Create force simulation - use the full vertical space
+    // Define arrow markers for directed links
+    const defs = svg.append('defs');
+
+    // Create different colored arrows for each node type
+    const colors = [
+      { id: 'green', color: '#10b981' },
+      { id: 'orange', color: '#f59e0b' },
+      { id: 'blue', color: '#3b82f6' },
+      { id: 'purple', color: '#8b5cf6' },
+      { id: 'gray', color: '#6b7280' }
+    ];
+
+    colors.forEach(c => {
+      defs.append('marker')
+        .attr('id', `arrow-${c.id}`)
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 40)
+        .attr('refY', 0)
+        .attr('markerWidth', 8)
+        .attr('markerHeight', 8)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', 'none')
+        .attr('stroke', c.color)
+        .attr('stroke-width', 2);
+    });
+
+    // Create force simulation - Protégé OntoGraf style
     const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(250))
-      .force('charge', d3.forceManyBody().strength(-800))
+      .force('link', d3.forceLink(validLinks).id(d => d.id).distance(250).strength(0.7))
+      .force('charge', d3.forceManyBody().strength(-1200))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(70))
-      .force('x', d3.forceX(width / 2).strength(0.03))
-      .force('y', d3.forceY(height / 2).strength(0.03));
+      .force('collision', d3.forceCollide().radius(100))
+      .force('x', d3.forceX(width / 2).strength(0.05))
+      .force('y', d3.forceY(height / 2).strength(0.05));
 
-    // Create arrow marker for links
-    svg.append('defs').selectAll('marker')
-      .data(['arrow'])
-      .enter().append('marker')
-      .attr('id', 'arrow')
-      .attr('viewBox', '0 -5 10 10')
-      .attr('refX', 25)
-      .attr('refY', 0)
-      .attr('markerWidth', 6)
-      .attr('markerHeight', 6)
-      .attr('orient', 'auto')
-      .append('path')
-      .attr('d', 'M0,-5L10,0L0,5')
-      .attr('fill', '#999');
-
-    // Create links
-    const link = g.append('g')
+    // Draw links
+    const linkElements = g.append('g')
       .attr('class', 'links')
       .selectAll('line')
       .data(validLinks)
       .enter().append('line')
-      .attr('stroke', '#999')
-      .attr('stroke-opacity', 0.6)
+      .attr('stroke', '#94a3b8')
       .attr('stroke-width', 2)
-      .attr('marker-end', 'url(#arrow)');
+      .attr('stroke-opacity', 0.6)
+      .attr('marker-end', 'url(#arrow-gray)');
 
-    // Create nodes
-    const node = g.append('g')
+    // Draw link labels
+    const linkLabels = g.append('g')
+      .attr('class', 'link-labels')
+      .selectAll('text')
+      .data(validLinks)
+      .enter().append('text')
+      .attr('class', 'link-label')
+      .attr('font-size', '11px')
+      .attr('fill', '#6b7280')
+      .attr('text-anchor', 'middle')
+      .attr('dy', -8)
+      .style('pointer-events', 'none')
+      .text(d => d.label);
+
+    // Draw nodes as groups
+    const nodeElements = g.append('g')
       .attr('class', 'nodes')
       .selectAll('g')
       .data(nodes)
@@ -135,57 +167,165 @@ const Visualization = () => {
         .on('drag', dragged)
         .on('end', dragended));
 
-    node.append('circle')
-      .attr('r', 20)
+    // Node shapes - rectangles with rounded corners (like Protégé)
+    nodeElements.append('rect')
+      .attr('x', -70)
+      .attr('y', -35)
+      .attr('width', 140)
+      .attr('height', 70)
+      .attr('rx', 10)
+      .attr('ry', 10)
       .attr('fill', d => d.color)
       .attr('stroke', '#fff')
-      .attr('stroke-width', 3);
+      .attr('stroke-width', 4)
+      .style('filter', 'drop-shadow(0px 3px 6px rgba(0,0,0,0.25))');
 
-    node.append('text')
-      .text(d => d.id.length > 15 ? d.id.substring(0, 12) + '...' : d.id)
-      .attr('x', 0)
-      .attr('y', 35)
+    // Node labels
+    nodeElements.append('text')
       .attr('text-anchor', 'middle')
-      .attr('font-size', '11px')
-      .attr('fill', '#333')
-      .attr('font-weight', '600');
+      .attr('dy', 0)
+      .attr('font-size', '14px')
+      .attr('font-weight', 'bold')
+      .attr('fill', '#fff')
+      .style('pointer-events', 'none')
+      .each(function(d) {
+        // Wrap long text
+        const text = d3.select(this);
+        const words = d.label.split(/\s+/);
+        
+        if (words.length === 1 && d.label.length > 12) {
+          // Break long single words
+          const label = d.label;
+          if (label.length > 24) {
+            text.text(label.substring(0, 10) + '...');
+          } else if (label.length > 12) {
+            const mid = Math.floor(label.length / 2);
+            text.append('tspan')
+              .attr('x', 0)
+              .attr('dy', '-0.3em')
+              .text(label.substring(0, mid));
+            text.append('tspan')
+              .attr('x', 0)
+              .attr('dy', '1.2em')
+              .text(label.substring(mid));
+          } else {
+            text.text(label);
+          }
+        } else if (words.length > 1) {
+          // Multi-word wrapping
+          text.text('');
+          const line1 = words.slice(0, Math.ceil(words.length / 2)).join(' ');
+          const line2 = words.slice(Math.ceil(words.length / 2)).join(' ');
+          
+          text.append('tspan')
+            .attr('x', 0)
+            .attr('dy', '-0.3em')
+            .text(line1.length > 12 ? line1.substring(0, 12) + '...' : line1);
+          
+          if (line2) {
+            text.append('tspan')
+              .attr('x', 0)
+              .attr('dy', '1.2em')
+              .text(line2.length > 12 ? line2.substring(0, 12) + '...' : line2);
+          }
+        } else {
+          text.text(d.label);
+        }
+      });
 
-    // Add tooltip
+    // Type badge
+    nodeElements.append('text')
+      .attr('text-anchor', 'middle')
+      .attr('y', 28)
+      .attr('font-size', '10px')
+      .attr('font-weight', '600')
+      .attr('fill', '#fff')
+      .attr('opacity', 0.8)
+      .style('pointer-events', 'none')
+      .text(d => d.type);
+
+    // Tooltip
     const tooltip = d3.select('body').append('div')
-      .attr('class', 'graph-tooltip')
+      .attr('class', 'network-tooltip')
       .style('opacity', 0)
       .style('position', 'absolute')
-      .style('pointer-events', 'none');
+      .style('background', 'rgba(0, 0, 0, 0.9)')
+      .style('color', 'white')
+      .style('padding', '12px')
+      .style('border-radius', '8px')
+      .style('font-size', '13px')
+      .style('pointer-events', 'none')
+      .style('z-index', '1000');
 
-    node.on('mouseover', (event, d) => {
-      tooltip.transition().duration(200).style('opacity', 0.9);
-      tooltip.html(`<strong>${d.id}</strong><br/>Type: ${d.type}`)
-        .style('left', (event.pageX + 10) + 'px')
+    nodeElements.on('mouseover', (event, d) => {
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      
+      let tooltipHtml = `<strong style="color: ${d.color}; font-size: 15px;">${d.label}</strong><br/>`;
+      tooltipHtml += `<em style="color: #94a3b8;">Type: ${d.type}</em><br/><br/>`;
+      
+      // Find connections
+      const outgoing = validLinks.filter(l => l.source.id === d.id);
+      const incoming = validLinks.filter(l => l.target.id === d.id);
+      
+      if (outgoing.length > 0) {
+        tooltipHtml += `<span style="color: #10b981;">Outgoing (${outgoing.length}):</span><br/>`;
+        outgoing.slice(0, 5).forEach(l => {
+          tooltipHtml += `→ ${l.type} → ${l.target.label}<br/>`;
+        });
+        if (outgoing.length > 5) tooltipHtml += `... and ${outgoing.length - 5} more<br/>`;
+      }
+      
+      if (incoming.length > 0) {
+        tooltipHtml += `<br/><span style="color: #3b82f6;">Incoming (${incoming.length}):</span><br/>`;
+        incoming.slice(0, 5).forEach(l => {
+          tooltipHtml += `← ${l.type} ← ${l.source.label}<br/>`;
+        });
+        if (incoming.length > 5) tooltipHtml += `... and ${incoming.length - 5} more<br/>`;
+      }
+      
+      tooltip.html(tooltipHtml)
+        .style('left', (event.pageX + 15) + 'px')
         .style('top', (event.pageY - 28) + 'px');
       
       // Highlight node
-      d3.select(event.currentTarget).select('circle')
-        .attr('stroke-width', 5)
-        .attr('stroke', '#fbbf24');
+      d3.select(event.currentTarget).select('rect')
+        .attr('stroke', '#fbbf24')
+        .attr('stroke-width', 6);
+
+      // Highlight connected links
+      linkElements
+        .attr('stroke', l => (l.source.id === d.id || l.target.id === d.id) ? d.color : '#94a3b8')
+        .attr('stroke-width', l => (l.source.id === d.id || l.target.id === d.id) ? 3 : 2)
+        .attr('stroke-opacity', l => (l.source.id === d.id || l.target.id === d.id) ? 1 : 0.3);
     })
-    .on('mouseout', (event) => {
+    .on('mouseout', (event, d) => {
       tooltip.transition().duration(500).style('opacity', 0);
       
-      // Reset node
-      d3.select(event.currentTarget).select('circle')
-        .attr('stroke-width', 3)
-        .attr('stroke', '#fff');
+      d3.select(event.currentTarget).select('rect')
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 4);
+
+      // Reset link highlighting
+      linkElements
+        .attr('stroke', '#94a3b8')
+        .attr('stroke-width', 2)
+        .attr('stroke-opacity', 0.6);
     });
 
-    // Update positions on tick
+    // Update positions on simulation tick
     simulation.on('tick', () => {
-      link
+      linkElements
         .attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
         .attr('x2', d => d.target.x)
         .attr('y2', d => d.target.y);
 
-      node.attr('transform', d => `translate(${d.x},${d.y})`);
+      linkLabels
+        .attr('x', d => (d.source.x + d.target.x) / 2)
+        .attr('y', d => (d.source.y + d.target.y) / 2);
+
+      nodeElements
+        .attr('transform', d => `translate(${d.x},${d.y})`);
     });
 
     // Drag functions
@@ -217,7 +357,7 @@ const Visualization = () => {
       <div className="visualization-page">
         <div className="loading">
           <div className="spinner"></div>
-          <p>Loading ontology visualization...</p>
+          <p>Loading network visualization...</p>
         </div>
       </div>
     );
@@ -239,7 +379,7 @@ const Visualization = () => {
       {/* Full-width header */}
       <div className="page-header">
         <h1>Network Visualization</h1>
-        <p>Interactive graph showing relationships in the coffee supply chain</p>
+        <p>Interactive graph like Protégé OntoGraf - drag, zoom, and explore relationships</p>
         {graphStats && (
           <div className="graph-stats">
             <span>Nodes: {graphStats.nodes}</span>
@@ -289,6 +429,18 @@ const Visualization = () => {
               <p>🖱️ Drag nodes to move</p>
               <p>🔍 Scroll to zoom</p>
               <p>✋ Drag background to pan</p>
+              <p>💡 Hover for connections</p>
+              <p>🎯 Click to focus</p>
+            </div>
+          </div>
+
+          <div className="legend-card">
+            <h3>Graph Info</h3>
+            <div className="control-info">
+              <p>📊 Force-directed layout</p>
+              <p>🔗 Relationship arrows</p>
+              <p>🏷️ Node type badges</p>
+              <p>💫 Dynamic positioning</p>
             </div>
           </div>
         </div>
