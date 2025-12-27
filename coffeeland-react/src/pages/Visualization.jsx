@@ -246,15 +246,15 @@ const Visualization = () => {
         // Stronger repulsion for ontology nodes
         return d.isOntology ? -1500 : -800;
       }))
-      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('center', d3.forceCenter(width / 2, 1000)) // Center in visible area
       .force('collision', d3.forceCollide().radius(d => d.isOntology ? 100 : 80))
       .force('x', d3.forceX(width / 2).strength(0.03))
       .force('y', d3.forceY(d => {
         // Hierarchical positioning by level
-        if (d.id === 'owl:Thing') return height * 0.15;
-        if (['Location', 'Organization', 'Product'].includes(d.id)) return height * 0.3;
-        if (d.isOntology) return height * 0.45;
-        return height * 0.65;
+        if (d.id === 'owl:Thing') return 300;
+        if (['Location', 'Organization', 'Product'].includes(d.id)) return 600;
+        if (d.isOntology) return 900;
+        return 1200;
       }).strength(0.1));
 
     // Draw links with different styles
@@ -515,6 +515,45 @@ const Visualization = () => {
 
       nodeElements
         .attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    // Auto-fit graph to visible area after simulation stabilizes
+    simulation.on('end', () => {
+      console.log('Network Graph simulation ended - auto-fitting to view');
+      
+      // Calculate bounds of all nodes
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      nodes.forEach(d => {
+        if (d.x < minX) minX = d.x;
+        if (d.y < minY) minY = d.y;
+        if (d.x > maxX) maxX = d.x;
+        if (d.y > maxY) maxY = d.y;
+      });
+
+      // Add padding
+      const padding = 150;
+      minX -= padding;
+      minY -= padding;
+      maxX += padding;
+      maxY += padding;
+
+      // Calculate bounds dimensions
+      const boundsWidth = maxX - minX;
+      const boundsHeight = maxY - minY;
+
+      // Calculate scale to fit (use 1500px as visible height for larger graph)
+      const scale = Math.min(width / boundsWidth, 1500 / boundsHeight) * 0.85;
+      
+      // Calculate translation to center in top portion
+      const translateX = width / 2 - (minX + boundsWidth / 2) * scale;
+      const translateY = 750 - (minY + boundsHeight / 2) * scale;
+
+      console.log('Network auto-fit:', { minX, minY, maxX, maxY, scale, translateX, translateY });
+
+      // Apply transform with smooth transition
+      svg.transition()
+        .duration(1500)
+        .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
     });
 
     // Drag functions

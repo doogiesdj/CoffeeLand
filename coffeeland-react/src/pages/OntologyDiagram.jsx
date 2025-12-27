@@ -105,10 +105,10 @@ const OntologyDiagram = () => {
     const simulation = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links).id(d => d.id).distance(200).strength(0.5))
       .force('charge', d3.forceManyBody().strength(-1000))
-      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('center', d3.forceCenter(width / 2, 800)) // Center in visible area
       .force('collision', d3.forceCollide().radius(80))
       .force('x', d3.forceX(width / 2).strength(0.05))
-      .force('y', d3.forceY(height / 2).strength(0.05));
+      .force('y', d3.forceY(800).strength(0.08)); // Pull towards top visible area
 
     // Draw links
     const linkElements = g.append('g')
@@ -243,6 +243,45 @@ const OntologyDiagram = () => {
 
       nodeElements
         .attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+
+    // Auto-fit graph to visible area after simulation stabilizes
+    simulation.on('end', () => {
+      console.log('Ontology simulation ended - auto-fitting to view');
+      
+      // Calculate bounds of all nodes
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      nodes.forEach(d => {
+        if (d.x < minX) minX = d.x;
+        if (d.y < minY) minY = d.y;
+        if (d.x > maxX) maxX = d.x;
+        if (d.y > maxY) maxY = d.y;
+      });
+
+      // Add padding
+      const padding = 100;
+      minX -= padding;
+      minY -= padding;
+      maxX += padding;
+      maxY += padding;
+
+      // Calculate bounds dimensions
+      const boundsWidth = maxX - minX;
+      const boundsHeight = maxY - minY;
+
+      // Calculate scale to fit
+      const scale = Math.min(width / boundsWidth, 1000 / boundsHeight) * 0.9; // Use 1000px as visible height
+      
+      // Calculate translation to center
+      const translateX = width / 2 - (minX + boundsWidth / 2) * scale;
+      const translateY = 500 - (minY + boundsHeight / 2) * scale; // Center in top 1000px
+
+      console.log('Auto-fit:', { minX, minY, maxX, maxY, scale, translateX, translateY });
+
+      // Apply transform with smooth transition
+      svg.transition()
+        .duration(1000)
+        .call(zoom.transform, d3.zoomIdentity.translate(translateX, translateY).scale(scale));
     });
 
     // Drag functions
