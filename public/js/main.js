@@ -8,12 +8,32 @@ const fileInput = document.getElementById('fileInput');
 const uploadBox = document.getElementById('uploadBox');
 const fileName = document.getElementById('fileName');
 const uploadStatus = document.getElementById('uploadStatus');
-const tabNav = document.getElementById('tabNav');
+const sidebarNav = document.getElementById('sidebarNav');
 const tabContent = document.getElementById('tabContent');
+const welcomeScreen = document.getElementById('welcomeScreen');
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebarToggle');
+const mainContent = document.getElementById('mainContent');
+
+// Sidebar toggle
+sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+});
+
+// Mobile sidebar toggle
+if (window.innerWidth <= 1024) {
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+    });
+}
 
 // File upload handling
 fileInput.addEventListener('change', handleFileSelect);
-uploadBox.addEventListener('click', () => fileInput.click());
+uploadBox.addEventListener('click', (e) => {
+    if (e.target !== fileInput) {
+        fileInput.click();
+    }
+});
 uploadBox.addEventListener('dragover', handleDragOver);
 uploadBox.addEventListener('dragleave', handleDragLeave);
 uploadBox.addEventListener('drop', handleDrop);
@@ -45,8 +65,8 @@ async function handleFileSelect() {
     if (!file) return;
     
     fileName.textContent = file.name;
-    uploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 파일 업로드 중...';
-    uploadStatus.className = 'upload-status';
+    uploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 업로드 중...';
+    uploadStatus.className = 'upload-status-mini';
     
     const formData = new FormData();
     formData.append('rdfFile', file);
@@ -61,11 +81,12 @@ async function handleFileSelect() {
         
         if (result.success) {
             uploadedFilename = result.filename;
-            uploadStatus.innerHTML = '<i class="fas fa-check-circle"></i> 파일 업로드 성공!';
-            uploadStatus.className = 'upload-status success';
+            uploadStatus.innerHTML = '<i class="fas fa-check-circle"></i> 성공!';
+            uploadStatus.className = 'upload-status-mini success';
             
-            // Show tabs and load data
-            tabNav.style.display = 'flex';
+            // Hide welcome screen and show content
+            welcomeScreen.style.display = 'none';
+            sidebarNav.style.display = 'block';
             tabContent.style.display = 'block';
             
             await loadRDFData();
@@ -73,8 +94,9 @@ async function handleFileSelect() {
             throw new Error(result.error || '업로드 실패');
         }
     } catch (error) {
-        uploadStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> 오류: ${error.message}`;
-        uploadStatus.className = 'upload-status error';
+        uploadStatus.innerHTML = `<i class="fas fa-exclamation-circle"></i> 오류`;
+        uploadStatus.className = 'upload-status-mini error';
+        console.error('Upload error:', error);
     }
 }
 
@@ -107,27 +129,39 @@ async function loadRDFData() {
     }
 }
 
-// Tab switching
-document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', () => {
-        const tabId = button.dataset.tab;
+// Sidebar navigation
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const tabId = item.dataset.tab;
         
-        // Update buttons
-        document.querySelectorAll('.tab-button').forEach(btn => {
-            btn.classList.remove('active');
+        // Update navigation
+        document.querySelectorAll('.nav-item').forEach(nav => {
+            nav.classList.remove('active');
         });
-        button.classList.add('active');
+        item.classList.add('active');
         
-        // Update panes
-        document.querySelectorAll('.tab-pane').forEach(pane => {
+        // Update content panes
+        document.querySelectorAll('.content-pane').forEach(pane => {
             pane.classList.remove('active');
         });
         document.getElementById(tabId).classList.add('active');
         
+        // Update page title
+        const titles = {
+            'graph': 'Graph Visualization',
+            'tree': 'Class Hierarchy',
+            'sparql': 'SPARQL Query Interface',
+            'raw': 'RDF Content',
+            'stats': 'Ontology Statistics'
+        };
+        document.getElementById('pageTitle').textContent = titles[tabId] || 'Ontology Viewer';
+        
         // Resize graph if switching to graph tab
         if (tabId === 'graph' && cy) {
-            cy.resize();
-            cy.fit();
+            setTimeout(() => {
+                cy.resize();
+                cy.fit();
+            }, 100);
         }
     });
 });
@@ -181,28 +215,30 @@ function initializeGraph() {
             {
                 selector: 'node',
                 style: {
-                    'background-color': '#6f4e37',
+                    'background-color': '#4a9eff',
                     'label': 'data(label)',
-                    'color': '#fff',
-                    'text-outline-color': '#6f4e37',
+                    'color': '#ffffff',
+                    'text-outline-color': '#1a1f29',
                     'text-outline-width': 2,
                     'font-size': '12px',
                     'width': '60px',
-                    'height': '60px'
+                    'height': '60px',
+                    'font-weight': 'bold'
                 }
             },
             {
                 selector: 'edge',
                 style: {
                     'width': 2,
-                    'line-color': '#a0826d',
-                    'target-arrow-color': '#a0826d',
+                    'line-color': '#6b7785',
+                    'target-arrow-color': '#6b7785',
                     'target-arrow-shape': 'triangle',
                     'curve-style': 'bezier',
                     'label': 'data(label)',
                     'font-size': '10px',
                     'text-rotation': 'autorotate',
-                    'text-margin-y': -10
+                    'text-margin-y': -10,
+                    'color': '#a8b2c1'
                 }
             }
         ],
@@ -240,11 +276,12 @@ function initializeGraph() {
 
 function showNodeInfo(data) {
     const infoPanel = document.getElementById('nodeInfo');
+    const connections = cy.getElementById(data.id).connectedEdges().length;
     infoPanel.innerHTML = `
-        <h4><i class="fas fa-info-circle"></i> 노드 정보</h4>
-        <p><strong>라벨:</strong> ${data.label}</p>
+        <h4><i class="fas fa-info-circle"></i> Node Information</h4>
+        <p><strong>Label:</strong> ${data.label}</p>
         <p><strong>URI:</strong> <code>${data.fullUri}</code></p>
-        <p><strong>연결:</strong> ${cy.getElementById(data.id).connectedEdges().length}개</p>
+        <p><strong>Connections:</strong> ${connections}</p>
     `;
 }
 
@@ -304,16 +341,42 @@ async function loadHierarchy() {
             const treeView = document.getElementById('treeView');
             treeView.innerHTML = renderTree(result.hierarchy);
             
+            // Add click handlers for tree nodes
+            document.querySelectorAll('.tree-node-label').forEach(node => {
+                node.addEventListener('click', (e) => {
+                    const children = e.currentTarget.parentElement.querySelector('.tree-node-children');
+                    if (children) {
+                        children.style.display = children.style.display === 'none' ? 'block' : 'none';
+                        const icon = e.currentTarget.querySelector('i');
+                        if (icon.classList.contains('fa-chevron-down')) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-right');
+                        } else {
+                            icon.classList.remove('fa-chevron-right');
+                            icon.classList.add('fa-chevron-down');
+                        }
+                    }
+                });
+            });
+            
             // Expand/collapse functionality
             document.getElementById('expandAllBtn').addEventListener('click', () => {
                 document.querySelectorAll('.tree-node-children').forEach(el => {
                     el.style.display = 'block';
+                });
+                document.querySelectorAll('.tree-node-label i.fa-chevron-right').forEach(icon => {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-down');
                 });
             });
             
             document.getElementById('collapseAllBtn').addEventListener('click', () => {
                 document.querySelectorAll('.tree-node-children').forEach(el => {
                     el.style.display = 'none';
+                });
+                document.querySelectorAll('.tree-node-label i.fa-chevron-down').forEach(icon => {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-right');
                 });
             });
         }
@@ -324,7 +387,7 @@ async function loadHierarchy() {
 
 function renderTree(nodes) {
     if (!nodes || nodes.length === 0) {
-        return '<p>계층 구조를 표시할 수 없습니다.</p>';
+        return '<p style="color: var(--text-secondary);">No hierarchy structure available.</p>';
     }
     
     return nodes.map(node => {
@@ -381,10 +444,10 @@ async function executeSPARQLQuery() {
         const result = await response.json();
         
         if (result.success) {
-            resultCount.textContent = `(${result.count}개 결과)`;
+            resultCount.textContent = `(${result.count} results)`;
             
             if (result.results.length === 0) {
-                resultsContainer.innerHTML = '<p style="padding:1rem;">결과가 없습니다.</p>';
+                resultsContainer.innerHTML = '<p style="padding:1rem;color:var(--text-secondary);">No results found.</p>';
                 return;
             }
             
@@ -413,7 +476,7 @@ async function executeSPARQLQuery() {
             throw new Error(result.error);
         }
     } catch (error) {
-        resultsContainer.innerHTML = `<p style="padding:1rem;color:red;">오류: ${error.message}</p>`;
+        resultsContainer.innerHTML = `<p style="padding:1rem;color:var(--error-color);">Error: ${error.message}</p>`;
     }
 }
 
@@ -422,7 +485,7 @@ document.getElementById('convertBtn').addEventListener('click', async () => {
     const format = document.getElementById('formatSelect').value;
     const rdfContent = document.getElementById('rdfContent');
     
-    rdfContent.textContent = '변환 중...';
+    rdfContent.textContent = 'Converting...';
     
     try {
         const response = await fetch('/api/rdf/convert', {
@@ -442,14 +505,20 @@ document.getElementById('convertBtn').addEventListener('click', async () => {
             throw new Error(result.error);
         }
     } catch (error) {
-        rdfContent.textContent = `오류: ${error.message}`;
+        rdfContent.textContent = `Error: ${error.message}`;
     }
 });
 
 document.getElementById('copyRdfBtn').addEventListener('click', () => {
     const content = document.getElementById('rdfContent').textContent;
-    navigator.clipboard.writeText(content);
-    alert('클립보드에 복사되었습니다!');
+    navigator.clipboard.writeText(content).then(() => {
+        const btn = document.getElementById('copyRdfBtn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+        }, 2000);
+    });
 });
 
 document.getElementById('downloadRdfBtn').addEventListener('click', () => {
@@ -459,5 +528,15 @@ document.getElementById('downloadRdfBtn').addEventListener('click', () => {
     const a = document.createElement('a');
     a.href = url;
     a.download = 'ontology.ttl';
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+// Window resize handler
+window.addEventListener('resize', () => {
+    if (cy) {
+        cy.resize();
+    }
 });

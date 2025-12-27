@@ -16,152 +16,290 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-coffee"></i> CoffeeLand 온톨로지 뷰어</h1>
-            <p class="subtitle">Semantic Web Ontology Visualization System</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- 파일 업로드 섹션 -->
-        <section class="upload-section">
-            <div class="upload-box" id="uploadBox">
-                <i class="fas fa-upload"></i>
-                <p>RDF/OWL 파일을 업로드하거나 드래그하세요</p>
-                <input type="file" id="fileInput" accept=".owl,.rdf,.ttl,.n3,.nt" style="display:none;" />
-                <label for="fileInput" class="upload-btn">파일 선택</label>
-                <span id="fileName" class="file-name"></span>
+    <!-- 좌측 사이드바 -->
+    <aside class="sidebar" id="sidebar">
+        <!-- 사이드바 헤더 -->
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-coffee"></i>
+                <span class="logo-text">CoffeeLand</span>
             </div>
-            <div id="uploadStatus" class="upload-status"></div>
-        </section>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
 
-        <!-- 탭 네비게이션 -->
-        <nav class="tabs" id="tabNav" style="display:none;">
-            <button class="tab-button active" data-tab="graph">
-                <i class="fas fa-project-diagram"></i> 그래프 시각화
+        <!-- 파일 업로드 섹션 -->
+        <div class="sidebar-section">
+            <div class="section-title">
+                <i class="fas fa-upload"></i>
+                <span>파일 업로드</span>
+            </div>
+            <div class="upload-widget">
+                <input type="file" id="fileInput" accept=".owl,.rdf,.ttl,.n3,.nt" style="display:none;" />
+                <label for="fileInput" class="upload-widget-btn">
+                    <i class="fas fa-file-upload"></i>
+                    <span>RDF/OWL 선택</span>
+                </label>
+                <div id="fileName" class="file-info"></div>
+            </div>
+            <div id="uploadStatus" class="upload-status-widget"></div>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
+        <nav class="sidebar-nav">
+            <div class="section-title">
+                <i class="fas fa-layer-group"></i>
+                <span>시각화 & 분석</span>
+            </div>
+            
+            <button class="nav-item active" data-view="upload">
+                <i class="fas fa-home"></i>
+                <span>홈</span>
             </button>
-            <button class="tab-button" data-tab="tree">
-                <i class="fas fa-sitemap"></i> 계층 구조
+            
+            <button class="nav-item" data-view="graph">
+                <i class="fas fa-project-diagram"></i>
+                <span>그래프 시각화</span>
             </button>
-            <button class="tab-button" data-tab="sparql">
-                <i class="fas fa-search"></i> SPARQL 쿼리
+            
+            <button class="nav-item" data-view="tree">
+                <i class="fas fa-sitemap"></i>
+                <span>계층 구조</span>
             </button>
-            <button class="tab-button" data-tab="raw">
-                <i class="fas fa-code"></i> RDF 내용
+            
+            <button class="nav-item" data-view="sparql">
+                <i class="fas fa-search"></i>
+                <span>SPARQL 쿼리</span>
             </button>
-            <button class="tab-button" data-tab="stats">
-                <i class="fas fa-chart-bar"></i> 통계
+            
+            <button class="nav-item" data-view="raw">
+                <i class="fas fa-code"></i>
+                <span>RDF 내용</span>
+            </button>
+            
+            <button class="nav-item" data-view="stats">
+                <i class="fas fa-chart-bar"></i>
+                <span>통계 정보</span>
             </button>
         </nav>
 
-        <!-- 탭 컨텐츠 -->
-        <div class="tab-content" id="tabContent" style="display:none;">
-            <!-- 그래프 시각화 탭 -->
-            <div id="graph" class="tab-pane active">
-                <div class="controls">
-                    <button id="fitBtn" class="control-btn"><i class="fas fa-expand"></i> 전체보기</button>
-                    <button id="centerBtn" class="control-btn"><i class="fas fa-compress"></i> 중앙정렬</button>
-                    <button id="resetZoomBtn" class="control-btn"><i class="fas fa-sync"></i> 줌 리셋</button>
-                    <select id="layoutSelect" class="control-select">
-                        <option value="cose">Force-Directed</option>
-                        <option value="circle">Circle</option>
-                        <option value="grid">Grid</option>
-                        <option value="breadthfirst">Breadth First</option>
-                        <option value="concentric">Concentric</option>
-                    </select>
+        <!-- 사이드바 푸터 -->
+        <div class="sidebar-footer">
+            <div class="footer-item">
+                <i class="fas fa-globe"></i>
+                <span>tonicloud.org</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-github"></i>
+                <span>GitHub</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-content">
+        <!-- 상단 헤더 -->
+        <header class="content-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">CoffeeLand 온톨로지 뷰어</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-subtitle">Semantic Web Ontology Visualization System</div>
+            </div>
+        </header>
+
+        <!-- 컨텐츠 영역 -->
+        <div class="content-body">
+            <!-- 업로드 뷰 (홈) -->
+            <div id="view-upload" class="content-view active">
+                <div class="welcome-section">
+                    <div class="welcome-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h2>CoffeeLand 온톨로지 뷰어에 오신 것을 환영합니다</h2>
+                    <p class="welcome-text">
+                        Protege에서 생성한 RDF/OWL 온톨로지 파일을 업로드하여 시각화하고 분석하세요.
+                    </p>
+                    
+                    <div class="upload-area" id="uploadBox">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>파일을 드래그하거나 클릭하여 업로드</h3>
+                        <p>지원 형식: .owl, .rdf, .ttl, .n3, .nt</p>
+                        <p class="upload-size-info">최대 파일 크기: 50MB</p>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-project-diagram"></i>
+                            <h4>그래프 시각화</h4>
+                            <p>노드-엣지 다이어그램으로 온톨로지 구조 탐색</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-sitemap"></i>
+                            <h4>계층 구조</h4>
+                            <p>클래스 상속 관계를 트리 형태로 표시</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-search"></i>
+                            <h4>SPARQL 쿼리</h4>
+                            <p>실시간 SPARQL 쿼리로 데이터 검색</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chart-bar"></i>
+                            <h4>통계 분석</h4>
+                            <p>클래스, 속성, 인스턴스 통계 정보</p>
+                        </div>
+                    </div>
                 </div>
-                <div id="cy" class="visualization-container"></div>
-                <div id="nodeInfo" class="info-panel"></div>
             </div>
 
-            <!-- 계층 구조 트리 탭 -->
-            <div id="tree" class="tab-pane">
-                <div class="controls">
-                    <button id="expandAllBtn" class="control-btn"><i class="fas fa-plus-circle"></i> 모두 펼치기</button>
-                    <button id="collapseAllBtn" class="control-btn"><i class="fas fa-minus-circle"></i> 모두 접기</button>
+            <!-- 그래프 시각화 뷰 -->
+            <div id="view-graph" class="content-view">
+                <div class="view-header">
+                    <h2><i class="fas fa-project-diagram"></i> 그래프 시각화</h2>
+                    <div class="view-controls">
+                        <button id="fitBtn" class="control-btn"><i class="fas fa-expand"></i> 전체보기</button>
+                        <button id="centerBtn" class="control-btn"><i class="fas fa-compress"></i> 중앙정렬</button>
+                        <button id="resetZoomBtn" class="control-btn"><i class="fas fa-sync"></i> 리셋</button>
+                        <select id="layoutSelect" class="control-select">
+                            <option value="cose">Force-Directed</option>
+                            <option value="circle">Circle</option>
+                            <option value="grid">Grid</option>
+                            <option value="breadthfirst">Breadth First</option>
+                            <option value="concentric">Concentric</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="visualization-wrapper">
+                    <div id="cy" class="visualization-container"></div>
+                    <div id="nodeInfo" class="info-panel"></div>
+                </div>
+            </div>
+
+            <!-- 계층 구조 뷰 -->
+            <div id="view-tree" class="content-view">
+                <div class="view-header">
+                    <h2><i class="fas fa-sitemap"></i> 계층 구조</h2>
+                    <div class="view-controls">
+                        <button id="expandAllBtn" class="control-btn"><i class="fas fa-plus-circle"></i> 모두 펼치기</button>
+                        <button id="collapseAllBtn" class="control-btn"><i class="fas fa-minus-circle"></i> 모두 접기</button>
+                    </div>
                 </div>
                 <div id="treeView" class="tree-container"></div>
             </div>
 
-            <!-- SPARQL 쿼리 탭 -->
-            <div id="sparql" class="tab-pane">
-                <div class="sparql-container">
-                    <div class="query-section">
-                        <h3>SPARQL 쿼리 입력</h3>
+            <!-- SPARQL 쿼리 뷰 -->
+            <div id="view-sparql" class="content-view">
+                <div class="view-header">
+                    <h2><i class="fas fa-search"></i> SPARQL 쿼리</h2>
+                </div>
+                <div class="sparql-layout">
+                    <div class="query-panel">
+                        <div class="panel-header">
+                            <h3>쿼리 입력</h3>
+                        </div>
                         <textarea id="sparqlQuery" class="sparql-textarea" placeholder="SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object } LIMIT 100">SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object } LIMIT 100</textarea>
                         <div class="query-examples">
+                            <span class="examples-label">예제:</span>
                             <button class="example-btn" data-query="all">모든 트리플</button>
-                            <button class="example-btn" data-query="classes">모든 클래스</button>
-                            <button class="example-btn" data-query="properties">모든 속성</button>
-                            <button class="example-btn" data-query="individuals">모든 인스턴스</button>
+                            <button class="example-btn" data-query="classes">클래스</button>
+                            <button class="example-btn" data-query="properties">속성</button>
+                            <button class="example-btn" data-query="individuals">인스턴스</button>
                             <button class="example-btn" data-query="subclasses">하위 클래스</button>
                         </div>
-                        <button id="executeQueryBtn" class="execute-btn"><i class="fas fa-play"></i> 쿼리 실행</button>
+                        <button id="executeQueryBtn" class="execute-btn">
+                            <i class="fas fa-play"></i> 쿼리 실행
+                        </button>
                     </div>
-                    <div class="results-section">
-                        <h3>쿼리 결과 <span id="resultCount"></span></h3>
+                    <div class="results-panel">
+                        <div class="panel-header">
+                            <h3>쿼리 결과 <span id="resultCount" class="result-count"></span></h3>
+                        </div>
                         <div id="queryResults" class="results-container"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- RDF 원본 내용 탭 -->
-            <div id="raw" class="tab-pane">
-                <div class="controls">
-                    <button id="downloadRdfBtn" class="control-btn"><i class="fas fa-download"></i> 다운로드</button>
-                    <button id="copyRdfBtn" class="control-btn"><i class="fas fa-copy"></i> 복사</button>
-                    <select id="formatSelect" class="control-select">
-                        <option value="text/turtle">Turtle</option>
-                        <option value="application/n-triples">N-Triples</option>
-                        <option value="application/n-quads">N-Quads</option>
-                    </select>
-                    <button id="convertBtn" class="control-btn"><i class="fas fa-sync-alt"></i> 변환</button>
+            <!-- RDF 내용 뷰 -->
+            <div id="view-raw" class="content-view">
+                <div class="view-header">
+                    <h2><i class="fas fa-code"></i> RDF 내용</h2>
+                    <div class="view-controls">
+                        <select id="formatSelect" class="control-select">
+                            <option value="text/turtle">Turtle</option>
+                            <option value="application/n-triples">N-Triples</option>
+                            <option value="application/n-quads">N-Quads</option>
+                        </select>
+                        <button id="convertBtn" class="control-btn"><i class="fas fa-sync-alt"></i> 변환</button>
+                        <button id="copyRdfBtn" class="control-btn"><i class="fas fa-copy"></i> 복사</button>
+                        <button id="downloadRdfBtn" class="control-btn"><i class="fas fa-download"></i> 다운로드</button>
+                    </div>
                 </div>
                 <pre id="rdfContent" class="rdf-content">RDF 내용이 여기에 표시됩니다...</pre>
             </div>
 
-            <!-- 통계 탭 -->
-            <div id="stats" class="tab-pane">
+            <!-- 통계 뷰 -->
+            <div id="view-stats" class="content-view">
+                <div class="view-header">
+                    <h2><i class="fas fa-chart-bar"></i> 통계 정보</h2>
+                </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <i class="fas fa-cubes"></i>
-                        <h3>클래스</h3>
-                        <p id="classCount" class="stat-number">0</p>
+                        <div class="stat-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>클래스</h3>
+                            <p id="classCount" class="stat-number">0</p>
+                        </div>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-link"></i>
-                        <h3>속성</h3>
-                        <p id="propertyCount" class="stat-number">0</p>
+                        <div class="stat-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>속성</h3>
+                            <p id="propertyCount" class="stat-number">0</p>
+                        </div>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-user"></i>
-                        <h3>인스턴스</h3>
-                        <p id="individualCount" class="stat-number">0</p>
+                        <div class="stat-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>인스턴스</h3>
+                            <p id="individualCount" class="stat-number">0</p>
+                        </div>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-stream"></i>
-                        <h3>총 트리플</h3>
-                        <p id="tripleCount" class="stat-number">0</p>
+                        <div class="stat-icon">
+                            <i class="fas fa-stream"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>총 트리플</h3>
+                            <p id="tripleCount" class="stat-number">0</p>
+                        </div>
                     </div>
                 </div>
-                <div class="stats-details">
-                    <h3>네임스페이스</h3>
-                    <ul id="namespaceList" class="namespace-list"></ul>
-                </div>
-                <div class="stats-details">
-                    <h3>클래스 목록</h3>
-                    <ul id="classList" class="class-list"></ul>
+                <div class="stats-details-grid">
+                    <div class="stats-panel">
+                        <h3><i class="fas fa-tags"></i> 네임스페이스</h3>
+                        <ul id="namespaceList" class="namespace-list"></ul>
+                    </div>
+                    <div class="stats-panel">
+                        <h3><i class="fas fa-list"></i> 클래스 목록</h3>
+                        <ul id="classList" class="class-list"></ul>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 CoffeeLand Ontology Project | Hosted on AWS | Domain: tonicloud.org</p>
-        </div>
-    </footer>
 
     <script src="/js/main.js"></script>
 </body>
