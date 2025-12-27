@@ -235,7 +235,8 @@ const Visualization = () => {
 
   return (
     <div className="visualization-page">
-      <div className="viz-header">
+      {/* Full-width header */}
+      <div className="page-header">
         <h1>Network Visualization</h1>
         <p>Interactive graph showing relationships in the coffee supply chain</p>
         {graphStats && (
@@ -254,32 +255,49 @@ const Visualization = () => {
           </div>
         )}
       </div>
-      
-      <div className="legend">
-        <div className="legend-item">
-          <span className="legend-color" style={{ backgroundColor: '#10b981' }}></span>
-          <span>Countries</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color" style={{ backgroundColor: '#f59e0b' }}></span>
-          <span>Brands</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color" style={{ backgroundColor: '#3b82f6' }}></span>
-          <span>Chains</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color" style={{ backgroundColor: '#8b5cf6' }}></span>
-          <span>Brokers</span>
-        </div>
-      </div>
 
-      <div className="viz-controls">
-        <p>💡 Tip: Drag nodes to rearrange • Scroll to zoom • Pan by dragging background</p>
-      </div>
+      {/* Two-column layout: sidebar + graph */}
+      <div className="content-grid">
+        {/* Left sidebar - narrow */}
+        <div className="sidebar-panel">
+          <div className="legend-card">
+            <h3>Node Types</h3>
+            <div className="legend-items">
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
+                <span>Countries</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
+                <span>Brands</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#3b82f6' }}></div>
+                <span>Chains</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#8b5cf6' }}></div>
+                <span>Brokers</span>
+              </div>
+            </div>
+          </div>
 
-      <div className="visualization-container" ref={containerRef}>
-        <svg ref={svgRef}></svg>
+          <div className="legend-card">
+            <h3>Controls</h3>
+            <div className="control-info">
+              <p>🖱️ Drag nodes to move</p>
+              <p>🔍 Scroll to zoom</p>
+              <p>✋ Drag background to pan</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right graph - wide */}
+        <div className="graph-panel">
+          <div className="graph-container" ref={containerRef}>
+            <svg ref={svgRef}></svg>
+          </div>
+        </div>
       </div>
     </div>
   );
