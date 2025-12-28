@@ -19,7 +19,7 @@ const Visualization = () => {
 
     const container = containerRef.current;
     const width = container.clientWidth || 1200;
-    const height = 4000;
+    const height = container.clientHeight || 900;
 
     console.log('Network Graph dimensions:', width, height);
 
@@ -250,11 +250,11 @@ const Visualization = () => {
       .force('collision', d3.forceCollide().radius(d => d.isOntology ? 100 : 80))
       .force('x', d3.forceX(width / 2).strength(0.03))
       .force('y', d3.forceY(d => {
-        // Hierarchical positioning by level
-        if (d.id === 'owl:Thing') return 300;
-        if (['Location', 'Organization', 'Product'].includes(d.id)) return 600;
-        if (d.isOntology) return 900;
-        return 1200;
+        // Hierarchical positioning by level (proportional to height)
+        if (d.id === 'owl:Thing') return height * 0.2;       // 20% from top
+        if (['Location', 'Organization', 'Product'].includes(d.id)) return height * 0.4;  // 40%
+        if (d.isOntology) return height * 0.6;                // 60%
+        return height * 0.8;                                   // 80%
       }).strength(0.1));
 
     // Draw links with different styles
@@ -541,12 +541,12 @@ const Visualization = () => {
       const boundsWidth = maxX - minX;
       const boundsHeight = maxY - minY;
 
-      // Calculate scale to fit (use 1500px as visible height for larger graph)
-      const scale = Math.min(width / boundsWidth, 1500 / boundsHeight) * 0.85;
+      // Calculate scale to fit to container
+      const scale = Math.min(width / boundsWidth, height / boundsHeight) * 0.8;
       
-      // Calculate translation to center in top portion
+      // Calculate translation to center in container
       const translateX = width / 2 - (minX + boundsWidth / 2) * scale;
-      const translateY = 750 - (minY + boundsHeight / 2) * scale;
+      const translateY = height / 2 - (minY + boundsHeight / 2) * scale;
 
       console.log('Network auto-fit:', { minX, minY, maxX, maxY, scale, translateX, translateY });
 

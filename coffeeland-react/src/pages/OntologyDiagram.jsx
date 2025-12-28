@@ -14,7 +14,7 @@ const OntologyDiagram = () => {
 
     const container = containerRef.current;
     const width = container.clientWidth || 1200;
-    const height = 4000;
+    const height = container.clientHeight || 900;
 
     console.log('Ontology container dimensions:', width, height);
 
@@ -105,10 +105,10 @@ const OntologyDiagram = () => {
     const simulation = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links).id(d => d.id).distance(200).strength(0.5))
       .force('charge', d3.forceManyBody().strength(-1000))
-      .force('center', d3.forceCenter(width / 2, 800)) // Center in visible area
+      .force('center', d3.forceCenter(width / 2, height / 2)) // Center in container
       .force('collision', d3.forceCollide().radius(80))
       .force('x', d3.forceX(width / 2).strength(0.05))
-      .force('y', d3.forceY(800).strength(0.08)); // Pull towards top visible area
+      .force('y', d3.forceY(height / 2).strength(0.08)); // Pull towards center
 
     // Draw links
     const linkElements = g.append('g')
@@ -270,11 +270,11 @@ const OntologyDiagram = () => {
       const boundsHeight = maxY - minY;
 
       // Calculate scale to fit
-      const scale = Math.min(width / boundsWidth, 1000 / boundsHeight) * 0.9; // Use 1000px as visible height
+      const scale = Math.min(width / boundsWidth, height / boundsHeight) * 0.8; // Fit to container
       
       // Calculate translation to center
       const translateX = width / 2 - (minX + boundsWidth / 2) * scale;
-      const translateY = 500 - (minY + boundsHeight / 2) * scale; // Center in top 1000px
+      const translateY = height / 2 - (minY + boundsHeight / 2) * scale; // Center in container
 
       console.log('Auto-fit:', { minX, minY, maxX, maxY, scale, translateX, translateY });
 
