@@ -12,6 +12,18 @@ const Chains = () => {
   
   const highlightedChain = searchParams.get('highlight');
   const chains = data?.chains || [];
+
+  // Scroll to and highlight the chain when URL parameter is present
+  useEffect(() => {
+    if (highlightedChain && chainRefs.current[highlightedChain]) {
+      setTimeout(() => {
+        chainRefs.current[highlightedChain]?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    }
+  }, [highlightedChain, data]);
   
   if (loading) return <div className="loading">Loading chains...</div>;
   if (error) return <div className="error">Error loading data: {error.message}</div>;
@@ -246,18 +258,6 @@ const Chains = () => {
       mission: 'Deliver exceptional coffee experiences to customers.'
     };
   };
-
-  // Scroll to and highlight the chain when URL parameter is present
-  useEffect(() => {
-    if (highlightedChain && chainRefs.current[highlightedChain]) {
-      setTimeout(() => {
-        chainRefs.current[highlightedChain]?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      }, 100);
-    }
-  }, [highlightedChain, data]);
 
   return (
     <div className="entity-page">
