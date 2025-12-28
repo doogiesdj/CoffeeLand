@@ -99,8 +99,9 @@
 
 .diagram-container {
   width: 100%;
-  height: 900px;
-  min-height: 700px;
+  height: calc(100vh - 250px); /* 화면 높이에서 헤더/여백 제외 */
+  max-height: 900px;
+  min-height: 600px;
   background: white;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
@@ -149,7 +150,8 @@
   }
 
   .diagram-container {
-    height: 700px;
-    min-height: 600px;
+    height: calc(100vh - 300px); /* 모바일에서 더 많은 여백 */
+    max-height: 700px;
+    min-height: 500px;
   }
 }
