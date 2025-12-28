@@ -25,7 +25,16 @@ export const parseRDFData = async (rdfUrl) => {
     const cities = extractEntitiesByType(store, ns('City'));
     const brands = extractEntitiesByType(store, ns('CoffeeBrand'));
     const chains = extractEntitiesByType(store, ns('CoffeeChain'));
-    const brokers = extractEntitiesByType(store, ns('Broker'));
+    
+    // Extract brokers (including ExportBroker and ImportBroker subtypes)
+    const brokers = [
+      ...extractEntitiesByType(store, ns('Broker')),
+      ...extractEntitiesByType(store, ns('ExportBroker')),
+      ...extractEntitiesByType(store, ns('ImportBroker'))
+    ];
+    
+    // Extract coffee varieties
+    const varieties = extractEntitiesByType(store, ns('CoffeeVariety'));
     
     // Extract relationships
     const relationships = extractRelationships(store, ontologyNS);
@@ -36,6 +45,7 @@ export const parseRDFData = async (rdfUrl) => {
       brands,
       chains,
       brokers,
+      varieties,
       relationships,
       store
     };
