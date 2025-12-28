@@ -467,7 +467,7 @@ const OntologyDiagram = () => {
         {/* Left sidebar - narrow */}
         <div className="sidebar-panel">
           <div className="legend-card">
-            <h3>Classes ({baseNodes.filter(n => !n.type || n.type !== 'abstract').length} total)</h3>
+            <h3>Classes (14 total)</h3>
             <div className="legend-items">
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#94a3b8', border: '2px dashed #475569' }}></div>
