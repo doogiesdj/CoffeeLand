@@ -8,13 +8,13 @@ const Chains = () => {
   const { data, loading, error } = useRDFData();
   const [selectedChain, setSelectedChain] = useState(null);
   const [searchParams] = useSearchParams();
-  const highlightedChain = searchParams.get('highlight');
   const chainRefs = useRef({});
+  
+  const highlightedChain = searchParams.get('highlight');
+  const chains = data?.chains || [];
   
   if (loading) return <div className="loading">Loading chains...</div>;
   if (error) return <div className="error">Error loading data: {error.message}</div>;
-
-  const chains = data?.chains || [];
 
   // Chain information database
   const chainInfo = {
