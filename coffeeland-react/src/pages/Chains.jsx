@@ -193,6 +193,24 @@ const Chains = () => {
       description: 'Fast-growing Korean coffee franchise known for large-size drinks at competitive prices.',
       specialty: 'Mega-sized beverages, value pricing, diverse menu',
       mission: 'Deliver great taste and generous portions at affordable prices.'
+    },
+    'Compose Coffee': {
+      founded: '2014',
+      headquarters: 'Seoul, South Korea',
+      stores: '2,600+',
+      countries: '1+',
+      description: 'Rapidly expanding Korean coffee franchise known for low prices and consistent quality.',
+      specialty: 'Affordable premium coffee, convenience store model, rapid expansion',
+      mission: 'Make quality coffee accessible to everyone at the lowest prices.'
+    },
+    'Hollys Coffee': {
+      founded: '1998',
+      headquarters: 'Seoul, South Korea',
+      stores: '550+',
+      countries: '3+',
+      description: 'Premium Korean coffeehouse chain with a European café atmosphere and artisanal approach.',
+      specialty: 'Belgian waffles, premium coffee, European café ambiance',
+      mission: 'Provide sophisticated coffee culture experience with European elegance.'
     }
   };
 
