@@ -211,6 +211,15 @@ const Chains = () => {
       description: 'Premium Korean coffeehouse chain with a European café atmosphere and artisanal approach.',
       specialty: 'Belgian waffles, premium coffee, European café ambiance',
       mission: 'Provide sophisticated coffee culture experience with European elegance.'
+    },
+    'Paik\'s Coffee': {
+      founded: '2006',
+      headquarters: 'Seoul, South Korea',
+      stores: '2,100+',
+      countries: '1+',
+      description: 'Popular Korean coffee franchise founded by celebrity chef Paik Jong-won, known for affordable prices and consistent quality.',
+      specialty: 'Affordable espresso drinks, simple menu, rapid service',
+      mission: 'Provide quality coffee at the most reasonable prices for everyday enjoyment.'
     }
   };
 
