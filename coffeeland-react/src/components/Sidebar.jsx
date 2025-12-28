@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Coffee, MapPin, ShoppingBag, Store, Users, BarChart3, Network, Info } from 'lucide-react';
+import { Coffee, MapPin, ShoppingBag, Store, Users, BarChart3, Info } from 'lucide-react';
 import '../styles/Sidebar.css';
 
 const Sidebar = () => {
@@ -45,11 +45,7 @@ const Sidebar = () => {
           <div className="nav-section-title">Visualization</div>
           <NavLink to="/ontology" className="nav-item">
             <ShoppingBag className="nav-icon" />
-            <span>Ontology</span>
-          </NavLink>
-          <NavLink to="/visualization" className="nav-item">
-            <Network className="nav-icon" />
-            <span>Network Graph</span>
+            <span>Ontology Diagram</span>
           </NavLink>
         </div>
 

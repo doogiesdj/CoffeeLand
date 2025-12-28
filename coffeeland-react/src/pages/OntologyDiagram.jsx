@@ -23,7 +23,7 @@ const OntologyDiagram = () => {
 
     console.log('Ontology container dimensions:', width, height);
 
-    // Define ontology classes as nodes
+    // Define ontology classes as nodes (expanded with new classes)
     const baseNodes = [
       { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', isClass: true },
       { id: 'Country', label: 'Country', type: 'class', color: '#10b981', isClass: true },
@@ -31,10 +31,14 @@ const OntologyDiagram = () => {
       { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', isClass: true },
       { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', isClass: true },
       { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', isClass: true },
-      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6', isClass: true },
+      { id: 'Broker', label: 'Broker', type: 'abstract', color: '#8b5cf6', isClass: true },
+      { id: 'ExportBroker', label: 'ExportBroker', type: 'class', color: '#a855f7', isClass: true },
+      { id: 'ImportBroker', label: 'ImportBroker', type: 'class', color: '#c084fc', isClass: true },
+      { id: 'LogisticsProvider', label: 'LogisticsProvider', type: 'class', color: '#d946ef', isClass: true },
       { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', isClass: true },
       { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', isClass: true },
-      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316', isClass: true }
+      { id: 'CoffeeVariety', label: 'CoffeeVariety', type: 'class', color: '#f97316', isClass: true },
+      { id: 'Certification', label: 'Certification', type: 'class', color: '#84cc16', isClass: true }
     ];
 
     // Function to get instances for a class
@@ -67,15 +71,25 @@ const OntologyDiagram = () => {
             parentClass: 'CoffeeChain',
             isClass: false
           }));
-        case 'Broker':
-          return (data.brokers || []).map(b => ({
-            id: `instance_${b.name}`,
+        case 'ExportBroker':
+        case 'ImportBroker':
+          return (data.brokers || []).filter(b => {
+            // Filter by broker type if available in data
+            return true; // Show all brokers for now
+          }).map(b => ({
+            id: `instance_${b.name}_${classId}`,
             label: b.name,
             type: 'instance',
-            color: '#8b5cf6',
-            parentClass: 'Broker',
+            color: classId === 'ExportBroker' ? '#a855f7' : '#c084fc',
+            parentClass: classId,
             isClass: false
           }));
+        case 'CoffeeVariety':
+          // Get varieties from data if available
+          return [];
+        case 'Certification':
+          // Get certifications from data if available
+          return [];
         case 'CoffeeBrand':
           return (data.brands || []).map(b => ({
             id: `instance_${b.name}`,
@@ -113,22 +127,27 @@ const OntologyDiagram = () => {
     const baseLinks = [
       // Inheritance (subClassOf)
       { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'Capital', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'City', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Capital', target: 'City', type: 'subClassOf', label: 'subClassOf' },
       { source: 'CoffeeChain', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'Broker', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'ExportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'ImportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'LogisticsProvider', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'CoffeeBrand', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'CoffeeBean', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'CoffeeVariety', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
       
       // Object Properties
       { source: 'Country', target: 'CoffeeBrand', type: 'produces', label: 'produces', style: 'property' },
       { source: 'City', target: 'Country', type: 'isLocatedIn', label: 'isLocatedIn', style: 'property' },
       { source: 'CoffeeChain', target: 'City', type: 'operatesIn', label: 'operatesIn', style: 'property' },
-      { source: 'Broker', target: 'CoffeeChain', type: 'suppliesTo', label: 'suppliesTo', style: 'property' },
-      { source: 'CoffeeChain', target: 'Broker', type: 'buysFrom', label: 'buysFrom', style: 'property' },
+      { source: 'ExportBroker', target: 'CoffeeChain', type: 'suppliesTo', label: 'suppliesTo', style: 'property' },
+      { source: 'CoffeeChain', target: 'ImportBroker', type: 'buysFrom', label: 'buysFrom', style: 'property' },
       { source: 'Country', target: 'Capital', type: 'hasMainCapital', label: 'hasMainCapital', style: 'property' },
       { source: 'CoffeeBrand', target: 'City', type: 'hasOriginIn', label: 'hasOriginIn', style: 'property' },
-      { source: 'CoffeeBrand', target: 'Country', type: 'isConsumedIn', label: 'isConsumedIn', style: 'property' }
+      { source: 'CoffeeBrand', target: 'Country', type: 'isConsumedIn', label: 'isConsumedIn', style: 'property' },
+      { source: 'CoffeeBrand', target: 'CoffeeVariety', type: 'usesVariety', label: 'usesVariety', style: 'property' },
+      { source: 'CoffeeBrand', target: 'Certification', type: 'hasCertification', label: 'hasCertification', style: 'property' }
     ];
 
     const links = [...baseLinks, ...instanceLinks];
@@ -448,7 +467,7 @@ const OntologyDiagram = () => {
         {/* Left sidebar - narrow */}
         <div className="sidebar-panel">
           <div className="legend-card">
-            <h3>Classes</h3>
+            <h3>Classes ({baseNodes.filter(n => !n.type || n.type !== 'abstract').length} total)</h3>
             <div className="legend-items">
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#94a3b8', border: '2px dashed #475569' }}></div>
@@ -456,15 +475,27 @@ const OntologyDiagram = () => {
               </div>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
-                <span>Location</span>
+                <span>Country/City</span>
               </div>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#3b82f6' }}></div>
-                <span>Organization</span>
+                <span>CoffeeChain</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#8b5cf6' }}></div>
+                <span>Broker</span>
               </div>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
-                <span>Product</span>
+                <span>CoffeeBrand</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#f97316' }}></div>
+                <span>CoffeeVariety</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#84cc16' }}></div>
+                <span>Certification</span>
               </div>
             </div>
           </div>
