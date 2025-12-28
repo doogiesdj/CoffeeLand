@@ -1,13 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import { useRDFData } from '../hooks/useRDFData';
 import '../styles/OntologyDiagram.css';
 
 const OntologyDiagram = () => {
   const svgRef = useRef();
   const containerRef = useRef();
+  const { data, loading, error } = useRDFData();
+  const [expandedNodes, setExpandedNodes] = useState(new Set());
+  const [allNodes, setAllNodes] = useState([]);
+  const [allLinks, setAllLinks] = useState([]);
 
   useEffect(() => {
-    if (!svgRef.current || !containerRef.current) return;
+    if (!svgRef.current || !containerRef.current || !data) return;
 
     // Clear previous visualization
     d3.select(svgRef.current).selectAll('*').remove();
@@ -19,20 +24,93 @@ const OntologyDiagram = () => {
     console.log('Ontology container dimensions:', width, height);
 
     // Define ontology classes as nodes
-    const nodes = [
-      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8' },
-      { id: 'Country', label: 'Country', type: 'class', color: '#10b981' },
-      { id: 'City', label: 'City', type: 'class', color: '#14b8a6' },
-      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4' },
-      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8' },
-      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6' },
-      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6' },
-      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8' },
-      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b' },
-      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316' }
+    const baseNodes = [
+      { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'Country', label: 'Country', type: 'class', color: '#10b981', isClass: true },
+      { id: 'City', label: 'City', type: 'class', color: '#14b8a6', isClass: true },
+      { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', isClass: true },
+      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', isClass: true },
+      { id: 'Broker', label: 'Broker', type: 'class', color: '#8b5cf6', isClass: true },
+      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', isClass: true },
+      { id: 'CoffeeBean', label: 'CoffeeBean', type: 'class', color: '#f97316', isClass: true }
     ];
 
-    const links = [
+    // Function to get instances for a class
+    const getInstancesForClass = (classId) => {
+      switch(classId) {
+        case 'Country':
+          return (data.countries || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#10b981',
+            parentClass: 'Country',
+            isClass: false
+          }));
+        case 'City':
+          return (data.cities || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#14b8a6',
+            parentClass: 'City',
+            isClass: false
+          }));
+        case 'CoffeeChain':
+          return (data.chains || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#3b82f6',
+            parentClass: 'CoffeeChain',
+            isClass: false
+          }));
+        case 'Broker':
+          return (data.brokers || []).map(b => ({
+            id: `instance_${b.name}`,
+            label: b.name,
+            type: 'instance',
+            color: '#8b5cf6',
+            parentClass: 'Broker',
+            isClass: false
+          }));
+        case 'CoffeeBrand':
+          return (data.brands || []).map(b => ({
+            id: `instance_${b.name}`,
+            label: b.name,
+            type: 'instance',
+            color: '#f59e0b',
+            parentClass: 'CoffeeBrand',
+            isClass: false
+          }));
+        default:
+          return [];
+      }
+    };
+
+    // Build nodes based on expanded state
+    let nodes = [...baseNodes];
+    let instanceLinks = [];
+
+    expandedNodes.forEach(classId => {
+      const instances = getInstancesForClass(classId);
+      nodes = [...nodes, ...instances];
+      
+      // Create links from instances to their class
+      instances.forEach(inst => {
+        instanceLinks.push({
+          source: inst.id,
+          target: classId,
+          type: 'instanceOf',
+          label: 'instanceOf',
+          style: 'instance'
+        });
+      });
+    });
+
+    const baseLinks = [
       // Inheritance (subClassOf)
       { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
       { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
@@ -52,6 +130,8 @@ const OntologyDiagram = () => {
       { source: 'CoffeeBrand', target: 'City', type: 'hasOriginIn', label: 'hasOriginIn', style: 'property' },
       { source: 'CoffeeBrand', target: 'Country', type: 'isConsumedIn', label: 'isConsumedIn', style: 'property' }
     ];
+
+    const links = [...baseLinks, ...instanceLinks];
 
     // Create SVG
     const svg = d3.select(svgRef.current)
@@ -116,9 +196,9 @@ const OntologyDiagram = () => {
       .selectAll('line')
       .data(links)
       .enter().append('line')
-      .attr('stroke', d => d.style === 'property' ? '#3b82f6' : '#64748b')
-      .attr('stroke-width', 2)
-      .attr('stroke-dasharray', d => d.style === 'property' ? '0' : '5,5')
+      .attr('stroke', d => d.style === 'instance' ? '#10b981' : (d.style === 'property' ? '#3b82f6' : '#64748b'))
+      .attr('stroke-width', d => d.style === 'instance' ? 1.5 : 2)
+      .attr('stroke-dasharray', d => d.style === 'instance' ? '3,3' : (d.style === 'property' ? '0' : '5,5'))
       .attr('marker-end', d => d.style === 'property' ? 'url(#arrow-property)' : 'url(#arrow-inheritance)');
 
     // Draw link labels
@@ -146,16 +226,16 @@ const OntologyDiagram = () => {
         .on('drag', dragged)
         .on('end', dragended));
 
-    // Node rectangles
+    // Node rectangles (different sizes for classes vs instances)
     nodeElements.append('rect')
-      .attr('x', -60)
-      .attr('y', -30)
-      .attr('width', 120)
-      .attr('height', 60)
-      .attr('rx', 8)
+      .attr('x', d => d.isClass ? -60 : -50)
+      .attr('y', d => d.isClass ? -30 : -20)
+      .attr('width', d => d.isClass ? 120 : 100)
+      .attr('height', d => d.isClass ? 60 : 40)
+      .attr('rx', d => d.isClass ? 8 : 6)
       .attr('fill', d => d.color)
       .attr('stroke', '#fff')
-      .attr('stroke-width', 3)
+      .attr('stroke-width', d => d.isClass ? 3 : 2)
       .style('filter', 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))');
 
     // Dashed border for abstract classes
@@ -171,12 +251,34 @@ const OntologyDiagram = () => {
       .attr('stroke-width', 2)
       .attr('stroke-dasharray', '5,5');
 
+    // Add expand/collapse indicator for classes
+    nodeElements.filter(d => d.isClass && d.type !== 'abstract')
+      .append('circle')
+      .attr('cx', 50)
+      .attr('cy', -20)
+      .attr('r', 10)
+      .attr('fill', d => expandedNodes.has(d.id) ? '#10b981' : '#94a3b8')
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer');
+
+    nodeElements.filter(d => d.isClass && d.type !== 'abstract')
+      .append('text')
+      .attr('x', 50)
+      .attr('y', -16)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '14px')
+      .attr('font-weight', 'bold')
+      .attr('fill', '#fff')
+      .style('pointer-events', 'none')
+      .text(d => expandedNodes.has(d.id) ? '−' : '+');
+
     // Node labels
     nodeElements.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', 5)
-      .attr('font-size', '14px')
-      .attr('font-weight', 'bold')
+      .attr('font-size', d => d.isClass ? '14px' : '11px')
+      .attr('font-weight', d => d.isClass ? 'bold' : 'normal')
       .attr('fill', '#fff')
       .style('pointer-events', 'none')
       .text(d => d.label);
@@ -197,20 +299,42 @@ const OntologyDiagram = () => {
       .attr('class', 'ontology-tooltip')
       .style('opacity', 0);
 
+    // Add click handler for classes
+    nodeElements.filter(d => d.isClass && d.type !== 'abstract')
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        event.stopPropagation();
+        const newExpanded = new Set(expandedNodes);
+        if (newExpanded.has(d.id)) {
+          newExpanded.delete(d.id);
+        } else {
+          newExpanded.add(d.id);
+        }
+        setExpandedNodes(newExpanded);
+      });
+
     nodeElements.on('mouseover', (event, d) => {
       tooltip.transition().duration(200).style('opacity', 0.95);
       
       let tooltipHtml = `<strong>${d.label}</strong><br/>`;
-      tooltipHtml += `Type: ${d.type === 'abstract' ? 'Abstract Class' : 'Class'}<br/>`;
-      
-      const outgoing = links.filter(r => r.source.id === d.id && r.style === 'property');
-      const incoming = links.filter(r => r.target.id === d.id && r.style === 'property');
-      
-      if (outgoing.length > 0) {
-        tooltipHtml += `<br/><em>Properties:</em><br/>`;
-        outgoing.forEach(r => {
-          tooltipHtml += `→ ${r.label}<br/>`;
-        });
+      if (d.isClass) {
+        tooltipHtml += `Type: ${d.type === 'abstract' ? 'Abstract Class' : 'Class'}<br/>`;
+        
+        const outgoing = links.filter(r => r.source.id === d.id && r.style === 'property');
+        const incoming = links.filter(r => r.target.id === d.id && r.style === 'property');
+        
+        if (outgoing.length > 0) {
+          tooltipHtml += `<br/><em>Properties:</em><br/>`;
+          outgoing.forEach(r => {
+            tooltipHtml += `→ ${r.label}<br/>`;
+          });
+        }
+        
+        if (d.type !== 'abstract') {
+          tooltipHtml += `<br/><em>Click to expand/collapse instances</em>`;
+        }
+      } else {
+        tooltipHtml += `Type: Instance of ${d.parentClass}<br/>`;
       }
       
       tooltip.html(tooltipHtml)
@@ -219,14 +343,14 @@ const OntologyDiagram = () => {
       
       d3.select(event.currentTarget).select('rect')
         .attr('stroke', '#fbbf24')
-        .attr('stroke-width', 5);
+        .attr('stroke-width', d => d.isClass ? 5 : 3);
     })
-    .on('mouseout', (event) => {
+    .on('mouseout', (event, d) => {
       tooltip.transition().duration(500).style('opacity', 0);
       
       d3.select(event.currentTarget).select('rect')
         .attr('stroke', '#fff')
-        .attr('stroke-width', 3);
+        .attr('stroke-width', d => d.isClass ? 3 : 2);
     });
 
     // Update positions on simulation tick
@@ -306,7 +430,10 @@ const OntologyDiagram = () => {
       simulation.stop();
       tooltip.remove();
     };
-  }, []);
+  }, [data, expandedNodes]);
+
+  if (loading) return <div className="loading">Loading ontology data...</div>;
+  if (error) return <div className="error">Error loading data: {error.message}</div>;
 
   return (
     <div className="ontology-page">
@@ -369,6 +496,7 @@ const OntologyDiagram = () => {
               <p>🔍 Scroll to zoom</p>
               <p>✋ Drag background to pan</p>
               <p>💡 Hover for details</p>
+              <p>🎯 <strong>Click classes</strong> to expand/collapse instances</p>
             </div>
           </div>
         </div>
