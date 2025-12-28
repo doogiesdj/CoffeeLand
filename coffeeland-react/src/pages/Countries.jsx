@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { MapPin, Coffee as CoffeeIcon, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Coffee as CoffeeIcon, Store, X } from 'lucide-react';
 import { useRDFData } from '../hooks/useRDFData';
 import '../styles/EntityPage.css';
 
 const Countries = () => {
   const { data, loading, error } = useRDFData();
+  const navigate = useNavigate();
   const [selectedBrand, setSelectedBrand] = useState(null);
   
   if (loading) return <div className="loading">Loading countries...</div>;
@@ -12,15 +14,39 @@ const Countries = () => {
 
   const countries = data?.countries || [];
   const allBrands = data?.brands || [];
+  const allChains = data?.chains || [];
+  const allCities = data?.cities || [];
 
   // Find full brand details
   const getBrandDetails = (brandName) => {
     return allBrands.find(brand => brand.name === brandName);
   };
 
+  // Get chains operating in this country
+  const getChainsInCountry = (countryName) => {
+    // Find cities in this country
+    const citiesInCountry = allCities.filter(city => 
+      city.isLocatedIn && city.isLocatedIn.some(loc => loc.name === countryName)
+    );
+    
+    const cityNames = citiesInCountry.map(city => city.name);
+    
+    // Find chains that operate in these cities
+    const chainsInCountry = allChains.filter(chain => 
+      chain.operatesIn && chain.operatesIn.some(city => cityNames.includes(city.name))
+    );
+    
+    return chainsInCountry;
+  };
+
   const handleBrandClick = (brandName) => {
     const brandDetails = getBrandDetails(brandName);
     setSelectedBrand(brandDetails);
+  };
+
+  const handleChainClick = (chainName) => {
+    // Navigate to Chains page with the chain highlighted
+    navigate(`/chains?highlight=${encodeURIComponent(chainName)}`);
   };
 
   const closeModal = () => {
@@ -64,6 +90,27 @@ const Countries = () => {
                 </div>
               </div>
             )}
+            
+            {(() => {
+              const chains = getChainsInCountry(country.name);
+              return chains.length > 0 && (
+                <div className="card-section">
+                  <h4><Store size={16} /> Coffee Chains</h4>
+                  <div className="tag-list">
+                    {chains.map((chain, i) => (
+                      <span 
+                        key={i} 
+                        className="tag tag-chain tag-clickable"
+                        onClick={() => handleChainClick(chain.name)}
+                        title="Click to view chain details"
+                      >
+                        {chain.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
             
             {country.hasMainCapital && (
               <div className="card-section">

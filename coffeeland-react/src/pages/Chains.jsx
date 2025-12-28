@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Users, MapPin, X, Store, Globe, TrendingUp } from 'lucide-react';
 import { useRDFData } from '../hooks/useRDFData';
 import '../styles/EntityPage.css';
@@ -6,6 +7,9 @@ import '../styles/EntityPage.css';
 const Chains = () => {
   const { data, loading, error } = useRDFData();
   const [selectedChain, setSelectedChain] = useState(null);
+  const [searchParams] = useSearchParams();
+  const highlightedChain = searchParams.get('highlight');
+  const chainRefs = useRef({});
   
   if (loading) return <div className="loading">Loading chains...</div>;
   if (error) return <div className="error">Error loading data: {error.message}</div>;
@@ -243,6 +247,18 @@ const Chains = () => {
     };
   };
 
+  // Scroll to and highlight the chain when URL parameter is present
+  useEffect(() => {
+    if (highlightedChain && chainRefs.current[highlightedChain]) {
+      setTimeout(() => {
+        chainRefs.current[highlightedChain]?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    }
+  }, [highlightedChain, data]);
+
   return (
     <div className="entity-page">
       <div className="page-header">
@@ -256,13 +272,16 @@ const Chains = () => {
       </div>
 
       <div className="entity-grid">
-        {chains.map((chain, index) => (
-          <div 
-            key={index} 
-            className="entity-card chain-card clickable-card"
-            onClick={() => handleChainClick(chain)}
-            title="Click for details"
-          >
+        {chains.map((chain, index) => {
+          const isHighlighted = highlightedChain === chain.name;
+          return (
+            <div 
+              key={index}
+              ref={(el) => (chainRefs.current[chain.name] = el)}
+              className={`entity-card chain-card clickable-card ${isHighlighted ? 'highlighted' : ''}`}
+              onClick={() => handleChainClick(chain)}
+              title="Click for details"
+            >
             <div className="card-header">
               <Users className="card-icon" />
               <h3>{chain.name}</h3>
@@ -290,7 +309,8 @@ const Chains = () => {
               </div>
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {chains.length === 0 && (

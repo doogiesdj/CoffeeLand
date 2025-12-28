@@ -158,6 +158,35 @@
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+.tag-chain {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+  font-weight: 600;
+}
+
+.tag-chain:hover {
+  box-shadow: 0 4px 12px rgba(67, 233, 123, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Highlighted card styles */
+.entity-card.highlighted {
+  border-left-width: 6px;
+  border-left-color: #fbbf24;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 40px rgba(251, 191, 36, 0.5);
+  }
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
