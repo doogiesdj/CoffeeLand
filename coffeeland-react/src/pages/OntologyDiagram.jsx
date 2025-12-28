@@ -23,22 +23,29 @@ const OntologyDiagram = () => {
 
     console.log('Ontology container dimensions:', width, height);
 
-    // Define ontology classes as nodes (expanded with new classes)
+    // Define ontology classes as nodes (from RDF structure)
     const baseNodes = [
+      // Top-level classes
       { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', isClass: true },
+      { id: 'Certification', label: 'Certification', type: 'class', color: '#84cc16', isClass: true },
+      
+      // Location hierarchy
       { id: 'Country', label: 'Country', type: 'class', color: '#10b981', isClass: true },
       { id: 'City', label: 'City', type: 'class', color: '#14b8a6', isClass: true },
       { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', isClass: true },
-      { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', isClass: true },
+      
+      // Organization hierarchy
       { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', isClass: true },
       { id: 'Broker', label: 'Broker', type: 'abstract', color: '#8b5cf6', isClass: true },
       { id: 'ExportBroker', label: 'ExportBroker', type: 'class', color: '#a855f7', isClass: true },
       { id: 'ImportBroker', label: 'ImportBroker', type: 'class', color: '#c084fc', isClass: true },
       { id: 'LogisticsProvider', label: 'LogisticsProvider', type: 'class', color: '#d946ef', isClass: true },
-      { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', isClass: true },
+      
+      // Product hierarchy
       { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', isClass: true },
-      { id: 'CoffeeVariety', label: 'CoffeeVariety', type: 'class', color: '#f97316', isClass: true },
-      { id: 'Certification', label: 'Certification', type: 'class', color: '#84cc16', isClass: true }
+      { id: 'CoffeeVariety', label: 'CoffeeVariety', type: 'class', color: '#f97316', isClass: true }
     ];
 
     // Function to get instances for a class
@@ -125,29 +132,36 @@ const OntologyDiagram = () => {
     });
 
     const baseLinks = [
-      // Inheritance (subClassOf)
+      // Inheritance (subClassOf) - From RDF analysis
+      // Location hierarchy
       { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'City', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'Capital', target: 'City', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Capital', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
+      
+      // Organization hierarchy
       { source: 'CoffeeChain', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'Broker', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'ExportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
       { source: 'ImportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'LogisticsProvider', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'LogisticsProvider', target: 'Broker', type: 'subClassOf', label: 'subClassOf' }, // FIXED!
+      
+      // Product hierarchy
       { source: 'CoffeeBrand', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
       { source: 'CoffeeVariety', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
       
-      // Object Properties
+      // Object Properties (key relationships)
       { source: 'Country', target: 'CoffeeBrand', type: 'produces', label: 'produces', style: 'property' },
       { source: 'City', target: 'Country', type: 'isLocatedIn', label: 'isLocatedIn', style: 'property' },
       { source: 'CoffeeChain', target: 'City', type: 'operatesIn', label: 'operatesIn', style: 'property' },
-      { source: 'ExportBroker', target: 'CoffeeChain', type: 'suppliesTo', label: 'suppliesTo', style: 'property' },
-      { source: 'CoffeeChain', target: 'ImportBroker', type: 'buysFrom', label: 'buysFrom', style: 'property' },
+      { source: 'Broker', target: 'CoffeeChain', type: 'suppliesTo', label: 'suppliesTo', style: 'property' },
+      { source: 'CoffeeChain', target: 'Broker', type: 'buysFrom', label: 'buysFrom', style: 'property' },
       { source: 'Country', target: 'Capital', type: 'hasMainCapital', label: 'hasMainCapital', style: 'property' },
       { source: 'CoffeeBrand', target: 'City', type: 'hasOriginIn', label: 'hasOriginIn', style: 'property' },
       { source: 'CoffeeBrand', target: 'Country', type: 'isConsumedIn', label: 'isConsumedIn', style: 'property' },
       { source: 'CoffeeBrand', target: 'CoffeeVariety', type: 'usesVariety', label: 'usesVariety', style: 'property' },
-      { source: 'CoffeeBrand', target: 'Certification', type: 'hasCertification', label: 'hasCertification', style: 'property' }
+      { source: 'Certification', target: 'CoffeeBrand', type: 'verifies', label: 'verifies', style: 'property' },
+      { source: 'CoffeeVariety', target: 'Country', type: 'isMainlyCultivatedIn', label: 'isMainlyCultivatedIn', style: 'property' },
+      { source: 'ExportBroker', target: 'Country', type: 'isHeadquarteredIn', label: 'isHeadquarteredIn', style: 'property' }
     ];
 
     const links = [...baseLinks, ...instanceLinks];
@@ -458,8 +472,8 @@ const OntologyDiagram = () => {
     <div className="ontology-page">
       {/* Full-width header */}
       <div className="page-header">
-        <h1>Ontology Class Diagram</h1>
-        <p>Interactive VOWL-style visualization like Protégé OntoGraf</p>
+        <h1>Coffee Supply Chain Ontology</h1>
+        <p>Interactive class diagram with 14 classes and dynamic instance expansion</p>
       </div>
 
       {/* Two-column layout: sidebar + diagram */}
