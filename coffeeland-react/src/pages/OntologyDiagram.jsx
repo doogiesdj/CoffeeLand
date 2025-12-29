@@ -23,34 +23,55 @@ const OntologyDiagram = () => {
 
     console.log('Ontology container dimensions:', width, height);
 
-    // Define ontology classes as nodes (from RDF structure)
+    // Define ontology classes as nodes (from RDF structure) - Complete 30-class hierarchy
     const baseNodes = [
-      // Top-level classes
+      // Top-level abstract classes (4)
       { id: 'Location', label: 'Location', type: 'abstract', color: '#94a3b8', isClass: true },
       { id: 'Organization', label: 'Organization', type: 'abstract', color: '#94a3b8', isClass: true },
       { id: 'Product', label: 'Product', type: 'abstract', color: '#94a3b8', isClass: true },
-      { id: 'Certification', label: 'Certification', type: 'class', color: '#84cc16', isClass: true },
+      { id: 'QualityAndProcessing', label: 'Quality & Processing', type: 'abstract', color: '#8b5cf6', isClass: true },
+      { id: 'MarketAndEconomics', label: 'Market & Economics', type: 'abstract', color: '#f59e0b', isClass: true },
       
-      // Location hierarchy
+      // Location hierarchy (7 classes)
       { id: 'Country', label: 'Country', type: 'class', color: '#10b981', isClass: true },
       { id: 'City', label: 'City', type: 'class', color: '#14b8a6', isClass: true },
       { id: 'Capital', label: 'Capital', type: 'class', color: '#06b6d4', isClass: true },
+      { id: 'Farm', label: 'Farm', type: 'class', color: '#059669', isClass: true },
+      { id: 'Port', label: 'Port', type: 'class', color: '#0891b2', isClass: true },
+      { id: 'Warehouse', label: 'Warehouse', type: 'class', color: '#64748b', isClass: true },
       
-      // Organization hierarchy
+      // Organization hierarchy (10 classes)
       { id: 'CoffeeChain', label: 'CoffeeChain', type: 'class', color: '#3b82f6', isClass: true },
       { id: 'Broker', label: 'Broker', type: 'abstract', color: '#8b5cf6', isClass: true },
       { id: 'ExportBroker', label: 'ExportBroker', type: 'class', color: '#a855f7', isClass: true },
       { id: 'ImportBroker', label: 'ImportBroker', type: 'class', color: '#c084fc', isClass: true },
       { id: 'LogisticsProvider', label: 'LogisticsProvider', type: 'class', color: '#d946ef', isClass: true },
+      { id: 'Cooperative', label: 'Cooperative', type: 'class', color: '#14b8a6', isClass: true },
+      { id: 'Farmer', label: 'Farmer', type: 'class', color: '#10b981', isClass: true },
+      { id: 'Roaster', label: 'Roaster', type: 'class', color: '#f97316', isClass: true },
+      { id: 'ProcessingMill', label: 'ProcessingMill', type: 'class', color: '#7c3aed', isClass: true },
+      { id: 'Retailer', label: 'Retailer', type: 'class', color: '#2563eb', isClass: true },
       
-      // Product hierarchy
+      // Product hierarchy (2 classes)
       { id: 'CoffeeBrand', label: 'CoffeeBrand', type: 'class', color: '#f59e0b', isClass: true },
-      { id: 'CoffeeVariety', label: 'CoffeeVariety', type: 'class', color: '#f97316', isClass: true }
+      { id: 'CoffeeVariety', label: 'CoffeeVariety', type: 'class', color: '#f97316', isClass: true },
+      
+      // Quality & Processing (3 classes)
+      { id: 'Certification', label: 'Certification', type: 'class', color: '#84cc16', isClass: true },
+      { id: 'ProcessingMethod', label: 'ProcessingMethod', type: 'class', color: '#a855f7', isClass: true },
+      { id: 'QualityGrade', label: 'QualityGrade', type: 'class', color: '#c084fc', isClass: true },
+      
+      // Market & Economics (4 classes)
+      { id: 'Consumer', label: 'Consumer', type: 'class', color: '#eab308', isClass: true },
+      { id: 'Price', label: 'Price', type: 'class', color: '#f59e0b', isClass: true },
+      { id: 'TradeAgreement', label: 'TradeAgreement', type: 'class', color: '#d97706', isClass: true },
+      { id: 'Season', label: 'Season/Harvest', type: 'class', color: '#ca8a04', isClass: true }
     ];
 
     // Function to get instances for a class
     const getInstancesForClass = (classId) => {
       switch(classId) {
+        // Location entities
         case 'Country':
           return (data.countries || []).map(c => ({
             id: `instance_${c.name}`,
@@ -69,6 +90,44 @@ const OntologyDiagram = () => {
             parentClass: 'City',
             isClass: false
           }));
+        case 'Capital':
+          return (data.capitals || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#06b6d4',
+            parentClass: 'Capital',
+            isClass: false
+          }));
+        case 'Farm':
+          return (data.farms || []).map(f => ({
+            id: `instance_${f.name}`,
+            label: f.name,
+            type: 'instance',
+            color: '#059669',
+            parentClass: 'Farm',
+            isClass: false
+          }));
+        case 'Port':
+          return (data.ports || []).map(p => ({
+            id: `instance_${p.name}`,
+            label: p.name,
+            type: 'instance',
+            color: '#0891b2',
+            parentClass: 'Port',
+            isClass: false
+          }));
+        case 'Warehouse':
+          return (data.warehouses || []).map(w => ({
+            id: `instance_${w.name}`,
+            label: w.name,
+            type: 'instance',
+            color: '#64748b',
+            parentClass: 'Warehouse',
+            isClass: false
+          }));
+          
+        // Organization entities
         case 'CoffeeChain':
           return (data.chains || []).map(c => ({
             id: `instance_${c.name}`,
@@ -78,25 +137,64 @@ const OntologyDiagram = () => {
             parentClass: 'CoffeeChain',
             isClass: false
           }));
+        case 'Cooperative':
+          return (data.cooperatives || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#14b8a6',
+            parentClass: 'Cooperative',
+            isClass: false
+          }));
+        case 'Farmer':
+          return (data.farmers || []).map(f => ({
+            id: `instance_${f.name}`,
+            label: f.name,
+            type: 'instance',
+            color: '#10b981',
+            parentClass: 'Farmer',
+            isClass: false
+          }));
+        case 'Roaster':
+          return (data.roasters || []).map(r => ({
+            id: `instance_${r.name}`,
+            label: r.name,
+            type: 'instance',
+            color: '#f97316',
+            parentClass: 'Roaster',
+            isClass: false
+          }));
+        case 'ProcessingMill':
+          return (data.processingMills || []).map(p => ({
+            id: `instance_${p.name}`,
+            label: p.name,
+            type: 'instance',
+            color: '#7c3aed',
+            parentClass: 'ProcessingMill',
+            isClass: false
+          }));
+        case 'Retailer':
+          return (data.retailers || []).map(r => ({
+            id: `instance_${r.name}`,
+            label: r.name,
+            type: 'instance',
+            color: '#2563eb',
+            parentClass: 'Retailer',
+            isClass: false
+          }));
         case 'ExportBroker':
         case 'ImportBroker':
-          return (data.brokers || []).filter(b => {
-            // Filter by broker type if available in data
-            return true; // Show all brokers for now
-          }).map(b => ({
+        case 'LogisticsProvider':
+          return (data.brokers || []).map(b => ({
             id: `instance_${b.name}_${classId}`,
             label: b.name,
             type: 'instance',
-            color: classId === 'ExportBroker' ? '#a855f7' : '#c084fc',
+            color: classId === 'ExportBroker' ? '#a855f7' : (classId === 'ImportBroker' ? '#c084fc' : '#d946ef'),
             parentClass: classId,
             isClass: false
           }));
-        case 'CoffeeVariety':
-          // Get varieties from data if available
-          return [];
-        case 'Certification':
-          // Get certifications from data if available
-          return [];
+          
+        // Product entities
         case 'CoffeeBrand':
           return (data.brands || []).map(b => ({
             id: `instance_${b.name}`,
@@ -106,6 +204,83 @@ const OntologyDiagram = () => {
             parentClass: 'CoffeeBrand',
             isClass: false
           }));
+        case 'CoffeeVariety':
+          return (data.varieties || []).map(v => ({
+            id: `instance_${v.name}`,
+            label: v.name,
+            type: 'instance',
+            color: '#f97316',
+            parentClass: 'CoffeeVariety',
+            isClass: false
+          }));
+          
+        // Quality & Processing
+        case 'Certification':
+          return (data.certifications || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#84cc16',
+            parentClass: 'Certification',
+            isClass: false
+          }));
+        case 'ProcessingMethod':
+          return (data.processingMethods || []).map(p => ({
+            id: `instance_${p.name}`,
+            label: p.name,
+            type: 'instance',
+            color: '#a855f7',
+            parentClass: 'ProcessingMethod',
+            isClass: false
+          }));
+        case 'QualityGrade':
+          return (data.qualityGrades || []).map(q => ({
+            id: `instance_${q.name}`,
+            label: q.name,
+            type: 'instance',
+            color: '#c084fc',
+            parentClass: 'QualityGrade',
+            isClass: false
+          }));
+          
+        // Market & Economics
+        case 'Consumer':
+          return (data.consumers || []).map(c => ({
+            id: `instance_${c.name}`,
+            label: c.name,
+            type: 'instance',
+            color: '#eab308',
+            parentClass: 'Consumer',
+            isClass: false
+          }));
+        case 'Price':
+          return (data.prices || []).map(p => ({
+            id: `instance_${p.name}`,
+            label: p.name,
+            type: 'instance',
+            color: '#f59e0b',
+            parentClass: 'Price',
+            isClass: false
+          }));
+        case 'TradeAgreement':
+          return (data.tradeAgreements || []).map(t => ({
+            id: `instance_${t.name}`,
+            label: t.name,
+            type: 'instance',
+            color: '#d97706',
+            parentClass: 'TradeAgreement',
+            isClass: false
+          }));
+        case 'Season':
+          return (data.seasons || []).map(s => ({
+            id: `instance_${s.name}`,
+            label: s.name,
+            type: 'instance',
+            color: '#ca8a04',
+            parentClass: 'Season',
+            isClass: false
+          }));
+          
         default:
           return [];
       }
@@ -132,24 +307,44 @@ const OntologyDiagram = () => {
     });
 
     const baseLinks = [
-      // Inheritance (subClassOf) - From RDF analysis
-      // Location hierarchy
+      // Inheritance (subClassOf) - Complete hierarchy from RDF
+      
+      // Location hierarchy (no parent = top-level)
       { source: 'Country', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
       { source: 'City', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
       { source: 'Capital', target: 'Country', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Farm', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Port', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Warehouse', target: 'Location', type: 'subClassOf', label: 'subClassOf' },
       
       // Organization hierarchy
       { source: 'CoffeeChain', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'Broker', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       { source: 'ExportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
       { source: 'ImportBroker', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
-      { source: 'LogisticsProvider', target: 'Broker', type: 'subClassOf', label: 'subClassOf' }, // FIXED!
+      { source: 'LogisticsProvider', target: 'Broker', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Cooperative', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Farmer', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Roaster', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'ProcessingMill', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Retailer', target: 'Organization', type: 'subClassOf', label: 'subClassOf' },
       
       // Product hierarchy
       { source: 'CoffeeBrand', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
       { source: 'CoffeeVariety', target: 'Product', type: 'subClassOf', label: 'subClassOf' },
       
-      // Object Properties (key relationships)
+      // Quality & Processing hierarchy
+      { source: 'Certification', target: 'QualityAndProcessing', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'ProcessingMethod', target: 'QualityAndProcessing', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'QualityGrade', target: 'QualityAndProcessing', type: 'subClassOf', label: 'subClassOf' },
+      
+      // Market & Economics hierarchy
+      { source: 'Consumer', target: 'MarketAndEconomics', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Price', target: 'MarketAndEconomics', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'TradeAgreement', target: 'MarketAndEconomics', type: 'subClassOf', label: 'subClassOf' },
+      { source: 'Season', target: 'MarketAndEconomics', type: 'subClassOf', label: 'subClassOf' },
+      
+      // Object Properties (key relationships from RDF)
       { source: 'Country', target: 'CoffeeBrand', type: 'produces', label: 'produces', style: 'property' },
       { source: 'City', target: 'Country', type: 'isLocatedIn', label: 'isLocatedIn', style: 'property' },
       { source: 'CoffeeChain', target: 'City', type: 'operatesIn', label: 'operatesIn', style: 'property' },
@@ -161,7 +356,17 @@ const OntologyDiagram = () => {
       { source: 'CoffeeBrand', target: 'CoffeeVariety', type: 'usesVariety', label: 'usesVariety', style: 'property' },
       { source: 'Certification', target: 'CoffeeBrand', type: 'verifies', label: 'verifies', style: 'property' },
       { source: 'CoffeeVariety', target: 'Country', type: 'isMainlyCultivatedIn', label: 'isMainlyCultivatedIn', style: 'property' },
-      { source: 'ExportBroker', target: 'Country', type: 'isHeadquarteredIn', label: 'isHeadquarteredIn', style: 'property' }
+      { source: 'ExportBroker', target: 'Country', type: 'isHeadquarteredIn', label: 'isHeadquarteredIn', style: 'property' },
+      { source: 'Farm', target: 'CoffeeVariety', type: 'cultivates', label: 'cultivates', style: 'property' },
+      { source: 'Farmer', target: 'Farm', type: 'owns', label: 'owns', style: 'property' },
+      { source: 'Farmer', target: 'Cooperative', type: 'memberOf', label: 'memberOf', style: 'property' },
+      { source: 'Roaster', target: 'CoffeeBrand', type: 'roasts', label: 'roasts', style: 'property' },
+      { source: 'ProcessingMill', target: 'CoffeeVariety', type: 'processes', label: 'processes', style: 'property' },
+      { source: 'Warehouse', target: 'CoffeeBrand', type: 'stores', label: 'stores', style: 'property' },
+      { source: 'Retailer', target: 'CoffeeBrand', type: 'sells', label: 'sells', style: 'property' },
+      { source: 'Consumer', target: 'CoffeeBrand', type: 'buys', label: 'buys', style: 'property' },
+      { source: 'QualityGrade', target: 'CoffeeBrand', type: 'appliesTo', label: 'appliesTo', style: 'property' },
+      { source: 'ProcessingMethod', target: 'CoffeeVariety', type: 'appliedTo', label: 'appliedTo', style: 'property' }
     ];
 
     const links = [...baseLinks, ...instanceLinks];
@@ -473,7 +678,7 @@ const OntologyDiagram = () => {
       {/* Full-width header */}
       <div className="page-header">
         <h1>Coffee Supply Chain Ontology</h1>
-        <p>Interactive class diagram with 14 classes and dynamic instance expansion</p>
+        <p>Interactive class diagram with 30 classes across 5 categories and dynamic instance expansion</p>
       </div>
 
       {/* Two-column layout: sidebar + diagram */}
@@ -481,24 +686,82 @@ const OntologyDiagram = () => {
         {/* Left sidebar - narrow */}
         <div className="sidebar-panel">
           <div className="legend-card">
-            <h3>Classes (14 total)</h3>
+            <h3>Classes (30 total)</h3>
             <div className="legend-items">
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#94a3b8', border: '2px dashed #475569' }}></div>
                 <span>Abstract Class</span>
               </div>
+              
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginTop: '0.75rem', color: '#374151' }}>Location (7)</h4>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
-                <span>Country/City</span>
+                <span>Country</span>
               </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#14b8a6' }}></div>
+                <span>City</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#06b6d4' }}></div>
+                <span>Capital</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#059669' }}></div>
+                <span>Farm</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#0891b2' }}></div>
+                <span>Port</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#64748b' }}></div>
+                <span>Warehouse</span>
+              </div>
+              
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginTop: '0.75rem', color: '#374151' }}>Organization (10)</h4>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#3b82f6' }}></div>
                 <span>CoffeeChain</span>
               </div>
               <div className="legend-item">
-                <div className="legend-box" style={{ backgroundColor: '#8b5cf6' }}></div>
-                <span>Broker</span>
+                <div className="legend-box" style={{ backgroundColor: '#14b8a6' }}></div>
+                <span>Cooperative</span>
               </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#10b981' }}></div>
+                <span>Farmer</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#f97316' }}></div>
+                <span>Roaster</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#2563eb' }}></div>
+                <span>Retailer</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#7c3aed' }}></div>
+                <span>ProcessingMill</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#8b5cf6', border: '2px dashed #7c3aed' }}></div>
+                <span>Broker (Abstract)</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#a855f7' }}></div>
+                <span>ExportBroker</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#c084fc' }}></div>
+                <span>ImportBroker</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#d946ef' }}></div>
+                <span>LogisticsProvider</span>
+              </div>
+              
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginTop: '0.75rem', color: '#374151' }}>Product (2)</h4>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
                 <span>CoffeeBrand</span>
@@ -507,9 +770,37 @@ const OntologyDiagram = () => {
                 <div className="legend-box" style={{ backgroundColor: '#f97316' }}></div>
                 <span>CoffeeVariety</span>
               </div>
+              
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginTop: '0.75rem', color: '#374151' }}>Quality & Processing (3)</h4>
               <div className="legend-item">
                 <div className="legend-box" style={{ backgroundColor: '#84cc16' }}></div>
                 <span>Certification</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#a855f7' }}></div>
+                <span>ProcessingMethod</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#c084fc' }}></div>
+                <span>QualityGrade</span>
+              </div>
+              
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginTop: '0.75rem', color: '#374151' }}>Market & Economics (4)</h4>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#eab308' }}></div>
+                <span>Consumer</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#f59e0b' }}></div>
+                <span>Price</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#d97706' }}></div>
+                <span>TradeAgreement</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-box" style={{ backgroundColor: '#ca8a04' }}></div>
+                <span>Season/Harvest</span>
               </div>
             </div>
           </div>
@@ -530,6 +821,12 @@ const OntologyDiagram = () => {
                   <polygon points="40,10 35,7 35,13" fill="none" stroke="#3b82f6" strokeWidth="2"/>
                 </svg>
                 <span>Property</span>
+              </div>
+              <div className="legend-item">
+                <svg width="50" height="20">
+                  <line x1="0" y1="10" x2="40" y2="10" stroke="#10b981" strokeWidth="1.5" strokeDasharray="3,3"/>
+                </svg>
+                <span>instanceOf</span>
               </div>
             </div>
           </div>

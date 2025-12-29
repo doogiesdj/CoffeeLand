@@ -21,31 +21,82 @@ export const parseRDFData = async (rdfUrl) => {
     const ns = $rdf.Namespace(ontologyNS);
     
     // Extract all entities
+    
+    // Location hierarchy
     const countries = extractEntitiesByType(store, ns('Country'));
     const cities = extractEntitiesByType(store, ns('City'));
-    const brands = extractEntitiesByType(store, ns('CoffeeBrand'));
-    const chains = extractEntitiesByType(store, ns('CoffeeChain'));
+    const capitals = extractEntitiesByType(store, ns('Capital'));
+    const farms = extractEntitiesByType(store, ns('Farm'));
+    const ports = extractEntitiesByType(store, ns('Port'));
+    const warehouses = extractEntitiesByType(store, ns('Warehouse'));
     
-    // Extract brokers (including ExportBroker and ImportBroker subtypes)
+    // Organization hierarchy
+    const chains = extractEntitiesByType(store, ns('CoffeeChain'));
+    const cooperatives = extractEntitiesByType(store, ns('Cooperative'));
+    const farmers = extractEntitiesByType(store, ns('Farmer'));
+    const roasters = extractEntitiesByType(store, ns('Roaster'));
+    const retailers = extractEntitiesByType(store, ns('Retailer'));
+    const processingMills = extractEntitiesByType(store, ns('ProcessingMill'));
+    
+    // Brokers (including subtypes)
     const brokers = [
       ...extractEntitiesByType(store, ns('Broker')),
       ...extractEntitiesByType(store, ns('ExportBroker')),
-      ...extractEntitiesByType(store, ns('ImportBroker'))
+      ...extractEntitiesByType(store, ns('ImportBroker')),
+      ...extractEntitiesByType(store, ns('LogisticsProvider'))
     ];
     
-    // Extract coffee varieties
+    // Product hierarchy
+    const brands = extractEntitiesByType(store, ns('CoffeeBrand'));
     const varieties = extractEntitiesByType(store, ns('CoffeeVariety'));
+    
+    // Quality & Processing
+    const certifications = extractEntitiesByType(store, ns('Certification'));
+    const processingMethods = extractEntitiesByType(store, ns('ProcessingMethod'));
+    const qualityGrades = extractEntitiesByType(store, ns('QualityGrade'));
+    
+    // Market & Economics
+    const consumers = extractEntitiesByType(store, ns('Consumer'));
+    const prices = extractEntitiesByType(store, ns('Price'));
+    const tradeAgreements = extractEntitiesByType(store, ns('TradeAgreement'));
+    const seasons = extractEntitiesByType(store, ns('Season/Harvest'));
     
     // Extract relationships
     const relationships = extractRelationships(store, ontologyNS);
     
     return {
+      // Location
       countries,
       cities,
-      brands,
+      capitals,
+      farms,
+      ports,
+      warehouses,
+      
+      // Organization
       chains,
+      cooperatives,
+      farmers,
+      roasters,
+      retailers,
+      processingMills,
       brokers,
+      
+      // Product
+      brands,
       varieties,
+      
+      // Quality & Processing
+      certifications,
+      processingMethods,
+      qualityGrades,
+      
+      // Market & Economics
+      consumers,
+      prices,
+      tradeAgreements,
+      seasons,
+      
       relationships,
       store
     };

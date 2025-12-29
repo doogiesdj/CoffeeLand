@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Coffee, MapPin, Store, Users, Search, X } from 'lucide-react';
+import { Coffee, MapPin, Store, Users, Search, X, Sprout, Star, Truck, DollarSign, Factory, Warehouse } from 'lucide-react';
 import { useRDFData } from '../hooks/useRDFData';
 import '../styles/Home.css';
 
@@ -12,63 +12,177 @@ const Home = () => {
 
   const stats = [
     {
-      title: 'Total Countries',
-      value: data?.countries?.length || 0,
-      icon: MapPin,
+      title: 'Supply Chain Entities',
+      value: (data?.countries?.length || 0) + (data?.farms?.length || 0) + (data?.farmers?.length || 0) + (data?.cooperatives?.length || 0),
+      icon: Sprout,
       gradient: 'primary'
     },
     {
-      title: 'Coffee Brands',
-      value: data?.brands?.length || 0,
-      icon: Coffee,
+      title: 'Organizations',
+      value: (data?.chains?.length || 0) + (data?.roasters?.length || 0) + (data?.brokers?.length || 0) + (data?.retailers?.length || 0) + (data?.processingMills?.length || 0),
+      icon: Store,
       gradient: 'secondary'
     },
     {
-      title: 'Coffee Chains',
-      value: data?.chains?.length || 0,
-      icon: Store,
+      title: 'Products',
+      value: (data?.brands?.length || 0) + (data?.varieties?.length || 0),
+      icon: Coffee,
       gradient: 'success'
     },
     {
-      title: 'Brokers',
-      value: data?.brokers?.length || 0,
-      icon: Users,
+      title: 'Quality & Logistics',
+      value: (data?.certifications?.length || 0) + (data?.warehouses?.length || 0) + (data?.ports?.length || 0),
+      icon: Star,
       gradient: 'warning'
     }
   ];
 
   const projects = [
+    // Core Supply Chain
     {
       name: 'Coffee Producing Countries',
       count: data?.countries?.length || 0,
       icon: MapPin,
       color: 'red',
       data: data?.countries || [],
-      type: 'countries'
+      type: 'countries',
+      category: 'Supply Chain'
     },
     {
-      name: 'Premium Coffee Brands',
-      count: data?.brands?.length || 0,
-      icon: Coffee,
-      color: 'blue',
-      data: data?.brands || [],
-      type: 'brands'
+      name: 'Farms',
+      count: data?.farms?.length || 0,
+      icon: Sprout,
+      color: 'green',
+      data: data?.farms || [],
+      type: 'farms',
+      category: 'Supply Chain'
     },
+    {
+      name: 'Farmers',
+      count: data?.farmers?.length || 0,
+      icon: Users,
+      color: 'emerald',
+      data: data?.farmers || [],
+      type: 'farmers',
+      category: 'Supply Chain'
+    },
+    {
+      name: 'Cooperatives',
+      count: data?.cooperatives?.length || 0,
+      icon: Users,
+      color: 'teal',
+      data: data?.cooperatives || [],
+      type: 'cooperatives',
+      category: 'Supply Chain'
+    },
+    
+    // Organizations
     {
       name: 'Global Coffee Chains',
       count: data?.chains?.length || 0,
       icon: Store,
-      color: 'green',
+      color: 'blue',
       data: data?.chains || [],
-      type: 'chains'
+      type: 'chains',
+      category: 'Organization'
+    },
+    {
+      name: 'Roasters',
+      count: data?.roasters?.length || 0,
+      icon: Factory,
+      color: 'orange',
+      data: data?.roasters || [],
+      type: 'roasters',
+      category: 'Organization'
     },
     {
       name: 'Supply Chain Brokers',
       count: data?.brokers?.length || 0,
       icon: Users,
-      color: 'orange',
+      color: 'purple',
       data: data?.brokers || [],
-      type: 'brokers'
+      type: 'brokers',
+      category: 'Organization'
+    },
+    {
+      name: 'Retailers',
+      count: data?.retailers?.length || 0,
+      icon: Store,
+      color: 'indigo',
+      data: data?.retailers || [],
+      type: 'retailers',
+      category: 'Organization'
+    },
+    
+    // Products
+    {
+      name: 'Premium Coffee Brands',
+      count: data?.brands?.length || 0,
+      icon: Coffee,
+      color: 'brown',
+      data: data?.brands || [],
+      type: 'brands',
+      category: 'Product'
+    },
+    {
+      name: 'Coffee Varieties',
+      count: data?.varieties?.length || 0,
+      icon: Coffee,
+      color: 'amber',
+      data: data?.varieties || [],
+      type: 'varieties',
+      category: 'Product'
+    },
+    
+    // Quality & Processing
+    {
+      name: 'Processing Mills',
+      count: data?.processingMills?.length || 0,
+      icon: Factory,
+      color: 'violet',
+      data: data?.processingMills || [],
+      type: 'processingMills',
+      category: 'Quality & Processing'
+    },
+    {
+      name: 'Certifications',
+      count: data?.certifications?.length || 0,
+      icon: Star,
+      color: 'yellow',
+      data: data?.certifications || [],
+      type: 'certifications',
+      category: 'Quality & Processing'
+    },
+    
+    // Logistics & Distribution
+    {
+      name: 'Warehouses',
+      count: data?.warehouses?.length || 0,
+      icon: Warehouse,
+      color: 'gray',
+      data: data?.warehouses || [],
+      type: 'warehouses',
+      category: 'Logistics'
+    },
+    {
+      name: 'Ports',
+      count: data?.ports?.length || 0,
+      icon: Truck,
+      color: 'cyan',
+      data: data?.ports || [],
+      type: 'ports',
+      category: 'Logistics'
+    },
+    
+    // Market & Economics
+    {
+      name: 'Trade Agreements',
+      count: data?.tradeAgreements?.length || 0,
+      icon: DollarSign,
+      color: 'lime',
+      data: data?.tradeAgreements || [],
+      type: 'tradeAgreements',
+      category: 'Market & Economics'
     }
   ];
 
@@ -256,6 +370,19 @@ const Home = () => {
                       {item.isHeadquarteredIn && item.isHeadquarteredIn.length > 0 && (
                         <p>Headquartered in: {item.isHeadquarteredIn.map(h => h.name || h).join(', ')}</p>
                       )}
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Generic rendering for other types */}
+                {!['countries', 'brands', 'chains', 'brokers'].includes(selectedProject.type) && selectedProject.data.map((item, idx) => (
+                  <div key={idx} className="modal-list-item">
+                    <div className="modal-list-icon">
+                      <selectedProject.icon size={16} />
+                    </div>
+                    <div className="modal-list-content">
+                      <h4>{item.name}</h4>
+                      <p className="modal-item-uri">{item.uri ? item.uri.split('#')[1] : ''}</p>
                     </div>
                   </div>
                 ))}
