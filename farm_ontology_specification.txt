@@ -1,0 +1,171 @@
+
+# COFFEE FARM ONTOLOGY - COMPLETE SPECIFICATION
+
+## 1. Farm Class Definition
+
+**Class Name**: Farm
+**Parent Class**: Location
+**Description**: 커피를 재배하는 농장을 나타내는 클래스
+
+---
+
+## 2. Object Properties (관계 속성)
+
+Farm 클래스는 다음 객체들과 관계를 맺습니다:
+
+1. **cultivates** (재배한다)
+   - Domain: Farm → Range: CoffeeVariety
+   - 설명: 해당 농장에서 재배하는 커피 품종
+   - 카디널리티: 1..*  (하나 이상의 품종 재배 가능)
+
+2. **memberOf** (소속되다)
+   - Domain: Farm → Range: Cooperative
+   - 설명: 농장이 속한 협동조합
+   - 카디널리티: 0..1  (협동조합에 속하지 않을 수도 있음)
+
+3. **isLocatedIn** (위치하다)
+   - Domain: Farm → Range: Country
+   - 설명: 농장이 위치한 국가
+   - 카디널리티: 1  (반드시 하나의 국가에 위치)
+
+4. **hasRegion** (지역을 가지다)
+   - Domain: Farm → Range: Region/City
+   - 설명: 농장이 위치한 구체적 지역
+   - 카디널리티: 1  (반드시 하나의 지역에 위치)
+
+5. **uses** (사용하다)
+   - Domain: Farm → Range: ProcessingMethod
+   - 설명: 농장에서 사용하는 가공 방식
+   - 카디널리티: 1..*  (여러 가공 방식 사용 가능)
+
+6. **hasCertification** (인증을 보유하다)
+   - Domain: Farm → Range: Certification
+   - 설명: 농장이 보유한 인증 (Fair Trade, Organic 등)
+   - 카디널리티: 0..*  (인증이 없을 수도, 여러 개일 수도 있음)
+
+7. **suppliesTo** (공급하다)
+   - Domain: Farm → Range: ProcessingMill
+   - 설명: 농장이 커피를 공급하는 가공소
+   - 카디널리티: 1..*  (하나 이상의 가공소에 공급)
+
+8. **ownedBy** (소유되다)
+   - Domain: Farm → Range: Farmer
+   - 설명: 농장을 소유한 농부/생산자
+   - 카디널리티: 1..*  (개인 또는 공동 소유)
+
+---
+
+## 3. Data Properties (데이터 속성)
+
+### 기본 정보
+- **farmName**: string - 농장 이름
+- **establishedYear**: integer - 설립 연도
+- **ownerName**: string - 소유주 이름
+- **contactEmail**: string - 연락처 이메일
+- **website**: string - 웹사이트 URL
+
+### 지리적 정보
+- **altitudeMin**: integer - 최저 고도 (미터)
+- **altitudeMax**: integer - 최고 고도 (미터)
+- **altitudeRange**: string - 고도 범위 표현
+- **soilType**: string - 토양 유형
+
+### 규모 및 생산
+- **farmSize**: string - 농장 규모 (Small/Medium/Large)
+- **areaInHectares**: float - 면적 (헥타르)
+- **annualProduction**: integer - 연간 생산량 (bags, 60kg 단위)
+- **annualProductionInKg**: integer - 연간 생산량 (킬로그램)
+
+### 재배 정보
+- **primaryVariety**: string - 주요 재배 품종
+- **processingMethod**: string - 주요 가공 방식
+- **harvestSeason**: string - 수확 시즌
+
+### 환경 정보
+- **rainfall**: integer - 연간 강수량 (mm)
+- **temperature**: string - 평균 기온 범위 (°C)
+
+### 인증 정보
+- **hasOrganicCertification**: boolean - 유기농 인증 여부
+- **hasFairTradeCertification**: boolean - 공정무역 인증 여부
+
+---
+
+## 4. Supply Chain Position
+
+Farm은 커피 공급망에서 **시작점**에 위치합니다:
+
+```
+Farm (농장)
+  ↓ cultivates
+CoffeeVariety (품종)
+  ↓ processed by
+ProcessingMill (가공소)
+  ↓ supplied through
+Cooperative (협동조합)
+  ↓ exported by
+ExportBroker (수출 브로커)
+  ↓ ...
+```
+
+---
+
+## 5. Key Relationships Summary
+
+Farm이 관계를 맺는 주요 클래스들:
+
+1. **Country** - 농장 위치 국가
+2. **Region/City** - 농장 위치 지역
+3. **CoffeeVariety** - 재배 품종
+4. **ProcessingMethod** - 가공 방식
+5. **Certification** - 인증
+6. **Cooperative** - 협동조합 소속
+7. **ProcessingMill** - 공급 대상
+8. **Farmer** - 소유주
+
+---
+
+## 6. Example Instance
+
+```turtle
+:Yirgacheffe_Kochere_Farm a :Farm ;
+    :farmName "Yirgacheffe Kochere Farm" ;
+    :isLocatedIn :Ethiopia ;
+    :hasRegion :Yirgacheffe ;
+    :cultivates :Arabica_Heirloom ;
+    :altitudeMin 1800 ;
+    :altitudeMax 2200 ;
+    :farmSize "Medium" ;
+    :annualProduction 150 ;
+    :uses :Washed_Processing ;
+    :hasCertification :Fair_Trade, :Organic ;
+    :memberOf :Cooperative_Yirgacheffe ;
+    :ownedBy :Farmer_Abebe_Bikila .
+```
+
+---
+
+## 7. Dataset Statistics
+
+- **Total Farms**: 24 farms
+- **Countries Covered**: 13 countries
+- **Top Countries**:
+  - Ethiopia: 3 farms
+  - Colombia: 3 farms
+  - Brazil: 3 farms
+- **Total Annual Production**: ~4,870 bags (60kg)
+- **Altitude Range**: 200m - 2,200m
+- **Processing Methods**: Washed, Natural, Honey, Pulped Natural, Giling Basah
+
+---
+
+## 8. Integration with Existing Ontology
+
+Farm 클래스는 기존 CoffeeLand 온톨로지의 다음 요소들과 통합됩니다:
+
+- **Location hierarchy**: Farm은 Location의 서브클래스
+- **Product**: Farm에서 재배한 CoffeeVariety가 CoffeeBrand로 가공됨
+- **Organization**: Farmer, Cooperative, ProcessingMill과 연결
+- **Quality**: Certification, ProcessingMethod와 연결
+- **Market**: 궁극적으로 Consumer까지 이어지는 공급망의 시작점
+

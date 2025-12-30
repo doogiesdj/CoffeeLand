@@ -1,0 +1,25 @@
+Country,Farm_Name,Region,Coffee_Variety,Altitude_Range_meters,Processing_Method,Certifications,Cooperative_Membership,Farm_Size,Annual_Production_bags
+Ethiopia,Yirgacheffe_Kochere_Farm,Yirgacheffe,Arabica_Heirloom,1800-2200,Washed,"Fair Trade, Organic",Cooperative_Yirgacheffe,Medium,150
+Ethiopia,Sidamo_Guji_Farm,Sidamo,Arabica_Heirloom,1700-2100,Natural,Rainforest Alliance,Guji_Cooperative,Large,500
+Ethiopia,Harrar_Estate,Harrar,Arabica_Heirloom,1400-2000,Natural,Organic,Individual_Farmer,Small,50
+Colombia,Huila_El_Paraiso_Farm,Huila,"Caturra, Castillo",1600-1900,"Washed, Honey","Rainforest Alliance, UTZ",Cooperative_Huila,Medium,200
+Colombia,Antioquia_La_Esperanza,Antioquia,"Caturra, Colombia",1500-1800,Washed,Fair Trade,Cooperative_Antioquia,Medium,180
+Colombia,Narino_San_Juan_Farm,Nariño,"Castillo, Caturra",1800-2200,Washed,"Organic, Fair Trade",Cooperative_Narino,Small,80
+Brazil,Minas_Gerais_Fazenda_Sertao,Minas Gerais,"Bourbon, Mundo Novo",900-1200,Pulped Natural,Rainforest Alliance,Individual_Farmer,Large,1000
+Brazil,Sao_Paulo_Fazenda_Ipe,São Paulo,"Catuai, Mundo Novo",800-1100,"Natural, Pulped Natural",UTZ,Individual_Farmer,Large,800
+Brazil,Espirito_Santo_Fazenda_Santa_Rita,Espírito Santo,Conilon (Robusta),200-800,Natural,None,Individual_Farmer,Medium,300
+Vietnam,Dak_Lak_Central_Highlands_Farm,Dak Lak,Robusta,500-800,Natural,None,Cooperative_DakLak,Large,600
+Vietnam,Lam_Dong_Arabica_Farm,Lam Dong,Arabica_Catimor,800-1500,Washed,Rainforest Alliance,Cooperative_LamDong,Medium,250
+Kenya,Nyeri_Gatomboya_Farm,Nyeri,"SL28, SL34",1500-1800,Washed,Fair Trade,Cooperative_Nyeri,Medium,120
+Kenya,Kiambu_Kagumo_Estate,Kiambu,"SL28, Ruiru 11",1600-1900,Washed,Organic,Cooperative_Kiambu,Medium,150
+Costa Rica,Tarrazu_La_Minita_Farm,Tarrazú,"Caturra, Catuai",1200-1700,"Washed, Honey",Rainforest Alliance,Individual_Farmer,Medium,100
+Costa Rica,West_Valley_Helsar_Farm,West Valley,"Caturra, Catuai",1300-1600,Honey,Rainforest Alliance,Individual_Farmer,Small,60
+Guatemala,Antigua_Finca_El_Injerto,Antigua,"Bourbon, Pacamara",1500-1800,Washed,Rainforest Alliance,Individual_Farmer,Medium,180
+Guatemala,Huehuetenango_Finca_Vista_Hermosa,Huehuetenango,"Bourbon, Caturra",1400-2000,Washed,"Organic, Fair Trade",Cooperative_Huehue,Small,90
+Indonesia,Sumatra_Mandheling_Gayo_Farm,Sumatra (Aceh),"Catimor, TimTim",1000-1500,Giling Basah (Wet-hulled),Organic,Cooperative_Gayo,Medium,200
+Indonesia,Java_Ijen_Estate,Java (East),"Typica, S795",900-1400,Washed,Rainforest Alliance,Individual_Farmer,Medium,150
+Honduras,Copan_San_Marcos_Farm,Copán,"Catuai, Lempira",1200-1600,Washed,Fair Trade,Cooperative_Copan,Medium,140
+Peru,Cajamarca_Villa_Rica_Farm,Cajamarca,"Caturra, Typica",1200-1800,Washed,"Organic, Fair Trade",Cooperative_Cajamarca,Medium,110
+Nicaragua,Jinotega_Finca_Mierisch,Jinotega,"Caturra, Catuai",1000-1400,"Washed, Honey",Rainforest Alliance,Individual_Farmer,Medium,130
+Rwanda,Western_Province_Huye_Mountain,Western Province,Bourbon,1700-2200,Washed,"Fair Trade, Organic",Cooperative_Huye,Small,70
+Tanzania,Kilimanjaro_Moshi_Estate,Kilimanjaro,"Kent, Bourbon",1200-1800,Washed,Rainforest Alliance,Cooperative_Kilimanjaro,Medium,160

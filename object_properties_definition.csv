@@ -1,0 +1,11 @@
+Property_Name,Domain_Class,Range_Class,Label,Comment
+isLocatedIn,Farm,Country,is located in,Indicates the country where the farm is located
+isLocatedIn,Cooperative,Country,is located in,Indicates the country where the cooperative is located
+cultivates,Farm,CoffeeVariety,cultivates,The coffee variety grown by the farm
+usesProcessingMethod,Farm,ProcessingMethod,uses processing method,The processing method used by the farm
+memberOf,Farm,Cooperative,member of,The cooperative that the farm is a member of
+hasOriginCountry,CoffeeVariety,Country,has origin country,The country where the coffee variety originated
+produces,Country,CoffeeVariety,produces,Coffee varieties produced by the country
+exports,Country,Country,exports,Countries that this country exports coffee to
+suppliesTo,Farm,Roaster,supplies to,Roasters that the farm supplies coffee to
+sourceFrom,Roaster,Farm,sources from,Farms that the roaster sources coffee from

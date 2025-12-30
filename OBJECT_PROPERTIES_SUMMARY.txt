@@ -1,0 +1,292 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Object Properties 완전 패키지 - CoffeeLand Ontology            ║
+║  9개 Object Properties 자동 생성 완료                            ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 생성 완료
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 제공된 파일 (4개):
+
+1. coffeeland_object_properties.rdf (5.3K)
+   → Protégé에서 바로 Import 가능
+   → 9개 Object Properties 정의 포함
+   
+2. coffeeland_object_properties_MERGE_ONLY.rdf (5K) ⭐
+   → RDF 파일 직접 편집용
+   → </rdf:RDF> 앞에 붙여넣기만 하면 됨
+   
+3. object_properties_definition.csv (1K)
+   → 원본 정의 데이터 (Excel에서 편집 가능)
+   → Property_Name, Domain_Class, Range_Class, Label, Comment
+   
+4. OBJECT_PROPERTIES_SUMMARY.txt (이 파일)
+   → 요약 가이드
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Object Properties 통계
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total unique properties: 9
+Total domain-range pairs: 10
+
+Property                | Domain → Range
+────────────────────────────────────────────────────────────────
+cultivates              | Farm → CoffeeVariety
+exports                 | Country → Country (Transitive)
+hasOriginCountry        | CoffeeVariety → Country
+isLocatedIn             | Farm → Country
+                        | Cooperative → Country
+memberOf                | Farm → Cooperative
+produces                | Country → CoffeeVariety
+sourceFrom              | Roaster → Farm
+suppliesTo              | Farm → Roaster
+usesProcessingMethod    | Farm → ProcessingMethod
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 Property 목록 (상세)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. isLocatedIn (2개 Domain)
+   - Farm → Country
+   - Cooperative → Country
+   의미: 농장/협동조합이 위치한 국가
+
+2. cultivates
+   - Farm → CoffeeVariety
+   의미: 농장에서 재배하는 커피 품종
+
+3. usesProcessingMethod
+   - Farm → ProcessingMethod
+   의미: 농장에서 사용하는 가공 방법
+
+4. memberOf
+   - Farm → Cooperative
+   의미: 농장이 소속된 협동조합
+
+5. hasOriginCountry
+   - CoffeeVariety → Country
+   의미: 커피 품종의 원산지 국가
+
+6. produces
+   - Country → CoffeeVariety
+   의미: 국가에서 생산하는 커피 품종
+
+7. exports (Transitive Property)
+   - Country → Country
+   의미: 국가 간 커피 수출 관계
+   특성: 전이적 (A→B, B→C이면 A→C)
+
+8. suppliesTo
+   - Farm → Roaster
+   의미: 농장이 공급하는 로스터리
+
+9. sourceFrom
+   - Roaster → Farm
+   의미: 로스터리가 원두를 공급받는 농장
+   관계: suppliesTo의 역관계
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Protégé Import 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+방법 1: Active Ontology 탭 (추천!)
+────────────────────────────────────────────────────────────────
+
+1. Protégé > Active Ontology 탭 클릭
+
+2. 우측 패널 "Ontology imports" 섹션
+
+3. [+] 버튼 클릭
+
+4. "Import an ontology contained in a document" 선택
+   → [Browse...] 클릭
+   → coffeeland_object_properties.rdf 선택
+
+5. "Copy ontology to active ontology" 선택
+
+6. [OK] 클릭
+
+7. Object properties 탭에서 9개 확인
+
+
+방법 2: RDF 파일 직접 편집 (가장 확실!)
+────────────────────────────────────────────────────────────────
+
+1. 파일 다운로드:
+   coffeeland_object_properties_MERGE_ONLY.rdf
+
+2. coffeeland.rdf 텍스트 에디터로 열기
+
+3. 파일 맨 끝 </rdf:RDF> 태그 찾기
+
+4. </rdf:RDF> 바로 위에 내용 붙여넣기:
+   
+   ... (기존 Data Properties) ...
+   
+   <!-- CoffeeLand Ontology Object Properties -->
+   <!-- Generated: 2025-12-29 -->
+   
+   (여기에 coffeeland_object_properties_MERGE_ONLY.rdf 내용 붙여넣기)
+   
+   </rdf:RDF>
+
+5. 저장 (Ctrl+S)
+
+6. Protégé > File > Reload (Ctrl+Shift+R)
+
+7. Object properties 탭에서 9개 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 RDF 파일 구조 (예시)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+<!-- isLocatedIn (2개 Domain) -->
+<owl:ObjectProperty rdf:about="...#isLocatedIn">
+  <rdfs:label>is located in</rdfs:label>
+  <rdfs:domain rdf:resource="...#Farm"/>
+  <rdfs:domain rdf:resource="...#Cooperative"/>
+  <rdfs:range rdf:resource="...#Country"/>
+  <rdfs:comment>Indicates the country where the farm is located</rdfs:comment>
+</owl:ObjectProperty>
+
+<!-- cultivates -->
+<owl:ObjectProperty rdf:about="...#cultivates">
+  <rdfs:label>cultivates</rdfs:label>
+  <rdfs:domain rdf:resource="...#Farm"/>
+  <rdfs:range rdf:resource="...#CoffeeVariety"/>
+  <rdfs:comment>The coffee variety grown by the farm</rdfs:comment>
+</owl:ObjectProperty>
+
+<!-- exports (Transitive) -->
+<owl:ObjectProperty rdf:about="...#exports">
+  <rdfs:label>exports</rdfs:label>
+  <rdfs:domain rdf:resource="...#Country"/>
+  <rdfs:range rdf:resource="...#Country"/>
+  <rdfs:comment>Countries that this country exports coffee to</rdfs:comment>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+</owl:ObjectProperty>
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 검증 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Protégé에서:
+  □ Object properties 탭에 9개 Property 표시
+  
+  □ isLocatedIn 클릭
+    → Domains: Farm, Cooperative
+    → Range: Country
+  
+  □ cultivates 클릭
+    → Domain: Farm
+    → Range: CoffeeVariety
+  
+  □ usesProcessingMethod 클릭
+    → Domain: Farm
+    → Range: ProcessingMethod
+  
+  □ memberOf 클릭
+    → Domain: Farm
+    → Range: Cooperative
+  
+  □ hasOriginCountry 클릭
+    → Domain: CoffeeVariety
+    → Range: Country
+  
+  □ exports 클릭
+    → Domain: Country
+    → Range: Country
+    → Characteristics: Transitive
+  
+  □ Reasoner 실행 → 오류 없음
+  
+  □ File > Save
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 다운로드 링크
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Base URL:
+https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/
+
+Files:
+  1. coffeeland_object_properties.rdf (5.3K) - Import용
+  2. coffeeland_object_properties_MERGE_ONLY.rdf (5K) ⭐ 직접 편집용
+  3. object_properties_definition.csv (1K) - 원본 정의
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 전체 온톨로지 구성 (Import 후)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Classes:              5
+Object Properties:    9  ← NEW!
+Data Properties:     35
+Individuals:         71 (Cellfie Import 후)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 완전한 워크플로우
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ Classes 정의 (완료)
+   → 5 classes
+
+2️⃣ Object Properties Import (지금!) ⭐
+   → coffeeland_object_properties.rdf
+   → 9 properties
+
+3️⃣ Data Properties Import (완료)
+   → coffeeland_data_properties.rdf
+   → 35 properties
+
+4️⃣ Individuals Import (다음 단계)
+   → Cellfie로 5개 CSV Import
+   → 71 individuals
+
+5️⃣ 검증 및 배포
+   → Reasoner 실행
+   → React App에 복사
+   → Ontology Diagram 테스트
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💡 추가 Property 제안
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+필요시 추가 가능한 Properties:
+
+Supply Chain:
+  - Farm → ProcessingMill (processedBy)
+  - ProcessingMill → Warehouse (storesAt)
+  - Warehouse → Port (shipsFrom)
+  - Roaster → Retailer (sellsTo)
+  - Retailer → Consumer (servesTo)
+
+Quality:
+  - Farm → Certification (hasCertification)
+  - CoffeeVariety → QualityGrade (hasGrade)
+
+Business:
+  - Cooperative → TradeAgreement (hasAgreement)
+  - Country → Country (tradesWith)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 9개 Object Properties 완성!
+
+다음 단계: Protégé에서 Import → Cellfie로 Individuals 추가
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+Complete Object Properties Package

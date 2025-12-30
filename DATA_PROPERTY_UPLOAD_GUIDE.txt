@@ -1,0 +1,250 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Protégé Data Property 정의 가이드                               ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 방법 1: Protégé GUI에서 수동 추가 (추천 - 학습용)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Data Properties 탭 열기
+  Protégé 상단 탭: Entities > Data properties
+
+Step 2: 새 Data Property 추가
+  좌측 상단: [+] 버튼 클릭
+  → "Create new property" 대화상자
+
+Step 3: Property 이름 입력
+  예: hasName
+  → OK 클릭
+
+Step 4: Domain 설정 (어떤 클래스가 이 속성을 가지는가?)
+  우측 패널: "Domains (intersection)"
+  [+] 클릭 → Farm 선택
+
+Step 5: Range 설정 (속성 값의 데이터 타입)
+  우측 패널: "Ranges (intersection)"
+  [+] 클릭 → xsd:string 선택
+  
+  데이터 타입 옵션:
+    xsd:string    → 문자열 (기본값)
+    xsd:integer   → 정수
+    xsd:float     → 실수
+    xsd:boolean   → 참/거짓
+    xsd:date      → 날짜
+    xsd:dateTime  → 날짜+시간
+
+Step 6: (선택) Annotations 추가
+  우측 패널: "Annotations"
+  [+] 클릭 → rdfs:label → "Farm Name"
+  [+] 클릭 → rdfs:comment → "The name of the farm"
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 방법 2: CSV/Excel에서 일괄 추가 (대량 - Cellfie 사용)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Cellfie는 Individual만 생성하고, Property는 미리 정의되어 있어야 함!
+
+하지만 Property 정의도 자동화하려면:
+→ 방법 3 (RDF 파일 직접 작성) 참조
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ 방법 3: RDF 파일로 일괄 추가 (대량 - 추천!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RDF/XML 형식으로 Data Property 정의 파일 작성 후 Merge
+
+Step 1: RDF 파일 작성 (data_properties.rdf)
+
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#">
+
+  <!-- Farm Data Properties -->
+  
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasName">
+    <rdfs:label>has name</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The name of the farm</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasRegion">
+    <rdfs:label>has region</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The region where the farm is located</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAltitudeRange">
+    <rdfs:label>has altitude range</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The altitude range of the farm (e.g., 1800-2200)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasFarmSize">
+    <rdfs:label>has farm size</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The size category of the farm (Small, Medium, Large)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAnnualProduction">
+    <rdfs:label>has annual production</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Annual production in bags (1 bag = 60 kg)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- Country Data Properties -->
+  
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasContinent">
+    <rdfs:label>has continent</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasCoffeeProductionRank">
+    <rdfs:label>has coffee production rank</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </owl:DatatypeProperty>
+
+  <!-- 나머지 속성들도 같은 패턴으로 추가 -->
+  
+</rdf:RDF>
+
+Step 2: Protégé에서 Merge
+  File > Merge with imported ontology...
+  → data_properties.rdf 선택
+  → Import
+
+Step 3: 검증
+  Data properties 탭에서 추가된 속성 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🐍 방법 4: Python 스크립트로 자동 생성 (대량 - 가장 효율적!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV에서 Data Property 정의를 읽어서 RDF 생성
+
+CSV 형식:
+  Property_Name, Domain_Class, Range_Type, Label, Comment
+
+Python 스크립트로 자동 생성:
+  → 아래 참조
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CoffeeLand 필수 Data Properties (45개)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Farm (9개):
+  hasName               → xsd:string
+  hasRegion             → xsd:string
+  hasAltitudeRange      → xsd:string
+  hasFarmSize           → xsd:string
+  hasAnnualProduction   → xsd:integer
+
+Country (9개):
+  hasName                    → xsd:string
+  hasContinent               → xsd:string
+  hasCoffeeProductionRank    → xsd:integer
+  hasAnnualProductionTons    → xsd:integer
+  hasPrimaryVariety          → xsd:string
+  hasGrowingRegions          → xsd:string
+  hasHarvestSeason           → xsd:string
+  hasExportPercentage        → xsd:integer
+  hasQualityGrade            → xsd:string
+
+CoffeeVariety (9개):
+  hasName                    → xsd:string
+  hasSpecies                 → xsd:string
+  hasFlavorProfile           → xsd:string
+  hasTypicalAltitudeRange    → xsd:string
+  hasCupQualityScore         → xsd:string
+  hasDiseaseResistance       → xsd:string
+  hasYieldPotential          → xsd:string
+  hasBeanSize                → xsd:string
+
+ProcessingMethod (9개):
+  hasName                    → xsd:string
+  hasAlternativeNames        → xsd:string
+  hasDescription             → xsd:string
+  hasTypicalCountries        → xsd:string
+  hasProcessingTimeDays      → xsd:string
+  hasWaterUsage              → xsd:string
+  hasFlavorImpact            → xsd:string
+  hasQualityLevel            → xsd:string
+  hasDefectRisk              → xsd:string
+
+Cooperative (9개):
+  hasName                    → xsd:string
+  hasRegion                  → xsd:string
+  hasEstablishedYear         → xsd:integer
+  hasNumberOfMembers         → xsd:integer
+  hasTotalAreaHectares       → xsd:integer
+  hasCertifications          → xsd:string
+  hasAnnualProductionTons    → xsd:integer
+  hasPrimaryMarket           → xsd:string
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 권장 워크플로우
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Option A: GUI 방식 (소량, 학습용)
+  1. Protégé에서 수동으로 추가
+  2. Domain/Range 설정
+  3. 저장
+
+Option B: RDF Merge 방식 (대량, 실무용)
+  1. Python 스크립트로 RDF 생성
+  2. Protégé에서 Merge
+  3. 검증
+
+Option C: 혼합 방식 (추천)
+  1. 중요한 속성은 GUI에서 수동 추가
+  2. 나머지는 Python 스크립트로 일괄 생성
+  3. Merge 후 검증
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ 주의사항
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Property 이름 규칙:
+   - camelCase 사용 (hasName, not has_name)
+   - 명확한 이름 (hasName vs name)
+   - 일관된 접두사 (has, is, etc.)
+
+2. Domain/Range 필수:
+   - Domain: 어떤 클래스가 이 속성을 가지는가?
+   - Range: 속성 값의 데이터 타입은?
+   - 없으면 Reasoner 오류 가능
+
+3. 데이터 타입 선택:
+   - 숫자는 xsd:integer 또는 xsd:float
+   - 텍스트는 xsd:string
+   - 참/거짓은 xsd:boolean
+   - 날짜는 xsd:date 또는 xsd:dateTime
+
+4. 중복 방지:
+   - 같은 이름의 Property가 이미 있는지 확인
+   - Protégé는 중복 허용하지만 혼란 야기
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+다음 단계: Python 스크립트로 45개 Data Property RDF 생성!
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project

@@ -1,0 +1,35 @@
+Property_Name,Domain_Class,Range_Type,Label,Comment
+hasName,Farm,xsd:string,has name,The name of the entity
+hasRegion,Farm,xsd:string,has region,The region where the farm is located
+hasAltitudeRange,Farm,xsd:string,has altitude range,"The altitude range of the farm (e.g., 1800-2200 meters)"
+hasFarmSize,Farm,xsd:string,has farm size,"The size category of the farm (Small, Medium, Large)"
+hasAnnualProduction,Farm,xsd:integer,has annual production,Annual production in bags (1 bag = 60 kg)
+hasContinent,Country,xsd:string,has continent,The continent where the country is located
+hasCoffeeProductionRank,Country,xsd:integer,has coffee production rank,Global ranking in coffee production
+hasAnnualProductionTons,Country,xsd:integer,has annual production tons,Annual coffee production in metric tons
+hasPrimaryVariety,Country,xsd:string,has primary variety,Primary coffee variety grown in the country
+hasGrowingRegions,Country,xsd:string,has growing regions,Main coffee growing regions
+hasHarvestSeason,Country,xsd:string,has harvest season,Coffee harvest season months
+hasExportPercentage,Country,xsd:integer,has export percentage,Percentage of production exported
+hasQualityGrade,Country,xsd:string,has quality grade,"Overall quality grade (Specialty, Commercial, etc.)"
+hasSpecies,CoffeeVariety,xsd:string,has species,"Coffee species (Arabica, Robusta, etc.)"
+hasFlavorProfile,CoffeeVariety,xsd:string,has flavor profile,Characteristic flavor profile
+hasTypicalAltitudeRange,CoffeeVariety,xsd:string,has typical altitude range,Typical growing altitude range
+hasCupQualityScore,CoffeeVariety,xsd:string,has cup quality score,"Cup quality score range (e.g., 85-90)"
+hasDiseaseResistance,CoffeeVariety,xsd:string,has disease resistance,"Level of disease resistance (Low, Medium, High, Very High)"
+hasYieldPotential,CoffeeVariety,xsd:string,has yield potential,"Yield potential (Low, Medium, High, Very High)"
+hasBeanSize,CoffeeVariety,xsd:string,has bean size,"Bean size category (Small, Medium, Large, Very Large)"
+hasAlternativeNames,ProcessingMethod,xsd:string,has alternative names,Alternative names for the processing method
+hasDescription,ProcessingMethod,xsd:string,has description,Description of the processing method
+hasTypicalCountries,ProcessingMethod,xsd:string,has typical countries,Countries where this method is commonly used
+hasProcessingTimeDays,ProcessingMethod,xsd:string,has processing time days,"Processing time in days (e.g., 2-3, 21-30)"
+hasWaterUsage,ProcessingMethod,xsd:string,has water usage,"Water usage level (Low, Medium, High)"
+hasFlavorImpact,ProcessingMethod,xsd:string,has flavor impact,Impact on coffee flavor profile
+hasQualityLevel,ProcessingMethod,xsd:string,has quality level,Typical quality level achieved
+hasDefectRisk,ProcessingMethod,xsd:string,has defect risk,"Risk of defects (Low, Medium, High)"
+hasEstablishedYear,Cooperative,xsd:integer,has established year,Year the cooperative was established
+hasNumberOfMembers,Cooperative,xsd:integer,has number of members,Number of cooperative members
+hasTotalAreaHectares,Cooperative,xsd:integer,has total area hectares,Total farming area in hectares
+hasCertifications,Cooperative,xsd:string,has certifications,"Certifications held (e.g., Fair Trade, Organic)"
+hasAnnualProductionTons,Cooperative,xsd:integer,has annual production tons,Annual production in metric tons
+hasPrimaryMarket,Cooperative,xsd:string,has primary market,"Primary market (Export, Domestic, Export/Domestic)"

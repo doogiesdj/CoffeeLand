@@ -1,0 +1,6 @@
+Method_Name,Alternative_Names,Description,Typical_Countries,Processing_Time_Days,Water_Usage,Flavor_Impact,Quality_Level,Defect_Risk
+Washed,Wet_Process,Fermentation and washing to remove mucilage,Ethiopia/Colombia/Kenya,2-3,High,Clean/Bright/Acidic,High,Low
+Natural,Dry_Process,Sun-drying with fruit intact,Ethiopia/Brazil,21-30,Low,Fruity/Sweet/Heavy-body,Medium-High,Medium
+Honey,Pulped_Natural,Partial mucilage removal,Costa_Rica/El_Salvador,7-14,Medium,Sweet/Syrupy/Complex,High,Medium
+Pulped_Natural,Semi-Washed,Mechanical mucilage removal,Brazil,3-7,Low-Medium,Balanced/Sweet/Moderate_body,Medium-High,Low-Medium
+Giling_Basah,Wet-Hulled,Early hulling while beans are wet,Indonesia,2-4,Medium,Earthy/Herbal/Full_body,Medium,Medium-High

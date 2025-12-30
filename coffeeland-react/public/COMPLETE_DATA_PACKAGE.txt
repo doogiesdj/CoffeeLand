@@ -1,0 +1,334 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  CoffeeLand Ontology - 5개 클래스 완전 데이터 패키지              ║
+║  Protégé Cellfie Import Ready                                    ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 제공된 파일 (총 9개)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV 데이터 파일 (5개):
+  1. coffee_farms_data.csv              (24 farms, 3.2K)
+  2. coffee_countries_data.csv          (17 countries, 1.9K)
+  3. coffee_varieties_data.csv          (10 varieties, 972B)
+  4. coffee_processing_methods_data.csv (5 methods, 747B)
+  5. coffee_cooperatives_data.csv       (15 cooperatives, 1.4K)
+
+Rule 가이드 (4개):
+  6. CELLFIE_ALL_5_RULES.txt           (전체 Rule 모음)
+  7. CELLFIE_CORRECT_SYNTAX.txt        (문법 가이드)
+  8. CELLFIE_RULES_FIXED.txt           (초기 수정본)
+  9. PROTEGE_INTEGRATION_GUIDE.txt     (통합 가이드)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 데이터 통계
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Class             | Individuals | CSV File
+─────────────────────────────────────────────────────────────────
+Farm              |     24      | coffee_farms_data.csv
+Country           |     17      | coffee_countries_data.csv
+CoffeeVariety     |     10      | coffee_varieties_data.csv
+ProcessingMethod  |      5      | coffee_processing_methods_data.csv
+Cooperative       |     15      | coffee_cooperatives_data.csv
+─────────────────────────────────────────────────────────────────
+TOTAL             |     71      | 5 files
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 다운로드 링크
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Base URL:
+https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/
+
+CSV 파일:
+  1. coffee_farms_data.csv
+  2. coffee_countries_data.csv
+  3. coffee_varieties_data.csv
+  4. coffee_processing_methods_data.csv
+  5. coffee_cooperatives_data.csv
+
+가이드 문서:
+  6. CELLFIE_ALL_5_RULES.txt
+  7. CELLFIE_CORRECT_SYNTAX.txt
+  8. PROTEGE_INTEGRATION_GUIDE.txt
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 5개 Cellfie Rules 요약
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Rule 1: Farm (24개)
+┌─────────────────────────────────────────────────────────────────┐
+│ Individual: @B*                                                 │
+│ Types: Farm                                                     │
+│ Facts:                                                          │
+│   hasName @B*,                                                  │
+│   hasRegion @C*,                                                │
+│   hasAltitudeRange @E*,                                         │
+│   hasFarmSize @I*,                                              │
+│   hasAnnualProduction @J*(xsd:integer),                         │
+│   isLocatedIn @A*(Class),                                       │
+│   cultivates @D*(Class),                                        │
+│   usesProcessingMethod @F*(Class),                              │
+│   memberOf @H*(Class)                                           │
+│                                                                 │
+│ Range: Row 2-25, Column A-J                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+Rule 2: Country (17개)
+┌─────────────────────────────────────────────────────────────────┐
+│ Individual: @A*                                                 │
+│ Types: Country                                                  │
+│ Facts:                                                          │
+│   hasName @A*,                                                  │
+│   hasContinent @B*,                                             │
+│   hasCoffeeProductionRank @C*(xsd:integer),                     │
+│   hasAnnualProductionTons @D*(xsd:integer),                     │
+│   hasPrimaryVariety @E*,                                        │
+│   hasGrowingRegions @F*,                                        │
+│   hasHarvestSeason @G*,                                         │
+│   hasExportPercentage @H*(xsd:integer),                         │
+│   hasQualityGrade @I*                                           │
+│                                                                 │
+│ Range: Row 2-18, Column A-I                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+Rule 3: CoffeeVariety (10개)
+┌─────────────────────────────────────────────────────────────────┐
+│ Individual: @A*                                                 │
+│ Types: CoffeeVariety                                            │
+│ Facts:                                                          │
+│   hasName @A*,                                                  │
+│   hasSpecies @B*,                                               │
+│   hasFlavorProfile @C*,                                         │
+│   hasOriginCountry @D*(Class),                                  │
+│   hasTypicalAltitudeRange @E*,                                  │
+│   hasCupQualityScore @F*,                                       │
+│   hasDiseaseResistance @G*,                                     │
+│   hasYieldPotential @H*,                                        │
+│   hasBeanSize @I*                                               │
+│                                                                 │
+│ Range: Row 2-11, Column A-I                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+Rule 4: ProcessingMethod (5개)
+┌─────────────────────────────────────────────────────────────────┐
+│ Individual: @A*                                                 │
+│ Types: ProcessingMethod                                         │
+│ Facts:                                                          │
+│   hasName @A*,                                                  │
+│   hasAlternativeNames @B*,                                      │
+│   hasDescription @C*,                                           │
+│   hasTypicalCountries @D*,                                      │
+│   hasProcessingTimeDays @E*,                                    │
+│   hasWaterUsage @F*,                                            │
+│   hasFlavorImpact @G*,                                          │
+│   hasQualityLevel @H*,                                          │
+│   hasDefectRisk @I*                                             │
+│                                                                 │
+│ Range: Row 2-6, Column A-I                                      │
+└─────────────────────────────────────────────────────────────────┘
+
+Rule 5: Cooperative (15개)
+┌─────────────────────────────────────────────────────────────────┐
+│ Individual: @A*                                                 │
+│ Types: Cooperative                                              │
+│ Facts:                                                          │
+│   hasName @A*,                                                  │
+│   hasRegion @C*,                                                │
+│   hasEstablishedYear @D*(xsd:integer),                          │
+│   hasNumberOfMembers @E*(xsd:integer),                          │
+│   hasTotalAreaHectares @F*(xsd:integer),                        │
+│   hasCertifications @G*,                                        │
+│   hasAnnualProductionTons @H*(xsd:integer),                     │
+│   hasPrimaryMarket @I*,                                         │
+│   isLocatedIn @B*(Class)                                        │
+│                                                                 │
+│ Range: Row 2-16, Column A-I                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Protégé Import 순서
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+중요: 의존 관계에 따라 순서대로 Import해야 합니다!
+
+1️⃣ Country (17개) → 기본 참조 대상
+   ↓
+2️⃣ CoffeeVariety (10개) → Country 참조
+   ↓
+3️⃣ ProcessingMethod (5개) → 독립적
+   ↓
+4️⃣ Cooperative (15개) → Country 참조
+   ↓
+5️⃣ Farm (24개) → 모든 것을 참조
+
+
+각 Import 단계:
+  1. Tools > Create axioms from Excel workbook...
+  2. CSV 파일 선택
+  3. Rule 입력
+  4. Validate → 오류 확인
+  5. Generate Axioms
+  6. Import to current ontology
+  7. Reasoner 실행 (Pellet/HermiT)
+  8. Individuals 탭에서 검증
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ 필수 전제 조건 (Protégé에서 미리 정의)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Classes (5개):
+  □ Farm
+  □ Country
+  □ CoffeeVariety
+  □ ProcessingMethod
+  □ Cooperative
+
+Object Properties (5개):
+  □ isLocatedIn
+      Domain: Farm, Cooperative
+      Range: Country
+  
+  □ cultivates
+      Domain: Farm
+      Range: CoffeeVariety
+  
+  □ usesProcessingMethod
+      Domain: Farm
+      Range: ProcessingMethod
+  
+  □ memberOf
+      Domain: Farm
+      Range: Cooperative
+  
+  □ hasOriginCountry
+      Domain: CoffeeVariety
+      Range: Country
+
+Data Properties (약 45개):
+  Farm (9개):
+    hasName, hasRegion, hasAltitudeRange, hasFarmSize,
+    hasAnnualProduction
+  
+  Country (9개):
+    hasName, hasContinent, hasCoffeeProductionRank,
+    hasAnnualProductionTons, hasPrimaryVariety, hasGrowingRegions,
+    hasHarvestSeason, hasExportPercentage, hasQualityGrade
+  
+  CoffeeVariety (9개):
+    hasName, hasSpecies, hasFlavorProfile, hasTypicalAltitudeRange,
+    hasCupQualityScore, hasDiseaseResistance, hasYieldPotential,
+    hasBeanSize
+  
+  ProcessingMethod (9개):
+    hasName, hasAlternativeNames, hasDescription, hasTypicalCountries,
+    hasProcessingTimeDays, hasWaterUsage, hasFlavorImpact,
+    hasQualityLevel, hasDefectRisk
+  
+  Cooperative (9개):
+    hasName, hasRegion, hasEstablishedYear, hasNumberOfMembers,
+    hasTotalAreaHectares, hasCertifications, hasAnnualProductionTons,
+    hasPrimaryMarket
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 검증 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Import 전:
+  □ Protégé에서 coffeeland.rdf 열기
+  □ 5개 Classes 존재 확인
+  □ Object Properties 존재 확인
+  □ Data Properties 존재 확인
+  □ CSV 파일 5개 다운로드
+
+Import 중:
+  □ Country (17개) Import ✓
+  □ CoffeeVariety (10개) Import ✓
+  □ ProcessingMethod (5개) Import ✓
+  □ Cooperative (15개) Import ✓
+  □ Farm (24개) Import ✓
+
+Import 후:
+  □ Individuals 탭에서 71개 확인
+  □ Reasoner 실행 → 일관성 확인
+  □ Object Properties 관계 확인
+  □ 저장: coffeeland.rdf
+  □ React App에 복사
+  □ Web Ontology Diagram 테스트
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 Web App 테스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 업데이트된 coffeeland.rdf를 React App에 복사
+   → coffeeland-react/public/coffeeland.rdf
+
+2. Web App 접속:
+   https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/ontology
+
+3. Ontology Diagram에서 클래스 클릭:
+   - Farm 클릭 → 24개 Individual 확장
+   - Country 클릭 → 17개 Individual 확장
+   - CoffeeVariety 클릭 → 10개 Individual 확장
+   - ProcessingMethod 클릭 → 5개 Individual 확장
+   - Cooperative 클릭 → 15개 Individual 확장
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 예상 최종 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Classes:             5
+Object Properties:   5
+Data Properties:    45
+Individuals:        71
+
+관계 (Object Property Assertions):
+  - Farm → Country:        24 links
+  - Farm → CoffeeVariety:  24 links
+  - Farm → ProcessingMethod: 24 links
+  - Farm → Cooperative:    24 links
+  - CoffeeVariety → Country: 10 links
+  - Cooperative → Country: 15 links
+  ───────────────────────────────
+  Total:                  121 links
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ 문제 해결
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Cellfie Rule 문법 오류?
+A: CELLFIE_CORRECT_SYNTAX.txt 참조
+   공식 MappingMaster DSL 기반
+
+Q: 클래스/속성이 없다는 오류?
+A: 전제 조건 확인 (위의 체크리스트)
+   Classes, Object Properties, Data Properties 미리 정의
+
+Q: Import 순서?
+A: Country → CoffeeVariety → ProcessingMethod → Cooperative → Farm
+   의존 관계 순서 필수
+
+Q: Reasoner 오류?
+A: Domain/Range 확인
+   Object Property 정의 재검토
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 5개 클래스, 71개 Individuals, 완전한 Cellfie Rules 준비 완료!
+
+다음 단계: Protégé에서 순서대로 Import → 검증 → Web App 테스트
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+Complete Data Package for 5 Core Classes

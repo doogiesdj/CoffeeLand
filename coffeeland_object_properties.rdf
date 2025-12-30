@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#">
+
+  <!-- CoffeeLand Ontology Object Properties -->
+  <!-- Generated: 2025-12-29 -->
+
+  <!-- cultivates -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#cultivates">
+    <rdfs:label>cultivates</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:comment>The coffee variety grown by the farm</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- exports -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#exports">
+    <rdfs:label>exports</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:comment>Countries that this country exports coffee to</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+
+  <!-- hasOriginCountry -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasOriginCountry">
+    <rdfs:label>has origin country</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:comment>The country where the coffee variety originated</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- isLocatedIn -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#isLocatedIn">
+    <rdfs:label>is located in</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:comment>Indicates the country where the farm is located</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- memberOf -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#memberOf">
+    <rdfs:label>member of</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:comment>The cooperative that the farm is a member of</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- produces -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#produces">
+    <rdfs:label>produces</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:comment>Coffee varieties produced by the country</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- sourceFrom -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#sourceFrom">
+    <rdfs:label>sources from</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:comment>Farms that the roaster sources coffee from</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- suppliesTo -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#suppliesTo">
+    <rdfs:label>supplies to</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+    <rdfs:comment>Roasters that the farm supplies coffee to</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <!-- usesProcessingMethod -->
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#usesProcessingMethod">
+    <rdfs:label>uses processing method</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:comment>The processing method used by the farm</rdfs:comment>
+  </owl:ObjectProperty>
+
+</rdf:RDF>

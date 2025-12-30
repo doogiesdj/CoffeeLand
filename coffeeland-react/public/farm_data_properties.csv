@@ -1,0 +1,21 @@
+Property_Name,Data_Type,Description_Korean,Example_Value
+farmName,string,농장 이름,Yirgacheffe_Kochere_Farm
+altitudeMin,integer,최저 고도 (미터),1800
+altitudeMax,integer,최고 고도 (미터),2200
+altitudeRange,string,고도 범위,1800-2200
+farmSize,string,농장 규모 (Small/Medium/Large),Medium
+areaInHectares,float,면적 (헥타르),50.5
+annualProduction,integer,"연간 생산량 (bags, 60kg)",150
+annualProductionInKg,integer,연간 생산량 (킬로그램),9000
+establishedYear,integer,설립 연도,1985
+hasOrganicCertification,boolean,유기농 인증 여부,true
+hasFairTradeCertification,boolean,공정무역 인증 여부,true
+primaryVariety,string,주요 재배 품종,Arabica_Heirloom
+processingMethod,string,가공 방식,Washed
+harvestSeason,string,수확 시즌,October-January
+soilType,string,토양 유형,"Volcanic, Clay"
+rainfall,integer,연간 강수량 (mm),1200
+temperature,string,평균 기온 범위 (°C),15-25
+ownerName,string,소유주 이름,Juan Carlos Rodriguez
+contactEmail,string,연락처 이메일,farm@example.com
+website,string,웹사이트,https://farm-example.com

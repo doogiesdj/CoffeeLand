@@ -1,0 +1,9 @@
+Property_Name,Domain,Range,Description_Korean,Example
+cultivates,Farm,CoffeeVariety,Farm에서 재배하는 커피 품종,예: Yirgacheffe_Kochere_Farm cultivates Arabica_Heirloom
+memberOf,Farm,Cooperative,Farm이 속한 협동조합,예: Huila_El_Paraiso_Farm memberOf Cooperative_Huila
+isLocatedIn,Farm,Country,Farm이 위치한 국가,예: Tarrazu_La_Minita_Farm isLocatedIn Costa_Rica
+hasRegion,Farm,Region/City,Farm이 위치한 지역,예: Nyeri_Gatomboya_Farm hasRegion Nyeri
+uses,Farm,ProcessingMethod,Farm에서 사용하는 가공 방식,예: Sumatra_Mandheling_Gayo_Farm uses Giling_Basah
+hasCertification,Farm,Certification,Farm이 보유한 인증,예: Cajamarca_Villa_Rica_Farm hasCertification Fair_Trade
+suppliesTo,Farm,ProcessingMill,Farm이 공급하는 가공소,예: Antigua_Finca_El_Injerto suppliesTo Antigua_Processing_Mill
+ownedBy,Farm,Farmer,Farm을 소유한 농부 (역관계),예: Harrar_Estate ownedBy Individual_Farmer_Ahmed

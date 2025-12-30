@@ -1,0 +1,159 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Cellfie Rules - Coffee Farm Data Import (FINAL FIX)            ║
+║  CoffeeLand Ontology Project - Column Reference Fixed           ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 문제 해결: @ 기호 제거
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ 이전 방식: @A, @B, @C ...
+✅ 수정 방식: A, B, C ... (@ 기호 제거)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CSV Column Mapping
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A: Country
+B: Farm_Name
+C: Region
+D: Coffee_Variety
+E: Altitude_Range_meters
+F: Processing_Method
+G: Certifications
+H: Cooperative_Membership
+I: Farm_Size
+J: Annual_Production_bags
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 FINAL RULES - 복사해서 Cellfie에 붙여넣으세요
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_$(B)
+Types: Farm
+Facts:
+  hasName $(B),
+  hasRegion $(C),
+  hasAltitudeRange $(E),
+  hasFarmSize $(I),
+  hasAnnualProduction $(J),
+  isLocatedIn http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(A),
+  cultivates http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(D),
+  usesProcessingMethod http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(F),
+  memberOf http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(H)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 변경 사항
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. @ → $ 변경
+   이전: @B
+   수정: $(B)
+
+2. 5개 Rule을 1개로 통합
+   → 더 간단하고 명확한 구조
+
+3. Facts를 한 번에 정의
+   → Data Properties + Object Properties 함께
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 대체 방안 1: Column Name 직접 사용
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_$(Farm_Name)
+Types: Farm
+Facts:
+  hasName $(Farm_Name),
+  hasRegion $(Region),
+  hasAltitudeRange $(Altitude_Range_meters),
+  hasFarmSize $(Farm_Size),
+  hasAnnualProduction $(Annual_Production_bags),
+  isLocatedIn http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(Country),
+  cultivates http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(Coffee_Variety),
+  usesProcessingMethod http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(Processing_Method),
+  memberOf http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#$(Cooperative_Membership)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 대체 방안 2: 더 단순한 버전 (추천!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_{B}
+Types: Farm
+Facts:
+  hasName {B},
+  hasRegion {C},
+  hasAltitudeRange {E},
+  hasFarmSize {I},
+  hasAnnualProduction {J},
+  isLocatedIn http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#{A},
+  cultivates http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#{D},
+  usesProcessingMethod http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#{F},
+  memberOf http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#{H}
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 대체 방안 3: 인덱스만 사용
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_B
+Types: Farm
+Facts:
+  hasName B,
+  hasRegion C,
+  hasAltitudeRange E,
+  hasFarmSize I,
+  hasAnnualProduction J,
+  isLocatedIn http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#A,
+  cultivates http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#D,
+  usesProcessingMethod http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#F,
+  memberOf http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#H
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 시도 순서 (추천)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1단계: 대체 방안 2 시도 → {B}, {C}, ... 형식
+
+2단계: 안되면 대체 방안 3 시도 → B, C, ... 형식만
+
+3단계: 안되면 대체 방안 1 시도 → $(Farm_Name) 형식
+
+4단계: 모두 안되면 → Cellfie 대신 수동 입력 또는 Python 스크립트로 RDF 생성
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 예상 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: Farm_Yirgacheffe_Kochere_Farm
+  Types: Farm
+  Facts:
+    hasName "Yirgacheffe_Kochere_Farm"
+    hasRegion "Yirgacheffe"
+    hasAltitudeRange "1800-2200"
+    hasFarmSize "Medium"
+    hasAnnualProduction "150"
+    isLocatedIn Ethiopia
+    cultivates Arabica_Heirloom
+    usesProcessingMethod Washed
+    memberOf Cooperative_Yirgacheffe
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚨 Cellfie가 계속 안 될 경우 → Python 스크립트로 RDF 생성
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Cellfie 문법이 버전마다 다르거나 특정 형식을 지원하지 않을 수 있습니다.
+
+대신 Python으로 CSV → RDF 변환 스크립트를 만들 수 있습니다.
+
+필요하시면 말씀해 주세요!
+→ "Python 스크립트로 RDF 만들어줘"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+GitHub: https://github.com/doogiesdj/CoffeeLand

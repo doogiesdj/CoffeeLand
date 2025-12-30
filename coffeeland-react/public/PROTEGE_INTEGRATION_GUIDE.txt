@@ -1,0 +1,240 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Coffee Farm Data → Protégé 완벽 가이드                          ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 문제 해결: Cellfie 오류 우회
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Cellfie Rule 문법 오류 때문에 CSV → RDF 변환이 어려웠습니다.
+
+✅ 해결 방법: Python 스크립트로 직접 RDF 생성!
+   → 24개 Farm Individual이 포함된 RDF 파일 생성 완료
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 제공된 파일
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. coffee_farms_individuals.rdf (28K)
+   → 24개 Farm Individual이 포함된 RDF/XML 파일
+   → Protégé에서 바로 Merge 가능
+   
+2. csv_to_rdf_converter.py (5.5K)
+   → CSV를 RDF로 변환하는 Python 스크립트
+   → 데이터 수정 후 재생성 가능
+   
+3. coffee_farms_data.csv (3.2K)
+   → 원본 Farm 데이터 (24개 농장)
+   
+4. CELLFIE_RULES_FINAL_FIX.txt
+   → Cellfie Rule 대안 (참고용)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 방법 1: RDF 파일 직접 Merge (추천!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: RDF 파일 다운로드
+┌─────────────────────────────────────────────────────────────────┐
+│ https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/ │
+│ coffee_farms_individuals.rdf                                    │
+└─────────────────────────────────────────────────────────────────┘
+
+Step 2: Protégé 열기
+- coffeeland.rdf 파일 열기
+
+Step 3: RDF Merge
+File > Merge with imported ontology...
+→ 또는 File > Import ontology...
+→ coffee_farms_individuals.rdf 선택
+
+Step 4: 검증
+1. Individuals 탭 클릭
+2. Classes 패널에서 "Farm" 클릭
+3. ✅ 24개 Farm Individual 확인:
+   - Farm_Yirgacheffe_Kochere_Farm (Ethiopia)
+   - Farm_Sidamo_Guji_Farm (Ethiopia)
+   - Farm_Harrar_Estate (Ethiopia)
+   - Farm_Huila_El_Paraiso_Farm (Colombia)
+   - ... (총 24개)
+
+Step 5: Properties 확인
+각 Farm Individual 클릭 → Properties 탭에서:
+✅ Data Properties:
+   - hasName
+   - hasRegion
+   - hasAltitudeRange
+   - hasFarmSize
+   - hasAnnualProduction
+
+✅ Object Properties:
+   - isLocatedIn → Country
+   - cultivates → CoffeeVariety
+   - usesProcessingMethod → ProcessingMethod
+   - memberOf → Cooperative
+   - hasCertification → Certification (다중)
+
+Step 6: 저장
+File > Save
+→ 또는 File > Save as... (새 파일로 저장)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 방법 2: Python 스크립트로 재생성 (데이터 수정 시)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV 데이터를 수정하고 싶을 때:
+
+Step 1: 파일 다운로드
+https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/
+- coffee_farms_data.csv
+- csv_to_rdf_converter.py
+
+Step 2: CSV 수정
+Excel 또는 Google Sheets에서:
+- 농장 추가/삭제
+- 정보 수정
+- 저장: coffee_farms_data.csv
+
+Step 3: Python 스크립트 실행
+터미널/명령 프롬프트:
+┌─────────────────────────────────────────────────────────────────┐
+│ python csv_to_rdf_converter.py                                  │
+└─────────────────────────────────────────────────────────────────┘
+
+Step 4: 새 RDF 생성
+→ coffee_farms_individuals.rdf 파일 생성됨
+
+Step 5: Protégé에서 Merge
+(방법 1과 동일)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 생성된 RDF 구조
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+예시: Farm_Yirgacheffe_Kochere_Farm
+
+<owl:NamedIndividual rdf:about="...#Farm_Yirgacheffe_Kochere_Farm">
+  <rdf:type rdf:resource="...#Farm"/>
+  
+  <!-- Data Properties -->
+  <hasName>Yirgacheffe_Kochere_Farm</hasName>
+  <hasRegion>Yirgacheffe</hasRegion>
+  <hasAltitudeRange>1800-2200</hasAltitudeRange>
+  <hasFarmSize>Medium</hasFarmSize>
+  <hasAnnualProduction rdf:datatype="xsd:integer">150</hasAnnualProduction>
+  
+  <!-- Object Properties -->
+  <isLocatedIn rdf:resource="...#Ethiopia"/>
+  <cultivates rdf:resource="...#Arabica_Heirloom"/>
+  <usesProcessingMethod rdf:resource="...#Washed"/>
+  <memberOf rdf:resource="...#Cooperative_Yirgacheffe"/>
+  
+  <!-- Multiple Certifications -->
+  <hasCertification rdf:resource="...#Fair_Trade"/>
+  <hasCertification rdf:resource="...#Organic"/>
+</owl:NamedIndividual>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📈 통계
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 총 Farm Individuals: 24개
+
+✅ 국가별 분포:
+   Ethiopia      3 farms
+   Colombia      3 farms
+   Brazil        3 farms
+   Vietnam       2 farms
+   Kenya         2 farms
+   Costa Rica    2 farms
+   Guatemala     2 farms
+   Indonesia     2 farms
+   Honduras      1 farm
+   Peru          1 farm
+   Nicaragua     1 farm
+   Rwanda        1 farm
+   Tanzania      1 farm
+
+✅ Farm Size 분포:
+   Small         5 farms
+   Medium       13 farms
+   Large         6 farms
+
+✅ 총 연간 생산량: 4,870 bags (약 292,200 kg)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 검증 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Protégé에서 확인:
+
+□ Individuals 탭 > Farm 클래스 → 24개 표시됨
+□ 각 Farm에 hasName 속성 있음
+□ 각 Farm에 isLocatedIn → Country 관계 있음
+□ 각 Farm에 cultivates → CoffeeVariety 관계 있음
+□ Reasoner 실행 → 오류 없음
+□ 저장 성공 → coffeeland.rdf 업데이트됨
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌐 Web App에서 확인
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Protégé에서 업데이트된 coffeeland.rdf 저장
+
+Step 2: React App의 public 폴더에 복사
+coffeeland-react/public/coffeeland.rdf
+
+Step 3: Web App에서 확인
+https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/ontology
+
+→ Ontology Diagram에서 "Farm" 클래스 클릭
+→ 24개 Farm Individual 확장되어 표시됨
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 다운로드 링크
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Base URL:
+https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/
+
+1. RDF 파일 (Protégé로 Merge):
+   coffee_farms_individuals.rdf (28K)
+
+2. Python 변환 스크립트:
+   csv_to_rdf_converter.py (5.5K)
+
+3. 원본 CSV 데이터:
+   coffee_farms_data.csv (3.2K)
+   farm_object_properties.csv (964B)
+   farm_data_properties.csv (1.2K)
+
+4. Cellfie Rules (참고):
+   CELLFIE_RULES_FINAL_FIX.txt (5.5K)
+
+5. 완전한 가이드:
+   cellfie_rules_guide.md (11K)
+   CELLFIE_QUICK_GUIDE.txt (5K)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ 추가 도움
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+더 많은 데이터 추가:
+→ Farmer, Cooperative, Roaster, Processing Mill 등
+
+다른 클래스의 인스턴스 추가:
+→ CSV 템플릿 제공 가능
+→ Python 스크립트 수정 가능
+
+자동화:
+→ Excel/Google Sheets → RDF 자동 변환
+→ 배치 Import 스크립트
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 이제 Protégé에서 coffee_farms_individuals.rdf를 Merge하세요!
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+GitHub: https://github.com/doogiesdj/CoffeeLand

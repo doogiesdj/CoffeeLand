@@ -1,0 +1,219 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Protégé RDF Import 방법 (버전별)                                ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 방법 1: Loaded ontology sources (추천!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: 메뉴 선택
+  File > Loaded ontology sources...
+
+Step 2: Ontology imports 창 확인
+  현재 로드된 온톨로지 목록 표시
+
+Step 3: Import 추가
+  하단: [Import ontology] 버튼 클릭
+  또는: [+] 버튼 클릭
+
+Step 4: Import 대화상자
+  "Import an ontology from:" 선택
+  
+  옵션 1: Import an ontology contained in a document
+    → [Browse...] 클릭
+    → coffeeland_data_properties.rdf 선택
+    
+  옵션 2: Import an ontology from the web
+    → URL 입력 (사용 안 함)
+
+Step 5: Import 옵션 선택
+  "What do you want to do?"
+  
+  ⭐ 선택: Copy ontology to active ontology
+     → 현재 온톨로지에 내용 복사 (추천!)
+  
+  또는: Import by location
+     → 링크만 생성 (권장 안 함)
+
+Step 6: 완료
+  [OK] 클릭
+  → 35개 Data Properties가 추가됨
+
+Step 7: 검증
+  Data properties 탭에서 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 방법 2: Open from URL... (온라인 파일)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: 메뉴 선택
+  File > Open from URL... (Ctrl+Shift+O)
+
+Step 2: URL 입력
+  https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland_data_properties.rdf
+
+Step 3: Open 클릭
+  → 새 창에서 RDF 파일이 열림
+
+Step 4: 수동으로 복사
+  ⚠️ 주의: 이 방법은 새 온톨로지로 열리므로
+  수동으로 Property를 복사해야 함 (비추천)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 방법 3: Active Ontology 탭 사용 (가장 쉬움!)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Active Ontology 탭 클릭
+  Protégé 상단 탭 영역
+
+Step 2: Ontology imports 섹션 찾기
+  우측 패널: "Ontology imports"
+
+Step 3: [+] 버튼 클릭
+  "Ontology imports" 옆의 [+] 버튼
+
+Step 4: Import 파일 선택
+  coffeeland_data_properties.rdf 선택
+
+Step 5: Import 옵션
+  "Copy ontology to active ontology" 선택
+
+Step 6: 완료
+  [OK] 클릭
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 가장 추천하는 방법 (단계별 스크린샷)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. File > Loaded ontology sources...
+   ↓
+2. [Import ontology] 버튼 클릭 (하단)
+   ↓
+3. "Import an ontology contained in a document" 선택
+   ↓
+4. [Browse...] → coffeeland_data_properties.rdf 선택
+   ↓
+5. "Copy ontology to active ontology" 선택
+   ↓
+6. [OK] 클릭
+   ↓
+7. Data properties 탭에서 35개 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ Import 옵션 설명
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Copy ontology to active ontology ⭐ 추천!
+   - RDF 파일의 모든 내용을 현재 온톨로지에 복사
+   - 35개 Data Properties가 coffeeland.rdf에 추가됨
+   - 파일 저장 시 함께 저장됨
+
+2. Import by location
+   - RDF 파일의 위치만 링크로 저장
+   - 파일을 옮기면 깨짐
+   - 권장하지 않음
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Import 성공 확인 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Data properties 탭 클릭
+   → 좌측 패널에 35개 Property 표시
+
+2. hasName 클릭
+   → 우측 패널 "Domains (intersection)"
+   → 5개 클래스 모두 표시:
+     - Farm
+     - Country
+     - CoffeeVariety
+     - ProcessingMethod
+     - Cooperative
+
+3. hasRegion 클릭
+   → Domain: Farm
+   → Range: xsd:string
+
+4. hasAnnualProduction 클릭
+   → Domain: Farm
+   → Range: xsd:integer
+
+5. hasEstablishedYear 클릭
+   → Domain: Cooperative
+   → Range: xsd:integer
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 문제 해결
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+문제 1: "Import ontology" 버튼이 안 보임
+해결: Active Ontology 탭에서 "Ontology imports" 섹션의 [+] 사용
+
+문제 2: Import 후 Property가 안 보임
+해결: 
+  - Data properties 탭 새로고침
+  - Reasoner 실행
+  - Protégé 재시작
+
+문제 3: "Ontology already imported" 오류
+해결:
+  - 이미 Import됨 (정상)
+  - Data properties 탭에서 확인
+
+문제 4: Domain/Range가 없음
+해결:
+  - RDF 파일 재확인
+  - 수동으로 Domain/Range 추가
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Import 전:
+  □ coffeeland.rdf 열려 있음
+  □ coffeeland_data_properties.rdf 다운로드 완료
+
+Import 중:
+  □ File > Loaded ontology sources...
+  □ [Import ontology] 클릭
+  □ "Import an ontology contained in a document" 선택
+  □ coffeeland_data_properties.rdf 선택
+  □ "Copy ontology to active ontology" 선택
+  □ [OK] 클릭
+
+Import 후:
+  □ Data properties 탭에서 35개 확인
+  □ hasName의 Domain 5개 확인
+  □ 각 Property의 Domain/Range 확인
+  □ File > Save (Ctrl+S)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎬 빠른 요약
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. File > Loaded ontology sources...
+2. [Import ontology] 버튼
+3. [Browse...] → coffeeland_data_properties.rdf
+4. "Copy ontology to active ontology" 선택
+5. [OK]
+6. Data properties 탭에서 35개 확인
+7. File > Save
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 정답: File > Loaded ontology sources...
+
+그 다음: [Import ontology] 버튼 클릭!
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project

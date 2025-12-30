@@ -1,0 +1,305 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Cellfie Rules - 5개 핵심 클래스 완전 가이드                      ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29 - Complete Rules for All Classes              ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 목차
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Farm (24개)              ✅ 완료
+2. Country (18개)           ← NEW
+3. CoffeeVariety (10개)     ← NEW
+4. ProcessingMethod (5개)   ← NEW
+5. Cooperative (15개)       ← NEW
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Rule 1: Farm (이미 완료)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV: coffee_farms_data.csv
+Columns: A-J (Country, Farm_Name, Region, Coffee_Variety, ...)
+
+Individual: @B*
+Types: Farm
+Facts:
+  hasName @B*,
+  hasRegion @C*,
+  hasAltitudeRange @E*,
+  hasFarmSize @I*,
+  hasAnnualProduction @J*(xsd:integer),
+  isLocatedIn @A*(Class),
+  cultivates @D*(Class),
+  usesProcessingMethod @F*(Class),
+  memberOf @H*(Class)
+
+Range: Sheet "coffee_farms_data", Row 2-25, Column A-J
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Rule 2: Country
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV: coffee_countries_data.csv
+Columns:
+  A: Country_Name
+  B: Continent
+  C: Coffee_Production_Rank
+  D: Annual_Production_Tons
+  E: Primary_Variety
+  F: Growing_Regions
+  G: Harvest_Season
+  H: Export_Percentage
+  I: Quality_Grade
+
+Sample Data:
+  Ethiopia, Africa, 5, 469000, Arabica_Heirloom, Yirgacheffe/Sidamo/Harrar, Oct-Jan, 45, Specialty
+  Colombia, South_America, 3, 810000, Caturra/Castillo, Huila/Antioquia/Narino, Apr-Jun_Oct-Dec, 95, Specialty
+  Brazil, South_America, 1, 3558000, Bourbon/Mundo_Novo, Minas_Gerais/Sao_Paulo, May-Sep, 75, Commercial/Specialty
+
+Cellfie Rule:
+
+Individual: @A*
+Types: Country
+Facts:
+  hasName @A*,
+  hasContinent @B*,
+  hasCoffeeProductionRank @C*(xsd:integer),
+  hasAnnualProductionTons @D*(xsd:integer),
+  hasPrimaryVariety @E*,
+  hasGrowingRegions @F*,
+  hasHarvestSeason @G*,
+  hasExportPercentage @H*(xsd:integer),
+  hasQualityGrade @I*
+
+Range: Sheet "coffee_countries_data", Row 2-19, Column A-I
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Rule 3: CoffeeVariety
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV: coffee_varieties_data.csv
+Columns:
+  A: Variety_Name
+  B: Species (Arabica/Robusta)
+  C: Flavor_Profile
+  D: Origin_Country
+  E: Typical_Altitude_Range
+  F: Cup_Quality_Score
+  G: Disease_Resistance
+  H: Yield_Potential
+  I: Bean_Size
+
+Sample Data:
+  Arabica_Heirloom, Arabica, Floral/Fruity/Wine-like, Ethiopia, 1800-2200, 88-94, Medium, Medium, Medium
+  Caturra, Arabica, Sweet/Nutty/Chocolate, Colombia, 1200-1800, 82-88, Low, High, Medium
+  Bourbon, Arabica, Sweet/Caramel/Balanced, Yemen, 1000-2000, 85-90, Low, Medium, Large
+
+Cellfie Rule:
+
+Individual: @A*
+Types: CoffeeVariety
+Facts:
+  hasName @A*,
+  hasSpecies @B*,
+  hasFlavorProfile @C*,
+  hasOriginCountry @D*(Class),
+  hasTypicalAltitudeRange @E*,
+  hasCupQualityScore @F*,
+  hasDiseaseResistance @G*,
+  hasYieldPotential @H*,
+  hasBeanSize @I*
+
+Range: Sheet "coffee_varieties_data", Row 2-11, Column A-I
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Rule 4: ProcessingMethod
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV: coffee_processing_methods_data.csv
+Columns:
+  A: Method_Name
+  B: Alternative_Names
+  C: Description
+  D: Typical_Countries
+  E: Processing_Time_Days
+  F: Water_Usage
+  G: Flavor_Impact
+  H: Quality_Level
+  I: Defect_Risk
+
+Sample Data:
+  Washed, Wet_Process, Fermentation and washing to remove mucilage, Ethiopia/Colombia/Kenya, 2-3, High, Clean/Bright/Acidic, High, Low
+  Natural, Dry_Process, Sun-drying with fruit intact, Ethiopia/Brazil, 21-30, Low, Fruity/Sweet/Heavy-body, Medium-High, Medium
+  Honey, Pulped_Natural, Partial mucilage removal, Costa_Rica/El_Salvador, 7-14, Medium, Sweet/Syrupy/Complex, High, Medium
+
+Cellfie Rule:
+
+Individual: @A*
+Types: ProcessingMethod
+Facts:
+  hasName @A*,
+  hasAlternativeNames @B*,
+  hasDescription @C*,
+  hasTypicalCountries @D*,
+  hasProcessingTimeDays @E*,
+  hasWaterUsage @F*,
+  hasFlavorImpact @G*,
+  hasQualityLevel @H*,
+  hasDefectRisk @I*
+
+Range: Sheet "coffee_processing_methods_data", Row 2-6, Column A-I
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 Rule 5: Cooperative
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CSV: coffee_cooperatives_data.csv
+Columns:
+  A: Cooperative_Name
+  B: Country
+  C: Region
+  D: Established_Year
+  E: Number_Of_Members
+  F: Total_Area_Hectares
+  G: Certifications
+  H: Annual_Production_Tons
+  I: Primary_Market
+
+Sample Data:
+  Cooperative_Yirgacheffe, Ethiopia, Yirgacheffe, 1975, 2500, 3200, Fair_Trade/Organic, 450, Export
+  Guji_Cooperative, Ethiopia, Sidamo, 1982, 1800, 2400, Rainforest_Alliance, 380, Export
+  Cooperative_Huila, Colombia, Huila, 1958, 3500, 5600, Fair_Trade/Organic/Rainforest_Alliance, 890, Export/Domestic
+
+Cellfie Rule:
+
+Individual: @A*
+Types: Cooperative
+Facts:
+  hasName @A*,
+  hasRegion @C*,
+  hasEstablishedYear @D*(xsd:integer),
+  hasNumberOfMembers @E*(xsd:integer),
+  hasTotalAreaHectares @F*(xsd:integer),
+  hasCertifications @G*,
+  hasAnnualProductionTons @H*(xsd:integer),
+  hasPrimaryMarket @I*,
+  isLocatedIn @B*(Class)
+
+Range: Sheet "coffee_cooperatives_data", Row 2-16, Column A-I
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 필수 전제 조건 (Protégé에서 미리 정의 필요)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Classes:
+  □ Farm
+  □ Country
+  □ CoffeeVariety
+  □ ProcessingMethod
+  □ Cooperative
+
+Object Properties:
+  □ isLocatedIn (Domain: Farm/Cooperative, Range: Country)
+  □ cultivates (Domain: Farm, Range: CoffeeVariety)
+  □ usesProcessingMethod (Domain: Farm, Range: ProcessingMethod)
+  □ memberOf (Domain: Farm, Range: Cooperative)
+  □ hasOriginCountry (Domain: CoffeeVariety, Range: Country)
+
+Data Properties:
+  Farm:
+    □ hasName, hasRegion, hasAltitudeRange, hasFarmSize, hasAnnualProduction
+  
+  Country:
+    □ hasName, hasContinent, hasCoffeeProductionRank, hasAnnualProductionTons
+    □ hasPrimaryVariety, hasGrowingRegions, hasHarvestSeason
+    □ hasExportPercentage, hasQualityGrade
+  
+  CoffeeVariety:
+    □ hasName, hasSpecies, hasFlavorProfile, hasTypicalAltitudeRange
+    □ hasCupQualityScore, hasDiseaseResistance, hasYieldPotential, hasBeanSize
+  
+  ProcessingMethod:
+    □ hasName, hasAlternativeNames, hasDescription, hasTypicalCountries
+    □ hasProcessingTimeDays, hasWaterUsage, hasFlavorImpact
+    □ hasQualityLevel, hasDefectRisk
+  
+  Cooperative:
+    □ hasName, hasRegion, hasEstablishedYear, hasNumberOfMembers
+    □ hasTotalAreaHectares, hasCertifications, hasAnnualProductionTons
+    □ hasPrimaryMarket
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Protégé 실행 순서
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Country 먼저 Import (다른 클래스가 참조하므로)
+2. CoffeeVariety Import
+3. ProcessingMethod Import
+4. Cooperative Import
+5. Farm 마지막에 Import (모든 클래스를 참조)
+
+각 Import 후:
+  - Reasoner 실행 (Pellet, HermiT 등)
+  - Inconsistency 확인
+  - Individuals 탭에서 검증
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 예상 결과 통계
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Farm:               24 Individuals
+Country:            18 Individuals
+CoffeeVariety:      10 Individuals
+ProcessingMethod:    5 Individuals
+Cooperative:        15 Individuals
+───────────────────────────────
+총합:               72 Individuals
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Protégé 준비:
+  □ 5개 Classes 정의됨
+  □ Object Properties 정의됨
+  □ Data Properties 정의됨
+
+CSV 파일 준비:
+  □ coffee_countries_data.csv
+  □ coffee_varieties_data.csv
+  □ coffee_processing_methods_data.csv
+  □ coffee_cooperatives_data.csv
+  □ coffee_farms_data.csv
+
+Cellfie Import:
+  □ Country (18개) ✓
+  □ CoffeeVariety (10개) ✓
+  □ ProcessingMethod (5개) ✓
+  □ Cooperative (15개) ✓
+  □ Farm (24개) ✓
+
+검증:
+  □ Reasoner 실행 → 일관성 확인
+  □ 72개 Individuals 확인
+  □ Object Properties 관계 확인
+  □ Web App에서 Ontology Diagram 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 5개 클래스의 완전한 Cellfie Rules 준비 완료!
+
+다음 단계: CSV 파일 생성 → Protégé Import → 검증
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+Complete Cellfie Rules for 5 Core Classes

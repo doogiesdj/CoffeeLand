@@ -1,0 +1,197 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    ☕ CELLFIE RULES - QUICK REFERENCE                     ║
+║                    Coffee Farm Data Import for Protégé                    ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 📊 CSV Column Mapping                                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│  @A → Country                                                           │
+│  @B → Farm_Name                                                         │
+│  @C → Region                                                            │
+│  @D → Coffee_Variety                                                    │
+│  @E → Altitude_Range_meters                                             │
+│  @F → Processing_Method                                                 │
+│  @G → Certifications                                                    │
+│  @H → Cooperative_Membership                                            │
+│  @I → Farm_Size                                                         │
+│  @J → Annual_Production_bags                                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🔥 COPY & PASTE: Complete Cellfie Rules                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  # Rule 1: Create Farm Individuals                                     │
+│  Individual: @B                                                         │
+│      Types: Farm                                                        │
+│      Facts:                                                             │
+│          isLocatedIn @A,                                                │
+│          cultivates @D,                                                 │
+│          uses @F,                                                       │
+│          memberOf @H,                                                   │
+│          farmSize @I(xsd:string),                                       │
+│          annualProduction @J(xsd:integer),                              │
+│          altitudeRange @E(xsd:string)                                   │
+│                                                                         │
+│  # Rule 2: Create Country Individuals                                  │
+│  Individual: @A                                                         │
+│      Types: Country                                                     │
+│                                                                         │
+│  # Rule 3: Create CoffeeVariety Individuals                            │
+│  Individual: @D                                                         │
+│      Types: CoffeeVariety                                               │
+│                                                                         │
+│  # Rule 4: Create ProcessingMethod Individuals                         │
+│  Individual: @F                                                         │
+│      Types: ProcessingMethod                                            │
+│                                                                         │
+│  # Rule 5: Create Cooperative Individuals                              │
+│  Individual: @H                                                         │
+│      Types: Cooperative                                                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 📋 Step-by-Step Instructions                                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  1️⃣  Install Cellfie Plugin                                            │
+│     File → Check for plugins... → Cellfie → Install → Restart          │
+│                                                                         │
+│  2️⃣  Open coffeeland.rdf                                               │
+│     File → Open → coffeeland.rdf                                        │
+│                                                                         │
+│  3️⃣  Launch Cellfie                                                    │
+│     Tools → Cellfie                                                     │
+│                                                                         │
+│  4️⃣  Load CSV                                                          │
+│     Load CSV → coffee_farms_data.csv                                    │
+│                                                                         │
+│  5️⃣  Enter Rules                                                       │
+│     Rules tab → Copy & Paste rules above                                │
+│                                                                         │
+│  6️⃣  Validate Rules                                                    │
+│     Validate button → Check for green ✓                                 │
+│                                                                         │
+│  7️⃣  Generate Individuals                                              │
+│     Generate Individuals button → Wait for completion                   │
+│                                                                         │
+│  8️⃣  Verify Results                                                    │
+│     Individuals tab → Farm class → Check 24 farms                       │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🎯 Rule Syntax Guide                                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Column Reference:                                                      │
+│    @A, @B, @C ...         → Column values                              │
+│    @A(xsd:string)         → String data type                           │
+│    @J(xsd:integer)        → Integer data type                          │
+│    @X(xsd:boolean)        → Boolean data type                          │
+│    @Y(xsd:float)          → Float data type                            │
+│                                                                         │
+│  Functions:                                                             │
+│    SPLIT(@E, "-", 0)      → Split string and get first part            │
+│    CONCAT(@A, "_", @B)    → Concatenate strings                        │
+│    IF(cond, true, false)  → Conditional logic                          │
+│    CONTAINS(@G, "text")   → Check if contains text                     │
+│                                                                         │
+│  Structure:                                                             │
+│    Individual: <name>     → Individual identifier                      │
+│    Types: <class>         → OWL Class assignment                       │
+│    Facts: <properties>    → Object/Data properties                     │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 💡 Example: First Row Transformation                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CSV Input:                                                             │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Ethiopia | Yirgacheffe_Kochere_Farm | Yirgacheffe | ...         │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                         │
+│  OWL Output:                                                            │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ :Yirgacheffe_Kochere_Farm a :Farm ;                              │  │
+│  │     :isLocatedIn :Ethiopia ;                                     │  │
+│  │     :cultivates :Arabica_Heirloom ;                              │  │
+│  │     :uses :Washed ;                                              │  │
+│  │     :memberOf :Cooperative_Yirgacheffe ;                         │  │
+│  │     :farmSize "Medium"^^xsd:string ;                             │  │
+│  │     :annualProduction 150 .                                      │  │
+│  │                                                                  │  │
+│  │ :Ethiopia a :Country .                                           │  │
+│  │ :Arabica_Heirloom a :CoffeeVariety .                             │  │
+│  │ :Washed a :ProcessingMethod .                                    │  │
+│  │ :Cooperative_Yirgacheffe a :Cooperative .                        │  │
+│  └──────────────────────────────────────────────────────────────────┘  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ⚠️  Common Errors & Solutions                                          │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ❌ "Column not found"                                                  │
+│     → Check CSV column order matches @A, @B, @C...                     │
+│                                                                         │
+│  ❌ "Property not found"                                                │
+│     → Define Object/Data Properties in Protégé first                   │
+│                                                                         │
+│  ❌ "Data type mismatch"                                                │
+│     → Add (xsd:integer) for numbers, (xsd:string) for text            │
+│                                                                         │
+│  ❌ "Invalid syntax"                                                    │
+│     → Check commas after each Facts line (except last)                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ✅ Success Checklist                                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ☐ Cellfie plugin installed                                            │
+│  ☐ coffeeland.rdf opened in Protégé                                    │
+│  ☐ coffee_farms_data.csv downloaded                                    │
+│  ☐ CSV loaded in Cellfie                                               │
+│  ☐ Rules copied and pasted                                             │
+│  ☐ Rules validated (green checkmark)                                   │
+│  ☐ Individuals generated successfully                                  │
+│  ☐ 24 Farm individuals visible in Individuals tab                      │
+│  ☐ Object properties verified (isLocatedIn, cultivates, etc.)          │
+│  ☐ Data properties verified (farmSize, annualProduction)               │
+│  ☐ File saved                                                          │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 🔗 Download Links                                                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CSV Files:                                                             │
+│  • coffee_farms_data.csv                                                │
+│    https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/      │
+│    coffee_farms_data.csv                                                │
+│                                                                         │
+│  • farm_object_properties.csv                                           │
+│  • farm_data_properties.csv                                             │
+│                                                                         │
+│  Google Sheets Instructions:                                            │
+│  → Import CSV files to Google Sheets for easier editing                │
+│  → File → Import → Upload → Select CSV                                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  💡 Tip: Save this file and keep it open while working with Cellfie!    ║
+║  📖 Full documentation: cellfie_rules_guide.md                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+Generated: 2025-12-29
+For: CoffeeLand Ontology Project
+Contact: https://github.com/doogiesdj/CoffeeLand

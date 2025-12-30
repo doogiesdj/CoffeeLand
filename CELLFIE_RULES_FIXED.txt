@@ -1,0 +1,162 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Cellfie Rules - Coffee Farm Data Import (Fixed Version)        ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29                                                ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CSV Column Mapping
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A: Country
+B: Farm_Name
+C: Region
+D: Coffee_Variety
+E: Altitude_Range_meters (예: "1800-2200")
+F: Processing_Method
+G: Certifications
+H: Cooperative_Membership
+I: Farm_Size
+J: Annual_Production_bags
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 FIXED RULES - 복사해서 Cellfie에 붙여넣으세요
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Rule 1: Farm Individual 생성 (기본 속성)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_@B
+Types: Farm
+Facts:
+  hasName @B,
+  hasRegion @C,
+  hasAltitudeRange @E,
+  hasFarmSize @I,
+  hasAnnualProduction @J
+
+
+Rule 2: Country 관계 (isLocatedIn)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_@B
+Facts:
+  isLocatedIn http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#@A
+
+
+Rule 3: CoffeeVariety 관계 (cultivates)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_@B
+Facts:
+  cultivates http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#@D
+
+
+Rule 4: ProcessingMethod 관계 (uses)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_@B
+Facts:
+  usesProcessingMethod http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#@F
+
+
+Rule 5: Cooperative 관계 (memberOf)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm_@B
+Facts:
+  memberOf http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#@H
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 주요 변경 사항
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ❌ 제거: SPLIT(@E,"-",0), SPLIT(@E,"-",1)
+   → XML 파싱 오류 방지를 위해 SPLIT 함수 제거
+   
+2. ✅ 대안: hasAltitudeRange @E
+   → 고도 범위를 문자열 그대로 저장 ("1800-2200")
+   → 필요시 나중에 수동으로 분리 가능
+
+3. ✅ 단순화: CONCAT(@B) → @B
+   → Farm 이름을 그대로 Individual ID로 사용
+   → 예: "Yirgacheffe_Kochere_Farm" → Farm_Yirgacheffe_Kochere_Farm
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 사용 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Protégé에서 Cellfie 플러그인 열기
+   Tools > Create axioms from Excel/CSV
+
+2. "Load data file" 클릭
+   → Coffee_Farm_Data.xlsx 선택
+
+3. Rule 입력 영역에 위의 Rule 1~5 복사/붙여넣기
+
+4. "Validate" 클릭 → 오류 확인
+
+5. "Generate" 클릭 → 24개 Farm Individual 생성
+
+6. Individuals 탭에서 확인
+   Classes > Farm 클릭 → 24개 농장 확인
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 성공 기준
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ 24개 Farm Individual 생성됨
+□ 각 Farm이 Country와 연결됨 (isLocatedIn)
+□ 각 Farm이 CoffeeVariety와 연결됨 (cultivates)
+□ hasName, hasRegion, hasAltitudeRange 속성 할당됨
+□ Reasoner 실행 시 오류 없음
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 예상 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: Farm_Yirgacheffe_Kochere_Farm
+  Types: Farm
+  Facts:
+    hasName "Yirgacheffe_Kochere_Farm"
+    hasRegion "Yirgacheffe"
+    hasAltitudeRange "1800-2200"
+    hasFarmSize "Medium"
+    hasAnnualProduction "150"
+    isLocatedIn Ethiopia
+    cultivates Arabica_Heirloom
+    usesProcessingMethod Washed
+    memberOf Cooperative_Yirgacheffe
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+❓ 고도 Min/Max 분리가 필요한 경우
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Excel에서 미리 분리:
+
+1. Coffee_Farm_Data.xlsx 열기
+2. E열 "Altitude_Range_meters" 오른쪽에 2개 열 추가:
+   - Altitude_Min
+   - Altitude_Max
+3. Excel 수식:
+   =LEFT(E2, FIND("-", E2)-1)    → Altitude_Min
+   =RIGHT(E2, LEN(E2)-FIND("-", E2))  → Altitude_Max
+4. 수식을 아래로 드래그
+5. 저장 후 Cellfie에서 사용:
+   hasAltitudeMin @K,
+   hasAltitudeMax @L
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 참고 링크
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Farm Data: https://5180-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffee_farms_data.csv
+Full Guide: /home/user/webapp/cellfie_rules_guide.md
+Quick Guide: /home/user/webapp/CELLFIE_QUICK_GUIDE.txt
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+GitHub: https://github.com/doogiesdj/CoffeeLand

@@ -1,0 +1,291 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  Cellfie 정확한 Rule 문법 가이드 (공식 문서 기반)                ║
+║  CoffeeLand Ontology Project                                     ║
+║  Date: 2025-12-29 - Based on MappingMaster DSL Wiki             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 핵심 발견: 정확한 Cellfie 문법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 공식 문법 확인:
+   Source: https://github.com/protegeproject/mapping-master/wiki/MappingMasterDSL
+
+✅ 컬럼 참조 방식:
+   @A5     → A열 5행 참조
+   @B*     → B열의 현재 반복 행
+   @*2     → 현재 반복 열의 2행
+   @**     → 현재 반복 셀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 CSV Column Mapping (Coffee_Farm_Data.csv)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A: Country
+B: Farm_Name
+C: Region
+D: Coffee_Variety
+E: Altitude_Range_meters (예: "1800-2200")
+F: Processing_Method
+G: Certifications
+H: Cooperative_Membership
+I: Farm_Size
+J: Annual_Production_bags
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 올바른 Cellfie Rules (공식 문법 기반)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Individual: @B*
+Types: Farm
+Facts:
+  hasName @B*,
+  hasRegion @C*,
+  hasAltitudeRange @E*,
+  hasFarmSize @I*,
+  hasAnnualProduction @J*(xsd:integer),
+  isLocatedIn @A*(Class),
+  cultivates @D*(Class),
+  usesProcessingMethod @F*(Class),
+  memberOf @H*(Class)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 문법 설명
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Individual: @B*
+   → B열의 각 행을 반복하며 Individual 생성
+   → Farm_Name 값으로 Individual 이름 생성
+
+2. Types: Farm
+   → 모든 Individual을 Farm 클래스로 지정
+
+3. Facts: (속성 정의)
+   
+   a) Data Properties (리터럴 값):
+      hasName @B*                    → Farm 이름 (문자열)
+      hasRegion @C*                  → 지역 (문자열)
+      hasAltitudeRange @E*           → 고도 범위 (문자열)
+      hasFarmSize @I*                → 농장 크기 (문자열)
+      hasAnnualProduction @J*(xsd:integer)  → 생산량 (정수)
+   
+   b) Object Properties (다른 엔티티 참조):
+      isLocatedIn @A*(Class)         → Country 클래스 참조
+      cultivates @D*(Class)          → CoffeeVariety 클래스 참조
+      usesProcessingMethod @F*(Class) → ProcessingMethod 클래스 참조
+      memberOf @H*(Class)            → Cooperative 클래스 참조
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎓 Cellfie 문법 핵심 규칙
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 컬럼 참조:
+   @A5      → 특정 셀 (A열 5행)
+   @B*      → B열의 현재 반복 행
+   @*2      → 현재 반복 열의 2행
+   @**      → 현재 반복 셀 (행과 열 모두)
+
+2. 타입 지정:
+   @A5(Class)              → OWL 클래스로 해석
+   @B5(NamedIndividual)    → OWL Individual로 해석
+   @C5(xsd:integer)        → 정수 리터럴
+   @D5(xsd:float)          → 실수 리터럴
+   @E5(xsd:string)         → 문자열 리터럴 (기본값)
+
+3. 이름 인코딩:
+   @A5(rdf:ID)             → 셀 값을 직접 ID로 사용
+   @A5(rdfs:label)         → 자동 URI 생성 + label로 저장
+   @A5(mm:Location)        → 셀 위치 기반 URI 생성 (값 무시)
+
+4. 빈 셀 처리:
+   mm:SkipIfEmptyLocation          → 빈 셀이면 전체 표현식 건너뜀
+   mm:ProcessIfEmptyLocation       → 빈 셀이면 해당 부분만 건너뜀
+   mm:ErrorIfEmptyLocation         → 빈 셀이면 오류 발생
+   mm:DefaultLocationValue="..."   → 빈 셀의 기본값 지정
+
+5. 문자열 처리 함수:
+   mm:toUpperCase(@A5)             → 대문자 변환
+   mm:toLowerCase(@A5)             → 소문자 변환
+   mm:prepend("prefix_", @A5)      → 앞에 문자열 추가
+   mm:append(@A5, "_suffix")       → 뒤에 문자열 추가
+   mm:replace(",", ".", @A5)       → 문자 치환
+   mm:replaceAll("[^a-zA-Z0-9]","",@A5) → 정규식 치환
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 Protégé Cellfie 사용 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1: Protégé 열기
+   → coffeeland.rdf 열기
+
+Step 2: Cellfie 플러그인 실행
+   Tools > Create axioms from Excel workbook...
+
+Step 3: Excel 파일 선택
+   → Coffee_Farm_Data.xlsx 선택
+   → Cellfie 창이 열림
+
+Step 4: 범위 지정
+   Transformation Rule Edit Panel에서:
+   
+   Sheet Name: coffee_farms_data
+   Start Column: A
+   End Column: J
+   Start Row: 2      (헤더 제외)
+   End Row: 25       (24개 데이터 + 헤더)
+
+Step 5: Rule 입력
+   위의 Rule을 복사해서 붙여넣기:
+   
+   Individual: @B*
+   Types: Farm
+   Facts:
+     hasName @B*,
+     hasRegion @C*,
+     hasAltitudeRange @E*,
+     hasFarmSize @I*,
+     hasAnnualProduction @J*(xsd:integer),
+     isLocatedIn @A*(Class),
+     cultivates @D*(Class),
+     usesProcessingMethod @F*(Class),
+     memberOf @H*(Class)
+
+Step 6: Validate 클릭
+   → 문법 오류 확인
+   → 오류 없으면 다음 단계
+
+Step 7: Generate Axioms 클릭
+   → 24개 Farm Individual 생성
+   → 미리보기 확인
+
+Step 8: Import
+   → "Import to current ontology" 선택
+   → OK 클릭
+
+Step 9: 검증
+   Individuals 탭 > Farm 클래스
+   → 24개 Individual 확인
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ 주의사항
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 범위 지정 필수:
+   - Cellfie GUI에서 반드시 Start/End Row/Column 지정
+   - @B* 같은 와일드카드는 이 범위 내에서만 반복
+
+2. 기존 클래스 필요:
+   - Farm, Country, CoffeeVariety 등 클래스가 미리 존재해야 함
+   - 없으면 오류 발생
+
+3. 속성(Property) 필요:
+   - hasName, isLocatedIn, cultivates 등 속성이 미리 정의되어야 함
+   - 없으면 오류 발생
+
+4. 데이터 타입:
+   - 숫자 데이터는 반드시 xsd:integer 또는 xsd:float 지정
+   - 문자열은 타입 생략 가능 (기본값)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🆚 비교: 이전 시도 vs 올바른 문법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ 이전 시도 (오류 발생):
+   Individual: http://www.semanticweb.org/...#Farm_@B
+   Facts:
+     hasAltitudeMin SPLIT(@E,"-",0),
+     hasAltitudeMax SPLIT(@E,"-",1)
+
+문제점:
+   1. 전체 URI 불필요 (자동 생성됨)
+   2. SPLIT 함수 미지원
+   3. @ 기호 위치 오류
+
+✅ 올바른 문법:
+   Individual: @B*
+   Facts:
+     hasAltitudeRange @E*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 예상 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Row 2 (Ethiopia, Yirgacheffe_Kochere_Farm, ...):
+
+Individual: Yirgacheffe_Kochere_Farm
+  Types: Farm
+  Facts:
+    hasName "Yirgacheffe_Kochere_Farm"
+    hasRegion "Yirgacheffe"
+    hasAltitudeRange "1800-2200"
+    hasFarmSize "Medium"
+    hasAnnualProduction "150"^^xsd:integer
+    isLocatedIn Ethiopia
+    cultivates Arabica_Heirloom
+    usesProcessingMethod Washed
+    memberOf Cooperative_Yirgacheffe
+
+... (24개 Farm Individual 생성)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 추가 고급 기능 (선택사항)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 고도 Min/Max 분리 (정규식 사용):
+   
+   Individual: @B*
+   Types: Farm
+   Facts:
+     hasAltitudeMin @E*(xsd:integer mm:capturing("(\\d+)-")),
+     hasAltitudeMax @E*(xsd:integer mm:capturing("-(\\d+)"))
+
+2. 다중 인증 처리:
+   
+   # G열: "Fair Trade, Organic, Rainforest Alliance"
+   # → 3개 hasCertification 속성 생성
+   
+   (Cellfie에서 쉼표 분리는 수동으로 처리해야 함)
+
+3. URI 접두사 지정:
+   
+   Individual: @B*(mm:prefix="farm")
+   → farm:Yirgacheffe_Kochere_Farm 형태로 생성
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 체크리스트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Protégé에서:
+□ Farm, Country, CoffeeVariety 등 클래스 존재 확인
+□ hasName, isLocatedIn 등 속성 존재 확인
+□ Excel 파일에서 헤더 행 제외하고 범위 지정
+□ Rule에서 @B*, @C* 등 와일드카드 사용
+□ xsd:integer 같은 타입 지정
+□ Validate 통과
+□ Generate Axioms 성공
+□ 24개 Farm Individual 생성 확인
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 결론
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 정답: @B*, @C* 형태가 맞습니다!
+   → 공식 MappingMaster DSL 문서 확인
+   → @ 기호 + 컬럼 + * (와일드카드)
+
+❌ Python 스크립트는 임시 우회책:
+   → Cellfie 문법을 배우는 게 더 중요
+   → 향후 다른 데이터 추가 시 Rule 작성 가능
+
+📚 참고 문서:
+   https://github.com/protegeproject/cellfie-plugin
+   https://github.com/protegeproject/mapping-master/wiki/MappingMasterDSL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 이제 위의 올바른 Rule을 Protégé Cellfie에서 시도해보세요!
+
+Generated: 2025-12-29
+CoffeeLand Ontology Project
+Based on Official MappingMaster DSL Documentation

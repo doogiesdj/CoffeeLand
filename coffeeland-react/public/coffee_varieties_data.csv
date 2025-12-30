@@ -1,0 +1,11 @@
+Variety_Name,Species,Flavor_Profile,Origin_Country,Typical_Altitude_Range,Cup_Quality_Score,Disease_Resistance,Yield_Potential,Bean_Size
+Arabica_Heirloom,Arabica,Floral/Fruity/Wine-like,Ethiopia,1800-2200,88-94,Medium,Medium,Medium
+Caturra,Arabica,Sweet/Nutty/Chocolate,Colombia,1200-1800,82-88,Low,High,Medium
+Bourbon,Arabica,Sweet/Caramel/Balanced,Yemen,1000-2000,85-90,Low,Medium,Large
+Typica,Arabica,Clean/Sweet/Mild,Yemen,900-1800,83-88,Low,Low,Large
+SL28,Arabica,Complex/Black_currant/Citrus,Kenya,1500-2100,86-92,Medium,Medium,Large
+SL34,Arabica,Heavy_body/Wine-like/Citrus,Kenya,1500-2100,85-91,Medium,Medium,Large
+Catuai,Arabica,Sweet/Fruity/Nutty,Brazil,800-1600,80-86,Medium,High,Medium
+Mundo_Novo,Arabica,Chocolate/Nutty/Low_acidity,Brazil,600-1200,78-84,High,High,Large
+Robusta,Robusta,Earthy/Bitter/Full_body,Congo,200-800,70-78,Very_High,Very_High,Small
+Pacamara,Arabica,Floral/Fruity/Complex,El_Salvador,1200-1700,84-90,Medium,Medium,Very_Large

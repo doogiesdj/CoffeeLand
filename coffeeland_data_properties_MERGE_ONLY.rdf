@@ -1,0 +1,264 @@
+
+  <!-- CoffeeLand Ontology Data Properties -->
+  <!-- Generated: 2025-12-29 -->
+
+  <!-- Shared Property: hasName -->
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasName">
+    <rdfs:label>has name</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The name of the entity</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- Farm Properties -->
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasName">
+    <rdfs:label>has name</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The name of the entity</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasRegion">
+    <rdfs:label>has region</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The region where the farm is located</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAltitudeRange">
+    <rdfs:label>has altitude range</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The altitude range of the farm (e.g., 1800-2200 meters)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasFarmSize">
+    <rdfs:label>has farm size</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The size category of the farm (Small, Medium, Large)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAnnualProduction">
+    <rdfs:label>has annual production</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farm"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Annual production in bags (1 bag = 60 kg)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- Country Properties -->
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasContinent">
+    <rdfs:label>has continent</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>The continent where the country is located</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasCoffeeProductionRank">
+    <rdfs:label>has coffee production rank</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Global ranking in coffee production</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAnnualProductionTons">
+    <rdfs:label>has annual production tons</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Annual coffee production in metric tons</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasPrimaryVariety">
+    <rdfs:label>has primary variety</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Primary coffee variety grown in the country</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasGrowingRegions">
+    <rdfs:label>has growing regions</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Main coffee growing regions</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasHarvestSeason">
+    <rdfs:label>has harvest season</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Coffee harvest season months</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasExportPercentage">
+    <rdfs:label>has export percentage</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Percentage of production exported</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasQualityGrade">
+    <rdfs:label>has quality grade</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Overall quality grade (Specialty, Commercial, etc.)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- CoffeeVariety Properties -->
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasSpecies">
+    <rdfs:label>has species</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Coffee species (Arabica, Robusta, etc.)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasFlavorProfile">
+    <rdfs:label>has flavor profile</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Characteristic flavor profile</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasTypicalAltitudeRange">
+    <rdfs:label>has typical altitude range</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Typical growing altitude range</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasCupQualityScore">
+    <rdfs:label>has cup quality score</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Cup quality score range (e.g., 85-90)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasDiseaseResistance">
+    <rdfs:label>has disease resistance</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Level of disease resistance (Low, Medium, High, Very High)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasYieldPotential">
+    <rdfs:label>has yield potential</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Yield potential (Low, Medium, High, Very High)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasBeanSize">
+    <rdfs:label>has bean size</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#CoffeeVariety"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Bean size category (Small, Medium, Large, Very Large)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- ProcessingMethod Properties -->
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAlternativeNames">
+    <rdfs:label>has alternative names</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Alternative names for the processing method</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasDescription">
+    <rdfs:label>has description</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Description of the processing method</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasTypicalCountries">
+    <rdfs:label>has typical countries</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Countries where this method is commonly used</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasProcessingTimeDays">
+    <rdfs:label>has processing time days</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Processing time in days (e.g., 2-3, 21-30)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasWaterUsage">
+    <rdfs:label>has water usage</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Water usage level (Low, Medium, High)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasFlavorImpact">
+    <rdfs:label>has flavor impact</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Impact on coffee flavor profile</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasQualityLevel">
+    <rdfs:label>has quality level</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Typical quality level achieved</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasDefectRisk">
+    <rdfs:label>has defect risk</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Risk of defects (Low, Medium, High)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- Cooperative Properties -->
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasEstablishedYear">
+    <rdfs:label>has established year</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Year the cooperative was established</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasNumberOfMembers">
+    <rdfs:label>has number of members</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Number of cooperative members</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasTotalAreaHectares">
+    <rdfs:label>has total area hectares</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Total farming area in hectares</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasCertifications">
+    <rdfs:label>has certifications</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Certifications held (e.g., Fair Trade, Organic)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasAnnualProductionTons">
+    <rdfs:label>has annual production tons</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment>Annual production in metric tons</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#hasPrimaryMarket">
+    <rdfs:label>has primary market</rdfs:label>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment>Primary market (Export, Domestic, Export/Domestic)</rdfs:comment>
+  </owl:DatatypeProperty>
+
