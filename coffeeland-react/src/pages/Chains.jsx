@@ -37,8 +37,7 @@ const Chains = () => {
       countries: '80+',
       description: 'The world\'s largest coffeehouse chain, known for its premium coffee and cozy atmosphere.',
       specialty: 'Espresso-based drinks, seasonal beverages',
-      mission: 'To inspire and nurture the human spirit – one person, one cup and one neighborhood at a time.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/200px-Starbucks_Corporation_Logo_2011.svg.png'
+      mission: 'To inspire and nurture the human spirit – one person, one cup and one neighborhood at a time.'
     },
     'Costa Coffee': {
       founded: '1971',
@@ -47,8 +46,7 @@ const Chains = () => {
       countries: '32+',
       description: 'British multinational coffeehouse company, second-largest coffeehouse chain globally.',
       specialty: 'Signature blend coffee, expertly crafted beverages',
-      mission: 'Save the world from mediocre coffee.',
-      logo: 'https://i.imgur.com/QJZ6rHK.png'
+      mission: 'Save the world from mediocre coffee.'
     },
     'Dunkin Donuts': {
       founded: '1950',
@@ -57,8 +55,7 @@ const Chains = () => {
       countries: '36+',
       description: 'American multinational coffee and donut company, famous for coffee and baked goods.',
       specialty: 'Original Blend coffee, donuts, breakfast sandwiches',
-      mission: 'Make and serve the freshest, most delicious coffee and donuts quickly and courteously.',
-      logo: 'https://i.imgur.com/8KZ5JhH.png'
+      mission: 'Make and serve the freshest, most delicious coffee and donuts quickly and courteously.'
     },
     'Tim Hortons': {
       founded: '1964',
@@ -67,8 +64,7 @@ const Chains = () => {
       countries: '15+',
       description: 'Canadian multinational fast food restaurant chain, iconic in Canadian culture.',
       specialty: 'Double-double coffee, Timbits, breakfast items',
-      mission: 'Deliver superior quality products and services for our guests and communities.',
-      logo: 'https://i.imgur.com/X8ZK4yG.png'
+      mission: 'Deliver superior quality products and services for our guests and communities.'
     },
     'McCafe': {
       founded: '1993',
@@ -77,8 +73,7 @@ const Chains = () => {
       countries: '100+',
       description: 'Coffee-house-style food and beverage chain by McDonald\'s, offering premium coffee.',
       specialty: 'Espresso drinks, frappes, smoothies',
-      mission: 'Provide quality coffee at accessible prices worldwide.',
-      logo: 'https://i.imgur.com/mPZqPfH.png'
+      mission: 'Provide quality coffee at accessible prices worldwide.'
     },
     'Peet Coffee': {
       founded: '1966',
@@ -87,8 +82,7 @@ const Chains = () => {
       countries: '5+',
       description: 'American specialty coffee roaster and retailer, pioneer of the specialty coffee movement.',
       specialty: 'Small-batch roasted coffee, deep flavors',
-      mission: 'Inspire a lifelong love of great coffee through commitment to quality.',
-      logo: 'https://i.imgur.com/vR8ZN7m.png'
+      mission: 'Inspire a lifelong love of great coffee through commitment to quality.'
     },
     'Blue Bottle': {
       founded: '2002',
@@ -97,8 +91,7 @@ const Chains = () => {
       countries: '4+',
       description: 'Premium specialty coffee roaster and retailer, known for single-origin coffees.',
       specialty: 'Pour-over coffee, single-origin beans, artisanal approach',
-      mission: 'Deliciousness in every cup through careful sourcing and expert roasting.',
-      logo: 'https://i.imgur.com/kD3pqLX.png'
+      mission: 'Deliciousness in every cup through careful sourcing and expert roasting.'
     },
     'Caffe Nero': {
       founded: '1997',
@@ -107,8 +100,7 @@ const Chains = () => {
       countries: '10+',
       description: 'British coffee house chain offering authentic Italian coffee experience.',
       specialty: 'Italian espresso, handcrafted drinks, pastries',
-      mission: 'Create the best Italian coffee house experience.',
-      logo: 'https://i.imgur.com/7aBVfNm.png'
+      mission: 'Create the best Italian coffee house experience.'
     },
     'Caribou Coffee': {
       founded: '1992',
@@ -117,8 +109,7 @@ const Chains = () => {
       countries: '10+',
       description: 'American coffeehouse chain known for its cabin-like atmosphere and quality coffee.',
       specialty: 'Signature roasted coffee, seasonal drinks',
-      mission: 'Create day-making experiences that inspire and enrich lives.',
-      logo: 'https://i.imgur.com/ynZWJ8K.png'
+      mission: 'Create day-making experiences that inspire and enrich lives.'
     },
     'The Coffee Bean And Tea Leaf': {
       founded: '1963',
@@ -127,8 +118,7 @@ const Chains = () => {
       countries: '30+',
       description: 'American coffee chain offering premium coffee and tea from around the world.',
       specialty: 'Ice Blended drinks, hand-roasted coffee',
-      mission: 'Deliver superior quality and service with passion.',
-      logo: 'https://i.imgur.com/wN8fK5P.png'
+      mission: 'Deliver superior quality and service with passion.'
     },
     'Gloria Jeans': {
       founded: '1979',
@@ -137,8 +127,7 @@ const Chains = () => {
       countries: '40+',
       description: 'Australian coffee chain known for specialty flavored coffee.',
       specialty: 'Flavored coffee, chillers, hot chocolate',
-      mission: 'Serve the best coffee with genuine hospitality.',
-      logo: 'https://i.imgur.com/HG9pLkQ.png'
+      mission: 'Serve the best coffee with genuine hospitality.'
     },
     'Lavazza': {
       founded: '1895',
@@ -147,8 +136,7 @@ const Chains = () => {
       countries: '90+',
       description: 'Italian coffee company, one of the oldest and most prestigious in the world.',
       specialty: 'Italian espresso, premium blends',
-      mission: 'Spread Italian coffee culture and excellence worldwide.',
-      logo: 'https://i.imgur.com/2YvF7Zm.png'
+      mission: 'Spread Italian coffee culture and excellence worldwide.'
     },
     'Doutor Coffee': {
       founded: '1980',
@@ -157,8 +145,7 @@ const Chains = () => {
       countries: '5+',
       description: 'Japanese coffeehouse chain, largest coffee chain in Japan.',
       specialty: 'Japanese-style coffee, light meals',
-      mission: 'Provide comfortable spaces and quality coffee for daily life.',
-      logo: 'https://i.imgur.com/pZnK4wM.png'
+      mission: 'Provide comfortable spaces and quality coffee for daily life.'
     },
     'Luckin Coffee': {
       founded: '2017',
@@ -167,8 +154,7 @@ const Chains = () => {
       countries: '2+',
       description: 'Chinese coffee company, rapidly growing with technology-driven service.',
       specialty: 'Mobile ordering, affordable premium coffee',
-      mission: 'Make it easy for everyone to enjoy great coffee.',
-      logo: 'https://i.imgur.com/FhN9K2L.png'
+      mission: 'Make it easy for everyone to enjoy great coffee.'
     },
     'Coffee Project NY': {
       founded: '2015',
@@ -177,8 +163,7 @@ const Chains = () => {
       countries: '2+',
       description: 'Philippine specialty coffee chain focusing on quality and experience.',
       specialty: 'Specialty coffee, artisanal drinks',
-      mission: 'Elevate the coffee experience in Southeast Asia.',
-      logo: null
+      mission: 'Elevate the coffee experience in Southeast Asia.'
     },
     'Philz Coffee': {
       founded: '2003',
@@ -187,8 +172,7 @@ const Chains = () => {
       countries: '1+',
       description: 'American coffee company known for customized coffee blends.',
       specialty: 'Personalized blended coffee, unique flavors',
-      mission: 'Better the day of everyone we interact with.',
-      logo: null
+      mission: 'Better the day of everyone we interact with.'
     },
     'Intelligentsia Coffee': {
       founded: '1995',
@@ -197,8 +181,7 @@ const Chains = () => {
       countries: '1+',
       description: 'American specialty coffee roaster, pioneer in direct trade relationships.',
       specialty: 'Single-origin coffee, direct trade beans',
-      mission: 'Pursue the extraordinary cup and create meaningful relationships.',
-      logo: 'https://i.imgur.com/vJ8nKpL.png'
+      mission: 'Pursue the extraordinary cup and create meaningful relationships.'
     },
     'Ediya Coffee': {
       founded: '2001',
@@ -207,8 +190,7 @@ const Chains = () => {
       countries: '1+',
       description: 'South Korea\'s largest coffee chain, known for affordable quality coffee and wide accessibility.',
       specialty: 'Dutch coffee, seasonal beverages, affordable pricing',
-      mission: 'Provide high-quality coffee at reasonable prices for everyone.',
-      logo: null
+      mission: 'Provide high-quality coffee at reasonable prices for everyone.'
     },
     'A Twosome Place': {
       founded: '2002',
@@ -217,8 +199,7 @@ const Chains = () => {
       countries: '2+',
       description: 'Premium Korean dessert café chain specializing in coffee and fresh desserts.',
       specialty: 'Cake & coffee pairing, premium desserts, cozy atmosphere',
-      mission: 'Create moments of happiness through quality coffee and desserts.',
-      logo: null
+      mission: 'Create moments of happiness through quality coffee and desserts.'
     },
     'Mega Coffee': {
       founded: '2017',
@@ -227,8 +208,7 @@ const Chains = () => {
       countries: '1+',
       description: 'Fast-growing Korean coffee franchise known for large-size drinks at competitive prices.',
       specialty: 'Mega-sized beverages, value pricing, diverse menu',
-      mission: 'Deliver great taste and generous portions at affordable prices.',
-      logo: null
+      mission: 'Deliver great taste and generous portions at affordable prices.'
     },
     'Compose Coffee': {
       founded: '2014',
@@ -237,8 +217,7 @@ const Chains = () => {
       countries: '1+',
       description: 'Rapidly expanding Korean coffee franchise known for low prices and consistent quality.',
       specialty: 'Affordable premium coffee, convenience store model, rapid expansion',
-      mission: 'Make quality coffee accessible to everyone at the lowest prices.',
-      logo: null
+      mission: 'Make quality coffee accessible to everyone at the lowest prices.'
     },
     'Hollys Coffee': {
       founded: '1998',
@@ -247,8 +226,7 @@ const Chains = () => {
       countries: '3+',
       description: 'Premium Korean coffeehouse chain with a European café atmosphere and artisanal approach.',
       specialty: 'Belgian waffles, premium coffee, European café ambiance',
-      mission: 'Provide sophisticated coffee culture experience with European elegance.',
-      logo: null
+      mission: 'Provide sophisticated coffee culture experience with European elegance.'
     },
     'Paik\'s Coffee': {
       founded: '2006',
@@ -257,8 +235,7 @@ const Chains = () => {
       countries: '1+',
       description: 'Popular Korean coffee franchise founded by celebrity chef Paik Jong-won, known for affordable prices and consistent quality.',
       specialty: 'Affordable espresso drinks, simple menu, rapid service',
-      mission: 'Provide quality coffee at the most reasonable prices for everyday enjoyment.',
-      logo: null
+      mission: 'Provide quality coffee at the most reasonable prices for everyday enjoyment.'
     }
   };
 
@@ -278,8 +255,7 @@ const Chains = () => {
       countries: 'N/A',
       description: 'A prominent coffee chain serving quality coffee to customers worldwide.',
       specialty: 'Premium coffee and beverages',
-      mission: 'Deliver exceptional coffee experiences to customers.',
-      logo: 'https://via.placeholder.com/200x100?text=Coffee+Chain'
+      mission: 'Deliver exceptional coffee experiences to customers.'
     };
   };
 
@@ -353,45 +329,8 @@ const Chains = () => {
             </button>
             
             <div className="modal-header modal-header-green">
-              {(() => {
-                const info = getChainInfo(selectedChain.name);
-                return (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
-                    {info.logo && (
-                      <div 
-                        style={{ 
-                          background: 'white',
-                          padding: '0.5rem 1rem',
-                          borderRadius: '8px',
-                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                          minWidth: '120px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
-                        }}
-                      >
-                        <img 
-                          src={info.logo} 
-                          alt={`${selectedChain.name} logo`}
-                          style={{ 
-                            maxHeight: '60px', 
-                            maxWidth: '100%',
-                            objectFit: 'contain',
-                            display: 'block'
-                          }}
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                          }}
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <Users className="modal-icon" style={{ display: 'inline', marginRight: '8px' }} />
-                      <h2 style={{ display: 'inline', margin: 0 }}>{selectedChain.name}</h2>
-                    </div>
-                  </div>
-                );
-              })()}
+              <Users className="modal-icon" />
+              <h2>{selectedChain.name}</h2>
             </div>
 
             <div className="modal-body">
