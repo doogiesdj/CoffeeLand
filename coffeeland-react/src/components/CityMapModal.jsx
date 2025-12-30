@@ -1,10 +1,13 @@
-import { useState, useCallback } from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { X, MapPin } from 'lucide-react';
+import { useState, useCallback, useRef } from 'react';
+import { GoogleMap, useLoadScript, Marker, InfoWindow, StreetViewPanorama } from '@react-google-maps/api';
+import { X, MapPin, Navigation } from 'lucide-react';
 import '../styles/CityMapModal.css';
 
 const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
   const [selectedStore, setSelectedStore] = useState(null);
+  const [showStreetView, setShowStreetView] = useState(false);
+  const [streetViewPosition, setStreetViewPosition] = useState(null);
+  const mapRef = useRef(null);
 
   // Load Google Maps script once
   const { isLoaded, loadError } = useLoadScript({
@@ -45,13 +48,23 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
   const mapOptions = {
     disableDefaultUI: false,
     zoomControl: true,
-    streetViewControl: false,
-    mapTypeControl: false,
+    streetViewControl: true,
+    mapTypeControl: true,
     fullscreenControl: true,
   };
 
   const onMapClick = useCallback(() => {
     setSelectedStore(null);
+  }, []);
+
+  const openStreetView = useCallback((position) => {
+    setStreetViewPosition(position);
+    setShowStreetView(true);
+  }, []);
+
+  const closeStreetView = useCallback(() => {
+    setShowStreetView(false);
+    setStreetViewPosition(null);
   }, []);
 
   if (!isOpen) return null;
@@ -157,6 +170,13 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
                   <p>{selectedStore.address}</p>
                   {selectedStore.hours && <p><strong>Hours:</strong> {selectedStore.hours}</p>}
                   {selectedStore.phone && <p><strong>Phone:</strong> {selectedStore.phone}</p>}
+                  <button 
+                    className="street-view-button"
+                    onClick={() => openStreetView(selectedStore.position)}
+                  >
+                    <Navigation size={16} />
+                    View Street View
+                  </button>
                 </div>
               </InfoWindow>
             )}
@@ -171,12 +191,23 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
                 <div 
                   key={index} 
                   className="store-item"
-                  onClick={() => setSelectedStore(store)}
                 >
                   <MapPin size={16} />
-                  <div>
-                    <strong>{store.name}</strong>
-                    <p>{store.address}</p>
+                  <div className="store-item-content">
+                    <div onClick={() => setSelectedStore(store)}>
+                      <strong>{store.name}</strong>
+                      <p>{store.address}</p>
+                    </div>
+                    <button 
+                      className="store-street-view-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openStreetView(store.position);
+                      }}
+                      title="View in Street View"
+                    >
+                      <Navigation size={14} />
+                    </button>
                   </div>
                 </div>
               ))}
@@ -184,6 +215,39 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
           </div>
         </div>
       </div>
+
+      {/* Street View Modal */}
+      {showStreetView && streetViewPosition && (
+        <div className="street-view-overlay">
+          <div className="street-view-container">
+            <div className="street-view-header">
+              <h3>Street View</h3>
+              <button className="street-view-close" onClick={closeStreetView}>
+                <X size={24} />
+              </button>
+            </div>
+            <div className="street-view-body">
+              <GoogleMap
+                mapContainerStyle={{ width: '100%', height: '100%' }}
+                center={streetViewPosition}
+                zoom={15}
+              >
+                <StreetViewPanorama
+                  position={streetViewPosition}
+                  visible={true}
+                  options={{
+                    enableCloseButton: false,
+                    addressControl: true,
+                    fullscreenControl: true,
+                    motionTracking: false,
+                    motionTrackingControl: false,
+                  }}
+                />
+              </GoogleMap>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
