@@ -48,7 +48,7 @@ const Chains = () => {
       description: 'British multinational coffeehouse company, second-largest coffeehouse chain globally.',
       specialty: 'Signature blend coffee, expertly crafted beverages',
       mission: 'Save the world from mediocre coffee.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Costa_Coffee_logo.svg/200px-Costa_Coffee_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2020/11/Costa-Coffee-Logo.png'
     },
     'Dunkin Donuts': {
       founded: '1950',
@@ -58,7 +58,7 @@ const Chains = () => {
       description: 'American multinational coffee and donut company, famous for coffee and baked goods.',
       specialty: 'Original Blend coffee, donuts, breakfast sandwiches',
       mission: 'Make and serve the freshest, most delicious coffee and donuts quickly and courteously.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Dunkin%27_logo.svg/200px-Dunkin%27_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2020/12/Dunkin-Donuts-Logo.png'
     },
     'Tim Hortons': {
       founded: '1964',
@@ -68,7 +68,7 @@ const Chains = () => {
       description: 'Canadian multinational fast food restaurant chain, iconic in Canadian culture.',
       specialty: 'Double-double coffee, Timbits, breakfast items',
       mission: 'Deliver superior quality products and services for our guests and communities.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b8/Tim_Hortons_logo.svg/200px-Tim_Hortons_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2021/10/Tim-Hortons-Logo.png'
     },
     'McCafe': {
       founded: '1993',
@@ -78,7 +78,7 @@ const Chains = () => {
       description: 'Coffee-house-style food and beverage chain by McDonald\'s, offering premium coffee.',
       specialty: 'Espresso drinks, frappes, smoothies',
       mission: 'Provide quality coffee at accessible prices worldwide.',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/200px-McDonald%27s_Golden_Arches.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2020/04/McDonalds-Logo.png'
     },
     'Peet Coffee': {
       founded: '1966',
@@ -88,7 +88,7 @@ const Chains = () => {
       description: 'American specialty coffee roaster and retailer, pioneer of the specialty coffee movement.',
       specialty: 'Small-batch roasted coffee, deep flavors',
       mission: 'Inspire a lifelong love of great coffee through commitment to quality.',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Peet%27s_Logo.svg/200px-Peet%27s_Logo.svg.png'
+      logo: 'https://1000logos.net/wp-content/uploads/2020/09/Peets-Coffee-Logo.png'
     },
     'Blue Bottle': {
       founded: '2002',
@@ -98,7 +98,7 @@ const Chains = () => {
       description: 'Premium specialty coffee roaster and retailer, known for single-origin coffees.',
       specialty: 'Pour-over coffee, single-origin beans, artisanal approach',
       mission: 'Deliciousness in every cup through careful sourcing and expert roasting.',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Blue_Bottle_Coffee_logo.svg/200px-Blue_Bottle_Coffee_logo.svg.png'
+      logo: 'https://1000logos.net/wp-content/uploads/2020/09/Blue-Bottle-Coffee-Logo.png'
     },
     'Caffe Nero': {
       founded: '1997',
@@ -108,7 +108,7 @@ const Chains = () => {
       description: 'British coffee house chain offering authentic Italian coffee experience.',
       specialty: 'Italian espresso, handcrafted drinks, pastries',
       mission: 'Create the best Italian coffee house experience.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Caffe_Nero_logo.svg/200px-Caffe_Nero_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2022/01/Caffe-Nero-Logo.png'
     },
     'Caribou Coffee': {
       founded: '1992',
@@ -118,7 +118,7 @@ const Chains = () => {
       description: 'American coffeehouse chain known for its cabin-like atmosphere and quality coffee.',
       specialty: 'Signature roasted coffee, seasonal drinks',
       mission: 'Create day-making experiences that inspire and enrich lives.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Caribou_Coffee_logo.svg/200px-Caribou_Coffee_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2022/01/Caribou-Coffee-Logo.png'
     },
     'The Coffee Bean And Tea Leaf': {
       founded: '1963',
@@ -128,7 +128,7 @@ const Chains = () => {
       description: 'American coffee chain offering premium coffee and tea from around the world.',
       specialty: 'Ice Blended drinks, hand-roasted coffee',
       mission: 'Deliver superior quality and service with passion.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a0/The_Coffee_Bean_%26_Tea_Leaf_logo.svg/200px-The_Coffee_Bean_%26_Tea_Leaf_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2022/01/Coffee-Bean-Tea-Leaf-Logo.png'
     },
     'Gloria Jeans': {
       founded: '1979',
@@ -138,7 +138,7 @@ const Chains = () => {
       description: 'Australian coffee chain known for specialty flavored coffee.',
       specialty: 'Flavored coffee, chillers, hot chocolate',
       mission: 'Serve the best coffee with genuine hospitality.',
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Gloria_Jean%27s_Coffees_logo.svg/200px-Gloria_Jean%27s_Coffees_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2022/01/Gloria-Jeans-Logo.png'
     },
     'Lavazza': {
       founded: '1895',
@@ -148,7 +148,7 @@ const Chains = () => {
       description: 'Italian coffee company, one of the oldest and most prestigious in the world.',
       specialty: 'Italian espresso, premium blends',
       mission: 'Spread Italian coffee culture and excellence worldwide.',
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lavazza_logo.svg/200px-Lavazza_logo.svg.png'
+      logo: 'https://logos-world.net/wp-content/uploads/2020/11/Lavazza-Logo.png'
     },
     'Doutor Coffee': {
       founded: '1980',
@@ -158,7 +158,7 @@ const Chains = () => {
       description: 'Japanese coffeehouse chain, largest coffee chain in Japan.',
       specialty: 'Japanese-style coffee, light meals',
       mission: 'Provide comfortable spaces and quality coffee for daily life.',
-      logo: 'https://www.doutor.co.jp/cms/wp-content/themes/dcm/common/img/logo.png'
+      logo: 'https://1000logos.net/wp-content/uploads/2020/09/Doutor-Coffee-Logo.png'
     },
     'Luckin Coffee': {
       founded: '2017',
@@ -168,7 +168,7 @@ const Chains = () => {
       description: 'Chinese coffee company, rapidly growing with technology-driven service.',
       specialty: 'Mobile ordering, affordable premium coffee',
       mission: 'Make it easy for everyone to enjoy great coffee.',
-      logo: 'https://s.yimg.com/ny/api/res/1.2/cqXd4qiJZQ8pMQIiK7j7Nw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM1OQ--/https://media.zenfs.com/en/luckin_coffee_articles_355/3ba3f31c9fdb4e6aaba3f1e8c96c7e1d'
+      logo: 'https://logos-world.net/wp-content/uploads/2021/11/Luckin-Coffee-Logo.png'
     },
     'Coffee Project NY': {
       founded: '2015',
@@ -178,7 +178,7 @@ const Chains = () => {
       description: 'Philippine specialty coffee chain focusing on quality and experience.',
       specialty: 'Specialty coffee, artisanal drinks',
       mission: 'Elevate the coffee experience in Southeast Asia.',
-      logo: 'https://coffeeprojectny.com/wp-content/uploads/2020/07/logo.png'
+      logo: 'https://via.placeholder.com/200x100/8B4513/FFFFFF?text=Coffee+Project+NY'
     },
     'Philz Coffee': {
       founded: '2003',
@@ -188,7 +188,7 @@ const Chains = () => {
       description: 'American coffee company known for customized coffee blends.',
       specialty: 'Personalized blended coffee, unique flavors',
       mission: 'Better the day of everyone we interact with.',
-      logo: 'https://www.philzcoffee.com/static/images/philz-logo.svg'
+      logo: 'https://via.placeholder.com/200x100/4A90E2/FFFFFF?text=Philz+Coffee'
     },
     'Intelligentsia Coffee': {
       founded: '1995',
@@ -198,7 +198,7 @@ const Chains = () => {
       description: 'American specialty coffee roaster, pioneer in direct trade relationships.',
       specialty: 'Single-origin coffee, direct trade beans',
       mission: 'Pursue the extraordinary cup and create meaningful relationships.',
-      logo: 'https://www.intelligentsiacoffee.com/static/logo-8a9c3b5c4c8f8c9e8b8f8c8f8c8f8c8f.svg'
+      logo: 'https://1000logos.net/wp-content/uploads/2020/09/Intelligentsia-Coffee-Logo.png'
     },
     'Ediya Coffee': {
       founded: '2001',
@@ -208,7 +208,7 @@ const Chains = () => {
       description: 'South Korea\'s largest coffee chain, known for affordable quality coffee and wide accessibility.',
       specialty: 'Dutch coffee, seasonal beverages, affordable pricing',
       mission: 'Provide high-quality coffee at reasonable prices for everyone.',
-      logo: 'https://www.ediya.com/files/brand/brand_img01.png'
+      logo: 'https://via.placeholder.com/200x100/FF6B35/FFFFFF?text=EDIYA+Coffee'
     },
     'A Twosome Place': {
       founded: '2002',
@@ -218,7 +218,7 @@ const Chains = () => {
       description: 'Premium Korean dessert café chain specializing in coffee and fresh desserts.',
       specialty: 'Cake & coffee pairing, premium desserts, cozy atmosphere',
       mission: 'Create moments of happiness through quality coffee and desserts.',
-      logo: 'https://www.atwosome.co.kr/resource/images/common/logo.png'
+      logo: 'https://via.placeholder.com/200x100/E84855/FFFFFF?text=A+Twosome+Place'
     },
     'Mega Coffee': {
       founded: '2017',
@@ -228,7 +228,7 @@ const Chains = () => {
       description: 'Fast-growing Korean coffee franchise known for large-size drinks at competitive prices.',
       specialty: 'Mega-sized beverages, value pricing, diverse menu',
       mission: 'Deliver great taste and generous portions at affordable prices.',
-      logo: 'https://www.megacoffee.me/img/common/logo.png'
+      logo: 'https://via.placeholder.com/200x100/FFD700/000000?text=MEGA+Coffee'
     },
     'Compose Coffee': {
       founded: '2014',
@@ -238,7 +238,7 @@ const Chains = () => {
       description: 'Rapidly expanding Korean coffee franchise known for low prices and consistent quality.',
       specialty: 'Affordable premium coffee, convenience store model, rapid expansion',
       mission: 'Make quality coffee accessible to everyone at the lowest prices.',
-      logo: 'https://composecoffee.com/images/logo.png'
+      logo: 'https://via.placeholder.com/200x100/2ECC71/FFFFFF?text=COMPOSE+Coffee'
     },
     'Hollys Coffee': {
       founded: '1998',
@@ -248,7 +248,7 @@ const Chains = () => {
       description: 'Premium Korean coffeehouse chain with a European café atmosphere and artisanal approach.',
       specialty: 'Belgian waffles, premium coffee, European café ambiance',
       mission: 'Provide sophisticated coffee culture experience with European elegance.',
-      logo: 'https://www.hollys.co.kr/images/common/logo.png'
+      logo: 'https://via.placeholder.com/200x100/8B4513/FFFFFF?text=HOLLYS+Coffee'
     },
     'Paik\'s Coffee': {
       founded: '2006',
@@ -258,7 +258,7 @@ const Chains = () => {
       description: 'Popular Korean coffee franchise founded by celebrity chef Paik Jong-won, known for affordable prices and consistent quality.',
       specialty: 'Affordable espresso drinks, simple menu, rapid service',
       mission: 'Provide quality coffee at the most reasonable prices for everyday enjoyment.',
-      logo: 'https://paikdabang.com/wp-content/themes/paikdabang/assets/images/common/logo.png'
+      logo: 'https://via.placeholder.com/200x100/DC143C/FFFFFF?text=Paiks+Coffee'
     }
   };
 
