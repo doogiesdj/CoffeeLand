@@ -218,8 +218,13 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
 
       {/* Street View Modal */}
       {showStreetView && streetViewPosition && (
-        <div className="street-view-overlay">
-          <div className="street-view-container">
+        <div className="street-view-overlay" onClick={(e) => {
+          // Only close if clicking the backdrop, not the content
+          if (e.target === e.currentTarget) {
+            closeStreetView();
+          }
+        }}>
+          <div className="street-view-container" onClick={(e) => e.stopPropagation()}>
             <div className="street-view-header">
               <h3>Street View</h3>
               <button className="street-view-close" onClick={closeStreetView}>

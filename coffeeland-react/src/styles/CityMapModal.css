@@ -344,6 +344,11 @@
   overflow: hidden;
 }
 
+/* Prevent clicks from propagating */
+.street-view-body * {
+  pointer-events: auto;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .map-modal-container {
@@ -365,6 +370,15 @@
 
   .map-modal-body {
     height: 400px;
+  }
+
+  .street-view-overlay {
+    padding: 0.5rem;
+  }
+
+  .street-view-container {
+    width: 100%;
+    height: 90vh;
   }
 }
 
