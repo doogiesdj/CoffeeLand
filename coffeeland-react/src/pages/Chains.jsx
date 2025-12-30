@@ -2,11 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Users, MapPin, X, Store, Globe, TrendingUp } from 'lucide-react';
 import { useRDFData } from '../hooks/useRDFData';
+import CityMapModal from '../components/CityMapModal';
+import { generateStoreLocations } from '../utils/storeLocations';
 import '../styles/EntityPage.css';
 
 const Chains = () => {
   const { data, loading, error } = useRDFData();
   const [selectedChain, setSelectedChain] = useState(null);
+  const [mapModalOpen, setMapModalOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedChainForMap, setSelectedChainForMap] = useState(null);
   const [searchParams] = useSearchParams();
   const chainRefs = useRef({});
   
@@ -247,6 +252,19 @@ const Chains = () => {
     setSelectedChain(null);
   };
 
+  const handleCityClick = (city, chainName, event) => {
+    event.stopPropagation(); // Prevent chain modal from opening
+    setSelectedCity(city);
+    setSelectedChainForMap(chainName);
+    setMapModalOpen(true);
+  };
+
+  const closeMapModal = () => {
+    setMapModalOpen(false);
+    setSelectedCity(null);
+    setSelectedChainForMap(null);
+  };
+
   const getChainInfo = (chainName) => {
     return chainInfo[chainName] || {
       founded: 'N/A',
@@ -292,7 +310,15 @@ const Chains = () => {
                 <h4><MapPin size={16} /> Operates In</h4>
                 <div className="tag-list">
                   {chain.operatesIn.map((city, i) => (
-                    <span key={i} className="tag location-tag">{city.name}</span>
+                    <span 
+                      key={i} 
+                      className="tag location-tag clickable-tag"
+                      onClick={(e) => handleCityClick(city.name, chain.name, e)}
+                      title={`View ${chain.name} locations in ${city.name}`}
+                    >
+                      <MapPin size={12} style={{ marginRight: '4px' }} />
+                      {city.name}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -370,15 +396,25 @@ const Chains = () => {
                     {selectedChain.operatesIn && (
                       <div className="modal-section">
                         <h3>Operating Locations</h3>
-                        <div className="info-row">
-                          <span className="info-label">Cities:</span>
-                          <span className="info-value">
-                            {selectedChain.operatesIn.map(city => city.name).join(', ')}
-                          </span>
+                        <div className="city-tags-container">
+                          {selectedChain.operatesIn.map((city, i) => (
+                            <span 
+                              key={i} 
+                              className="tag location-tag clickable-tag"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCityClick(city.name, selectedChain.name, e);
+                              }}
+                              title={`View ${selectedChain.name} locations in ${city.name}`}
+                            >
+                              <MapPin size={12} style={{ marginRight: '4px' }} />
+                              {city.name}
+                            </span>
+                          ))}
                         </div>
                         <p className="brand-description" style={{ marginTop: '1rem' }}>
                           {selectedChain.name} has established a strong presence in {selectedChain.operatesIn.length} {selectedChain.operatesIn.length === 1 ? 'city' : 'cities'}, 
-                          serving millions of customers with quality coffee and exceptional service.
+                          serving millions of customers with quality coffee and exceptional service. Click any city to view store locations on the map.
                         </p>
                       </div>
                     )}
@@ -429,6 +465,17 @@ const Chains = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* City Map Modal */}
+      {mapModalOpen && selectedCity && selectedChainForMap && (
+        <CityMapModal
+          isOpen={mapModalOpen}
+          onClose={closeMapModal}
+          city={selectedCity}
+          chainName={selectedChainForMap}
+          stores={generateStoreLocations(selectedCity, selectedChainForMap)}
+        />
       )}
     </div>
   );
