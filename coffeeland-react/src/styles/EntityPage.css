@@ -267,6 +267,13 @@
   gap: 1rem;
 }
 
+.modal-header img {
+  background: white;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .modal-header-green {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
