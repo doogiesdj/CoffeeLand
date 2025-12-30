@@ -1,10 +1,15 @@
 import { useState, useCallback } from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { X, MapPin } from 'lucide-react';
 import '../styles/CityMapModal.css';
 
 const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
   const [selectedStore, setSelectedStore] = useState(null);
+
+  // Load Google Maps script once
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyBFw0Qbyq9zTFTd-tUY6dN5QiVZoFD0R4o'
+  });
 
   // City coordinates (you can expand this list)
   const cityCoordinates = {
@@ -51,6 +56,64 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
 
   if (!isOpen) return null;
 
+  // Show loading state
+  if (!isLoaded) {
+    return (
+      <div className="map-modal-backdrop" onClick={onClose}>
+        <div className="map-modal-container" onClick={(e) => e.stopPropagation()}>
+          <div className="map-modal-header">
+            <div className="map-modal-title">
+              <MapPin className="map-modal-icon" />
+              <div>
+                <h2>{chainName} Locations</h2>
+                <p>{city}</p>
+              </div>
+            </div>
+            <button className="map-modal-close" onClick={onClose}>
+              <X size={24} />
+            </button>
+          </div>
+          <div className="map-modal-body" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+              <p>Loading map...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (loadError) {
+    return (
+      <div className="map-modal-backdrop" onClick={onClose}>
+        <div className="map-modal-container" onClick={(e) => e.stopPropagation()}>
+          <div className="map-modal-header">
+            <div className="map-modal-title">
+              <MapPin className="map-modal-icon" />
+              <div>
+                <h2>{chainName} Locations</h2>
+                <p>{city}</p>
+              </div>
+            </div>
+            <button className="map-modal-close" onClick={onClose}>
+              <X size={24} />
+            </button>
+          </div>
+          <div className="map-modal-body" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="error-message">
+              <p>Error loading Google Maps</p>
+              <p style={{ fontSize: '0.9rem', color: '#6b7280', marginTop: '0.5rem' }}>
+                Please check your API key configuration
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="map-modal-backdrop" onClick={onClose}>
       <div className="map-modal-container" onClick={(e) => e.stopPropagation()}>
@@ -68,38 +131,36 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
         </div>
         
         <div className="map-modal-body">
-          <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyBFw0Qbyq9zTFTd-tUY6dN5QiVZoFD0R4o'}>
-            <GoogleMap
-              mapContainerStyle={mapContainerStyle}
-              center={center}
-              zoom={12}
-              options={mapOptions}
-              onClick={onMapClick}
-            >
-              {stores.map((store, index) => (
-                <Marker
-                  key={index}
-                  position={store.position}
-                  onClick={() => setSelectedStore(store)}
-                  animation={window.google?.maps?.Animation?.DROP}
-                />
-              ))}
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={center}
+            zoom={12}
+            options={mapOptions}
+            onClick={onMapClick}
+          >
+            {stores.map((store, index) => (
+              <Marker
+                key={index}
+                position={store.position}
+                onClick={() => setSelectedStore(store)}
+                animation={window.google?.maps?.Animation?.DROP}
+              />
+            ))}
 
-              {selectedStore && (
-                <InfoWindow
-                  position={selectedStore.position}
-                  onCloseClick={() => setSelectedStore(null)}
-                >
-                  <div className="info-window-content">
-                    <h3>{selectedStore.name}</h3>
-                    <p>{selectedStore.address}</p>
-                    {selectedStore.hours && <p><strong>Hours:</strong> {selectedStore.hours}</p>}
-                    {selectedStore.phone && <p><strong>Phone:</strong> {selectedStore.phone}</p>}
-                  </div>
-                </InfoWindow>
-              )}
-            </GoogleMap>
-          </LoadScript>
+            {selectedStore && (
+              <InfoWindow
+                position={selectedStore.position}
+                onCloseClick={() => setSelectedStore(null)}
+              >
+                <div className="info-window-content">
+                  <h3>{selectedStore.name}</h3>
+                  <p>{selectedStore.address}</p>
+                  {selectedStore.hours && <p><strong>Hours:</strong> {selectedStore.hours}</p>}
+                  {selectedStore.phone && <p><strong>Phone:</strong> {selectedStore.phone}</p>}
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
         </div>
 
         <div className="map-modal-footer">
