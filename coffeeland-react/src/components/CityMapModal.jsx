@@ -7,11 +7,13 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
   const [selectedStore, setSelectedStore] = useState(null);
   const [showStreetView, setShowStreetView] = useState(false);
   const [streetViewPosition, setStreetViewPosition] = useState(null);
+  const [streetViewPov, setStreetViewPov] = useState(null);
   const mapRef = useRef(null);
 
-  // Load Google Maps script once
+  // Load Google Maps script once with geometry library
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyBFw0Qbyq9zTFTd-tUY6dN5QiVZoFD0R4o'
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyBFw0Qbyq9zTFTd-tUY6dN5QiVZoFD0R4o',
+    libraries: ['geometry'] // Required for computeHeading
   });
 
   // City coordinates (you can expand this list)
@@ -57,14 +59,53 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
     setSelectedStore(null);
   }, []);
 
-  const openStreetView = useCallback((position) => {
-    setStreetViewPosition(position);
-    setShowStreetView(true);
+  const openStreetView = useCallback((position, storeName) => {
+    // Use Street View Service to find the nearest panorama
+    if (window.google && window.google.maps) {
+      const streetViewService = new window.google.maps.StreetViewService();
+      const RADIUS = 50; // Search within 50 meters
+      
+      streetViewService.getPanorama(
+        { location: position, radius: RADIUS },
+        (data, status) => {
+          if (status === 'OK' && data && data.location) {
+            // Use the exact panorama location
+            const panoramaLocation = data.location.latLng.toJSON();
+            setStreetViewPosition(panoramaLocation);
+            
+            // Calculate heading from panorama to store
+            const heading = window.google.maps.geometry.spherical.computeHeading(
+              new window.google.maps.LatLng(panoramaLocation.lat, panoramaLocation.lng),
+              new window.google.maps.LatLng(position.lat, position.lng)
+            );
+            
+            setStreetViewPov({
+              heading: heading,
+              pitch: 0 // Level view
+            });
+            
+            setShowStreetView(true);
+          } else {
+            // Fallback to original position if no Street View found
+            console.warn('No Street View found nearby for', storeName);
+            setStreetViewPosition(position);
+            setStreetViewPov({ heading: 0, pitch: 0 });
+            setShowStreetView(true);
+          }
+        }
+      );
+    } else {
+      // Fallback if Google Maps not loaded
+      setStreetViewPosition(position);
+      setStreetViewPov({ heading: 0, pitch: 0 });
+      setShowStreetView(true);
+    }
   }, []);
 
   const closeStreetView = useCallback(() => {
     setShowStreetView(false);
     setStreetViewPosition(null);
+    setStreetViewPov(null);
   }, []);
 
   if (!isOpen) return null;
@@ -172,7 +213,7 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
                   {selectedStore.phone && <p><strong>Phone:</strong> {selectedStore.phone}</p>}
                   <button 
                     className="street-view-button"
-                    onClick={() => openStreetView(selectedStore.position)}
+                    onClick={() => openStreetView(selectedStore.position, selectedStore.name)}
                   >
                     <Navigation size={16} />
                     View Street View
@@ -202,7 +243,7 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
                       className="store-street-view-btn"
                       onClick={(e) => {
                         e.stopPropagation();
-                        openStreetView(store.position);
+                        openStreetView(store.position, store.name);
                       }}
                       title="View in Street View"
                     >
@@ -240,12 +281,14 @@ const CityMapModal = ({ isOpen, onClose, city, chainName, stores }) => {
                 <StreetViewPanorama
                   position={streetViewPosition}
                   visible={true}
+                  pov={streetViewPov}
                   options={{
                     enableCloseButton: false,
                     addressControl: true,
                     fullscreenControl: true,
                     motionTracking: false,
                     motionTrackingControl: false,
+                    pov: streetViewPov
                   }}
                 />
               </GoogleMap>
