@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2/"
+     xml:base="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <!-- Port Individuals -->
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Santos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Santos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Santos</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Santos</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Brazil</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5000000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2800000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-23.9355</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-46.3272</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Hamburg -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Hamburg">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Hamburg</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hamburg</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Germany</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3500000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Roasted Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">53.5511</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.9937</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Antwerp -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Antwerp">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Antwerp</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Antwerp</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Belgium</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2800000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1200000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">51.2194</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.4025</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Rotterdam -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Rotterdam">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Rotterdam</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rotterdam</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Netherlands</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4200000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green and Roasted Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1800000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">51.9244</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">4.4777</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_NewOrleans -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_NewOrleans">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of New Orleans</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">New Orleans</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">USA</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3000000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">950000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">29.9511</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-90.0715</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_LongBeach -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_LongBeach">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Long Beach</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Long Beach</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">USA</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2500000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coffee Products</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">800000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">33.7701</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-118.1937</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Mombasa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Mombasa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Mombasa</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mombasa</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kenya</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1800000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">650000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-4.0435</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">39.6682</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_HoChiMinh -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_HoChiMinh">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Ho Chi Minh</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ho Chi Minh City</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vietnam</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2200000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Robusta Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">720000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">10.7769</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">106.7009</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Genoa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Genoa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Genoa</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Genoa</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Italy</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Specialty Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">420000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">44.4056</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">8.9463</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Singapore -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Singapore">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Singapore</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Singapore</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Singapore</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3800000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coffee Re-export</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">980000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.3521</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">103.8198</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Tokyo -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Tokyo">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Tokyo</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tokyo</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Japan</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2100000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Imported Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">530000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">35.6262</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">139.7745</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Busan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Busan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Busan</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Busan</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">South Korea</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1900000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coffee Import</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">410000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">35.1796</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">129.0756</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Felixstowe -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Felixstowe">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Felixstowe</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Felixstowe</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UK</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1600000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coffee Products</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">380000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">51.9606</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.3511</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Valencia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Valencia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Valencia</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Valencia</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spain</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1400000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">340000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">39.4699</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-0.3763</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Sydney -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Sydney">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Sydney</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sydney</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Australia</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1200000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Coffee Import</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">290000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-33.8688</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">151.2093</hasLongitude>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

@@ -1,0 +1,302 @@
+=================================================================
+PORT & WAREHOUSE DATA IMPORT GUIDE FOR COFFEELAND ONTOLOGY
+=================================================================
+
+📦 PACKAGE CONTENTS
+=================================================================
+
+CSV Data Files:
+  • coffee_ports_data.csv (15 Ports)
+  • coffee_warehouses_data.csv (20 Warehouses)
+
+RDF Individual Files:
+  • coffee_ports_individuals.rdf (15 Port individuals)
+  • coffee_warehouses_individuals.rdf (20 Warehouse individuals)
+  • coffee_logistics_individuals.rdf ⭐ (Combined: 35 individuals)
+
+Conversion Script:
+  • csv_to_rdf_logistics_v2.py (Python converter)
+
+=================================================================
+📊 DATA OVERVIEW
+=================================================================
+
+PORTS (15 individuals):
+  ✓ Port_Santos (Brazil) - 2.8M tons/year
+  ✓ Port_Hamburg (Germany) - 1.5M tons/year
+  ✓ Port_Antwerp (Belgium) - 1.2M tons/year
+  ✓ Port_Rotterdam (Netherlands) - 1.8M tons/year
+  ✓ Port_NewOrleans (USA) - 950K tons/year
+  ✓ Port_LongBeach (USA) - 800K tons/year
+  ✓ Port_Mombasa (Kenya) - 650K tons/year
+  ✓ Port_HoChiMinh (Vietnam) - 720K tons/year
+  ✓ Port_Genoa (Italy) - 420K tons/year
+  ✓ Port_Singapore (Singapore) - 980K tons/year
+  ✓ Port_Tokyo (Japan) - 530K tons/year
+  ✓ Port_Busan (South Korea) - 410K tons/year
+  ✓ Port_Felixstowe (UK) - 380K tons/year
+  ✓ Port_Valencia (Spain) - 340K tons/year
+  ✓ Port_Sydney (Australia) - 290K tons/year
+
+Port Data Properties:
+  - hasName (Port name)
+  - hasCity (City location)
+  - hasCountry (Country)
+  - hasCapacity (Total capacity in tons)
+  - handlesProduct (Type of coffee product)
+  - yearlyThroughput (Annual throughput in tons)
+  - hasLatitude (Geographic latitude)
+  - hasLongitude (Geographic longitude)
+
+WAREHOUSES (20 individuals):
+  ✓ Major hubs: Santos, Hamburg, Rotterdam, Singapore
+  ✓ Regional centers: Tokyo, Seoul, Sydney, Miami
+  ✓ Specialty storage: Seattle (Starbucks Reserve)
+  ✓ Temperature-controlled facilities: 12 warehouses
+  ✓ Ambient storage: 8 warehouses
+
+Warehouse Data Properties:
+  - hasName (Warehouse name)
+  - hasCity (City location)
+  - hasCountry (Country)
+  - storageCapacity (Capacity in tons)
+  - storesProduct (Type of coffee stored)
+  - temperatureControl (Climate Controlled/Ambient)
+  - hasLatitude (Geographic latitude)
+  - hasLongitude (Geographic longitude)
+  - managedBy (Managing organization)
+
+=================================================================
+🚀 METHOD 1: PROTÉGÉ GUI IMPORT (RECOMMENDED)
+=================================================================
+
+Step 1: Prepare Protégé
+  1. Launch Protégé application
+  2. File → Open → Select coffeeland.rdf
+  3. Wait for ontology to load fully
+
+Step 2: Verify Classes Exist
+  1. Go to "Classes" tab
+  2. Verify "Location" class exists
+  3. Verify "Port" and "Warehouse" are subclasses of Location
+     (If not, create them first:
+      - Right-click "Location" → Add subclass → "Port"
+      - Right-click "Location" → Add subclass → "Warehouse")
+
+Step 3: Import Individuals
+  1. File → Merge with Imported Ontology...
+  2. Browse and select: coffee_logistics_individuals.rdf
+  3. Click "OK" to import
+  4. Wait for import to complete
+
+Step 4: Verify Import
+  1. Go to "Individuals" tab
+  2. Select "Port" class → Should show 15 individuals
+  3. Select "Warehouse" class → Should show 20 individuals
+  4. Click any individual to view properties
+
+Step 5: Save
+  1. File → Save (Ctrl+S / Cmd+S)
+  2. Confirm save location
+
+=================================================================
+🔧 METHOD 2: CELLFIE PLUGIN (ALTERNATIVE)
+=================================================================
+
+Step 1: Install Cellfie Plugin
+  1. Protégé → File → Check for plugins
+  2. Install "Cellfie" plugin
+  3. Restart Protégé
+
+Step 2: Prepare CSV Files
+  • Use coffee_ports_data.csv
+  • Use coffee_warehouses_data.csv
+
+Step 3: Import via Cellfie
+  1. Tools → Create axioms from Excel/CSV workbook
+  2. Load CSV file
+  3. Define mapping rules:
+     - Class Expression: Port (or Warehouse)
+     - Individual column: PortID (or WarehouseID)
+     - Map each CSV column to data property
+  4. Generate axioms
+  5. Save ontology
+
+Note: Cellfie method requires manual mapping configuration
+Recommended to use Method 1 (GUI Import) for simplicity
+
+=================================================================
+💻 METHOD 3: MANUAL CSV→RDF CONVERSION
+=================================================================
+
+If you need to regenerate RDF files:
+
+Step 1: Edit CSV Files
+  • Modify coffee_ports_data.csv
+  • Modify coffee_warehouses_data.csv
+  • Add/remove/edit rows as needed
+
+Step 2: Run Python Converter
+  ```bash
+  python3 csv_to_rdf_logistics_v2.py
+  ```
+
+Step 3: Output Files Generated
+  ✓ coffee_ports_individuals.rdf
+  ✓ coffee_warehouses_individuals.rdf
+  ✓ coffee_logistics_individuals.rdf
+
+Step 4: Import to Protégé
+  • Follow Method 1 instructions above
+
+=================================================================
+📝 DATA PROPERTIES USED
+=================================================================
+
+Common Properties (both Port & Warehouse):
+  • hasName (xsd:string)
+  • hasCity (xsd:string)
+  • hasCountry (xsd:string)
+  • hasLatitude (xsd:double)
+  • hasLongitude (xsd:double)
+
+Port-Specific Properties:
+  • hasCapacity (xsd:integer) - Total storage capacity
+  • handlesProduct (xsd:string) - Type of coffee product
+  • yearlyThroughput (xsd:integer) - Annual processing volume
+
+Warehouse-Specific Properties:
+  • storageCapacity (xsd:integer) - Storage capacity in tons
+  • storesProduct (xsd:string) - Coffee product type stored
+  • temperatureControl (xsd:string) - Climate control type
+  • managedBy (xsd:string) - Managing organization
+
+=================================================================
+🎯 VERIFICATION CHECKLIST
+=================================================================
+
+After Import:
+  □ Classes tab shows "Port" and "Warehouse" under Location
+  □ Individuals tab shows 15 Port individuals
+  □ Individuals tab shows 20 Warehouse individuals
+  □ Individual properties display correctly
+  □ hasLatitude and hasLongitude values are valid
+  □ All data properties have correct datatypes
+  □ No error messages in Protégé console
+  □ Reasoner runs without errors
+
+To Run Reasoner:
+  1. Reasoner → Pellet (or HermiT)
+  2. Reasoner → Start reasoner
+  3. Check for inconsistencies
+  4. Verify inferred class hierarchy
+
+=================================================================
+🗺️ GEOGRAPHIC DISTRIBUTION
+=================================================================
+
+Ports by Region:
+  • Americas: 2 ports (USA)
+  • Europe: 6 ports (Germany, Belgium, Netherlands, Italy, UK, Spain)
+  • Asia-Pacific: 6 ports (Vietnam, Singapore, Japan, South Korea, Australia)
+  • Africa: 1 port (Kenya)
+
+Warehouses by Region:
+  • Americas: 4 warehouses (USA: New Orleans, Long Beach, Seattle, Miami)
+  • Europe: 9 warehouses (Germany, Belgium, Netherlands, Italy, Spain, UK)
+  • Asia-Pacific: 6 warehouses (Vietnam, Singapore, Japan, South Korea, Australia)
+  • Africa: 1 warehouse (Kenya)
+
+=================================================================
+🔗 INTEGRATION WITH WEB APP
+=================================================================
+
+After importing to Protégé:
+
+Step 1: Export Updated RDF
+  1. File → Save as...
+  2. Save to: coffeeland-react/public/coffeeland.rdf
+
+Step 2: Verify Web App
+  • Navigate to http://localhost:5173
+  • Check Ontology Diagram for Port/Warehouse nodes
+  • Verify individuals appear in lists
+
+Step 3: Add Web Pages (Optional)
+  • Create Ports.jsx page
+  • Create Warehouses.jsx page
+  • Similar to existing Farms, Chains pages
+
+=================================================================
+📚 ADDITIONAL RESOURCES
+=================================================================
+
+Files:
+  • coffee_ports_data.csv - Source data for ports
+  • coffee_warehouses_data.csv - Source data for warehouses
+  • csv_to_rdf_logistics_v2.py - Python conversion script
+  • coffee_logistics_individuals.rdf - Combined RDF file
+
+Documentation:
+  • PROTEGE_IMPORT_EASY_WAY.txt - General import guide
+  • CELLFIE_ALL_5_RULES.txt - Cellfie mapping guide
+
+=================================================================
+❓ TROUBLESHOOTING
+=================================================================
+
+Issue: "Cannot find Port/Warehouse classes"
+Solution: Create classes first in Protégé Classes tab
+  - Add "Port" as subclass of "Location"
+  - Add "Warehouse" as subclass of "Location"
+
+Issue: "Data properties not recognized"
+Solution: Ensure data properties exist in ontology
+  - Go to Data Properties tab
+  - Create missing properties if needed
+  - Set correct domain and range
+
+Issue: "Import shows 0 individuals"
+Solution: Check RDF file format
+  - Verify XML is well-formed
+  - Check namespace matches ontology
+  - Re-run Python converter
+
+Issue: "Coordinates not displaying"
+Solution: Verify datatype
+  - hasLatitude and hasLongitude should be xsd:double
+  - Check decimal format (use period, not comma)
+
+Issue: "Python script fails"
+Solution: 
+  - Ensure Python 3 is installed
+  - Check CSV files are in same directory
+  - Verify CSV headers match script expectations
+
+=================================================================
+✅ SUMMARY
+=================================================================
+
+Total Individuals: 35
+  • 15 Ports (major coffee import/export hubs)
+  • 20 Warehouses (storage facilities worldwide)
+
+Import Methods:
+  1. Protégé GUI Import (Recommended) ⭐
+  2. Cellfie Plugin (Advanced)
+  3. Manual Conversion (Customization)
+
+Next Steps:
+  1. Import coffee_logistics_individuals.rdf to Protégé
+  2. Verify 35 individuals appear
+  3. Save updated coffeeland.rdf
+  4. Deploy to web app for visualization
+
+=================================================================
+
+For questions or issues, refer to:
+  • Protégé documentation: https://protege.stanford.edu/
+  • OWL specification: https://www.w3.org/OWL/
+  • CoffeeLand project: https://github.com/doogiesdj/CoffeeLand
+
+=================================================================

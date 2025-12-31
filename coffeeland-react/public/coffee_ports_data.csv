@@ -1,0 +1,16 @@
+PortID,PortName,City,Country,HasCapacity,HandlesProduct,YearlyThroughput,Latitude,Longitude
+Port_Santos,Port of Santos,Santos,Brazil,5000000,Green Coffee Beans,2800000,-23.9355,-46.3272
+Port_Hamburg,Port of Hamburg,Hamburg,Germany,3500000,Roasted Coffee,1500000,53.5511,9.9937
+Port_Antwerp,Port of Antwerp,Antwerp,Belgium,2800000,Green Coffee Beans,1200000,51.2194,4.4025
+Port_Rotterdam,Port of Rotterdam,Rotterdam,Netherlands,4200000,Green and Roasted Coffee,1800000,51.9244,4.4777
+Port_NewOrleans,Port of New Orleans,New Orleans,USA,3000000,Green Coffee Beans,950000,29.9511,-90.0715
+Port_LongBeach,Port of Long Beach,Long Beach,USA,2500000,Coffee Products,800000,33.7701,-118.1937
+Port_Mombasa,Port of Mombasa,Mombasa,Kenya,1800000,Green Coffee Beans,650000,-4.0435,39.6682
+Port_HoChiMinh,Port of Ho Chi Minh,Ho Chi Minh City,Vietnam,2200000,Robusta Coffee,720000,10.7769,106.7009
+Port_Genoa,Port of Genoa,Genoa,Italy,1500000,Specialty Coffee,420000,44.4056,8.9463
+Port_Singapore,Port of Singapore,Singapore,Singapore,3800000,Coffee Re-export,980000,1.3521,103.8198
+Port_Tokyo,Port of Tokyo,Tokyo,Japan,2100000,Imported Coffee,530000,35.6262,139.7745
+Port_Busan,Port of Busan,Busan,South Korea,1900000,Coffee Import,410000,35.1796,129.0756
+Port_Felixstowe,Port of Felixstowe,Felixstowe,UK,1600000,Coffee Products,380000,51.9606,1.3511
+Port_Valencia,Port of Valencia,Valencia,Spain,1400000,Green Coffee,340000,39.4699,-0.3763
+Port_Sydney,Port of Sydney,Sydney,Australia,1200000,Coffee Import,290000,-33.8688,151.2093

@@ -1,0 +1,21 @@
+WarehouseID,WarehouseName,City,Country,StorageCapacity,StoresProduct,Temperature,Latitude,Longitude,ManagedBy
+Warehouse_Santos_A,Santos Coffee Storage A,Santos,Brazil,150000,Green Coffee Beans,Ambient,-23.9608,-46.3335,Santos Port Authority
+Warehouse_Hamburg_Central,Hamburg Coffee Hub,Hamburg,Germany,200000,Roasted Coffee,Climate Controlled,53.5488,9.9872,Neumann Kaffee Gruppe
+Warehouse_Antwerp_North,Antwerp Coffee Warehouse,Antwerp,Belgium,120000,Green Coffee,Ambient,51.2867,4.4184,Sucafina
+Warehouse_Rotterdam_West,Rotterdam Coffee Terminal,Rotterdam,Netherlands,180000,Green and Roasted,Climate Controlled,51.9066,4.4596,Olam Coffee
+Warehouse_NewOrleans_CBD,New Orleans Coffee Depot,New Orleans,USA,100000,Green Coffee Beans,Ambient,29.9543,-90.0789,ED&F Man
+Warehouse_LongBeach_South,Long Beach Coffee Facility,Long Beach,USA,90000,Coffee Products,Climate Controlled,33.7545,-118.1960,Sustainable Harvest
+Warehouse_Mombasa_Central,Mombasa Coffee Store,Mombasa,Kenya,80000,Green Coffee Beans,Ambient,-4.0547,39.6599,Kenya Coffee Board
+Warehouse_HoChiMinh_District7,HCMC Coffee Warehouse,Ho Chi Minh City,Vietnam,110000,Robusta Coffee,Ambient,10.7544,106.6946,Vicofa
+Warehouse_Genoa_Harbor,Genoa Specialty Storage,Genoa,Italy,60000,Specialty Coffee,Climate Controlled,44.4184,8.9255,Lavazza
+Warehouse_Singapore_West,Singapore Coffee Hub,Singapore,Singapore,140000,Coffee Re-export,Climate Controlled,1.3391,103.7040,ECOM Agroindustrial
+Warehouse_Tokyo_Bay,Tokyo Coffee Terminal,Tokyo,Japan,95000,Imported Coffee,Climate Controlled,35.6544,139.7714,Marubeni Corporation
+Warehouse_Busan_Port,Busan Coffee Storage,Busan,South Korea,85000,Coffee Import,Ambient,35.1020,129.0403,Korean Coffee Association
+Warehouse_Felixstowe_East,Felixstowe Coffee Depot,Felixstowe,UK,75000,Coffee Products,Ambient,51.9533,1.3650,Volcafe
+Warehouse_Valencia_Industrial,Valencia Coffee Center,Valencia,Spain,70000,Green Coffee,Climate Controlled,39.4561,-0.3545,Mercon Coffee Group
+Warehouse_Sydney_South,Sydney Coffee Warehouse,Sydney,Australia,65000,Coffee Import,Climate Controlled,-33.8765,151.2070,Australian Coffee Traders
+Warehouse_Seattle_Port,Seattle Coffee Storage,Seattle,USA,130000,Specialty Coffee,Climate Controlled,47.5952,-122.3317,Starbucks Reserve
+Warehouse_Amsterdam_West,Amsterdam Coffee Vault,Amsterdam,Netherlands,105000,Premium Coffee,Climate Controlled,52.3702,4.8952,Trabocca
+Warehouse_Miami_FreeZone,Miami Coffee Free Zone,Miami,USA,115000,Coffee Transit,Ambient,25.7907,-80.2329,Atlantic Coffee Solutions
+Warehouse_Barcelona_Port,Barcelona Coffee Depot,Barcelona,Spain,82000,Coffee Products,Ambient,41.3681,2.1774,Marcomar
+Warehouse_Melbourne_Docks,Melbourne Coffee Store,Melbourne,Australia,72000,Imported Coffee,Climate Controlled,-37.8272,144.9342,Merlo Coffee
