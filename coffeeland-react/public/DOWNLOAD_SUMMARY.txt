@@ -1,0 +1,121 @@
+╔══════════════════════════════════════════════════════════════════╗
+║  CoffeeLand 온톨로지 인스턴스 파일 다운로드 가이드               ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📌 **다운로드 페이지**
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/download_guide.html
+
+   ⭐ 위 링크를 열면 모든 파일을 클릭해서 다운로드할 수 있습니다!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 **직접 다운로드 링크**
+
+📥 **메인 온톨로지** (필수!)
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland.rdf
+   ► 375개 인스턴스 (Farm 24 + Port 15 + Warehouse 20 + 기타 316)
+
+
+📦 **추가 인스턴스 파일들** (generated_imports/)
+
+💼 시장 및 경제 (10개)
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/consumer_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/price_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/season_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/tradeagreement_individuals.rdf
+
+🏢 조직 (27개)
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/cooperative_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/farmer_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/processingmill_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/retailer_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/roaster_individuals.rdf
+
+⭐ 품질 및 가공 (17개)
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/certification_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/processingmethod_individuals.rdf
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/qualitygrade_individuals.rdf
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 **다운로드 방법**
+
+방법 1: 브라우저에서
+   1. 다운로드 페이지 열기:
+      https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/download_guide.html
+   2. 원하는 파일 링크 클릭
+   3. 자동으로 다운로드됨
+
+방법 2: 명령줄 (curl)
+   # 메인 온톨로지
+   curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland.rdf
+   
+   # 추가 인스턴스 파일 (하나씩)
+   curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/farmer_individuals.rdf
+
+방법 3: 한 번에 모두 다운로드
+   mkdir -p generated_imports
+   cd generated_imports
+   for file in certification consumer cooperative farmer price processingmethod processingmill qualitygrade retailer roaster season tradeagreement; do
+     curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/${file}_individuals.rdf
+   done
+   cd ..
+   curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland.rdf
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 **문서 파일**
+
+   한국어 가이드:
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/README_KOREAN.html
+
+   Import 시스템 가이드:
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/README_IMPORT_SYSTEM.md
+
+   검증 보고서:
+   https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/VALIDATION_REPORT.txt
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ **사용 순서**
+
+1. coffeeland.rdf 다운로드 (메인 파일)
+2. Protégé에서 열기
+3. Individuals 탭에서 Farm, Port, Warehouse 확인
+4. 필요한 경우 generated_imports/ 파일들을 추가로 다운로드
+5. Protégé의 Import 기능으로 추가 파일 임포트
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 **파일 통계**
+
+메인 온톨로지:              375 인스턴스
+├─ Farm:                    24개
+├─ Port:                    15개
+├─ Warehouse:               20개
+└─ 기타:                    316개
+
+추가 Import 가능:           56 인스턴스
+├─ 시장 및 경제:            10개
+├─ 조직:                    27개
+└─ 품질 및 가공:            17개
+
+총 잠재 인스턴스:           431개
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔗 **GitHub 저장소**
+   https://github.com/doogiesdj/CoffeeLand
+   
+   최신 커밋: e7a7db8
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+생성일: 2025-12-31
+버전: 1.0.0
