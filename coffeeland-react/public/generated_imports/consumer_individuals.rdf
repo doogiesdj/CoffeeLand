@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer_CoffeeEnthusiast_USA">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer"/>
+        <hasName>Coffee Enthusiast USA</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <preferredCoffeeType>Specialty Arabica</preferredCoffeeType>
+        <annualConsumption rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">180</annualConsumption>
+        <buys rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Starbucks"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer_EspressoLover_Italy">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer"/>
+        <hasName>Espresso Lover Italy</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Italy"/>
+        <preferredCoffeeType>Dark Roast Espresso</preferredCoffeeType>
+        <annualConsumption rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">250</annualConsumption>
+        <buys rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Lavazza"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer_CasualDrinker_Japan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Consumer"/>
+        <hasName>Casual Drinker Japan</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Japan"/>
+        <preferredCoffeeType>Light Roast</preferredCoffeeType>
+        <annualConsumption rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">120</annualConsumption>
+        <buys rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Blue_Bottle"/>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

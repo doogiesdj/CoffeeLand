@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_Fair_Trade_Certified">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>Fair Trade Certified</hasName>
+        <certificationBody>Fairtrade International</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1997</establishedYear>
+        <certificationScope>Social and economic standards</certificationScope>
+        <issuedBy>FLO-CERT</issuedBy>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_USDA_Organic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>USDA Organic</hasName>
+        <certificationBody>United States Department of Agriculture</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2002</establishedYear>
+        <certificationScope>Organic farming practices</certificationScope>
+        <issuedBy>USDA NOP</issuedBy>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_Rainforest_Alliance_Certified">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>Rainforest Alliance Certified</hasName>
+        <certificationBody>Rainforest Alliance</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1987</establishedYear>
+        <certificationScope>Environmental and social sustainability</certificationScope>
+        <issuedBy>Rainforest Alliance</issuedBy>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_4C_Coffee_Certification">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>4C Coffee Certification</hasName>
+        <certificationBody>4C Services</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2006</establishedYear>
+        <certificationScope>Baseline sustainability standards</certificationScope>
+        <issuedBy>4C Association</issuedBy>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_UTZ_Certified">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>UTZ Certified</hasName>
+        <certificationBody>UTZ (now part of Rainforest Alliance)</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2002</establishedYear>
+        <certificationScope>Sustainable farming and supply chain</certificationScope>
+        <issuedBy>UTZ Certification</issuedBy>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification_Bird_Friendly">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Certification"/>
+        <hasName>Bird Friendly</hasName>
+        <certificationBody>Smithsonian Migratory Bird Center</certificationBody>
+        <establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1999</establishedYear>
+        <certificationScope>Shade-grown coffee with biodiversity</certificationScope>
+        <issuedBy>SMBC</issuedBy>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

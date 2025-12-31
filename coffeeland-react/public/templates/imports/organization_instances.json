@@ -1,0 +1,202 @@
+{
+  "description": "Organization subclass instances template",
+  "classes": {
+    "Cooperative": {
+      "class_name": "Cooperative",
+      "instances": [
+        {
+          "id": "Cooperative_Yirgacheffe",
+          "properties": {
+            "hasName": "Yirgacheffe Farmers Cooperative",
+            "hasCountry": {"resource": "Ethiopia"},
+            "memberCount": 850,
+            "foundedYear": 1998,
+            "certifications": [
+              {"resource": "Fair_Trade"},
+              {"resource": "Organic"}
+            ],
+            "mainProduct": {"resource": "Arabica_Heirloom"}
+          }
+        },
+        {
+          "id": "Cooperative_APROCASSI",
+          "properties": {
+            "hasName": "APROCASSI Cooperative",
+            "hasCountry": {"resource": "Rwanda"},
+            "memberCount": 1200,
+            "foundedYear": 2001,
+            "certifications": [
+              {"resource": "Fair_Trade"}
+            ],
+            "mainProduct": {"resource": "Arabica_Bourbon"}
+          }
+        },
+        {
+          "id": "Cooperative_Guji",
+          "properties": {
+            "hasName": "Guji Highland Cooperative",
+            "hasCountry": {"resource": "Ethiopia"},
+            "memberCount": 650,
+            "foundedYear": 2005,
+            "certifications": [
+              {"resource": "Rainforest_Alliance"}
+            ],
+            "mainProduct": {"resource": "Arabica_Heirloom"}
+          }
+        }
+      ]
+    },
+    "Farmer": {
+      "class_name": "Farmer",
+      "instances": [
+        {
+          "id": "Farmer_Abel_Tesfaye",
+          "properties": {
+            "hasName": "Abel Tesfaye",
+            "hasCountry": {"resource": "Ethiopia"},
+            "hasRegion": "Yirgacheffe",
+            "farmSize": "2.5 hectares",
+            "experienceYears": 25,
+            "owns": {"resource": "Farm_Yirgacheffe_Kochere_Farm"},
+            "memberOf": {"resource": "Cooperative_Yirgacheffe"}
+          }
+        },
+        {
+          "id": "Farmer_Maria_Santos",
+          "properties": {
+            "hasName": "Maria Santos",
+            "hasCountry": {"resource": "Brazil"},
+            "hasRegion": "Minas Gerais",
+            "farmSize": "15 hectares",
+            "experienceYears": 35,
+            "owns": {"resource": "Farm_Minas_Gerais_Estate"},
+            "certifications": [{"resource": "Rainforest_Alliance"}]
+          }
+        },
+        {
+          "id": "Farmer_Juan_Valdez",
+          "properties": {
+            "hasName": "Juan Valdez",
+            "hasCountry": {"resource": "Colombia"},
+            "hasRegion": "Huila",
+            "farmSize": "8 hectares",
+            "experienceYears": 40,
+            "owns": {"resource": "Farm_Huila_El_Paraiso_Farm"},
+            "memberOf": {"resource": "Cooperative_FNC"}
+          }
+        }
+      ]
+    },
+    "ProcessingMill": {
+      "class_name": "ProcessingMill",
+      "instances": [
+        {
+          "id": "ProcessingMill_Santos_Central",
+          "properties": {
+            "hasName": "Santos Central Processing Mill",
+            "hasCity": "Santos",
+            "hasCountry": {"resource": "Brazil"},
+            "dailyCapacity": 50000,
+            "processingMethods": ["Washed", "Natural", "Pulped_Natural"],
+            "operatedBy": {"resource": "Cooperative_Santos"}
+          }
+        },
+        {
+          "id": "ProcessingMill_Addis_Ababa",
+          "properties": {
+            "hasName": "Addis Ababa Premium Mill",
+            "hasCity": "Addis Ababa",
+            "hasCountry": {"resource": "Ethiopia"},
+            "dailyCapacity": 30000,
+            "processingMethods": ["Washed", "Natural"],
+            "operatedBy": {"resource": "Cooperative_Yirgacheffe"}
+          }
+        }
+      ]
+    },
+    "Retailer": {
+      "class_name": "Retailer",
+      "instances": [
+        {
+          "id": "Retailer_Whole_Foods",
+          "properties": {
+            "hasName": "Whole Foods Market",
+            "hasCountry": {"resource": "USA"},
+            "retailType": "Supermarket Chain",
+            "storeCount": 500,
+            "sells": [
+              {"resource": "Starbucks"},
+              {"resource": "Peets_Coffee"}
+            ]
+          }
+        },
+        {
+          "id": "Retailer_Carrefour",
+          "properties": {
+            "hasName": "Carrefour",
+            "hasCountry": {"resource": "France"},
+            "retailType": "Hypermarket",
+            "storeCount": 1200,
+            "sells": [
+              {"resource": "Lavazza"},
+              {"resource": "Nespresso"}
+            ]
+          }
+        }
+      ]
+    },
+    "Roaster": {
+      "class_name": "Roaster",
+      "instances": [
+        {
+          "id": "Roaster_Blue_Bottle",
+          "properties": {
+            "hasName": "Blue Bottle Coffee",
+            "hasCountry": {"resource": "USA"},
+            "hasCity": "Oakland",
+            "roastingCapacity": 2000000,
+            "roastProfiles": ["Light", "Medium", "Dark"],
+            "specialtyGrade": true,
+            "sources": [
+              {"resource": "Ethiopia"},
+              {"resource": "Colombia"},
+              {"resource": "Kenya"}
+            ]
+          }
+        },
+        {
+          "id": "Roaster_Illy",
+          "properties": {
+            "hasName": "illycaffè",
+            "hasCountry": {"resource": "Italy"},
+            "hasCity": "Trieste",
+            "roastingCapacity": 50000000,
+            "roastProfiles": ["Medium", "Dark"],
+            "specialtyGrade": true,
+            "sources": [
+              {"resource": "Brazil"},
+              {"resource": "Ethiopia"},
+              {"resource": "India"}
+            ]
+          }
+        },
+        {
+          "id": "Roaster_Verve",
+          "properties": {
+            "hasName": "Verve Coffee Roasters",
+            "hasCountry": {"resource": "USA"},
+            "hasCity": "Santa Cruz",
+            "roastingCapacity": 1000000,
+            "roastProfiles": ["Light", "Medium"],
+            "specialtyGrade": true,
+            "directTrade": true,
+            "sources": [
+              {"resource": "Colombia"},
+              {"resource": "Guatemala"}
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+name,methodType,description,waterUsage,flavorProfile,dryingTime
+Washed Process,Wet Processing,Cherries are pulped fermented and washed before drying,High,Clean bright acidity lighter body,10-14 days
+Natural Process,Dry Processing,Whole cherries are dried in the sun before hulling,Minimal,Fruity full body complex sweetness,20-30 days
+Honey Process,Semi-Washed,Cherries are pulped but some mucilage remains during drying,Medium,Sweet balanced medium body,12-18 days
+Anaerobic Fermentation,Experimental,Fermentation in sealed oxygen-free tanks,Variable,Unique intense complex wine-like,Variable
+Carbonic Maceration,Experimental,Whole cherries fermented in CO2-rich environment,Low,Fruit-forward complex low acidity,Variable
+Wet Hulled (Giling Basah),Hybrid,Unique Indonesian method where parchment is removed while beans still wet,Medium,Earthy full body low acidity,7-10 days

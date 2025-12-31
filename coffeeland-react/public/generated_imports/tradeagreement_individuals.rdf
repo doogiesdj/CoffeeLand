@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#TradeAgreement_BrazilUSA_2025">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#TradeAgreement"/>
+        <hasName>Brazil-USA Coffee Trade Agreement 2025</hasName>
+        <agreementType>Bilateral</agreementType>
+        <startDate>2025-01-01</startDate>
+        <endDate>2030-12-31</endDate>
+        <volume rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">500000</volume>
+        <exporter rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Brazil"/>
+        <importer rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#TradeAgreement_EthiopiaEU_2024">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#TradeAgreement"/>
+        <hasName>Ethiopia-EU Specialty Coffee Agreement</hasName>
+        <agreementType>Preferential</agreementType>
+        <startDate>2024-06-01</startDate>
+        <endDate>2029-05-31</endDate>
+        <volume rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">150000</volume>
+        <exporter rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <importer rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Germany"/>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

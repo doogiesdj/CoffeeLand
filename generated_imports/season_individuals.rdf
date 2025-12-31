@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season_Ethiopia_MainHarvest">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season"/>
+        <hasName>Ethiopia Main Harvest Season</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <harvestPeriod>October to December</harvestPeriod>
+        <expectedYield>High</expectedYield>
+        <weatherConditions>Optimal rainfall</weatherConditions>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season_Brazil_MainHarvest">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season"/>
+        <hasName>Brazil Main Harvest Season</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Brazil"/>
+        <harvestPeriod>May to September</harvestPeriod>
+        <expectedYield>Very High</expectedYield>
+        <weatherConditions>Dry season favorable</weatherConditions>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season_Colombia_FlyHarvest">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Season"/>
+        <hasName>Colombia Fly Harvest Season</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Colombia"/>
+        <harvestPeriod>April to June</harvestPeriod>
+        <expectedYield>Medium</expectedYield>
+        <weatherConditions>Variable rainfall</weatherConditions>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

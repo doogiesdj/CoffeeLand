@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMill_Santos_Central">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMill"/>
+        <hasName>Santos Central Processing Mill</hasName>
+        <hasCity>Santos</hasCity>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Brazil"/>
+        <dailyCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">50000</dailyCapacity>
+        <processingMethods>Washed</processingMethods>
+        <processingMethods>Natural</processingMethods>
+        <processingMethods>Pulped_Natural</processingMethods>
+        <operatedBy rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_Santos"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMill_Addis_Ababa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMill"/>
+        <hasName>Addis Ababa Premium Mill</hasName>
+        <hasCity>Addis Ababa</hasCity>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <dailyCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">30000</dailyCapacity>
+        <processingMethods>Washed</processingMethods>
+        <processingMethods>Natural</processingMethods>
+        <operatedBy rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_Yirgacheffe"/>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

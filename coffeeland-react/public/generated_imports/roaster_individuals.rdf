@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Blue_Bottle_Coffee">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Blue Bottle Coffee</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <hasCity>Oakland</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Dark"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_illycaffè">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>illycaffè</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Italy"/>
+        <hasCity>Trieste</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">50000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Dark"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Verve_Coffee_Roasters">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Verve Coffee Roasters</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <hasCity>Santa Cruz</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Intelligentsia_Coffee">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Intelligentsia Coffee</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <hasCity>Chicago</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">3000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Stumptown_Coffee_Roasters">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Stumptown Coffee Roasters</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <hasCity>Portland</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">5000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Dark"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Counter_Culture_Coffee">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Counter Culture Coffee</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <hasCity>Durham</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">4000000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster_Square_Mile_Coffee_Roasters">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Roaster"/>
+        <hasName>Square Mile Coffee Roasters</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#UK"/>
+        <hasCity>London</hasCity>
+        <roastingCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">800000</roastingCapacity>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Light"/>
+        <roastProfiles rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Medium"/>
+        <specialtyGrade rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">True</specialtyGrade>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

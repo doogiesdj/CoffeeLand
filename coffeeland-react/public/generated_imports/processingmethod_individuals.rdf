@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Washed_Process">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Washed Process</hasName>
+        <methodType>Wet Processing</methodType>
+        <description>Cherries are pulped fermented and washed before drying</description>
+        <waterUsage>High</waterUsage>
+        <flavorProfile>Clean bright acidity lighter body</flavorProfile>
+        <dryingTime>10-14 days</dryingTime>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Natural_Process">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Natural Process</hasName>
+        <methodType>Dry Processing</methodType>
+        <description>Whole cherries are dried in the sun before hulling</description>
+        <waterUsage>Minimal</waterUsage>
+        <flavorProfile>Fruity full body complex sweetness</flavorProfile>
+        <dryingTime>20-30 days</dryingTime>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Honey_Process">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Honey Process</hasName>
+        <methodType>Semi-Washed</methodType>
+        <description>Cherries are pulped but some mucilage remains during drying</description>
+        <waterUsage>Medium</waterUsage>
+        <flavorProfile>Sweet balanced medium body</flavorProfile>
+        <dryingTime>12-18 days</dryingTime>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Anaerobic_Fermentation">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Anaerobic Fermentation</hasName>
+        <methodType>Experimental</methodType>
+        <description>Fermentation in sealed oxygen-free tanks</description>
+        <waterUsage>Variable</waterUsage>
+        <flavorProfile>Unique intense complex wine-like</flavorProfile>
+        <dryingTime>Variable</dryingTime>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Carbonic_Maceration">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Carbonic Maceration</hasName>
+        <methodType>Experimental</methodType>
+        <description>Whole cherries fermented in CO2-rich environment</description>
+        <waterUsage>Low</waterUsage>
+        <flavorProfile>Fruit-forward complex low acidity</flavorProfile>
+        <dryingTime>Variable</dryingTime>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod_Wet_Hulled_(Giling_Basah)">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#ProcessingMethod"/>
+        <hasName>Wet Hulled (Giling Basah)</hasName>
+        <methodType>Hybrid</methodType>
+        <description>Unique Indonesian method where parchment is removed while beans still wet</description>
+        <waterUsage>Medium</waterUsage>
+        <flavorProfile>Earthy full body low acidity</flavorProfile>
+        <dryingTime>7-10 days</dryingTime>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

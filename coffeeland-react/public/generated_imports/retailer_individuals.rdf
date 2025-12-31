@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Whole_Foods_Market">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Whole Foods Market</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <retailType>Supermarket Chain</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">500</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Carrefour">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Carrefour</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#France"/>
+        <retailType>Hypermarket</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1200</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Tesco">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Tesco</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#UK"/>
+        <retailType>Supermarket</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">3400</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Walmart">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Walmart</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <retailType>Supermarket</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">4700</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Aeon">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Aeon</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Japan"/>
+        <retailType>Supermarket</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">570</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Costco">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Costco</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#USA"/>
+        <retailType>Warehouse Club</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">850</storeCount>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer_Lidl">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Retailer"/>
+        <hasName>Lidl</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Germany"/>
+        <retailType>Discount Supermarket</retailType>
+        <storeCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">11500</storeCount>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Abel_Tesfaye">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Abel Tesfaye</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <hasRegion>Yirgacheffe</hasRegion>
+        <farmSize>2.5</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">25</experienceYears>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Fair_Trade"/>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Organic"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Maria_Santos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Maria Santos</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Brazil"/>
+        <hasRegion>Minas Gerais</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">15</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">35</experienceYears>
+        <certifications>Rainforest_Alliance</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Juan_Valdez">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Juan Valdez</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Colombia"/>
+        <hasRegion>Huila</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">8</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">40</experienceYears>
+        <certifications>Fair_Trade</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Carlos_Rodriguez">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Carlos Rodriguez</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Guatemala"/>
+        <hasRegion>Antigua</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">5</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">18</experienceYears>
+        <certifications>Organic</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Ahmed_Hassan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Ahmed Hassan</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Kenya"/>
+        <hasRegion>Nyeri</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">3</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">22</experienceYears>
+        <certifications>Fair_Trade</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Nguyen_Van_Hai">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Nguyen Van Hai</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Vietnam"/>
+        <hasRegion>Dak Lak</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">12</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">30</experienceYears>
+        <certifications>4C</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer_Rosa_Jimenez">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Farmer"/>
+        <hasName>Rosa Jimenez</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Costa Rica"/>
+        <hasRegion>Tarrazu</hasRegion>
+        <farmSize rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">6</farmSize>
+        <experienceYears rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">25</experienceYears>
+        <certifications>Rainforest_Alliance</certifications>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade_Specialty_90Plus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade"/>
+        <hasName>Specialty Grade 90+</hasName>
+        <gradeLevel>Exceptional</gradeLevel>
+        <cupScore rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">90</cupScore>
+        <defectCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">0</defectCount>
+        <gradeDescription>Outstanding distinctive attributes</gradeDescription>
+        <scaScore>90-100</scaScore>
+        <marketSegment>Ultra-premium specialty</marketSegment>
+        <priceMultiplier rdf:datatype="http://www.w3.org/2001/XMLSchema##double">5.0</priceMultiplier>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade_Specialty_85to89">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade"/>
+        <hasName>Specialty Grade 85-89</hasName>
+        <gradeLevel>Excellent</gradeLevel>
+        <cupScore rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">87</cupScore>
+        <defectCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">0</defectCount>
+        <gradeDescription>High-quality specialty coffee</gradeDescription>
+        <scaScore>85-89.99</scaScore>
+        <marketSegment>Premium specialty</marketSegment>
+        <priceMultiplier rdf:datatype="http://www.w3.org/2001/XMLSchema##double">3.0</priceMultiplier>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade_Specialty_80to84">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade"/>
+        <hasName>Specialty Grade 80-84</hasName>
+        <gradeLevel>Very Good</gradeLevel>
+        <cupScore rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">82</cupScore>
+        <defectCount>0-5 secondary defects</defectCount>
+        <gradeDescription>Specialty entry level</gradeDescription>
+        <scaScore>80-84.99</scaScore>
+        <marketSegment>Specialty</marketSegment>
+        <priceMultiplier rdf:datatype="http://www.w3.org/2001/XMLSchema##double">2.0</priceMultiplier>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade_Premium">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade"/>
+        <hasName>Premium Grade</hasName>
+        <gradeLevel>Good</gradeLevel>
+        <cupScore rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">75</cupScore>
+        <defectCount>Up to 8 full defects</defectCount>
+        <gradeDescription>Above average commodity</gradeDescription>
+        <scaScore>75-79.99</scaScore>
+        <marketSegment>Premium commodity</marketSegment>
+        <priceMultiplier rdf:datatype="http://www.w3.org/2001/XMLSchema##double">1.3</priceMultiplier>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade_Exchange">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#QualityGrade"/>
+        <hasName>Exchange Grade</hasName>
+        <gradeLevel>Standard</gradeLevel>
+        <cupScore rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">70</cupScore>
+        <defectCount>Up to 23 full defects</defectCount>
+        <gradeDescription>Commodity market standard</gradeDescription>
+        <scaScore>Below 75</scaScore>
+        <marketSegment>Commodity</marketSegment>
+        <priceMultiplier rdf:datatype="http://www.w3.org/2001/XMLSchema##double">1.0</priceMultiplier>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

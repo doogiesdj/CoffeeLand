@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_Yirgacheffe_Farmers_Cooperative">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>Yirgacheffe Farmers Cooperative</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">850</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1998</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Heirloom"/>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Fair_Trade"/>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Organic"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_APROCASSI_Cooperative">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>APROCASSI Cooperative</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Rwanda"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1200</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2001</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Bourbon"/>
+        <certifications>Fair_Trade</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_Guji_Highland_Cooperative">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>Guji Highland Cooperative</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Ethiopia"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">650</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2005</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Heirloom"/>
+        <certifications>Rainforest_Alliance</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_COMSA_Cooperative">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>COMSA Cooperative</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Honduras"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">980</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1999</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Catuai"/>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Organic"/>
+        <certifications rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Fair_Trade"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_Cooperativa_La_Voz">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>Cooperativa La Voz</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Colombia"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">450</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">2003</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Caturra"/>
+        <certifications>Fair_Trade</certifications>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative_ANKOLE_Coffee_Producers">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Cooperative"/>
+        <hasName>ANKOLE Coffee Producers</hasName>
+        <hasCountry rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Uganda"/>
+        <memberCount rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1500</memberCount>
+        <foundedYear rdf:datatype="http://www.w3.org/2001/XMLSchema##integer">1995</foundedYear>
+        <mainProduct rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Robusta"/>
+        <certifications>UTZ</certifications>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

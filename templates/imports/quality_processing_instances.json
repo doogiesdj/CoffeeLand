@@ -1,0 +1,224 @@
+{
+  "description": "QualityAndProcessing subclass instances template",
+  "classes": {
+    "Certification": {
+      "class_name": "Certification",
+      "instances": [
+        {
+          "id": "Certification_Fair_Trade",
+          "properties": {
+            "hasName": "Fair Trade Certified",
+            "certificationBody": "Fairtrade International",
+            "establishedYear": 1997,
+            "certificationScope": "Social and economic standards",
+            "issuedBy": "FLO-CERT",
+            "certifies": [
+              {"resource": "Farm_Yirgacheffe_Kochere_Farm"},
+              {"resource": "Cooperative_APROCASSI"}
+            ]
+          }
+        },
+        {
+          "id": "Certification_Organic",
+          "properties": {
+            "hasName": "USDA Organic",
+            "certificationBody": "United States Department of Agriculture",
+            "establishedYear": 2002,
+            "certificationScope": "Organic farming practices",
+            "issuedBy": "USDA NOP",
+            "certifies": [
+              {"resource": "Farm_Harrar_Estate"},
+              {"resource": "Cooperative_Yirgacheffe"}
+            ]
+          }
+        },
+        {
+          "id": "Certification_Rainforest_Alliance",
+          "properties": {
+            "hasName": "Rainforest Alliance Certified",
+            "certificationBody": "Rainforest Alliance",
+            "establishedYear": 1987,
+            "certificationScope": "Environmental and social sustainability",
+            "issuedBy": "Rainforest Alliance",
+            "certifies": [
+              {"resource": "Farm_Sidamo_Guji_Farm"},
+              {"resource": "Cooperative_Guji"}
+            ]
+          }
+        },
+        {
+          "id": "Certification_4C",
+          "properties": {
+            "hasName": "4C Coffee Certification",
+            "certificationBody": "4C Services",
+            "establishedYear": 2006,
+            "certificationScope": "Baseline sustainability standards",
+            "issuedBy": "4C Association"
+          }
+        },
+        {
+          "id": "Certification_UTZ",
+          "properties": {
+            "hasName": "UTZ Certified",
+            "certificationBody": "UTZ (now part of Rainforest Alliance)",
+            "establishedYear": 2002,
+            "certificationScope": "Sustainable farming and supply chain",
+            "issuedBy": "UTZ Certification"
+          }
+        }
+      ]
+    },
+    "ProcessingMethod": {
+      "class_name": "ProcessingMethod",
+      "instances": [
+        {
+          "id": "ProcessingMethod_Washed",
+          "properties": {
+            "hasName": "Washed (Wet) Process",
+            "methodType": "Wet Processing",
+            "description": "Cherries are pulped, fermented, and washed before drying",
+            "waterUsage": "High",
+            "flavorProfile": "Clean, bright acidity, lighter body",
+            "dryingTime": "10-14 days",
+            "commonIn": [
+              {"resource": "Colombia"},
+              {"resource": "Ethiopia"},
+              {"resource": "Kenya"}
+            ]
+          }
+        },
+        {
+          "id": "ProcessingMethod_Natural",
+          "properties": {
+            "hasName": "Natural (Dry) Process",
+            "methodType": "Dry Processing",
+            "description": "Whole cherries are dried in the sun before hulling",
+            "waterUsage": "Minimal",
+            "flavorProfile": "Fruity, full body, complex sweetness",
+            "dryingTime": "20-30 days",
+            "commonIn": [
+              {"resource": "Ethiopia"},
+              {"resource": "Brazil"},
+              {"resource": "Yemen"}
+            ]
+          }
+        },
+        {
+          "id": "ProcessingMethod_Honey",
+          "properties": {
+            "hasName": "Honey (Pulped Natural) Process",
+            "methodType": "Semi-Washed",
+            "description": "Cherries are pulped but some mucilage remains during drying",
+            "waterUsage": "Medium",
+            "flavorProfile": "Sweet, balanced, medium body",
+            "dryingTime": "12-18 days",
+            "commonIn": [
+              {"resource": "Costa_Rica"},
+              {"resource": "El_Salvador"},
+              {"resource": "Brazil"}
+            ]
+          }
+        },
+        {
+          "id": "ProcessingMethod_Anaerobic",
+          "properties": {
+            "hasName": "Anaerobic Fermentation",
+            "methodType": "Experimental",
+            "description": "Fermentation in sealed, oxygen-free tanks",
+            "waterUsage": "Variable",
+            "flavorProfile": "Unique, intense, complex, wine-like",
+            "dryingTime": "Variable",
+            "innovationYear": 2015,
+            "commonIn": [
+              {"resource": "Colombia"},
+              {"resource": "Costa_Rica"}
+            ]
+          }
+        },
+        {
+          "id": "ProcessingMethod_Carbonic_Maceration",
+          "properties": {
+            "hasName": "Carbonic Maceration",
+            "methodType": "Experimental",
+            "description": "Whole cherries fermented in CO2-rich environment",
+            "waterUsage": "Low",
+            "flavorProfile": "Fruit-forward, complex, low acidity",
+            "dryingTime": "Variable",
+            "innovationYear": 2015,
+            "inspiredBy": "Wine-making techniques"
+          }
+        }
+      ]
+    },
+    "QualityGrade": {
+      "class_name": "QualityGrade",
+      "instances": [
+        {
+          "id": "QualityGrade_Specialty_90Plus",
+          "properties": {
+            "hasName": "Specialty Grade 90+",
+            "gradeLevel": "Exceptional",
+            "cupScore": 90,
+            "defectCount": 0,
+            "gradeDescription": "Outstanding distinctive attributes",
+            "scaScore": "90-100",
+            "marketSegment": "Ultra-premium specialty",
+            "priceMultiplier": 5.0
+          }
+        },
+        {
+          "id": "QualityGrade_Specialty_85to89",
+          "properties": {
+            "hasName": "Specialty Grade 85-89",
+            "gradeLevel": "Excellent",
+            "cupScore": 87,
+            "defectCount": 0,
+            "gradeDescription": "High-quality specialty coffee",
+            "scaScore": "85-89.99",
+            "marketSegment": "Premium specialty",
+            "priceMultiplier": 3.0
+          }
+        },
+        {
+          "id": "QualityGrade_Specialty_80to84",
+          "properties": {
+            "hasName": "Specialty Grade 80-84",
+            "gradeLevel": "Very Good",
+            "cupScore": 82,
+            "defectCount": "0-5 secondary defects",
+            "gradeDescription": "Specialty entry level",
+            "scaScore": "80-84.99",
+            "marketSegment": "Specialty",
+            "priceMultiplier": 2.0
+          }
+        },
+        {
+          "id": "QualityGrade_Premium",
+          "properties": {
+            "hasName": "Premium Grade",
+            "gradeLevel": "Good",
+            "cupScore": 75,
+            "defectCount": "Up to 8 full defects",
+            "gradeDescription": "Above average commodity",
+            "scaScore": "75-79.99",
+            "marketSegment": "Premium commodity",
+            "priceMultiplier": 1.3
+          }
+        },
+        {
+          "id": "QualityGrade_Exchange",
+          "properties": {
+            "hasName": "Exchange Grade",
+            "gradeLevel": "Standard",
+            "cupScore": 70,
+            "defectCount": "Up to 23 full defects",
+            "gradeDescription": "Commodity market standard",
+            "scaScore": "Below 75",
+            "marketSegment": "Commodity",
+            "priceMultiplier": 1.0
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "description": "MarketAndEconomics subclass instances template",
+  "classes": {
+    "Consumer": {
+      "class_name": "Consumer",
+      "instances": [
+        {
+          "id": "Consumer_CoffeeEnthusiast_USA",
+          "properties": {
+            "hasName": "Coffee Enthusiast USA",
+            "hasCountry": {"resource": "USA"},
+            "preferredCoffeeType": "Specialty Arabica",
+            "annualConsumption": 180,
+            "buys": {"resource": "Starbucks"}
+          }
+        },
+        {
+          "id": "Consumer_EspressoLover_Italy",
+          "properties": {
+            "hasName": "Espresso Lover Italy",
+            "hasCountry": {"resource": "Italy"},
+            "preferredCoffeeType": "Dark Roast Espresso",
+            "annualConsumption": 250,
+            "buys": {"resource": "Lavazza"}
+          }
+        },
+        {
+          "id": "Consumer_CasualDrinker_Japan",
+          "properties": {
+            "hasName": "Casual Drinker Japan",
+            "hasCountry": {"resource": "Japan"},
+            "preferredCoffeeType": "Light Roast",
+            "annualConsumption": 120,
+            "buys": {"resource": "Blue_Bottle"}
+          }
+        }
+      ]
+    },
+    "Price": {
+      "class_name": "Price",
+      "instances": [
+        {
+          "id": "Price_Arabica_SpecialtyGrade_2025",
+          "properties": {
+            "hasName": "Arabica Specialty Grade Price 2025",
+            "pricePerKg": 8.5,
+            "currency": "USD",
+            "effectiveDate": "2025-01-01",
+            "priceType": "Specialty Market",
+            "appliesTo": {"resource": "Arabica_Heirloom"}
+          }
+        },
+        {
+          "id": "Price_Robusta_Commercial_2025",
+          "properties": {
+            "hasName": "Robusta Commercial Price 2025",
+            "pricePerKg": 3.2,
+            "currency": "USD",
+            "effectiveDate": "2025-01-01",
+            "priceType": "Commodity Market",
+            "appliesTo": {"resource": "Robusta"}
+          }
+        }
+      ]
+    },
+    "Season": {
+      "class_name": "Season",
+      "instances": [
+        {
+          "id": "Season_Ethiopia_MainHarvest",
+          "properties": {
+            "hasName": "Ethiopia Main Harvest Season",
+            "hasCountry": {"resource": "Ethiopia"},
+            "harvestPeriod": "October to December",
+            "expectedYield": "High",
+            "weatherConditions": "Optimal rainfall"
+          }
+        },
+        {
+          "id": "Season_Brazil_MainHarvest",
+          "properties": {
+            "hasName": "Brazil Main Harvest Season",
+            "hasCountry": {"resource": "Brazil"},
+            "harvestPeriod": "May to September",
+            "expectedYield": "Very High",
+            "weatherConditions": "Dry season favorable"
+          }
+        },
+        {
+          "id": "Season_Colombia_FlyHarvest",
+          "properties": {
+            "hasName": "Colombia Fly Harvest Season",
+            "hasCountry": {"resource": "Colombia"},
+            "harvestPeriod": "April to June",
+            "expectedYield": "Medium",
+            "weatherConditions": "Variable rainfall"
+          }
+        }
+      ]
+    },
+    "TradeAgreement": {
+      "class_name": "TradeAgreement",
+      "instances": [
+        {
+          "id": "TradeAgreement_BrazilUSA_2025",
+          "properties": {
+            "hasName": "Brazil-USA Coffee Trade Agreement 2025",
+            "agreementType": "Bilateral",
+            "startDate": "2025-01-01",
+            "endDate": "2030-12-31",
+            "volume": 500000,
+            "exporter": {"resource": "Brazil"},
+            "importer": {"resource": "USA"}
+          }
+        },
+        {
+          "id": "TradeAgreement_EthiopiaEU_2024",
+          "properties": {
+            "hasName": "Ethiopia-EU Specialty Coffee Agreement",
+            "agreementType": "Preferential",
+            "startDate": "2024-06-01",
+            "endDate": "2029-05-31",
+            "volume": 150000,
+            "exporter": {"resource": "Ethiopia"},
+            "importer": {"resource": "Germany"}
+          }
+        }
+      ]
+    }
+  }
+}

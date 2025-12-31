@@ -1,0 +1,8 @@
+name,country,city,roastingCapacity,roastProfiles,specialtyGrade
+Blue Bottle Coffee,USA,Oakland,2000000,Light|Medium|Dark,true
+illycaffè,Italy,Trieste,50000000,Medium|Dark,true
+Verve Coffee Roasters,USA,Santa Cruz,1000000,Light|Medium,true
+Intelligentsia Coffee,USA,Chicago,3000000,Light|Medium,true
+Stumptown Coffee Roasters,USA,Portland,5000000,Light|Medium|Dark,true
+Counter Culture Coffee,USA,Durham,4000000,Light|Medium,true
+Square Mile Coffee Roasters,UK,London,800000,Light|Medium,true

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Price_Arabica_SpecialtyGrade_2025">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Price"/>
+        <hasName>Arabica Specialty Grade Price 2025</hasName>
+        <pricePerKg rdf:datatype="http://www.w3.org/2001/XMLSchema##double">8.5</pricePerKg>
+        <currency>USD</currency>
+        <effectiveDate>2025-01-01</effectiveDate>
+        <priceType>Specialty Market</priceType>
+        <appliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Arabica_Heirloom"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Price_Robusta_Commercial_2025">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Price"/>
+        <hasName>Robusta Commercial Price 2025</hasName>
+        <pricePerKg rdf:datatype="http://www.w3.org/2001/XMLSchema##double">3.2</pricePerKg>
+        <currency>USD</currency>
+        <effectiveDate>2025-01-01</effectiveDate>
+        <priceType>Commodity Market</priceType>
+        <appliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Robusta"/>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
