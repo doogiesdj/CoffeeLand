@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeLand 온톨로지 인스턴스 파일 다운로드</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; background: #ecf0f1; padding: 10px; }
+        .file-section {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .file-link {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .file-link:hover { background: #2980b9; }
+        .count { 
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .main-file { background: #27ae60; }
+        .main-file:hover { background: #229954; }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>☕ CoffeeLand 온톨로지 인스턴스 파일 다운로드</h1>
+    
+    <div class="note">
+        <strong>📌 중요:</strong> 아래 링크를 <strong>우클릭 → 다른 이름으로 링크 저장</strong>으로 다운로드하세요.
+        <br>또는 링크를 복사하여 <code>curl -O [URL]</code> 또는 <code>wget [URL]</code> 명령으로 다운로드할 수 있습니다.
+    </div>
+
+    <div class="file-section">
+        <h2>🎯 메인 온톨로지 (필수)</h2>
+        <a href="/coffeeland.rdf" class="file-link main-file" download>
+            📥 coffeeland.rdf <span class="count">375개 인스턴스</span>
+        </a>
+        <p><small>Farm 24 + Port 15 + Warehouse 20 + 기타 316개 포함</small></p>
+    </div>
+
+    <div class="file-section">
+        <h2>💼 시장 및 경제 (MarketAndEconomics)</h2>
+        <a href="/generated_imports/consumer_individuals.rdf" class="file-link" download>
+            📥 consumer_individuals.rdf <span class="count">3개</span>
+        </a>
+        <a href="/generated_imports/price_individuals.rdf" class="file-link" download>
+            📥 price_individuals.rdf <span class="count">2개</span>
+        </a>
+        <a href="/generated_imports/season_individuals.rdf" class="file-link" download>
+            📥 season_individuals.rdf <span class="count">3개</span>
+        </a>
+        <a href="/generated_imports/tradeagreement_individuals.rdf" class="file-link" download>
+            📥 tradeagreement_individuals.rdf <span class="count">2개</span>
+        </a>
+    </div>
+
+    <div class="file-section">
+        <h2>🏢 조직 (Organization)</h2>
+        <a href="/generated_imports/cooperative_individuals.rdf" class="file-link" download>
+            📥 cooperative_individuals.rdf <span class="count">6개</span>
+        </a>
+        <a href="/generated_imports/farmer_individuals.rdf" class="file-link" download>
+            📥 farmer_individuals.rdf <span class="count">7개</span>
+        </a>
+        <a href="/generated_imports/processingmill_individuals.rdf" class="file-link" download>
+            📥 processingmill_individuals.rdf <span class="count">2개</span>
+        </a>
+        <a href="/generated_imports/retailer_individuals.rdf" class="file-link" download>
+            📥 retailer_individuals.rdf <span class="count">7개</span>
+        </a>
+        <a href="/generated_imports/roaster_individuals.rdf" class="file-link" download>
+            📥 roaster_individuals.rdf <span class="count">7개</span>
+        </a>
+    </div>
+
+    <div class="file-section">
+        <h2>⭐ 품질 및 가공 (QualityAndProcessing)</h2>
+        <a href="/generated_imports/certification_individuals.rdf" class="file-link" download>
+            📥 certification_individuals.rdf <span class="count">6개</span>
+        </a>
+        <a href="/generated_imports/processingmethod_individuals.rdf" class="file-link" download>
+            📥 processingmethod_individuals.rdf <span class="count">6개</span>
+        </a>
+        <a href="/generated_imports/qualitygrade_individuals.rdf" class="file-link" download>
+            📥 qualitygrade_individuals.rdf <span class="count">5개</span>
+        </a>
+    </div>
+
+    <div class="file-section">
+        <h2>📋 기존 인스턴스 파일들</h2>
+        <a href="/coffee_farms_individuals.rdf" class="file-link" download>
+            📥 coffee_farms_individuals.rdf <span class="count">24개</span>
+        </a>
+        <a href="/coffee_ports_individuals.rdf" class="file-link" download>
+            📥 coffee_ports_individuals.rdf <span class="count">15개</span>
+        </a>
+        <a href="/coffee_warehouses_individuals.rdf" class="file-link" download>
+            📥 coffee_warehouses_individuals.rdf <span class="count">20개</span>
+        </a>
+        <a href="/coffee_logistics_individuals.rdf" class="file-link" download>
+            📥 coffee_logistics_individuals.rdf <span class="count">35개</span>
+        </a>
+    </div>
+
+    <div class="file-section">
+        <h2>📚 문서</h2>
+        <a href="/README_KOREAN.html" class="file-link" style="background: #9b59b6;">
+            📖 한국어 가이드 (HTML)
+        </a>
+        <a href="/README_IMPORT_SYSTEM.md" class="file-link" style="background: #9b59b6;">
+            📖 Import 시스템 가이드 (영문)
+        </a>
+        <a href="/VALIDATION_REPORT.txt" class="file-link" style="background: #9b59b6;">
+            📊 검증 보고서
+        </a>
+        <a href="/QUICK_SUMMARY.txt" class="file-link" style="background: #9b59b6;">
+            📝 빠른 요약
+        </a>
+    </div>
+
+    <div class="note">
+        <h3>💡 사용 방법</h3>
+        <ol>
+            <li><strong>메인 온톨로지</strong>를 먼저 다운로드하세요 (coffeeland.rdf)</li>
+            <li>Protégé에서 열어 현재 인스턴스를 확인하세요</li>
+            <li>필요한 추가 인스턴스 파일을 다운로드하세요</li>
+            <li>Protégé의 "Import" 기능으로 추가 파일을 임포트하세요</li>
+        </ol>
+    </div>
+
+    <div class="note" style="border-left-color: #3498db; background: #d6eaf8;">
+        <h3>🔧 명령줄 다운로드</h3>
+        <p>모든 파일을 한번에 다운로드하려면:</p>
+        <code style="display: block; padding: 10px; background: #2c3e50; color: #ecf0f1;">
+# 메인 온톨로지<br>
+curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland.rdf<br><br>
+
+# generated_imports 폴더 생성<br>
+mkdir -p generated_imports<br><br>
+
+# 모든 generated_imports 파일<br>
+cd generated_imports<br>
+for file in certification consumer cooperative farmer price processingmethod processingmill qualitygrade retailer roaster season tradeagreement; do<br>
+&nbsp;&nbsp;curl -O https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/${file}_individuals.rdf<br>
+done
+        </code>
+    </div>
+
+</body>
+</html>
