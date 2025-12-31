@@ -1,0 +1,239 @@
+================================================================================
+PROTÉGÉ IMPORT 방법 - PORT & WAREHOUSE 데이터
+================================================================================
+
+🎯 올바른 Import 절차 (Protégé 5.x)
+================================================================================
+
+방법 1: Loaded ontology sources 메뉴 사용 (추천)
+--------------------------------------------------------------------------------
+
+Step 1: Protégé에서 coffeeland.rdf 열기
+  • File → Open... (Ctrl+O)
+  • coffeeland.rdf 선택
+  • 온톨로지가 로드될 때까지 대기
+
+Step 2: Active Ontology 탭으로 이동
+  • 상단 탭에서 "Active Ontology" 클릭
+  • (또는 최상단 메뉴바 아래 탭 영역)
+
+Step 3: Ontology imports 섹션 찾기
+  • Active Ontology 탭 내에서
+  • "Ontology imports" 또는 "Direct imports" 섹션 찾기
+  • [+] 버튼 클릭
+
+Step 4: Import할 RDF 파일 선택
+  • "Import ontology from file" 선택
+  • coffee_logistics_individuals.rdf 찾아서 선택
+  • OK 클릭
+
+Step 5: 저장
+  • File → Save (Ctrl+S)
+  • 변경사항 저장 확인
+
+Step 6: 검증
+  • Individuals 탭으로 이동
+  • Port 클래스 선택 → 15개 개체 확인
+  • Warehouse 클래스 선택 → 20개 개체 확인
+
+================================================================================
+
+방법 2: File → Loaded ontology sources... 메뉴 사용
+--------------------------------------------------------------------------------
+
+Step 1: Protégé에서 coffeeland.rdf 열기
+  • File → Open... (Ctrl+O)
+  • coffeeland.rdf 선택
+
+Step 2: Loaded ontology sources 열기
+  • File → Loaded ontology sources...
+  • 새 창이 열림
+
+Step 3: Import ontology 클릭
+  • 좌측 하단의 "Import ontology" 버튼 클릭
+  • 또는 우클릭 → "Import ontology"
+
+Step 4: Import 설정
+  • Import type: "Import by direct file"
+  • 파일 선택: coffee_logistics_individuals.rdf
+  • OK 클릭
+
+Step 5: 적용 및 저장
+  • Close 버튼으로 Loaded ontology sources 창 닫기
+  • File → Save (Ctrl+S)
+
+Step 6: 검증
+  • Individuals 탭에서 확인
+
+================================================================================
+
+방법 3: 직접 RDF 파일 병합 (수동)
+--------------------------------------------------------------------------------
+
+Step 1: 백업 생성
+  • coffeeland.rdf 파일 복사 (백업용)
+
+Step 2: coffee_logistics_individuals.rdf 열기
+  • 텍스트 에디터로 coffee_logistics_individuals.rdf 열기
+  • <owl:NamedIndividual> 태그 부분 복사
+  • (XML 선언과 RDF 헤더는 제외)
+
+Step 3: coffeeland.rdf에 붙여넣기
+  • 텍스트 에디터로 coffeeland.rdf 열기
+  • 파일 끝의 </rdf:RDF> 태그 **직전**에 붙여넣기
+  • 저장
+
+Step 4: Protégé에서 확인
+  • 수정된 coffeeland.rdf를 Protégé에서 열기
+  • Individuals 탭에서 확인
+
+주의: 이 방법은 XML 구문에 익숙한 경우에만 사용하세요.
+
+================================================================================
+
+🔍 각 방법의 장단점
+================================================================================
+
+방법 1: Active Ontology 탭 (가장 권장) ⭐
+  장점:
+    ✅ GUI 기반으로 쉬움
+    ✅ Import 관계가 명시적으로 관리됨
+    ✅ 실수 가능성 낮음
+    ✅ Protégé가 자동으로 검증
+  
+  단점:
+    ❌ Active Ontology 탭 찾기 어려울 수 있음
+
+방법 2: Loaded ontology sources 메뉴
+  장점:
+    ✅ File 메뉴에서 바로 접근
+    ✅ Import 목록 한눈에 확인
+    ✅ 여러 온톨로지 관리 가능
+  
+  단점:
+    ❌ 추가 창이 열려서 복잡해 보일 수 있음
+
+방법 3: 수동 병합
+  장점:
+    ✅ Protégé 없이도 가능
+    ✅ 정확한 제어 가능
+    ✅ 대량의 데이터도 빠르게 처리
+  
+  단점:
+    ❌ XML 문법 오류 가능성
+    ❌ 수동 작업 필요
+    ❌ 백업 필수
+
+================================================================================
+
+📸 스크린샷 가이드
+================================================================================
+
+Active Ontology 탭을 찾는 방법:
+
+1. Protégé 메인 창 상단을 보세요
+2. 탭 영역에서 다음 탭들을 찾으세요:
+   [Active Ontology] [Classes] [Object Properties] [Data Properties] ...
+
+3. "Active Ontology" 탭을 클릭하면:
+   • Ontology annotations
+   • Ontology imports (또는 Direct imports)
+   • General class axioms
+   등의 섹션이 보입니다.
+
+4. "Ontology imports" 섹션에서:
+   • [+] 버튼 클릭
+   • Import할 파일 선택
+
+================================================================================
+
+❓ 문제 해결
+================================================================================
+
+Q: "Active Ontology" 탭이 안 보여요
+A: Window → Tabs → Active ontology 메뉴에서 활성화
+
+Q: "Import ontology" 버튼이 안 보여요
+A: Loaded ontology sources 창에서 우클릭 → Import ontology
+
+Q: Import 후 개체가 안 보여요
+A: 
+  1. Reasoner 실행: Reasoner → Start reasoner
+  2. Individuals 탭 새로고침
+  3. Port/Warehouse 클래스 직접 선택
+
+Q: XML 오류가 발생해요
+A:
+  1. 원본 파일이 손상되지 않았는지 확인
+  2. 백업에서 복구
+  3. 방법 1 또는 2로 다시 시도
+
+Q: 중복 개체가 생겼어요
+A:
+  1. Edit → Undo (Ctrl+Z)
+  2. 저장하지 말고 파일 다시 열기
+  3. Import 한 번만 실행
+
+================================================================================
+
+✅ 성공 확인 방법
+================================================================================
+
+Import가 성공적으로 완료되면:
+
+1. Individuals 탭으로 이동
+2. 좌측 Class hierarchy에서 "Port" 선택
+   → 우측에 15개 개체 표시:
+     • Port_Santos
+     • Port_Hamburg
+     • Port_Antwerp
+     • ... (총 15개)
+
+3. "Warehouse" 선택
+   → 우측에 20개 개체 표시:
+     • Warehouse_Santos_A
+     • Warehouse_Hamburg_Central
+     • Warehouse_Antwerp_North
+     • ... (총 20개)
+
+4. 개별 개체 클릭하면 Properties 표시:
+   • hasName
+   • hasCity
+   • hasCountry
+   • hasLatitude
+   • hasLongitude
+   • 등등
+
+5. 하단 콘솔에 오류 메시지 없음
+
+================================================================================
+
+🎯 권장 순서
+================================================================================
+
+1차 시도: 방법 1 (Active Ontology 탭)
+  → Active Ontology 탭 찾기
+  → Ontology imports 섹션에서 [+] 클릭
+  → coffee_logistics_individuals.rdf 선택
+  → 저장
+
+2차 시도: 방법 2 (Loaded ontology sources)
+  → File → Loaded ontology sources...
+  → Import ontology 버튼
+  → 파일 선택 → 저장
+
+3차 시도: 방법 3 (수동 병합)
+  → 백업 생성
+  → 텍스트 에디터로 수동 병합
+  → Protégé에서 확인
+
+================================================================================
+
+마지막으로, Protégé 버전에 따라 메뉴 이름이 약간 다를 수 있습니다:
+  • Protégé 5.0-5.2: "Loaded ontology sources"
+  • Protégé 5.5+: "Active Ontology" 탭에서 직접 import
+  • Protégé 4.x: "Import" 메뉴 (구버전)
+
+버전 확인: Help → About Protégé
+
+================================================================================
