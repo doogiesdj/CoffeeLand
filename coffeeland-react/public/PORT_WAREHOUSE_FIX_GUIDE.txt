@@ -1,0 +1,266 @@
+================================================================================
+🔧 PORT & WAREHOUSE 빈 개체 문제 해결 완료
+================================================================================
+
+❌ 문제점:
+  • Protégé에서 Port 클래스 선택 시 "Direct instances" 창이 비어있음
+  • 15개 Port, 20개 Warehouse 개체가 import되었으나 표시되지 않음
+  • 원인: RDF 파일에 개체(individuals)만 있고 클래스 정의가 없었음
+
+✅ 해결 방법:
+  • Port와 Warehouse 클래스 정의를 포함한 새 RDF 파일 생성
+  • 클래스를 Location의 하위 클래스로 정의
+  • 필요한 모든 Data Properties 정의 추가
+
+================================================================================
+📥 수정된 파일 다운로드
+================================================================================
+
+⭐ 새 파일 (클래스 정의 포함):
+  coffee_logistics_WITH_CLASSES.rdf (48KB)
+  
+  다운로드:
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffee_logistics_WITH_CLASSES.rdf
+
+이전 파일 (개체만):
+  coffee_logistics_individuals.rdf (44KB) - 사용하지 마세요
+
+================================================================================
+🚀 Protégé에서 다시 Import 하기
+================================================================================
+
+Step 1: 이전 Import 제거 (중요!)
+  1. Protégé에서 "Ontology source locations" 창 열기
+     - File → Loaded ontology sources...
+  
+  2. "OntologyID(Anonymous-13)" 항목 찾기
+     - 이것이 coffee_ports_individuals.rdf입니다
+  
+  3. 해당 항목 선택 후 삭제
+     - 우클릭 → Remove 또는 [-] 버튼 클릭
+  
+  4. 저장
+     - File → Save (Ctrl+S)
+
+Step 2: 새 파일 Import
+  1. Active Ontology 탭으로 이동
+     - 상단 탭에서 "Active Ontology" 클릭
+  
+  2. Ontology imports 섹션에서 [+] 클릭
+  
+  3. 새 파일 선택
+     - "Import ontology from file"
+     - coffee_logistics_WITH_CLASSES.rdf 선택
+     - OK 클릭
+  
+  4. 저장
+     - File → Save (Ctrl+S)
+
+Step 3: 검증
+  1. Individuals 탭으로 이동
+  
+  2. Class hierarchy에서 "Port" 클릭
+     → Direct instances에 15개 Port 표시되어야 함:
+       • Port_Santos
+       • Port_Hamburg
+       • Port_Antwerp
+       • Port_Rotterdam
+       • Port_NewOrleans
+       • Port_LongBeach
+       • Port_Mombasa
+       • Port_HoChiMinh
+       • Port_Genoa
+       • Port_Singapore
+       • Port_Tokyo
+       • Port_Busan
+       • Port_Felixstowe
+       • Port_Valencia
+       • Port_Sydney
+  
+  3. Class hierarchy에서 "Warehouse" 클릭
+     → Direct instances에 20개 Warehouse 표시되어야 함:
+       • Warehouse_Santos_A
+       • Warehouse_Hamburg_Central
+       • Warehouse_Antwerp_North
+       • ... (총 20개)
+
+================================================================================
+📊 새 파일에 포함된 내용
+================================================================================
+
+1. 클래스 정의:
+   ```xml
+   <owl:Class rdf:about="...#Port">
+       <rdfs:subClassOf rdf:resource="...#Location"/>
+       <rdfs:label>Port</rdfs:label>
+       <rdfs:comment>A port facility handling coffee import/export</rdfs:comment>
+   </owl:Class>
+
+   <owl:Class rdf:about="...#Warehouse">
+       <rdfs:subClassOf rdf:resource="...#Location"/>
+       <rdfs:label>Warehouse</rdfs:label>
+       <rdfs:comment>A warehouse facility for coffee storage</rdfs:comment>
+   </owl:Class>
+   ```
+
+2. Data Properties 정의:
+   Port 전용:
+   • handlesProduct (string) - 처리하는 커피 제품 유형
+   • yearlyThroughput (integer) - 연간 처리량
+
+   Warehouse 전용:
+   • storageCapacity (integer) - 저장 용량
+   • storesProduct (string) - 저장하는 제품 유형
+   • temperatureControl (string) - 온도 제어 방식
+   • managedBy (string) - 관리 조직
+
+   공통:
+   • hasName, hasCity, hasCountry
+   • hasLatitude, hasLongitude
+
+3. 15개 Port 개체 (완전한 속성 포함)
+
+4. 20개 Warehouse 개체 (완전한 속성 포함)
+
+================================================================================
+✅ 성공 확인
+================================================================================
+
+Import가 성공하면:
+
+□ Classes 탭:
+  • Location 아래에 Port와 Warehouse가 하위 클래스로 표시
+  • 클래스 옆에 개체 수 표시: Port(15), Warehouse(20)
+
+□ Individuals 탭:
+  • Port 선택 → 15개 개체 표시
+  • Warehouse 선택 → 20개 개체 표시
+  • 각 개체 클릭 시 모든 속성 정상 표시
+
+□ Data Properties 탭:
+  • handlesProduct, yearlyThroughput (Port 전용)
+  • storageCapacity, storesProduct, temperatureControl, managedBy (Warehouse 전용)
+  • 각 속성에 올바른 domain과 range 설정
+
+□ Reasoner 테스트:
+  • Reasoner → Start reasoner
+  • 오류 없이 실행 완료
+  • Inferred class hierarchy 정상 표시
+
+================================================================================
+🔍 문제 해결 (여전히 개체가 안 보이는 경우)
+================================================================================
+
+문제 1: "Location 클래스가 없다"는 오류
+해결책:
+  1. coffeeland.rdf에 Location 클래스가 정의되어 있는지 확인
+  2. Classes 탭에서 Location 클래스를 수동으로 생성:
+     - 우클릭 owl:Thing → Add subclass → "Location"
+  3. 저장 후 다시 Import
+
+문제 2: 여전히 빈 목록
+해결책:
+  1. Reasoner 실행: Reasoner → Pellet → Start reasoner
+  2. Individuals 탭 새로고침 (F5 또는 탭 재선택)
+  3. Classes 탭에서 Port/Warehouse 클래스 우클릭 → "Classify this class"
+
+문제 3: 중복 개체 발생
+해결책:
+  1. Edit → Undo (Ctrl+Z)로 최근 Import 취소
+  2. File → Loaded ontology sources에서 중복 import 제거
+  3. 파일 재저장 후 다시 열기
+
+문제 4: Import 오류 메시지
+해결책:
+  1. coffee_logistics_WITH_CLASSES.rdf 파일 크기 확인 (약 48KB)
+  2. 파일이 완전히 다운로드되었는지 확인
+  3. 텍스트 에디터로 열어 XML 형식이 올바른지 확인
+  4. 파일 재다운로드
+
+================================================================================
+📝 왜 이전 파일은 작동하지 않았는가?
+================================================================================
+
+이전 파일 (coffee_logistics_individuals.rdf):
+  ❌ 개체만 정의됨
+  ❌ Port/Warehouse 클래스 정의 없음
+  ❌ Data Properties 정의 없음
+  
+  결과:
+  → Protégé가 Port/Warehouse 클래스를 인식하지 못함
+  → 개체가 어떤 클래스에 속하는지 알 수 없음
+  → Direct instances 목록이 비어있음
+
+새 파일 (coffee_logistics_WITH_CLASSES.rdf):
+  ✅ 클래스 정의 포함
+  ✅ Location의 하위 클래스로 명시
+  ✅ 모든 Data Properties 정의 포함
+  ✅ Domain과 Range 올바르게 설정
+  
+  결과:
+  → Protégé가 클래스 구조를 완전히 이해
+  → 개체가 올바른 클래스에 분류됨
+  → Direct instances가 정상적으로 표시됨
+
+================================================================================
+🎓 교훈
+================================================================================
+
+RDF/OWL 온톨로지에서:
+  1. 개체(individuals)만 import하면 작동하지 않을 수 있음
+  2. 클래스 정의가 먼저 필요함
+  3. Data Properties도 정의되어야 속성이 표시됨
+  4. 상속 관계(subClassOf)가 명시되어야 계층 구조가 형성됨
+
+완전한 온톨로지 = 클래스 + 속성 + 개체 + 관계
+
+================================================================================
+📥 다운로드 링크 정리
+================================================================================
+
+✅ 사용할 파일:
+  coffee_logistics_WITH_CLASSES.rdf (48KB) ⭐
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffee_logistics_WITH_CLASSES.rdf
+
+❌ 사용하지 말 것:
+  coffee_logistics_individuals.rdf (44KB)
+  coffee_ports_individuals.rdf (18KB)
+  coffee_warehouses_individuals.rdf (27KB)
+
+참고 문서:
+  PROTEGE_IMPORT_CORRECT_METHOD.txt
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/PROTEGE_IMPORT_CORRECT_METHOD.txt
+
+  PORT_WAREHOUSE_COMPLETE_PACKAGE.txt
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/PORT_WAREHOUSE_COMPLETE_PACKAGE.txt
+
+================================================================================
+🎯 다음 단계
+================================================================================
+
+1. ✅ 이전 import 제거
+2. ✅ coffee_logistics_WITH_CLASSES.rdf 다운로드
+3. ✅ Active Ontology 탭에서 import
+4. ✅ Individuals 탭에서 35개 개체 확인
+5. ✅ 저장
+6. ✅ Reasoner 실행하여 일관성 검증
+
+완료되면 coffeeland.rdf를 웹 앱에 배포하여 시각화!
+
+================================================================================
+✨ 요약
+================================================================================
+
+문제: Port/Warehouse 개체가 Protégé에서 표시되지 않음
+원인: 클래스 정의 누락
+해결: coffee_logistics_WITH_CLASSES.rdf 사용
+결과: 15 Ports + 20 Warehouses = 35개 개체 정상 표시
+
+이제 올바른 파일로 import하면 모든 개체가 정상적으로 보일 것입니다! 🎉
+
+================================================================================
+
+GitHub Commit: 7bd58c3
+Last Updated: 2025-12-31
+
+================================================================================
