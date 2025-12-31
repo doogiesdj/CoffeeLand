@@ -1,0 +1,253 @@
+═══════════════════════════════════════════════════════════════════════
+🎉 FARM INSTANCES RESTORED + UNIVERSAL IMPORT SYSTEM COMPLETE
+═══════════════════════════════════════════════════════════════════════
+
+✅ MISSION ACCOMPLISHED
+
+Problem: Farm instances disappeared when Port/Warehouse were added
+Solution: Complete restoration + reusable import system for all future needs
+
+═══════════════════════════════════════════════════════════════════════
+📊 WHAT WAS RESTORED
+═══════════════════════════════════════════════════════════════════════
+
+✅ 24 Farm Instances Restored
+   • Farm_Yirgacheffe_Kochere_Farm (Ethiopia)
+   • Farm_Sidamo_Guji_Farm (Ethiopia)
+   • Farm_Harrar_Estate (Ethiopia)
+   • Farm_Huila_El_Paraiso_Farm (Colombia)
+   • ... and 20 more farms
+
+✅ Total Ontology Now: 375 Individuals
+   • Farm: 24
+   • Port: 15
+   • Warehouse: 20
+   • Other classes: 316
+
+═══════════════════════════════════════════════════════════════════════
+🚀 NEW UNIVERSAL IMPORT SYSTEM
+═══════════════════════════════════════════════════════════════════════
+
+Instead of manually editing coffeeland.rdf, you now have:
+
+1️⃣ JSON Templates (12 subclasses, 38 instances ready)
+   📁 templates/imports/
+   • market_economics_instances.json
+   • organization_instances.json
+   • quality_processing_instances.json
+
+2️⃣ CSV Templates (6 subclasses, 39 instances ready)
+   📁 templates/csv_sources/
+   • farmers.csv
+   • cooperatives.csv
+   • certifications.csv
+   • processing_methods.csv
+   • retailers.csv
+   • roasters.csv
+
+3️⃣ Automation Scripts
+   📁 scripts/
+   • generate_imports.py - Converts JSON → RDF
+   • csv_to_rdf.py - Converts CSV → RDF
+
+4️⃣ Core Engine
+   📄 restore_and_import_ontology.py
+   • OntologyInstanceManager class
+   • UniversalInstanceGenerator class
+   • Automated backup system
+
+═══════════════════════════════════════════════════════════════════════
+🎯 COMPLETE COVERAGE OF REQUESTED SUBCLASSES
+═══════════════════════════════════════════════════════════════════════
+
+✅ MarketAndEconomics:
+   • Consumer ✅
+   • Price ✅
+   • Season/Harvest ✅
+   • TradeAgreement ✅
+
+✅ Organization:
+   • Cooperative ✅
+   • Farmer ✅
+   • ProcessingMill ✅
+   • Retailer ✅
+   • Roaster ✅
+
+✅ QualityAndProcessing:
+   • Certification ✅
+   • ProcessingMethod ✅
+   • QualityGrade ✅
+
+✅ Location (Context):
+   • Farm ✅ (restored)
+
+═══════════════════════════════════════════════════════════════════════
+📥 HOW TO USE THE IMPORT SYSTEM
+═══════════════════════════════════════════════════════════════════════
+
+OPTION 1: Import All Generated Instances (Fastest)
+   $ cd /home/user/webapp
+   $ python3 scripts/generate_imports.py --import-only
+
+OPTION 2: Generate from JSON Templates First
+   $ python3 scripts/generate_imports.py
+   # Review generated_imports/ folder
+   # Then import via Protégé or script
+
+OPTION 3: Generate from CSV Files
+   $ python3 scripts/csv_to_rdf.py
+   # CSV → RDF conversion
+   # Then import
+
+OPTION 4: Manual Import in Protégé
+   1. Open Protégé
+   2. Load coffeeland.rdf
+   3. Active Ontology tab → [+] Import
+   4. Select file from generated_imports/
+   5. Save
+
+═══════════════════════════════════════════════════════════════════════
+📁 FILES LOCATION
+═══════════════════════════════════════════════════════════════════════
+
+Everything is available in TWO locations:
+
+1️⃣ Project Root: /home/user/webapp/
+   • restore_and_import_ontology.py
+   • templates/
+   • scripts/
+   • generated_imports/
+
+2️⃣ Public Directory: /home/user/webapp/coffeeland-react/public/
+   • Same files copied here for easy access
+   • Download URL: https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/
+
+═══════════════════════════════════════════════════════════════════════
+📥 DOWNLOAD LINKS
+═══════════════════════════════════════════════════════════════════════
+
+Main Ontology (with restored Farms):
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/coffeeland.rdf
+
+Documentation:
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/ONTOLOGY_IMPORT_SYSTEM_GUIDE.md
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/VALIDATION_REPORT.txt
+
+Core Scripts:
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/restore_and_import_ontology.py
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/scripts/generate_imports.py
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/scripts/csv_to_rdf.py
+
+Templates Directory:
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/templates/
+
+Generated RDF Files:
+  https://5173-iq167hrnwb18xvsq7sd61-de59bda9.sandbox.novita.ai/generated_imports/
+
+═══════════════════════════════════════════════════════════════════════
+🔍 VERIFICATION IN PROTÉGÉ
+═══════════════════════════════════════════════════════════════════════
+
+1. Download coffeeland.rdf from link above
+2. Open in Protégé
+3. Go to Individuals tab
+4. Select "Farm" class → Should see 24 instances ✅
+
+Expected Farm instances:
+   ✓ Farm_Yirgacheffe_Kochere_Farm
+   ✓ Farm_Sidamo_Guji_Farm
+   ✓ Farm_Harrar_Estate
+   ✓ Farm_Huila_El_Paraiso_Farm
+   ✓ Farm_Narino_La_Esperanza
+   ✓ ... (20 more)
+
+5. Select "Port" class → Should see 15 instances ✅
+6. Select "Warehouse" class → Should see 20 instances ✅
+
+Total: 59 Location instances (Farm + Port + Warehouse)
+
+═══════════════════════════════════════════════════════════════════════
+📈 READY-TO-IMPORT INSTANCES
+═══════════════════════════════════════════════════════════════════════
+
+Already in generated_imports/ folder:
+
+  ✓ certification_individuals.rdf (6 instances)
+  ✓ consumer_individuals.rdf (3 instances)
+  ✓ cooperative_individuals.rdf (6 instances)
+  ✓ farmer_individuals.rdf (7 instances)
+  ✓ price_individuals.rdf (2 instances)
+  ✓ processingmethod_individuals.rdf (6 instances)
+  ✓ processingmill_individuals.rdf (2 instances)
+  ✓ qualitygrade_individuals.rdf (5 instances)
+  ✓ retailer_individuals.rdf (7 instances)
+  ✓ roaster_individuals.rdf (7 instances)
+  ✓ season_individuals.rdf (3 instances)
+  ✓ tradeagreement_individuals.rdf (2 instances)
+
+Total: 56 additional instances ready to import!
+
+═══════════════════════════════════════════════════════════════════════
+🎓 EXAMPLE: ADD YOUR OWN INSTANCES
+═══════════════════════════════════════════════════════════════════════
+
+Method 1: JSON Template
+1. Create templates/imports/my_custom.json
+2. Follow the structure in existing templates
+3. Run: python3 scripts/generate_imports.py
+4. Import the generated RDF
+
+Method 2: CSV File
+1. Create templates/csv_sources/myclass.csv
+2. Add mapping in scripts/csv_to_rdf.py
+3. Run: python3 scripts/csv_to_rdf.py
+4. Import the generated RDF
+
+See ONTOLOGY_IMPORT_SYSTEM_GUIDE.md for detailed instructions
+
+═══════════════════════════════════════════════════════════════════════
+📝 GIT COMMIT INFO
+═══════════════════════════════════════════════════════════════════════
+
+Commit: bc116ca
+Message: "feat: Restore Farm instances and implement universal ontology import system"
+Repository: https://github.com/doogiesdj/CoffeeLand
+Branch: main
+
+View commit:
+https://github.com/doogiesdj/CoffeeLand/commit/bc116ca
+
+═══════════════════════════════════════════════════════════════════════
+✅ SUMMARY
+═══════════════════════════════════════════════════════════════════════
+
+[✅] Farm instances restored (24)
+[✅] Universal import system created
+[✅] JSON templates for 12 subclasses
+[✅] CSV templates for 6 subclasses
+[✅] Automation scripts working
+[✅] 56 instances ready to import
+[✅] Comprehensive documentation
+[✅] All code committed and pushed
+
+Total individuals in ontology: 375 (currently)
+Potential total with all imports: 431+ individuals
+
+═══════════════════════════════════════════════════════════════════════
+🎉 SUCCESS!
+═══════════════════════════════════════════════════════════════════════
+
+Your CoffeeLand ontology is now:
+  ✅ Complete with all Farm instances
+  ✅ Future-proofed with reusable import system
+  ✅ Ready for batch instance creation
+  ✅ Documented and maintainable
+
+Next time you need to add instances:
+  → Don't edit coffeeland.rdf directly
+  → Use the templates and scripts
+  → Safe, automated, repeatable
+
+Happy ontology building! 🚀☕
+
+═══════════════════════════════════════════════════════════════════════
