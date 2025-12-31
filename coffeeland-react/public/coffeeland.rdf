@@ -2419,8 +2419,7 @@
         <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">144.9342</hasLongitude>
         <managedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Merlo Coffee</managedBy>
     </owl:NamedIndividual>
-
-</rdf:RDF>
+    
 
 
     <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Volcafe(ED&amp;FMan) -->
