@@ -116,44 +116,182 @@
         <div class="content-body">
             <!-- 업로드 뷰 (홈) -->
             <div id="view-upload" class="content-view active">
-                <div class="welcome-section">
-                    <div class="welcome-icon">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h2>CoffeeLand 온톨로지 뷰어에 오신 것을 환영합니다</h2>
-                    <p class="welcome-text">
-                        Protege에서 생성한 RDF/OWL 온톨로지 파일을 업로드하여 시각화하고 분석하세요.
-                    </p>
-                    
-                    <div class="upload-area" id="uploadBox">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas fa-coffee"></i>
+                            <span>Semantic Web Platform</span>
                         </div>
-                        <h3>파일을 드래그하거나 클릭하여 업로드</h3>
-                        <p>지원 형식: .owl, .rdf, .ttl, .n3, .nt</p>
-                        <p class="upload-size-info">최대 파일 크기: 50MB</p>
+                        <h1 class="hero-title">
+                            CoffeeLand
+                            <span class="hero-subtitle">온톨로지 시각화 플랫폼</span>
+                        </h1>
+                        <p class="hero-description">
+                            커피 공급망의 복잡한 관계를 시각적으로 탐색하고 분석하세요.
+                            Protege에서 생성한 RDF/OWL 온톨로지를 실시간으로 시각화합니다.
+                        </p>
+                        
+                        <!-- Upload Box with Premium Design -->
+                        <div class="upload-area-premium" id="uploadBox">
+                            <div class="upload-backdrop"></div>
+                            <div class="upload-content-wrapper">
+                                <div class="upload-icon-large">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <div class="upload-icon-orbit"></div>
+                                </div>
+                                <h3 class="upload-title">파일을 드래그하거나 클릭하여 업로드</h3>
+                                <p class="upload-subtitle">RDF/XML, Turtle, N-Triples 형식 지원</p>
+                                <div class="upload-meta">
+                                    <span><i class="fas fa-file-code"></i> .owl, .rdf, .ttl, .n3, .nt</span>
+                                    <span><i class="fas fa-database"></i> 최대 50MB</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="feature-grid">
-                        <div class="feature-card">
+                <!-- Stats Bar -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-icon">
                             <i class="fas fa-project-diagram"></i>
-                            <h4>그래프 시각화</h4>
-                            <p>노드-엣지 다이어그램으로 온톨로지 구조 탐색</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="stat-content">
+                            <div class="stat-value" id="home-graph-count">—</div>
+                            <div class="stat-label">Interactive Graph</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
                             <i class="fas fa-sitemap"></i>
-                            <h4>계층 구조</h4>
-                            <p>클래스 상속 관계를 트리 형태로 표시</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="stat-content">
+                            <div class="stat-value" id="home-class-count">—</div>
+                            <div class="stat-label">Class Hierarchy</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
                             <i class="fas fa-search"></i>
-                            <h4>SPARQL 쿼리</h4>
-                            <p>실시간 SPARQL 쿼리로 데이터 검색</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="stat-content">
+                            <div class="stat-value" id="home-query-count">—</div>
+                            <div class="stat-label">SPARQL Query</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
                             <i class="fas fa-chart-bar"></i>
-                            <h4>통계 분석</h4>
-                            <p>클래스, 속성, 인스턴스 통계 정보</p>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="home-stats-count">—</div>
+                            <div class="stat-label">Analytics</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Cards with Modern Design -->
+                <div class="features-section">
+                    <div class="section-header">
+                        <h2>강력한 기능</h2>
+                        <p>CoffeeLand는 온톨로지 데이터를 다각도로 분석할 수 있는 도구를 제공합니다</p>
+                    </div>
+                    
+                    <div class="feature-grid-modern">
+                        <div class="feature-card-premium">
+                            <div class="feature-card-glow"></div>
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>그래프 시각화</h3>
+                            <p>Force-Directed, Circle, Grid 등 다양한 레이아웃으로 노드-엣지 관계를 탐색하세요. 실시간 줌, 팬, 필터링을 지원합니다.</p>
+                            <div class="feature-tags">
+                                <span>Interactive</span>
+                                <span>Real-time</span>
+                                <span>Customizable</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-premium">
+                            <div class="feature-card-glow"></div>
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h3>계층 구조</h3>
+                            <p>클래스 상속 관계를 트리 형태로 시각화하여 온톨로지의 구조를 한눈에 파악할 수 있습니다.</p>
+                            <div class="feature-tags">
+                                <span>Tree View</span>
+                                <span>Hierarchical</span>
+                                <span>Expandable</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-premium">
+                            <div class="feature-card-glow"></div>
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>SPARQL 쿼리</h3>
+                            <p>실시간 SPARQL 쿼리 엔진으로 복잡한 데이터 검색과 분석을 수행하세요. 예제 쿼리를 제공합니다.</p>
+                            <div class="feature-tags">
+                                <span>Query</span>
+                                <span>Examples</span>
+                                <span>Export</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-premium">
+                            <div class="feature-card-glow"></div>
+                            <div class="feature-icon-wrapper">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3>통계 분석</h3>
+                            <p>클래스, 속성, 인스턴스의 통계 정보와 네임스페이스 분석을 제공하여 데이터 품질을 확인하세요.</p>
+                            <div class="feature-tags">
+                                <span>Statistics</span>
+                                <span>Metrics</span>
+                                <span>Quality</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coffee Supply Chain Highlight -->
+                <div class="highlight-section">
+                    <div class="highlight-content">
+                        <div class="highlight-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h3>커피 공급망 온톨로지</h3>
+                            <p>농장부터 소비자까지, 커피 산업의 복잡한 관계망을 시맨틱 웹 기술로 모델링합니다.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-items">
+                        <div class="highlight-item">
+                            <i class="fas fa-seedling"></i>
+                            <span>Coffee Farm</span>
+                        </div>
+                        <div class="highlight-arrow">→</div>
+                        <div class="highlight-item">
+                            <i class="fas fa-industry"></i>
+                            <span>Processing</span>
+                        </div>
+                        <div class="highlight-arrow">→</div>
+                        <div class="highlight-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            <span>Distribution</span>
+                        </div>
+                        <div class="highlight-arrow">→</div>
+                        <div class="highlight-item">
+                            <i class="fas fa-store"></i>
+                            <span>Retail</span>
+                        </div>
+                        <div class="highlight-arrow">→</div>
+                        <div class="highlight-item">
+                            <i class="fas fa-user"></i>
+                            <span>Consumer</span>
                         </div>
                     </div>
                 </div>
