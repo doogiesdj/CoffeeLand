@@ -31,6 +31,8 @@ navItems.forEach(item => {
 });
 
 function switchView(viewName) {
+    console.log('🔄 switchView called:', viewName);
+    
     // Hide all views
     document.querySelectorAll('.content-view').forEach(view => {
         view.classList.remove('active');
@@ -38,11 +40,15 @@ function switchView(viewName) {
     
     // Show selected view
     const targetView = document.getElementById(`view-${viewName}`);
+    console.log('🎯 Target view:', targetView ? `found (view-${viewName})` : `NOT FOUND (view-${viewName})`);
+    
     if (targetView) {
         targetView.classList.add('active');
+        console.log('✅ View activated:', viewName);
         
         // Resize graph if switching to graph view
         if (viewName === 'graph' && cy) {
+            console.log('📐 Resizing and fitting graph...');
             setTimeout(() => {
                 cy.resize();
                 cy.fit();
@@ -140,8 +146,10 @@ async function handleFileSelect() {
 
 // Load RDF data
 async function loadRDFData() {
+    console.log('📥 loadRDFData() called, filename:', uploadedFilename);
     try {
         // Parse RDF
+        console.log('🔍 Fetching /api/rdf/parse...');
         const parseResponse = await fetch('/api/rdf/parse', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -149,34 +157,49 @@ async function loadRDFData() {
         });
         
         const parseResult = await parseResponse.json();
+        console.log('✅ Parse result:', parseResult.success ? `${parseResult.count} triples` : 'FAILED');
         
         if (parseResult.success) {
             rdfData = parseResult.triples;
+            console.log('💾 Stored rdfData:', rdfData.length, 'triples');
             
             // Load statistics
+            console.log('📊 Loading statistics...');
             await loadStatistics();
             
             // Initialize graph visualization
+            console.log('🎨 Calling initializeGraph()...');
             initializeGraph();
             
             // Load hierarchy
+            console.log('🌳 Loading hierarchy...');
             await loadHierarchy();
+            
+            console.log('✅ loadRDFData() completed successfully');
         }
     } catch (error) {
-        console.error('Error loading RDF data:', error);
+        console.error('❌ Error loading RDF data:', error);
     }
 }
 
 // Graph visualization
 function initializeGraph() {
-    const container = document.getElementById('cy');
+    console.log('🎨 initializeGraph() called');
+    console.log('📊 rdfData:', rdfData ? `${rdfData.length} triples` : 'null');
     
-    if (!container) return;
+    const container = document.getElementById('cy');
+    console.log('📦 Container #cy:', container ? 'found' : 'NOT FOUND');
+    
+    if (!container) {
+        console.error('❌ Container #cy not found!');
+        return;
+    }
     
     // Build graph elements
     const elements = [];
     const nodeSet = new Set();
     
+    console.log('🔨 Building graph elements...');
     rdfData.forEach(triple => {
         if (!nodeSet.has(triple.subject)) {
             elements.push({
@@ -210,7 +233,11 @@ function initializeGraph() {
         });
     });
     
+    console.log('🔢 Total elements:', elements.length);
+    console.log('🔢 Unique nodes:', nodeSet.size);
+    
     // Initialize Cytoscape
+    console.log('🚀 Initializing Cytoscape...');
     cy = cytoscape({
         container: container,
         elements: elements,
