@@ -231,14 +231,17 @@ function initializeGraph() {
             nodeSet.add(triple.object);
         }
         
-        elements.push({
-            data: {
-                source: triple.subject,
-                target: triple.object,
-                label: getShortName(triple.predicate),
-                fullUri: triple.predicate
-            }
-        });
+        // Only create edge if object is a NamedNode (not a Literal)
+        if (triple.objectType === 'NamedNode') {
+            elements.push({
+                data: {
+                    source: triple.subject,
+                    target: triple.object,
+                    label: getShortName(triple.predicate),
+                    fullUri: triple.predicate
+                }
+            });
+        }
     });
     
     console.log('🔢 Total elements:', elements.length);

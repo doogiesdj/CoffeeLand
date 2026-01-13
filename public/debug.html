@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Upload Flow</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px 0; cursor: pointer; }
+        #log { background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px; font-family: monospace; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>🐛 Upload & Graph Debug</h1>
+    
+    <button onclick="testUploadedFile()">1. Check if file exists on server</button><br>
+    <button onclick="testParseAPI()">2. Test /api/rdf/parse</button><br>
+    <button onclick="testFullFlow()">3. Simulate full upload flow</button><br>
+    
+    <div id="log"></div>
+    
+    <script>
+        const logDiv = document.getElementById('log');
+        
+        function log(msg) {
+            logDiv.innerHTML += new Date().toLocaleTimeString() + ' - ' + msg + '\n';
+        }
+        
+        async function testUploadedFile() {
+            log('🔍 Checking if coffeeland.rdf exists...');
+            try {
+                const response = await fetch('/api/rdf/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: '1768301363919-coffeeland.rdf' })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    log('✅ File exists and parsed: ' + result.count + ' triples');
+                } else {
+                    log('❌ Failed: ' + result.error);
+                }
+            } catch (error) {
+                log('❌ Error: ' + error.message);
+            }
+        }
+        
+        async function testParseAPI() {
+            log('🔍 Testing parse API with actual filename...');
+            
+            // First, let's check what files are uploaded
+            const files = ['1768301363919-coffeeland.rdf', 'coffeeland.rdf'];
+            
+            for (const filename of files) {
+                log('Trying: ' + filename);
+                try {
+                    const response = await fetch('/api/rdf/parse', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ filename: filename })
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        log('✅ SUCCESS with ' + filename + ': ' + result.count + ' triples');
+                        log('   Sample: ' + JSON.stringify(result.triples[0]).substring(0, 100));
+                        window.testFilename = filename;
+                        return;
+                    } else {
+                        log('❌ Failed with ' + filename + ': ' + result.error);
+                    }
+                } catch (error) {
+                    log('❌ Error with ' + filename + ': ' + error.message);
+                }
+            }
+        }
+        
+        async function testFullFlow() {
+            log('🚀 Simulating full upload flow...');
+            
+            if (!window.testFilename) {
+                log('⚠️ Run test 2 first to find correct filename!');
+                return;
+            }
+            
+            const filename = window.testFilename;
+            log('Using filename: ' + filename);
+            
+            // Step 1: Parse RDF
+            log('Step 1: Parsing RDF...');
+            const parseResponse = await fetch('/api/rdf/parse', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: filename })
+            });
+            const parseResult = await parseResponse.json();
+            
+            if (!parseResult.success) {
+                log('❌ Parse failed: ' + parseResult.error);
+                return;
+            }
+            
+            log('✅ Parse success: ' + parseResult.count + ' triples');
+            const rdfData = parseResult.triples;
+            
+            // Step 2: Check if #cy exists
+            log('Step 2: Checking #cy container...');
+            const cy = document.getElementById('cy');
+            if (!cy) {
+                log('❌ #cy container NOT FOUND in DOM!');
+                log('   This page is for debugging. Open main page and check console.');
+                return;
+            }
+            
+            log('✅ Container found');
+            log('   Details will appear in main page console');
+        }
+    </script>
+</body>
+</html>
