@@ -515,7 +515,7 @@ body {
     gap: 1.5rem;
 }
 
-.visualization-container {
+.visualization-container, #cy {
     width: 100%;
     height: 700px;
     background: var(--secondary-dark);

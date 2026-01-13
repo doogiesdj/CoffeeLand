@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cytoscape 기본 테스트</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        #cy {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #333;
+            background: white;
+            margin: 20px 0;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background: #2d72d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #1f5bb7;
+        }
+        
+        .status {
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .status h3 {
+            margin-top: 0;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 CoffeeLand 시스템 진단 테스트</h1>
+    
+    <div class="controls">
+        <h3>1단계: 기본 그래프 테스트</h3>
+        <button onclick="testBasicGraph()">기본 그래프 렌더링 테스트</button>
+        <button onclick="clearGraph()">그래프 지우기</button>
+    </div>
+    
+    <div id="cy"></div>
+    
+    <div class="controls">
+        <h3>2단계: 실제 RDF 데이터 테스트</h3>
+        <button onclick="testRDFParsing()">서버에서 RDF 데이터 가져오기</button>
+        <button onclick="testGraphVisualization()">RDF 데이터로 그래프 생성</button>
+    </div>
+    
+    <div class="status">
+        <h3>상태 로그</h3>
+        <div id="log"></div>
+    </div>
+    
+    <script>
+        let cy = null;
+        let rdfData = null;
+        
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const colors = {
+                'info': '#2d72d2',
+                'success': '#0f9960',
+                'error': '#db3737',
+                'warning': '#f29d49'
+            };
+            
+            logDiv.innerHTML = `
+                <div style="color: ${colors[type]}; margin: 5px 0;">
+                    [${timestamp}] ${message}
+                </div>
+            ` + logDiv.innerHTML;
+        }
+        
+        function testBasicGraph() {
+            log('🧪 기본 그래프 테스트 시작...', 'info');
+            
+            const container = document.getElementById('cy');
+            
+            if (!container) {
+                log('❌ #cy 컨테이너를 찾을 수 없습니다!', 'error');
+                return;
+            }
+            
+            log(`✅ #cy 컨테이너 발견: ${container.offsetWidth}x${container.offsetHeight}px`, 'success');
+            
+            if (container.offsetWidth === 0 || container.offsetHeight === 0) {
+                log('⚠️ 경고: 컨테이너 크기가 0입니다!', 'warning');
+            }
+            
+            try {
+                cy = cytoscape({
+                    container: container,
+                    elements: [
+                        { data: { id: 'a', label: 'Node A' } },
+                        { data: { id: 'b', label: 'Node B' } },
+                        { data: { id: 'c', label: 'Node C' } },
+                        { data: { source: 'a', target: 'b', label: 'connects' } },
+                        { data: { source: 'b', target: 'c', label: 'connects' } }
+                    ],
+                    style: [
+                        {
+                            selector: 'node',
+                            style: {
+                                'background-color': '#2d72d2',
+                                'label': 'data(label)',
+                                'color': '#fff',
+                                'text-outline-color': '#2d72d2',
+                                'text-outline-width': 2
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                            style: {
+                                'width': 2,
+                                'line-color': '#8b6f47',
+                                'target-arrow-color': '#8b6f47',
+                                'target-arrow-shape': 'triangle',
+                                'curve-style': 'bezier',
+                                'label': 'data(label)'
+                            }
+                        }
+                    ],
+                    layout: {
+                        name: 'circle',
+                        animate: true
+                    }
+                });
+                
+                log(`✅ Cytoscape 초기화 성공! 노드: ${cy.nodes().length}, 엣지: ${cy.edges().length}`, 'success');
+                
+                // Cytoscape 객체 확인
+                log(`📊 Cytoscape 상태:`, 'info');
+                log(`   - 컨테이너 크기: ${cy.width()}x${cy.height()}px`, 'info');
+                log(`   - 줌 레벨: ${cy.zoom()}`, 'info');
+                log(`   - 팬 위치: (${cy.pan().x}, ${cy.pan().y})`, 'info');
+                
+            } catch (error) {
+                log(`❌ Cytoscape 초기화 실패: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        function clearGraph() {
+            if (cy) {
+                cy.destroy();
+                cy = null;
+                log('🗑️ 그래프가 지워졌습니다', 'info');
+            } else {
+                log('⚠️ 지울 그래프가 없습니다', 'warning');
+            }
+        }
+        
+        async function testRDFParsing() {
+            log('🔍 서버에서 RDF 데이터 가져오기...', 'info');
+            
+            try {
+                const response = await fetch('/api/rdf/parse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: '1768301363919-coffeeland.rdf' })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    rdfData = result.triples;
+                    log(`✅ RDF 파싱 성공: ${result.count}개의 트리플`, 'success');
+                    log(`   샘플 트리플:`, 'info');
+                    log(`<pre>${JSON.stringify(rdfData.slice(0, 3), null, 2)}</pre>`, 'info');
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                log(`❌ RDF 파싱 실패: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        async function testGraphVisualization() {
+            if (!rdfData) {
+                log('⚠️ 먼저 RDF 데이터를 가져와야 합니다!', 'warning');
+                return;
+            }
+            
+            log('🎨 RDF 데이터로 그래프 생성 중...', 'info');
+            
+            const container = document.getElementById('cy');
+            const elements = [];
+            const nodeSet = new Set();
+            
+            rdfData.forEach(triple => {
+                if (!nodeSet.has(triple.subject)) {
+                    elements.push({
+                        data: { 
+                            id: triple.subject, 
+                            label: getShortName(triple.subject),
+                            fullUri: triple.subject
+                        }
+                    });
+                    nodeSet.add(triple.subject);
+                }
+                
+                if (!nodeSet.has(triple.object) && triple.objectType === 'NamedNode') {
+                    elements.push({
+                        data: { 
+                            id: triple.object, 
+                            label: getShortName(triple.object),
+                            fullUri: triple.object
+                        }
+                    });
+                    nodeSet.add(triple.object);
+                }
+                
+                if (triple.objectType === 'NamedNode') {
+                    elements.push({
+                        data: {
+                            source: triple.subject,
+                            target: triple.object,
+                            label: getShortName(triple.predicate),
+                            fullUri: triple.predicate
+                        }
+                    });
+                }
+            });
+            
+            log(`🔢 그래프 요소: 노드 ${nodeSet.size}개, 총 엘리먼트 ${elements.length}개`, 'info');
+            
+            try {
+                if (cy) {
+                    cy.destroy();
+                }
+                
+                cy = cytoscape({
+                    container: container,
+                    elements: elements,
+                    style: [
+                        {
+                            selector: 'node',
+                            style: {
+                                'background-color': '#2d72d2',
+                                'label': 'data(label)',
+                                'color': '#f5f8fa',
+                                'text-outline-color': '#2d72d2',
+                                'text-outline-width': 2,
+                                'font-size': '12px',
+                                'width': '60px',
+                                'height': '60px',
+                                'text-valign': 'center',
+                                'text-halign': 'center'
+                            }
+                        },
+                        {
+                            selector: 'edge',
+                            style: {
+                                'width': 2,
+                                'line-color': '#8b6f47',
+                                'target-arrow-color': '#8b6f47',
+                                'target-arrow-shape': 'triangle',
+                                'curve-style': 'bezier',
+                                'label': 'data(label)',
+                                'font-size': '10px',
+                                'text-rotation': 'autorotate',
+                                'text-margin-y': -10,
+                                'color': '#abb3bf',
+                                'text-outline-color': '#1a1f29',
+                                'text-outline-width': 1
+                            }
+                        }
+                    ],
+                    layout: {
+                        name: 'cose',
+                        animate: true,
+                        animationDuration: 1000,
+                        padding: 50
+                    }
+                });
+                
+                log(`✅ 그래프 생성 성공!`, 'success');
+                log(`   - 실제 렌더링된 노드: ${cy.nodes().length}개`, 'success');
+                log(`   - 실제 렌더링된 엣지: ${cy.edges().length}개`, 'success');
+                
+            } catch (error) {
+                log(`❌ 그래프 생성 실패: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        function getShortName(uri) {
+            const match = uri.match(/[/#]([^/#]+)$/);
+            return match ? match[1] : uri;
+        }
+        
+        // 페이지 로드 시 초기 정보
+        window.addEventListener('load', () => {
+            log('🚀 테스트 페이지 로드 완료', 'success');
+            log(`📦 Cytoscape.js 버전: ${typeof cytoscape !== 'undefined' ? cytoscape.version : 'NOT LOADED'}`, 
+                typeof cytoscape !== 'undefined' ? 'success' : 'error');
+            
+            const container = document.getElementById('cy');
+            log(`📐 #cy 컨테이너 크기: ${container.offsetWidth}x${container.offsetHeight}px`, 'info');
+        });
+    </script>
+</body>
+</html>

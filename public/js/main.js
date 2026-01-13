@@ -128,13 +128,13 @@ async function handleFileSelect() {
                 item.style.opacity = '1';
             });
             
-            // Load data
-            await loadRDFData();
-            
-            // Switch to graph view
+            // Switch to graph view FIRST (so container is visible)
             switchView('graph');
             navItems.forEach(nav => nav.classList.remove('active'));
             document.querySelector('[data-view="graph"]').classList.add('active');
+            
+            // Then load data and initialize graph
+            await loadRDFData();
         } else {
             throw new Error(result.error || '업로드 실패');
         }
@@ -189,9 +189,17 @@ function initializeGraph() {
     
     const container = document.getElementById('cy');
     console.log('📦 Container #cy:', container ? 'found' : 'NOT FOUND');
+    console.log('📐 Container size:', container ? `${container.offsetWidth}x${container.offsetHeight}px` : 'N/A');
+    console.log('📐 Container display:', container ? window.getComputedStyle(container).display : 'N/A');
     
     if (!container) {
         console.error('❌ Container #cy not found!');
+        return;
+    }
+    
+    if (container.offsetWidth === 0 || container.offsetHeight === 0) {
+        console.error('⚠️ Container has zero size! Waiting 100ms and retrying...');
+        setTimeout(() => initializeGraph(), 100);
         return;
     }
     
