@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Coffee, MapPin, ShoppingBag, Store, Users, BarChart3, Info } from 'lucide-react';
+import { Coffee, MapPin, ShoppingBag, Store, Users, BarChart3, Info, Wrench } from 'lucide-react';
 import '../styles/Sidebar.css';
 
 const Sidebar = () => {
@@ -47,6 +47,19 @@ const Sidebar = () => {
             <ShoppingBag className="nav-icon" />
             <span>Ontology Diagram</span>
           </NavLink>
+        </div>
+
+        <div className="nav-section">
+          <div className="nav-section-title">Tools</div>
+          <a 
+            href="https://doogiesdj.github.io/coffeeland-web/" 
+            className="nav-item" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Wrench className="nav-icon" />
+            <span>Ontology Viewer</span>
+          </a>
         </div>
 
         <div className="nav-section">
