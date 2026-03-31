@@ -1324,6 +1324,82 @@
     
 
 
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Maersk_Line -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Maersk_Line">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#LogisticsProvider"/>
+        <untitled-ontology-2:isHeadquarteredIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Denmark"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Santos"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Cartagena"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Puerto_Cortes"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Rotterdam"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Hamburg"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Antwerp"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Felixstowe"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Colombian_Supremo"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Bourbon_Santos"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Costa_Coffee"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Lavazza"/>
+    </owl:NamedIndividual>
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#MSC_Mediterranean -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#MSC_Mediterranean">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#LogisticsProvider"/>
+        <untitled-ontology-2:isHeadquarteredIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Switzerland"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Mombasa"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Santos"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Cartagena"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Genoa"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Valencia"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Antwerp"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_New_Orleans"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Long_Beach"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Kenya_AA"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Santos_Premium"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Starbucks"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Dunkin_Donuts"/>
+    </owl:NamedIndividual>
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Bollore_Logistics -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Bollore_Logistics">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#LogisticsProvider"/>
+        <untitled-ontology-2:isHeadquarteredIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#France"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Mombasa"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Santos"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Rotterdam"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Genoa"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Hamburg"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Felixstowe"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Kilimanjaro_Peaberry"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Nyeri_Gatomboya"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Caffe_Nero"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Peet_Coffee"/>
+    </owl:NamedIndividual>
+
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#NYK_Line -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#NYK_Line">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#LogisticsProvider"/>
+        <untitled-ontology-2:isHeadquarteredIn rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Japan"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Tanjung_Priok"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Ho_Chi_Minh"/>
+        <untitled-ontology-2:transportsFrom rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Mombasa"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Tokyo"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Busan"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Singapore"/>
+        <untitled-ontology-2:transportsTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Sydney"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Sumatra_Mandheling"/>
+        <untitled-ontology-2:mediates rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Java_Estate"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Tully_s_Coffee"/>
+        <untitled-ontology-2:suppliesTo rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Luckin_Coffee"/>
+    </owl:NamedIndividual>
+
+
     <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Mundo_Novo -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Mundo_Novo">
