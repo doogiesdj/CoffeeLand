@@ -2187,8 +2187,78 @@
         <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">151.2093</hasLongitude>
     </owl:NamedIndividual>
 
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Callao -->
 
-    <!-- 
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Callao">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Callao</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Callao</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Peru</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2500000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">450000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-12.0564</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-77.1185</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Djibouti -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Djibouti">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Djibouti</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Djibouti</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Djibouti</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1800000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">380000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">11.5884</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">43.1456</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_DarEsSalaam -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_DarEsSalaam">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Dar es Salaam</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dar es Salaam</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tanzania</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1600000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">320000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-6.8235</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">39.2695</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Limon -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Limon">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Puerto Limón</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Puerto Limón</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Costa Rica</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">900000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">210000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">9.9907</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-83.0359</hasLongitude>
+    </owl:NamedIndividual>
+
+    <!-- http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Quetzal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port_Quetzal">
+        <rdf:type rdf:resource="http://www.semanticweb.org/boogi/ontologies/2025/11/untitled-ontology-2#Port"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Port of Puerto Quetzal</hasName>
+        <hasCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Puerto Quetzal</hasCity>
+        <hasCountry rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Guatemala</hasCountry>
+        <hasCapacity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">700000</hasCapacity>
+        <handlesProduct rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Green Coffee Beans</handlesProduct>
+        <yearlyThroughput rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">180000</yearlyThroughput>
+        <hasLatitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">13.9274</hasLatitude>
+        <hasLongitude rdf:datatype="http://www.w3.org/2001/XMLSchema#double">-90.7857</hasLongitude>
+    </owl:NamedIndividual>
+
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Warehouse Individuals
